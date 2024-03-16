@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\ImGui">
+      <UniqueIdentifier>{d910d01f-0a12-4978-995c-2db698adf994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ImGui">
+      <UniqueIdentifier>{1c8952c5-07eb-4d2b-82b0-0fe0d95fd8e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine">
+      <UniqueIdentifier>{6a85c2e4-9360-4796-ab12-bec4e7100eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\Collider">
+      <UniqueIdentifier>{a5f97468-d225-4e03-a9ed-78c75d6e44cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\GameObject">
+      <UniqueIdentifier>{931d0038-8f5d-488b-a809-513b4f240d49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\DirectX_11">
+      <UniqueIdentifier>{08dda351-47b3-4c47-974e-e1601ee8e962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\Component">
+      <UniqueIdentifier>{62a656dc-52a1-4343-9fee-75e42a07a146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\ECS">
+      <UniqueIdentifier>{e75d1f17-9c02-4145-812d-4f95b4675506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\System">
+      <UniqueIdentifier>{7bb0e623-9eab-41b4-a913-aa6faf587aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes">
+      <UniqueIdentifier>{f75301fc-ada3-4491-8d44-7d6046d88292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes\RootObjects">
+      <UniqueIdentifier>{eb914c11-856a-4677-8ad5-f8dab3af7c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\ResourceManager">
+      <UniqueIdentifier>{c08edbe2-834c-4fbd-ab53-e8cd5e03f960}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTime.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="InterSceneData.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\BillBoard.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Direct3D.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Fbx.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\FbxParts.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Input.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Math.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Sprite.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Texture.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameObject\CameraManager.cpp">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameObject\GameObject.cpp">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\Audio.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\TextureManager.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Direct2D.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Main.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\CsvReader.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObjectChild.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectSetter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\ColliderSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\ImageSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\LineParticleSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\ModelSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\ParticleSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\PhysicsSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\TextSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Systems\TransformSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ECS\ComponentManager.cpp">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ECS\EntityManager.cpp">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ECS\SystemManager.cpp">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\ImageManager_ECSver.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\ModelManager_ECSver.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Image.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\LineParticle.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Particle.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Test_Model_ECSver.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Text.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Transform.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX_11\Material.cpp">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Collider.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameObject\Object.cpp">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Coordinator.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\newSceneManager.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Title.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Menu.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Title.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\SceneBase.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameObject\Camera.cpp">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Play.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Time.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\JsonOperator.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager\ImageMediationer.cpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Result.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Result.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Division.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticResource.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>ヘッダー ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SAFE_DELETE_RELEASE.h">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\BillBoard.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Direct3D.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Fbx.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\FbxParts.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Input.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Math.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Sprite.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Texture.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameObject\CameraManager.h">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameObject\GameObject.h">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\Audio.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\TextureManager.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Direct2D.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\json.hpp">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\CsvReader.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugUI.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTime.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="InterSceneData.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectSetter.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObjectChild.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\ColliderSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\ImageSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\LineParticleSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\ModelSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\ParticleSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\PhysicsSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\TextSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\TransformSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\ComponentArray.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\ComponentManager.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\ECS.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\EntityManager.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\IComponentArray.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\System.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ECS\SystemManager.h">
+      <Filter>ソース ファイル\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\ImageManager_ECSver.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\ModelManager_ECSver.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Image.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\LineParticle.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Particle.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Test_Model_ECSver.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Text.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Transform.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX_11\Material.h">
+      <Filter>ソース ファイル\Engine\DirectX_11</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameObject\Object.h">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Coordinator.h">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\newSceneManager.h">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Menu.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Title.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Menu.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Title.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\SceneBase.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameObject\Camera.h">
+      <Filter>ソース ファイル\Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Play.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Play.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Collider.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\JsonOperator.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager\ImageMediationer.h">
+      <Filter>ソース ファイル\Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Result.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Result.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticResource.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Division.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Simple3D.hlsl" />
+    <FxCompile Include="Simple2D.hlsl" />
+    <FxCompile Include="BillBoard.hlsl" />
+    <FxCompile Include="OutLine.hlsl" />
+    <FxCompile Include="ToonShader.hlsl" />
+    <FxCompile Include="newSimple3D.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dialog.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
