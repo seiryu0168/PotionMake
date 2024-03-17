@@ -172,7 +172,7 @@ HRESULT Sprite::CreateVertexBuffer()
 	HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pVertexBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"頂点データ用バッファの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Sprite.cpp:頂点データ用バッファの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -196,7 +196,7 @@ HRESULT Sprite::CreateIndexBuffer()
 	HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd, &InitData, &pIndexBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"インデックスバッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Sprite.cpp:インデックスバッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	return S_OK;
@@ -217,7 +217,7 @@ HRESULT Sprite::CreateConstantBuffer()
 	HRESULT hr = Direct3D::pDevice->CreateBuffer(&cb, nullptr, &pConstantBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"コンスタントバッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Sprite.cpp:コンスタントバッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	return S_OK;
@@ -228,7 +228,7 @@ HRESULT Sprite::Load(const std::string& fileName)
 	hPict_ = TextureManager::Load(fileName.c_str());
 	if (hPict_<0)
 	{
-		MessageBox(nullptr, L"画像ロードに失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Sprite.cpp:画像ロードに失敗しました", L"エラー", MB_OK);
 		return E_FAIL;
 	}
 	size_ = { (float)TextureManager::GetTexture(hPict_)->GetWidth(),(float)TextureManager::GetTexture(hPict_)->GetHeight(),1.0f };
@@ -259,7 +259,7 @@ HRESULT Sprite::StaticLoad(const std::string& fileName)
 	hPict_ = TextureManager::StaticLoad(fileName.c_str());
 	if (hPict_ < 0)
 	{
-		MessageBox(nullptr, L"画像ロードに失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Sprite.cpp:画像ロードに失敗しました", L"エラー", MB_OK);
 		return E_FAIL;
 	}
 	size_ = { (float)TextureManager::GetStaticTexture(hPict_)->GetWidth(),(float)TextureManager::GetStaticTexture(hPict_)->GetHeight(),1.0f };

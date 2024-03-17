@@ -23,36 +23,19 @@ Title::~Title()
 void Title::Initialize()
 {
 	Image image;
-	image.Load("Assets/Image/Ennichi_TitleImage.jpg");
+	image.Load("Assets/Image/StartButtonImage.png");
+	XMFLOAT3 pos = { 0,-0.5f,0 };
+	image.SetPosition(pos);
 	AddComponent<Image>(image);
-	
-	Text messageText("ボタンを押してください\nPush Any Button", "りいてがき筆", {0,0,1100,200});
-	messageText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
-	messageText.SetRatio(0.23f, 0.72f);
-	messageText.SetTextSize(100);
-	AddComponent<Text>(messageText);
 
-	time_ = std::make_unique<Time::Watch>();
-	time_->UnLock();
-
-	hAudio_ = Audio::Load("Assets\\Audio\\festival.wav");
 }
 
 void Title::Update()
 {
-	switch (State_)
+	if(Input::IsKeyDown(DIK_SPACE))
 	{
-	case Title::STATE::WAIT:
-		Waiting();
-		break;
-	case Title::STATE::PUSHED:
-		Pushed();
-		break;
-	default:
-		break;
+		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 	}
-
-	Audio::Play(hAudio_);
 }
 
 void Title::Release()
@@ -61,17 +44,9 @@ void Title::Release()
 
 void Title::Waiting()
 {
-	//何かボタンを押されたら
-	if (Input::IsPadAnyButtonDown())
-	{
-		//PUSHED状態にしてシーン遷移
-		State_ = STATE::PUSHED;
-		newSceneManager::ChangeScene(SCENE_ID::MENU, TO_SCENE_CHANGE);
-	}
-	GetComponent<Text>().SetColor({ 0,0,0,(sinf(time_->GetSeconds<float>() * 2) * 0.5f) + 0.5f });
+	
 }
 
 void Title::Pushed()
 {
-	GetComponent<Text>().SetColor({ 0,0,0, (float)((++Frame_ % TO_TEXT_CHANGE + 5) / TO_TEXT_CHANGE) });
 }

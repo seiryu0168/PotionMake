@@ -255,6 +255,18 @@
     <ClCompile Include="StaticResource.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Play_ManagementPart.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Play_ManagementPart.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -484,6 +496,18 @@
     </ClInclude>
     <ClInclude Include="Division.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Play_ManagementPart.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Play_ManagementPart.h">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

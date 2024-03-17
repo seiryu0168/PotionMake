@@ -1,6 +1,7 @@
 #include "RootObject_Menu.h"
 #include"../../Engine/Components/Transform.h"
 #include"../../StaticResource.h"
+#include"../../MainMenu.h"
 //#include"../../SelectUI.h"
 //#include"../../Select_StaticUI.h"
 
@@ -20,6 +21,7 @@ void RootObject_Menu::Initialize()
 	//AddComponent<Image>(StaticResource::GetImage("image01"));
 	//Instantiate<Select_StaticUI>(this);
 	//Instantiate<SelectUI>(this);
+	Instantiate<MainMenu>(this);
 	
 }
 

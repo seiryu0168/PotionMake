@@ -180,7 +180,7 @@ HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
 
 	if(FAILED(hr))
 	{
-		MessageBox(nullptr, L"ブレンドステートの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ブレンドステートの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	pContext->OMSetBlendState(pBlendState[(int)BLEND_MODE::BLEND_DEFAULT], factor, 0xffffffff);
@@ -246,7 +246,7 @@ HRESULT Direct3D::InitShader2D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -260,7 +260,7 @@ HRESULT Direct3D::InitShader2D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
@@ -275,7 +275,7 @@ HRESULT Direct3D::InitShader2D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompilePS);
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompilePS);
@@ -289,7 +289,7 @@ HRESULT Direct3D::InitShader2D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompilePS);
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -308,7 +308,7 @@ HRESULT Direct3D::InitShader3D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -334,7 +334,7 @@ HRESULT Direct3D::InitShader3D()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
@@ -348,7 +348,7 @@ HRESULT Direct3D::InitShader3D()
 	SAFE_RELEASE(pCompilePS);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -360,7 +360,7 @@ HRESULT Direct3D::InitShader3D()
 	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_3D].pRasterizerState);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ラスタライザの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -379,7 +379,7 @@ HRESULT Direct3D::InitShaderEFF()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -392,7 +392,7 @@ HRESULT Direct3D::InitShaderEFF()
 	SAFE_RELEASE(pCompilePS);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -416,7 +416,7 @@ HRESULT Direct3D::InitShaderEFF()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
@@ -430,7 +430,7 @@ HRESULT Direct3D::InitShaderEFF()
 	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_EFF].pRasterizerState);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ラスタライザの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -449,7 +449,7 @@ HRESULT Direct3D::InitShaderOutLine()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -475,7 +475,7 @@ HRESULT Direct3D::InitShaderOutLine()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
@@ -489,7 +489,7 @@ HRESULT Direct3D::InitShaderOutLine()
 	SAFE_RELEASE(pCompilePS);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -501,7 +501,7 @@ HRESULT Direct3D::InitShaderOutLine()
 	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_OUTLINE].pRasterizerState);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ラスタライザの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -520,7 +520,7 @@ HRESULT Direct3D::InitShaderToon()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -546,7 +546,7 @@ HRESULT Direct3D::InitShaderToon()
 	if (FAILED(hr))
 	{
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
@@ -560,7 +560,7 @@ HRESULT Direct3D::InitShaderToon()
 	SAFE_RELEASE(pCompilePS);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -572,7 +572,7 @@ HRESULT Direct3D::InitShaderToon()
 	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_TOON].pRasterizerState);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ラスタライザの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -706,7 +706,7 @@ void Direct3D::EndDraw()
 	if (hr== DXGI_ERROR_DEVICE_REMOVED || hr== DXGI_ERROR_DEVICE_RESET)
 	{
 		
-			MessageBox(nullptr, L"Direct3D : スワップチェイン失敗", L"エラー", MB_OK);
+			MessageBox(nullptr, L"DirectX_11/Direct3D.cpp:スワップチェイン失敗", L"エラー", MB_OK);
 		
 	}
 }

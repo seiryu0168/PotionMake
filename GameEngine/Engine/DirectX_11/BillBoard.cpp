@@ -42,7 +42,7 @@ HRESULT BillBoard::Load(const std::string& fileName)
 	hr=Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pVertexBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ビルボード頂点バッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/BillBord.cpp:ビルボード頂点バッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	
@@ -59,7 +59,7 @@ HRESULT BillBoard::Load(const std::string& fileName)
 	hr=Direct3D::pDevice->CreateBuffer(&cb, nullptr, &pConstantBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ビルボードコンスタントバッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/BillBord.cpp:ビルボードコンスタントバッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 
@@ -80,14 +80,14 @@ HRESULT BillBoard::Load(const std::string& fileName)
 	hr = Direct3D::pDevice->CreateBuffer(&bd_index, &initData, &pIndexBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ビルボードインデックスバッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/BillBord.cpp:ビルボードインデックスバッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	hTexture_ = TextureManager::Load(fileName);
 
 	if (hTexture_<0)
 	{
-		MessageBox(nullptr, L"ビルボードテクスチャのロードに失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/BillBord.cpp:ビルボードテクスチャのロードに失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	return hr;

@@ -228,20 +228,24 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="InterSceneData.cpp" />
     <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
+    <ClCompile Include="Scenes\RootObject\RootObject_Play_ManagementPart.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Result.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Title.cpp" />
     <ClCompile Include="Scenes\SceneBase.cpp" />
     <ClCompile Include="Scenes\Scene_Menu.cpp" />
     <ClCompile Include="Scenes\Scene_Play.cpp" />
+    <ClCompile Include="Scenes\Scene_Play_ManagementPart.cpp" />
     <ClCompile Include="Scenes\Scene_Result.cpp" />
     <ClCompile Include="Scenes\Scene_Title.cpp" />
     <ClCompile Include="ObjectSetter.cpp" />
     <ClCompile Include="StaticResource.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Division.h" />
@@ -304,14 +308,17 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="InterSceneData.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />
+    <ClInclude Include="Scenes\RootObject\RootObject_Play_ManagementPart.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Result.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Title.h" />
     <ClInclude Include="Scenes\SceneBase.h" />
     <ClInclude Include="Scenes\Scene_Menu.h" />
     <ClInclude Include="Scenes\Scene_Play.h" />
+    <ClInclude Include="Scenes\Scene_Play_ManagementPart.h" />
     <ClInclude Include="Scenes\Scene_Result.h" />
     <ClInclude Include="Scenes\Scene_Title.h" />
     <ClInclude Include="ObjectSetter.h" />
@@ -320,6 +327,7 @@
     <ClInclude Include="StaticResource.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestObjectChild.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BillBoard.hlsl">

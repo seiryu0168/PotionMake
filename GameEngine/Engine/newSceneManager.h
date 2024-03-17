@@ -8,6 +8,7 @@ enum class SCENE_ID
 {
 	TITLE = 0,
 	MENU,
+	PLAY_MANAGEMENT,
 	PLAY,
 	RESULT,
 	//MAX,

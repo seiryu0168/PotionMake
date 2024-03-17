@@ -122,12 +122,12 @@ namespace Division
 		CreateIB();
 		CreateCB();
 
-		pTexture_ = std::make_unique<Texture>();
-		pTexture_->Load("Assets\\Image\\parrot.jpg");
+		//pTexture_ = std::make_unique<Texture>();
+		//pTexture_->Load("Assets\\Image\\parrot.jpg");
 
 		//image_.StaticLoad("Assets\\Image\\parrot.jpg");
 
-		Prepare();
+		//Prepare();
 	}
 
 	void Draw()

@@ -29,7 +29,7 @@ HRESULT D2D::Initialize(int winW, int winH, HWND hWnd)
 	hr= D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &pFactory_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"ファクトリの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct2D.cpp:ファクトリの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), reinterpret_cast<IUnknown**>(&pWriteFactory_));
@@ -223,7 +223,7 @@ void D2D::CreateRenderTarget(const XMINT2 dpiScale, D2D1_RENDER_TARGET_TYPE type
 
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Direct2D : レンダーターゲットの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Direct2D.cpp:レンダーターゲットの作成に失敗", L"エラー", MB_OK);
 		return;
 	}
 	renderTargets_.push_back(pRenderTarget);

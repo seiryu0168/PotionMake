@@ -26,7 +26,7 @@ HRESULT Texture::Load(const LPCWSTR& fileName)
 	hr = pFactory->CreateDecoderFromFilename(fileName, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &pDecoder);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:テクスチャファイルのロードに失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:テクスチャファイルのロードに失敗しました", L"エラー", MB_OK);
 		SAFE_RELEASE(pFactory);
 		return hr;
 	}
@@ -61,7 +61,7 @@ HRESULT Texture::Load(const LPCWSTR& fileName)
 	hr = Direct3D::pDevice->CreateTexture2D(&texdec, nullptr, &pTexture);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:テクスチャ作成に失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:テクスチャ作成に失敗しました", L"エラー", MB_OK);
 		SAFE_RELEASE(pTexture);
 		return hr;
 	}
@@ -82,7 +82,7 @@ HRESULT Texture::Load(const LPCWSTR& fileName)
 	hr = Direct3D::pDevice->CreateSamplerState(&SamDesc, &pSampler_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:サンプラー作成に失敗しました", L"エラー",MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:サンプラー作成に失敗しました", L"エラー",MB_OK);
 		return hr;
 	}
 	//シェーダリソースビュー作成
@@ -93,7 +93,7 @@ HRESULT Texture::Load(const LPCWSTR& fileName)
 	hr = Direct3D::pDevice->CreateShaderResourceView(pTexture, &srv, &pSRV_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:シェーダーリソースビュー作成に失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:シェーダーリソースビュー作成に失敗しました", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pTexture);
@@ -124,7 +124,7 @@ HRESULT Texture::Load(const std::string& fileName)
 	hr = pFactory->CreateDecoderFromFilename(file.c_str(), NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &pDecoder);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:テクスチャファイルのロードに失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:テクスチャファイルのロードに失敗しました", L"エラー", MB_OK);
 		SAFE_RELEASE(pFactory);
 		return hr;
 	}
@@ -159,7 +159,7 @@ HRESULT Texture::Load(const std::string& fileName)
 	hr = Direct3D::pDevice->CreateTexture2D(&texdec, nullptr, &pTexture);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:テクスチャ作成に失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:テクスチャ作成に失敗しました", L"エラー", MB_OK);
 		SAFE_RELEASE(pTexture);
 		return hr;
 	}
@@ -180,7 +180,7 @@ HRESULT Texture::Load(const std::string& fileName)
 	hr = Direct3D::pDevice->CreateSamplerState(&SamDesc, &pSampler_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:サンプラー作成に失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:サンプラー作成に失敗しました", L"エラー", MB_OK);
 		return hr;
 	}
 	//シェーダリソースビュー作成
@@ -191,7 +191,7 @@ HRESULT Texture::Load(const std::string& fileName)
 	hr = Direct3D::pDevice->CreateShaderResourceView(pTexture, &srv, &pSRV_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture:シェーダーリソースビュー作成に失敗しました", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/Texture.cpp:シェーダーリソースビュー作成に失敗しました", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pTexture);

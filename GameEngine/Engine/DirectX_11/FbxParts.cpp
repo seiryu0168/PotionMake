@@ -347,7 +347,7 @@ HRESULT FbxParts::InitVertex(fbxsdk::FbxMesh* mesh)
 	HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pVertexBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"頂点データ用バッファの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/FbxParts.cpp:頂点データ用バッファの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	return S_OK;
@@ -396,7 +396,7 @@ HRESULT FbxParts::InitIndex(fbxsdk::FbxMesh* mesh)
 		HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd, &InitData, &ppIndexBuffer_[i]);
 		if (FAILED(hr))
 		{
-			MessageBox(nullptr, L"インデックスバッファの作成に失敗", L"エラー", MB_OK);
+			MessageBox(nullptr, L"DirectX_11/FbxParts.cpp:インデックスバッファの作成に失敗", L"エラー", MB_OK);
 			return hr;
 		}
 	}
@@ -418,7 +418,7 @@ HRESULT FbxParts::CreateConstantBuffer()
 	HRESULT hr = Direct3D::pDevice->CreateBuffer(&cb, nullptr, &pConstantBuffer_);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"コンスタントバッファの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"DirectX_11/FbxParts.cpp:コンスタントバッファの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	return S_OK;

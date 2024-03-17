@@ -1,6 +1,7 @@
 #include "RootObject_Title.h"
 #include"../../Engine/Components/Transform.h"
 #include"../../StaticResource.h"
+#include"../../Title.h"
 //#include"../../TestObject.h"
 //#include"../../SelectUI.h"
 //#include"../../Title.h"
@@ -33,7 +34,7 @@ void RootObject_Title::Initialize()
 	//	StaticResource::AddImage("GameFinishImage", image);
 	//}
 	//
-	//Instantiate<Title>(this);
+	Instantiate<Title>(this);
 }
 
 void RootObject_Title::Release()
