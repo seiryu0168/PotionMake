@@ -229,6 +229,8 @@
     <ClCompile Include="InterSceneData.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="ManagementPart_Floor.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
@@ -309,6 +311,8 @@
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="InterSceneData.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="ManagementPart_Floor.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />

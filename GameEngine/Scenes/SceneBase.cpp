@@ -31,6 +31,11 @@ void SceneBase::SetRootObject(std::shared_ptr<Object> obj)
 	rootObject_->Initialize();
 }
 
+std::shared_ptr<Object> SceneBase::GetRootObject()
+{
+	return rootObject_;
+}
+
 void SceneBase::ObjectSet()
 {
 	setter_.SetObject();

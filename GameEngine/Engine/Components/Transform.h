@@ -7,6 +7,10 @@ class Transform
 	XMMATRIX matTranslate_;	//à⁄ìÆçsóÒ
 	XMMATRIX matRotate_;	//âÒì]çsóÒ	
 	XMMATRIX matScale_;	//ägëÂçsóÒ
+	XMVECTOR front_;
+	XMVECTOR right_;
+	XMVECTOR left_;
+	XMVECTOR back_;
 public:
 
 	XMVECTOR position_;	//à íu
@@ -29,6 +33,7 @@ public:
 	//âÒì]
 	void RotateAxis(const XMVECTOR& axis, float angle);
 	void RotateEular(const XMFLOAT3& rotation);
+	void RotateEular(float x,float y,float z);
 
 	float GetPositionX();
 	float GetPositionY();
@@ -52,6 +57,10 @@ public:
 	const XMVECTOR& GetWorldFrontVector();
 	const XMVECTOR& GetLocalFrontVector();
 
+	XMVECTOR GetFront() { return front_; }
+	XMVECTOR GetRight() { return right_; }
+	XMVECTOR GetLeft() { return left_; }
+	XMVECTOR GetBack() { return back_; }
 
 	static XMFLOAT3 Float3Add(const XMVECTOR& add1, const XMVECTOR& add2)
 	{

@@ -82,6 +82,7 @@ void Object::UpdateSub()
 	if (activeFlag_ && isUpdate_ && killFlag_ == false)
 	{
 		Update();
+		transform_->Calclation();
 	}
 
 	if (isUpdate_)

@@ -18,7 +18,7 @@ Camera::Camera()
 void Camera::Initialize(float width, float height, float nearClipping, float farClipping)
 {
 	position_ = XMVectorSet(0, 10, -40, 0);	//カメラの位置
-	target_ = XMVectorSet(0, 0, 0, 0);	//カメラの焦点
+	target_ = XMVectorSet(0, 0, 1, 0);	//カメラの焦点
 	upVector_ = XMVectorSet(0, 1, 0, 0);
 	angleOfView_ = XM_PIDIV4;
 	aspectRadio_ = (FLOAT)width / (FLOAT)height;

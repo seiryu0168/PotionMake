@@ -21,8 +21,12 @@ Transform::Transform(Transform* parent)
 	position_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),
 	rotate_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),
 	scale_(XMFLOAT3(1.0f, 1.0f, 1.0f)),
-	baseVec_(XMVectorSet(0, 0, 0, 0)),
-	pParent_(parent)
+	baseVec_(XMVectorSet(0, 0, 1, 0)),
+	pParent_(parent),
+	front_(XMVectorSet(0,0,1,0)),
+	right_(XMVectorSet(1,0,0,0)),
+	left_(XMVectorSet(-1,0,0,0)),
+	back_(XMVectorSet(0,0,-1,0))
 {
 
 }
@@ -42,6 +46,11 @@ void Transform::Calclation()
 	
 	//âÒì]çsóÒ
 	matRotate_ = XMMatrixRotationQuaternion(rotate_);
+
+	front_ = XMVector3Rotate(XMVectorSet(0, 0, 1, 0), rotate_);
+	right_ = XMVectorSet(1, 0, 0, 0) * matRotate_;
+	left_ = XMVectorSet(-1, 0, 0, 0) * matRotate_;
+	back_ = XMVectorSet(0, 0, -1, 0) * matRotate_;
 	
 	//ägëÂçsóÒ
 	matScale_ = XMMatrixScaling(scale_.x, scale_.y, scale_.z);
@@ -58,6 +67,13 @@ void Transform::RotateEular(const XMFLOAT3& rotation)
 	rotate_ = XMQuaternionRotationRollPitchYaw(XMConvertToRadians(rotation.x),
 											   XMConvertToRadians(rotation.y),
 											   XMConvertToRadians(rotation.z));
+}
+
+void Transform::RotateEular(float x, float y, float z)
+{
+	rotate_ = XMQuaternionRotationRollPitchYaw(XMConvertToRadians(x),
+											   XMConvertToRadians(y),
+											   XMConvertToRadians(z));
 }
 
 float Transform::GetPositionX()

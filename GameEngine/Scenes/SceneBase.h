@@ -16,6 +16,7 @@ public:
 	virtual ~SceneBase() {};
 	virtual void SceneInitialize() = 0;
 	void SetRootObject(std::shared_ptr<Object> obj);
+	std::shared_ptr<Object> GetRootObject();
 	void ObjectSet();
 	void SetFile(const std::string& name);
 	void Update();
