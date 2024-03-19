@@ -12,9 +12,9 @@ ManagementPart_Floor::~ManagementPart_Floor()
 
 void ManagementPart_Floor::Initialize()
 {
-	//Test_Model_ECSver floorModel(this);
-	//floorModel.Load("Assets/Model/ground_grass.fbx");
-	//AddComponent<Test_Model_ECSver>(floorModel);
+	Test_Model_ECSver floorModel(this);
+	floorModel.Load("Assets/Model/ground_grass.fbx");
+	AddComponent<Test_Model_ECSver>(floorModel);
 	transform_->scale_ = { 10,10,10 };
 }
 

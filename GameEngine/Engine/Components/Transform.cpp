@@ -48,9 +48,9 @@ void Transform::Calclation()
 	matRotate_ = XMMatrixRotationQuaternion(rotate_);
 
 	front_ = XMVector3Rotate(XMVectorSet(0, 0, 1, 0), rotate_);
-	right_ = XMVectorSet(1, 0, 0, 0) * matRotate_;
-	left_ = XMVectorSet(-1, 0, 0, 0) * matRotate_;
-	back_ = XMVectorSet(0, 0, -1, 0) * matRotate_;
+	right_ = XMVector3Rotate(XMVectorSet(1, 0, 0, 0), rotate_);
+	left_ = XMVector3Rotate(XMVectorSet(-1, 0, 0, 0), rotate_);
+	back_ = XMVector3Rotate(XMVectorSet(0, 0, -1, 0), rotate_);
 	
 	//ägëÂçsóÒ
 	matScale_ = XMMatrixScaling(scale_.x, scale_.y, scale_.z);

@@ -7,6 +7,7 @@ private:
 	float speed_;
 	XMVECTOR cameraTargetVec_;
 	XMFLOAT2 cameraRotate_;
+	float moveTime_;
 public:
 	Player(Object* parent);
 	~Player();
