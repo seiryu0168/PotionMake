@@ -231,6 +231,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />
@@ -335,6 +337,12 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BillBoard.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="ColliderShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

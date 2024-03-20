@@ -7,6 +7,8 @@ private:
 	float speed_;
 	XMVECTOR cameraTargetVec_;
 	XMFLOAT2 cameraRotate_;
+	float rotateUperLimitY_;
+	float rotateDownerLimitY_;
 	float moveTime_;
 public:
 	Player(Object* parent);
@@ -15,5 +17,7 @@ public:
 	void Update() override;
 	void CameraControll();
 	void Release() override;
+
+	void OnCollisionEnter(GameObject* pTarget) override;
 };
 

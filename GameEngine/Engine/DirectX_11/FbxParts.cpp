@@ -191,7 +191,7 @@ void FbxParts::DrawSkinAnime(Transform& transform, FbxTime time, XMFLOAT4 lineCo
 	//各ボーンに対応する頂点の変形を制御
 	for (int i = 0; i < vertexCount_; i++)
 	{
-		//各頂点ごとに影響するボーン×ウェイトを繁栄させた行列を作成
+		//各頂点ごとに影響するボーン×ウェイトを反映させた行列を作成
 		XMMATRIX matrix;
 		ZeroMemory(&matrix, sizeof(matrix));
 		for (int j = 0; j < boneNum_; j++)

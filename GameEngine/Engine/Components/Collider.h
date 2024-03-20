@@ -42,6 +42,7 @@ private:
 	bool nowHit_;
 	GameObject* attachObject_;
 public:
+	bool isShowHitArea_;
 
 	Collider();
 	Collider(const XMFLOAT3& centerPos);
@@ -74,6 +75,8 @@ public:
 	void KillCollider() { isKill_ = true; }
 
 	bool IsKill() const { return isKill_; }
+
+	void Draw();
 
 	void Release();
 

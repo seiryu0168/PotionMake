@@ -273,6 +273,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Play_ManagementPart_Shelf.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -521,6 +524,9 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Play_ManagementPart_Shelf.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Simple3D.hlsl" />
@@ -529,6 +535,7 @@
     <FxCompile Include="OutLine.hlsl" />
     <FxCompile Include="ToonShader.hlsl" />
     <FxCompile Include="newSimple3D.hlsl" />
+    <FxCompile Include="ColliderShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dialog.rc">

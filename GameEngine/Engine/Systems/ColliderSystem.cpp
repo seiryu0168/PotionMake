@@ -29,6 +29,17 @@ void ColliderSystem::Update()
 	}
 }
 
+void ColliderSystem::Draw(int drawLayer)
+{
+	for (Entity entity : entities_)
+	{
+		if (Coordinator::GetComponent<Collider>(entity).isShowHitArea_)
+		{
+
+		}
+	}
+}
+
 void ColliderSystem::Release()
 {
 	//拡張for文内で値を消すのでコピーして回す

@@ -14,12 +14,18 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	colliderType_(ColliderType::BOX_COLLIDER),
 	colliderEntity_(0),
 	nowHit_(false),
-	prevHit_(false)
+	prevHit_(false),
+	isShowHitArea_(false)
 {
 }
 
 Collider::~Collider()
 {
+}
+
+void Collider::Draw()
+{
+
 }
 
 void Collider::Release()

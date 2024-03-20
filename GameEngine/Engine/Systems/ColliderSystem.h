@@ -4,10 +4,23 @@
 #include"../Components/Collider.h"
 class ColliderSystem : public System
 {
+private:
+	ID3D11Buffer* pVertexBuffer_;	//頂点バッファ
+	ID3D11Buffer* pIndexBuffer_;	//インデックスバッファ
+	ID3D11Buffer* pConstantBuffer_;	//コンスタントバッファ
+
+	struct CONSTANT_BUFFER
+	{
+		XMMATRIX matWorld;
+		XMMATRIX matUVTrans;
+		XMFLOAT4 color;
+		XMFLOAT4 ChangeColor;
+	};
 public:
 	ColliderSystem();
 	~ColliderSystem() {};
 	void Update() override;
+	void Draw(int drawLayer = 0) override;
 	void Release() override;
 	void CheckRemove() override;
 	/// <summary>

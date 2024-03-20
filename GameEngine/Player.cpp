@@ -2,6 +2,8 @@
 #include"Engine/DirectX_11/Input.h"
 #include"Engine/DirectX_11/Math.h"
 #include"Engine/Systems/ModelSystem.h"
+#include"Engine/Systems/ColliderSystem.h"
+#include"Engine/Systems/TextSystem.h"
 #include"Engine/GameObject/CameraManager.h"
 Player::Player(Object* parent)
 	:GameObject(parent, "Player"),
@@ -9,7 +11,9 @@ Player::Player(Object* parent)
 	speed_(0.5),
 	cameraRotate_({0,0}),
 	cameraTargetVec_(XMVectorSet(0,0,1,0)),
-	moveTime_(0)
+	moveTime_(0),
+	rotateUperLimitY_(60),
+	rotateDownerLimitY_(-60)
 {
 }
 
@@ -22,6 +26,17 @@ void Player::Initialize()
 	//Test_Model_ECSver floorModel(this);
 	//floorModel.Load("Assets/Model/ground_grass.fbx");
 	//AddComponent<Test_Model_ECSver>(floorModel);
+	
+	HitSphere sphereCollider(1.0f);
+	Collider coll({ 0,-10,0 });
+	coll.SetCollider(sphereCollider);
+	coll.SetAttachObject(this);
+	AddComponent<Collider>(coll);
+
+	Text noticeText;
+	noticeText.SetText("Name");
+	noticeText.SetColor({ 0,0,0,1 });
+	AddComponent<Text>(noticeText);
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0,10,1,0));
@@ -65,10 +80,18 @@ void Player::CameraControll()
 	rotate = StoreFloat3(Input::GetMouseMove()*0.03f);
 	cameraRotate_.x += rotate.x;
 	cameraRotate_.y += rotate.y;
-	cameraRotate_.y = Clamp<float>(cameraRotate_.y, -60.0f, 60.0f);
+	cameraRotate_.y = Clamp<float>(cameraRotate_.y, rotateDownerLimitY_, rotateUperLimitY_);
 	transform_->RotateEular(cameraRotate_.y, cameraRotate_.x, 0);//RotateEular(XMConvertToDegrees(cameraRotate_.y), XMConvertToDegrees(cameraRotate_.x*10), 0);
 	CameraManager::GetCamera(0).SetTarget(transform_->position_ + transform_->GetFront());
 }
 void Player::Release()
 {
+}
+
+void Player::OnCollisionEnter(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
+	{
+		GetComponent<Text>().SetText(pTarget->GetObjectName());
+	}
 }
