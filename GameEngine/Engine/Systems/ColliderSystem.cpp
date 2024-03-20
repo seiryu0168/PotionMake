@@ -1,9 +1,123 @@
 #include "ColliderSystem.h"
 #include"../GameObject/GameObject.h"
+#include"../DirectX_11/Direct3D.h"
+#include"../GameObject/CameraManager.h"
+void ColliderSystem::CreateVB()
+{
+	//HitBox用バーテックスバッファ
+	{
+		D3D11_BUFFER_DESC bd_vertex{};
+		bd_vertex.ByteWidth = sizeof(VERTEX) * 8;
+		bd_vertex.Usage = D3D11_USAGE_DEFAULT;
+		bd_vertex.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bd_vertex.CPUAccessFlags = 0;
+		bd_vertex.MiscFlags = 0;
+		bd_vertex.StructureByteStride = 0;
+		D3D11_SUBRESOURCE_DATA data_vertex{};
+		data_vertex.pSysMem = boxVertices_;
+		HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pBoxVertexBuffer_);
+	}
+	//HitSphere用バーテックスバッファ
+	{
+		D3D11_BUFFER_DESC bd_vertex{};
+		bd_vertex.ByteWidth = sizeof(VERTEX) * 36;
+		bd_vertex.Usage = D3D11_USAGE_DEFAULT;
+		bd_vertex.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bd_vertex.CPUAccessFlags = 0;
+		bd_vertex.MiscFlags = 0;
+		bd_vertex.StructureByteStride = 0;
+		D3D11_SUBRESOURCE_DATA data_vertex{};
+		data_vertex.pSysMem = sphereVertices_;
+		HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd_vertex, &data_vertex, &pSphereVertexBuffer_);
+	}
+}
+void ColliderSystem::CreateIB()
+{
+	////HitBox用インデックスバッファ
+	//{
+	//
+	//	D3D11_BUFFER_DESC   bd{};
+	//	bd.Usage = D3D11_USAGE_DEFAULT;
+	//	bd.ByteWidth = sizeof(int) * 8;
+	//	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	//	bd.CPUAccessFlags = 0;
+	//	bd.MiscFlags = 0;
+	//
+	//	D3D11_SUBRESOURCE_DATA InitData{};
+	//	InitData.pSysMem = index;
+	//	InitData.SysMemPitch = 0;
+	//	InitData.SysMemSlicePitch = 0;
+	//	HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd, &InitData, &pBoxIndexBuffer_);
+	//}
+	//
+	////HitSphere用インデックスバッファ
+	//{
+	//	D3D11_BUFFER_DESC   bd{};
+	//	bd.Usage = D3D11_USAGE_DEFAULT;
+	//	bd.ByteWidth = sizeof(int) * indexNum_;
+	//	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	//	bd.CPUAccessFlags = 0;
+	//	bd.MiscFlags = 0;
+	//
+	//	D3D11_SUBRESOURCE_DATA InitData{};
+	//	InitData.pSysMem = index;
+	//	InitData.SysMemPitch = 0;
+	//	InitData.SysMemSlicePitch = 0;
+	//	HRESULT hr = Direct3D::pDevice->CreateBuffer(&bd, &InitData, &pBoxIndexBuffer_);
+	//}
+}
+void ColliderSystem::CreateCB()
+{
+	//HitBox用コンスタントバッファ
+	{
+
+		D3D11_BUFFER_DESC cb{};
+		cb.ByteWidth = sizeof(CONSTANT_BUFFER);
+		cb.Usage = D3D11_USAGE_DYNAMIC;
+		cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cb.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		cb.MiscFlags = 0;
+		cb.StructureByteStride = 0;
+
+		// コンスタントバッファの作成
+		HRESULT hr = Direct3D::pDevice->CreateBuffer(&cb, nullptr, &pBoxConstantBuffer_);
+	}
+	//HitSphere用コンスタントバッファ
+	{
+
+		D3D11_BUFFER_DESC cb{};
+		cb.ByteWidth = sizeof(CONSTANT_BUFFER);
+		cb.Usage = D3D11_USAGE_DYNAMIC;
+		cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cb.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		cb.MiscFlags = 0;
+		cb.StructureByteStride = 0;
+
+		// コンスタントバッファの作成
+		HRESULT hr = Direct3D::pDevice->CreateBuffer(&cb, nullptr, &pSphereConstantBuffer_);
+	}
+}
 ColliderSystem::ColliderSystem() : System()
 {
 	Coordinator::RegisterComponent<HitBox>();
 	Coordinator::RegisterComponent<HitSphere>();
+
+	int vCount_ = 0;
+	XMFLOAT3 vPos = {0,0,0};
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			sphereVertices_[vCount_] = { XMVectorSet(0.5f * cosf(vPos.x), 0.5f * sinf(vPos.y), 0.5f * sinf(vPos.z), 0) };
+			vPos.x += XMConvertToRadians(360.0f / 6.0f);
+			vPos.z += XMConvertToRadians(360.0f / 6.0f);
+			vCount_++;
+		}
+		vPos.y+= XMConvertToRadians(360.0f / 6.0f);
+	}
+	CreateVB();
+	CreateCB();
+
 	//Signature collSignature;
 	//auto type = Coordinator::GetComponentType<HitBox>();
 	//collSignature.set(Coordinator::GetComponentType<HitBox>());
@@ -31,11 +145,60 @@ void ColliderSystem::Update()
 
 void ColliderSystem::Draw(int drawLayer)
 {
+	ColliderType type;
+	bool isShow;
+	Direct3D::SetShader(SHADER_TYPE::SHADER_COLLIDER);
+	Direct3D::SetBlendMode(BLEND_MODE::BLEND_DEFAULT);
 	for (Entity entity : entities_)
 	{
-		if (Coordinator::GetComponent<Collider>(entity).isShowHitArea_)
+		isShow = Coordinator::GetComponent<Collider>(entity).isShowHitArea_;
+		type = Coordinator::GetComponent<Collider>(entity).GetType();
+		if (isShow)
 		{
+			CONSTANT_BUFFER cb;
+			cb.matWVP = XMMatrixTranspose(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->GetWorldMatrix() * CameraManager::GetCurrentCamera().GetViewMatrix() * CameraManager::GetCurrentCamera().GetProjectionMatrix());
+			cb.matW = XMMatrixTranspose(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->GetWorldMatrix());
+			cb.matNormal = XMMatrixTranspose(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->GetNormalMatrix());
+			
+			D3D11_MAPPED_SUBRESOURCE pdata;
+			if (type == ColliderType::BOX_COLLIDER)
+			{
+				Direct3D::pContext->Map(pBoxConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
+				memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
+				Direct3D::pContext->Unmap(pBoxConstantBuffer_, 0);//再開
+			}
+			else if (type == ColliderType::SPHERE_COLLIDER)
+			{
+				Direct3D::pContext->Map(pSphereConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
+				memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
+				Direct3D::pContext->Unmap(pSphereConstantBuffer_, 0);//再開
+			}
 
+			//頂点バッファ
+			UINT stride = sizeof(VERTEX);
+			UINT offset = 0;
+			if (type == ColliderType::BOX_COLLIDER)
+			{
+				Direct3D::pContext->IASetVertexBuffers(0, 1, &pBoxVertexBuffer_, &stride, &offset);
+				//コンスタントバッファ
+				Direct3D::pContext->VSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//頂点シェーダー用	
+				Direct3D::pContext->PSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//ピクセルシェーダー用
+				Direct3D::pContext->UpdateSubresource(pBoxConstantBuffer_, 0, nullptr, &cb, 0, 0);
+				Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+				Direct3D::pContext->Draw(sizeof(boxVertices_)/sizeof(VERTEX),0);
+			}
+			else if (type == ColliderType::SPHERE_COLLIDER)
+			{
+
+				Direct3D::pContext->IASetVertexBuffers(0, 1, &pSphereVertexBuffer_, &stride, &offset);
+
+				//コンスタントバッファ
+				Direct3D::pContext->VSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//頂点シェーダー用	
+				Direct3D::pContext->PSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//ピクセルシェーダー用
+				Direct3D::pContext->UpdateSubresource(pSphereConstantBuffer_, 0, nullptr, &cb, 0, 0);
+				Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+				Direct3D::pContext->Draw(sizeof(sphereVertices_) / sizeof(VERTEX), 0);
+			}
 		}
 	}
 }

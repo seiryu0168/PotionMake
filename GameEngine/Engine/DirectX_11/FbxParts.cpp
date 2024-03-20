@@ -151,7 +151,7 @@ void FbxParts::Draw(Transform& transform,XMFLOAT4 lineColor)
 		UINT stride = sizeof(VERTEX);
 		UINT offset = 0;
 		Direct3D::pContext->IASetVertexBuffers(0, 1, &pVertexBuffer_, &stride, &offset);
-
+		
 		// インデックスバッファーをセット
 		stride = sizeof(int);
 		offset = 0;

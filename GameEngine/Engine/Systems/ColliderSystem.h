@@ -5,17 +5,47 @@
 class ColliderSystem : public System
 {
 private:
-	ID3D11Buffer* pVertexBuffer_;	//頂点バッファ
-	ID3D11Buffer* pIndexBuffer_;	//インデックスバッファ
-	ID3D11Buffer* pConstantBuffer_;	//コンスタントバッファ
+	ID3D11Buffer* pBoxVertexBuffer_;	//頂点バッファ
+	ID3D11Buffer* pBoxIndexBuffer_;	//インデックスバッファ
+	ID3D11Buffer* pBoxConstantBuffer_;	//コンスタントバッファ
+
+	ID3D11Buffer* pSphereVertexBuffer_;	//頂点バッファ
+	ID3D11Buffer* pSphereIndexBuffer_;	//インデックスバッファ
+	ID3D11Buffer* pSphereConstantBuffer_;	//コンスタントバッファ
 
 	struct CONSTANT_BUFFER
 	{
-		XMMATRIX matWorld;
-		XMMATRIX matUVTrans;
-		XMFLOAT4 color;
-		XMFLOAT4 ChangeColor;
+		XMMATRIX matWVP;			//ワールド、ビュー、プロジェクション行列の合成(頂点変換に使う)
+		XMMATRIX matW;				//ワールド行列
+		XMMATRIX matNormal;			//回転行列と拡大行列の合成(法線の変形に使う)
 	};
+
+	const struct VERTEX
+	{
+		XMVECTOR position;
+		//XMVECTOR uv
+	};
+
+	VERTEX boxVertices_[8] = 
+	  { {XMVectorSet(-0.5f,0.5f,-0.5,0)},
+		{XMVectorSet(0.5f,0.5f,-0.5f,0)},
+		{XMVectorSet(0.5f,-0.5f,-0.5f,0)},
+		{XMVectorSet(-0.5f,-0.5f,-0.5f,0)},
+		{XMVectorSet(-0.5f,0.5f,0.5,0)},
+		{XMVectorSet(0.5f,0.5f,0.5f,0)},
+		{XMVectorSet(0.5f,-0.5f,0.5f,0)},
+		{XMVectorSet(-0.5f,-0.5f,0.5f,0)}
+	  };
+
+	VERTEX sphereVertices_[36];
+	//CONSTANT_BUFFER boxCb;
+	//CONSTANT_BUFFER sphereCb;
+
+	//int boxIndex[] = { 0,1,3, 0,1,2, 1,6,2, 1,5,6, 5,7,6, 5,4,7, 4,3,7, 4,0,3, 0,4,5, 0,5,1, 2,7,3, 2,6,7 };
+
+	void CreateVB();
+	void CreateIB();
+	void CreateCB();
 public:
 	ColliderSystem();
 	~ColliderSystem() {};

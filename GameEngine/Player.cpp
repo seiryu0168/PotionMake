@@ -27,8 +27,8 @@ void Player::Initialize()
 	//floorModel.Load("Assets/Model/ground_grass.fbx");
 	//AddComponent<Test_Model_ECSver>(floorModel);
 	
-	HitSphere sphereCollider(1.0f);
-	Collider coll({ 0,-10,0 });
+	HitSphere sphereCollider(10.0f);
+	Collider coll({ 0,0,0 });
 	coll.SetCollider(sphereCollider);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);

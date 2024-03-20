@@ -20,11 +20,11 @@ void Play_ManagementPart_Shelf::Initialize()
 	AddComponent<Collider>(coll);
 
 	Test_Model_ECSver tableModel(this);
-	tableModel.Load("Assets/Model/tableCloth.fbx");
+	tableModel.Load("Assets/Model/bookcaseClosedWide.fbx");
 	AddComponent<Test_Model_ECSver>(tableModel);
 
 
-	transform_->position_ = XMVectorSet(0, 0, 10, 0);
+	transform_->position_ = XMVectorSet(0, 0, 20, 0);
 
 }
 

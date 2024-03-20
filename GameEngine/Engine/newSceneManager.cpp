@@ -131,8 +131,9 @@ namespace newSceneManager
 				CameraManager::UpdateCameraNum(i);
 				Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
 
-
+				
 				pModelSyatem_->Draw(layerCount);
+				//pColliderSystem_->Draw();
 				pParticleSystem_->Draw(layerCount);
 				pLineParticleSystem_->Draw(layerCount);
 				pImageSystem_->Draw(layerCount);
