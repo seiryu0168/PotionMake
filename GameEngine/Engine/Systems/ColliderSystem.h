@@ -27,7 +27,7 @@ private:
 	};
 
 	VERTEX boxVertices_[8] = 
-	  { {XMVectorSet(-0.5f,0.5f,-0.5,0)},
+	  { {XMVectorSet(-0.5f,0.5f,-0.5f,0)},
 		{XMVectorSet(0.5f,0.5f,-0.5f,0)},
 		{XMVectorSet(0.5f,-0.5f,-0.5f,0)},
 		{XMVectorSet(-0.5f,-0.5f,-0.5f,0)},
@@ -41,7 +41,7 @@ private:
 	//CONSTANT_BUFFER boxCb;
 	//CONSTANT_BUFFER sphereCb;
 
-	//int boxIndex[] = { 0,1,3, 0,1,2, 1,6,2, 1,5,6, 5,7,6, 5,4,7, 4,3,7, 4,0,3, 0,4,5, 0,5,1, 2,7,3, 2,6,7 };
+	int boxIndex[36] = { 0,1,3, 0,1,2, 1,6,2, 1,5,6, 5,7,6, 5,4,7, 4,3,7, 4,0,3, 0,4,5, 0,5,1, 2,7,3, 2,6,7 };
 
 	void CreateVB();
 	void CreateIB();

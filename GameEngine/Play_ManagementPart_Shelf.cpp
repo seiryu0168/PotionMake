@@ -14,7 +14,7 @@ Play_ManagementPart_Shelf::~Play_ManagementPart_Shelf()
 void Play_ManagementPart_Shelf::Initialize()
 {
 	HitBox tableHitBox({ 2,1,1 });
-	Collider coll({ 0,0,0 });
+	Collider coll({ 0,5,0 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);

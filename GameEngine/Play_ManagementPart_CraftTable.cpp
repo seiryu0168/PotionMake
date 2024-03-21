@@ -13,7 +13,7 @@ Play_ManagementPart_CraftTable::~Play_ManagementPart_CraftTable()
 void Play_ManagementPart_CraftTable::Initialize()
 {
 	HitBox tableHitBox({ 1,1,2 });
-	Collider coll({ 0,0,0 });
+	Collider coll({ 0,5,0 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);

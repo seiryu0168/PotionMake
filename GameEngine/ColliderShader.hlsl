@@ -1,9 +1,7 @@
 //───────────────────────────────────────
  // テクスチャ＆サンプラーデータのグローバル変数定義
 //───────────────────────────────────────
-Texture2D		g_texture		: register(t0);	//テクスチャー
-Texture2D		g_normalTexture : register(t2); //ノーマルマップ
-SamplerState	g_sampler		: register(s0);	//サンプラー
+
 
 //───────────────────────────────────────
  // コンスタントバッファ
@@ -12,17 +10,8 @@ SamplerState	g_sampler		: register(s0);	//サンプラー
 cbuffer global
 {
 	float4x4	g_matWVP;			// ワールド・ビュー・プロジェクションの合成行列
-	float4x4	g_matW;				//ワールド行列
+	float4x4	g_matW;				//ワールド行列	
 	float4x4    g_matNormal;		//法線変形行列(回転行列と拡大行列の逆行列)
-	float4		g_diffuseColor;		// ディフューズカラー（マテリアルの色）
-	float4		g_ambient;			//アンビエント
-	float4		g_speculer;			//スペキュラー
-	float4		g_lightDirection;	//ライトの向き
-	float4		g_cameraPosition;	//カメラの位置
-	float4      g_customColor;		//プログラム側で色を変える場合の変数
-	float		g_shininess;		//ハイライトの強さ
-	bool		g_isTexture;		// テクスチャ貼ってあるかどうか
-	bool		g_isNormal;  //プログラム側で変える色
 };
 
 //───────────────────────────────────────
@@ -43,13 +32,13 @@ struct VS_OUT
 //───────────────────────────────────────
 // 頂点シェーダ
 //───────────────────────────────────────
-VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL, float4 tangent : TANGENT)
+float4 VS(float4 pos : POSITION, float4 uv : TEXCOORD) : SV_POSITION
 {
 	//ピクセルシェーダーへ渡す情報
-	VS_OUT outData;
+	//VS_OUT outData;
 	//ローカル座標に、ワールド・ビュー・プロジェクション行列をかけて
 	//スクリーン座標に変換し、ピクセルシェーダーへ
-	outData.pos = mul(pos, g_matWVP);
+	//outData.pos = mul(pos, g_matWVP);
 
 	////視線ベクトル
 	//outData.wPos = mul(pos, g_matW);
@@ -96,7 +85,8 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL, f
 	//outData.uv = uv;
 
 	//まとめて出力
-	return outData;
+	return mul(pos, g_matWVP);
+	//return outData;
 }
 //───────────────────────────────────────
 // ピクセルシェーダ

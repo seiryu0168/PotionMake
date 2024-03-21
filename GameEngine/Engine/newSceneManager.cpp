@@ -134,13 +134,13 @@ namespace newSceneManager
 
 				
 				pModelSyatem_->Draw(layerCount);
-				//pColliderSystem_->Draw();
 				pParticleSystem_->Draw(layerCount);
 				pLineParticleSystem_->Draw(layerCount);
 				pImageSystem_->Draw(layerCount);
 				pTextSystem_->Draw(layerCount);
 			}
 		}
+				pColliderSystem_->Draw();
 		CameraManager::UpdateCameraNum(0);
 		Direct3D::SetViewPort(CameraManager::GetCamera(0).GetViewPort());
 		//StaticResource::Draw();

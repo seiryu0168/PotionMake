@@ -158,8 +158,8 @@ void FbxParts::Draw(Transform& transform,XMFLOAT4 lineColor)
 		Direct3D::pContext->IASetIndexBuffer(ppIndexBuffer_[i], DXGI_FORMAT_R32_UINT, 0);
 
 		//コンスタントバッファ
-		Direct3D::pContext->VSSetConstantBuffers(0, 1, &pConstantBuffer_);							//頂点シェーダー用	
-		Direct3D::pContext->PSSetConstantBuffers(0, 1, &pConstantBuffer_);							//ピクセルシェーダー用
+		Direct3D::pContext->VSSetConstantBuffers(0, 1, &pConstantBuffer_);				//頂点シェーダー用	
+		Direct3D::pContext->PSSetConstantBuffers(0, 1, &pConstantBuffer_);				//ピクセルシェーダー用
 		Direct3D::pContext->UpdateSubresource(pConstantBuffer_, 0, nullptr, &cb, 0, 0);
 		Direct3D::pContext->DrawIndexed(indexCount_.get()[i], 0, 0);
 	}

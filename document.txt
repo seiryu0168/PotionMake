@@ -1,14 +1,30 @@
 transform_
 ・position_
 　XMVECTOR型なので、変更する際にはXMVectorSet関数などを使うといい
+　以下はz軸方向に10移動させるプログラム　
+　transform_->position_=XMVectorSet(0,0,10,0);
+	
 ・rotate_
 　XMVECTOR型だが、四元数なので直接変更するのは知識が無いと難しい。
-　transform_->RotateAxisもしくはRotateEular関数で変更できる
+　transform_->RotateAxisもしくはRotateEular関数で変更できる。
+　以下はy軸に45度回転させるプログラム
+　transform_->RotateAxis(XMVectorSet(0,1,0,0),45.0f);
 ・scale_
-　XMFLOAT3型。直接弄って変更可能
+　XMFLOAT3型。直接弄って変更可能。
+　以下は3倍に大きくするプログラム
+　transform_->scale_={3,3,3};
 
 Collider
 ・HitBox
 　コライダーのタイプ。箱型のコライダーとして判定を行う
 ・HitSphere
 　コライダーのタイプ。球型のコライダーとして判定を行う
+　以下はコライダーのコンポーネントを設定する一連の流れ
+　XMFLOAT3 centerPosition={0,0,0};　　
+　Collider coll(centerPosition);
+
+　XMFLOAT3 colliderSize={3,3,3};
+　HitBox box(colliderSize_);
+　
+　coll.SetCollider(box);
+　coll.SetAttachObject(this);

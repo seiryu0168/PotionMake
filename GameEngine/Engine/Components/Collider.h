@@ -29,7 +29,6 @@ enum class ColliderType
 };
 
 //当たり判定
-
 class Collider
 {
 private:
@@ -44,7 +43,14 @@ private:
 public:
 	bool isShowHitArea_;
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	Collider();
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="centerPos">コライダーの中心</param>
 	Collider(const XMFLOAT3& centerPos);
 	template<typename T>
 	Collider(const XMFLOAT3& centerPos, const T& colliderShape)
@@ -67,6 +73,8 @@ public:
 	void SetCenter(const XMFLOAT3& pos) { center_ = pos; }
 	//コライダーの位置を返す
 	const XMFLOAT3& GetCenter() const { return center_; }
+	//コライダーのサイズを返す
+	
 	//今ヒットしてるかどうか設定(未完成機能)
 	void HitEnable(bool isHit) { nowHit_ = isHit; }
 	//ヒットしてるかどうか

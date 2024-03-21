@@ -71,10 +71,10 @@ void Player::Update()
 
 		transform_->position_ += XMVector3Normalize(moveVec_)*0.1f;
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
-		XMFLOAT3 pos = StoreFloat3(transform_->position_);
-		GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) + 
-									 "\nY:" + std::to_string(pos.y) + 
-									 "\nZ:" + std::to_string(pos.z));
+		//XMFLOAT3 pos = StoreFloat3(transform_->position_);
+		//GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) + 
+		//							 "\nY:" + std::to_string(pos.y) + 
+		//							 "\nZ:" + std::to_string(pos.z));
 			//CameraManager::GetCamera(0).SetTarget(this->transform_->position_ + XMVectorSet(0, 0, 1, 0));
 		moveVec_ = XMVectorSet(0, 0, 0, 0);
 	}
@@ -88,10 +88,10 @@ void Player::CameraControll()
 	cameraRotate_.y += rotate.y;
 	cameraRotate_.y = Clamp<float>(cameraRotate_.y, rotateDownerLimitY_, rotateUperLimitY_);
 	transform_->RotateEular(cameraRotate_.y, cameraRotate_.x, 0);//RotateEular(XMConvertToDegrees(cameraRotate_.y), XMConvertToDegrees(cameraRotate_.x*10), 0);
-	XMFLOAT3 pos = CameraManager::GetCamera(0).GetPosition();
-	GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) +
-		"\nY:" + std::to_string(pos.y) +
-		"\nZ:" + std::to_string(pos.z));
+	//XMFLOAT3 pos = CameraManager::GetCamera(0).GetPosition();
+	//GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) +
+	//	"\nY:" + std::to_string(pos.y) +
+	//	"\nZ:" + std::to_string(pos.z));
 	
 	CameraManager::GetCamera(0).SetTarget(transform_->position_ + transform_->GetFront());
 }
@@ -101,23 +101,24 @@ void Player::Release()
 
 void Player::OnCollision(Object* pTarget)
 {
-	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
-	//{
-	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
-	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
-	//								 "\nX:"+std::to_string(pos.x)+
-	//								 "\nY:"+std::to_string(pos.y)+
-	//								 "\nZ:"+std::to_string(pos.z));
-	//}
-	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
-	//{
-	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
-	//	GetComponent<Text>().SetText(pTarget->GetObjectName() +
-	//								 "\nX:" + std::to_string(pos.x) +
-	//								 "\nY:" + std::to_string(pos.y) +
-	//								 "\nZ:" + std::to_string(pos.z));
-	//
-	//}
+
+	if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
+	{
+		XMFLOAT3 pos = StoreFloat3(transform_->position_);
+		GetComponent<Text>().SetText(pTarget->GetObjectName()+
+									 "\nX:"+std::to_string(pos.x)+
+									 "\nY:"+std::to_string(pos.y)+
+									 "\nZ:"+std::to_string(pos.z));
+	}
+	else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
+	{
+		XMFLOAT3 pos = StoreFloat3(transform_->position_);
+		GetComponent<Text>().SetText(pTarget->GetObjectName() +
+									 "\nX:" + std::to_string(pos.x) +
+									 "\nY:" + std::to_string(pos.y) +
+									 "\nZ:" + std::to_string(pos.z));
+	
+	}
 
 
 }
