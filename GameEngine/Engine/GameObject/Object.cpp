@@ -82,7 +82,7 @@ void Object::UpdateSub()
 	if (activeFlag_ && isUpdate_ && killFlag_ == false)
 	{
 		Update();
-		transform_->Calclation();
+		//transform_->Calclation();
 	}
 
 	if (isUpdate_)
@@ -305,6 +305,7 @@ void Object::KillObjectSub(Object* pTarget)
 			//itr = pTarget->childList_.erase(itr);
 		}
 		pTarget->childList_.clear();
+		pTarget->transform_->childList_.clear();
 	}
 	pTarget->Release();
 }

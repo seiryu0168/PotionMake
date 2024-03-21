@@ -108,6 +108,7 @@ namespace newSceneManager
 		currentScene_->Update();
 		//シーンの更新
 		currentScene_->StaticUpdate();
+		currentScene_->GetRootObject()->GetTransform()->UpdateSub();
 		//モデルの更新
 		pModelSyatem_->Update();
 		//パーティクルの更新

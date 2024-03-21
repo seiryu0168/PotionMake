@@ -160,61 +160,61 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			{
 				lastUpdateTime = nowTime;
 
-				std::thread main(Division::threadMain);
-				std::thread load(Division::threadDraw);
-				main.join();
-				load.join();
-//#ifdef _DEBUG
-//				DebugUI::StartImGui();
-//#endif
-//				//ゲームの処理
-//				Time::Update();
-//				Input::Update();
-//
-//				lastUpdateTime = nowTime;
-//				//countFps++;
-//				newSceneManager::Update();
-//				//pRootJob->UpdateSub();
-//				CameraManager::Update();
-//#ifdef _DEBUG
-//				DebugUI::Debug(/*(GameObject*)pRootJob->FindChild("SceneManager")*/);
-//				//DebugUI::Log();
-//				ImGui::Render();
-//#endif 
-//				newSceneManager::CheckRemoveObject();
-//				//描画処理
-//				Direct3D::BeginDraw();
-//
-//				//pRootJob->ComponentUpdate();
-//				//D2D::BeginDraw();
-//				//Coordinator::SystemsUpdate();
-//				//pRootJob->DrawSub();
-//				//ビューポート１
-//				CameraManager::Update();
-//				for (int i = 0; i < CameraManager::GetCameraCount(); i++)
-//				{
-//					CameraManager::UpdateCameraNum(i);
-//					Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
-//
-//					newSceneManager::Draw();
-//				}
-//				////ビューポート２
-//				//{
-//				//	Direct3D::SetViewPort(1);
-//				//	//CameraManager::SetPosition(XMVectorSet(10, 10, -10, 0));
-//				//	//CameraManager::SetTarget(XMVectorSet(0, 0, 0, 0));
-//				//	CameraManager::Update();
-//				//	newSceneManager::Draw();
-//				//}
-//				//pRootJob->DrawSub();
-//
-//				//D2D::EndDraw();
-//				//ImageManager::DrawUI();
-//				//pRootJob->ThirdDrawSub();
-//#ifdef _DEBUG	
-//				ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-//#endif
-//				Direct3D::EndDraw();
+				//std::thread main(Division::threadMain);
+				//std::thread load(Division::threadDraw);
+				//main.join();
+				//load.join();
+#ifdef _DEBUG
+				DebugUI::StartImGui();
+#endif
+				//ゲームの処理
+				Time::Update();
+				Input::Update();
+
+				lastUpdateTime = nowTime;
+				//countFps++;
+				newSceneManager::Update();
+				//pRootJob->UpdateSub();
+				CameraManager::Update();
+#ifdef _DEBUG
+				DebugUI::Debug(/*(GameObject*)pRootJob->FindChild("SceneManager")*/);
+				//DebugUI::Log();
+				ImGui::Render();
+#endif 
+				newSceneManager::CheckRemoveObject();
+				//描画処理
+				Direct3D::BeginDraw();
+
+				//pRootJob->ComponentUpdate();
+				//D2D::BeginDraw();
+				//Coordinator::SystemsUpdate();
+				//pRootJob->DrawSub();
+				//ビューポート１
+				CameraManager::Update();
+				for (int i = 0; i < CameraManager::GetCameraCount(); i++)
+				{
+					CameraManager::UpdateCameraNum(i);
+					Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
+
+					newSceneManager::Draw();
+				}
+				////ビューポート２
+				//{
+				//	Direct3D::SetViewPort(1);
+				//	//CameraManager::SetPosition(XMVectorSet(10, 10, -10, 0));
+				//	//CameraManager::SetTarget(XMVectorSet(0, 0, 0, 0));
+				//	CameraManager::Update();
+				//	newSceneManager::Draw();
+				//}
+				//pRootJob->DrawSub();
+
+				//D2D::EndDraw();
+				//ImageManager::DrawUI();
+				//pRootJob->ThirdDrawSub();
+#ifdef _DEBUG	
+				ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif
+				Direct3D::EndDraw();
 			}
 		}
 	}

@@ -37,6 +37,13 @@ Transform::~Transform()
 
 }
 
+void Transform::PushBackChild(Transform* child)
+{
+	assert(child != nullptr);
+	child->pParent_ = this;
+	childList_.push_back(child);
+}
+
 //Šes—ñ‚ÌŒvŽZ
 void Transform::Calclation()
 {
@@ -46,7 +53,7 @@ void Transform::Calclation()
 	
 	//‰ñ“]s—ñ
 	matRotate_ = XMMatrixRotationQuaternion(rotate_);
-
+		
 	front_ = XMVector3Rotate(XMVectorSet(0, 0, 1, 0), rotate_);
 	right_ = XMVector3Rotate(XMVectorSet(1, 0, 0, 0), rotate_);
 	left_ = XMVector3Rotate(XMVectorSet(-1, 0, 0, 0), rotate_);
@@ -54,6 +61,24 @@ void Transform::Calclation()
 	
 	//Šg‘ås—ñ
 	matScale_ = XMMatrixScaling(scale_.x, scale_.y, scale_.z);
+}
+
+void Transform::Update()
+{
+	Calclation();
+}
+
+void Transform::UpdateSub()
+{
+	Update();
+	if (!childList_.empty())
+	{
+		for (Transform* itr : childList_)
+		{
+			itr->UpdateSub();
+		}
+	}
+
 }
 
 void Transform::RotateAxis(const XMVECTOR& axis, float angle)
@@ -165,3 +190,8 @@ const XMVECTOR& Transform::GetLocalFrontVector()
 {
 	return baseVec_ * GetLocalRotateMatrix();
 }
+
+//void Transform::RemoveChild()
+//{
+//	pParent_->childList_.erase(this);
+//}

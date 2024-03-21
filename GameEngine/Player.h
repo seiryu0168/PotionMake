@@ -18,6 +18,6 @@ public:
 	void CameraControll();
 	void Release() override;
 
-	void OnCollisionEnter(GameObject* pTarget) override;
+	void OnCollision(Object* pTarget) override;
 };
 

@@ -153,6 +153,7 @@ public:
 		if (parent != nullptr)
 		{
 			parent->PushBackChild(p);
+			parent->transform_->PushBackChild(p->transform_);
 		}
 		p->Initialize();
 		return p.get();

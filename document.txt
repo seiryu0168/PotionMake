@@ -1,0 +1,14 @@
+transform_
+・position_
+　XMVECTOR型なので、変更する際にはXMVectorSet関数などを使うといい
+・rotate_
+　XMVECTOR型だが、四元数なので直接変更するのは知識が無いと難しい。
+　transform_->RotateAxisもしくはRotateEular関数で変更できる
+・scale_
+　XMFLOAT3型。直接弄って変更可能
+
+Collider
+・HitBox
+　コライダーのタイプ。箱型のコライダーとして判定を行う
+・HitSphere
+　コライダーのタイプ。球型のコライダーとして判定を行う

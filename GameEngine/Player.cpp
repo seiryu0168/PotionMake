@@ -27,14 +27,16 @@ void Player::Initialize()
 	//floorModel.Load("Assets/Model/ground_grass.fbx");
 	//AddComponent<Test_Model_ECSver>(floorModel);
 	
-	HitSphere sphereCollider(10.0f);
-	Collider coll({ 0,0,0 });
+	HitSphere sphereCollider(1.0f);
+	Collider coll({ 0,-10,0 });
 	coll.SetCollider(sphereCollider);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 
 	Text noticeText;
 	noticeText.SetText("Name");
+	TEXT_RECT rect = { 0,0,1000,500 };
+	noticeText.SetRect(rect);
 	noticeText.SetColor({ 0,0,0,1 });
 	AddComponent<Text>(noticeText);
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
@@ -61,15 +63,19 @@ void Player::Update()
 		moveVec_ += XMVectorSet(speed_, 0, 0, 0);
 	}
 	
-	if (VectorLength(moveVec_) >= 0.1f)
+	if (VectorLength(moveVec_) >= speed_)
 	{
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(moveVec_, transform_->rotate_));
 		moveBuff.y = 0;
 		moveVec_ = XMLoadFloat3(&moveBuff);
 
-		transform_->position_ += XMVector3Normalize(moveVec_)*0.3f;
+		transform_->position_ += XMVector3Normalize(moveVec_)*0.1f;
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
-		//CameraManager::GetCamera(0).SetTarget(this->transform_->position_ + XMVectorSet(0, 0, 1, 0));
+		XMFLOAT3 pos = StoreFloat3(transform_->position_);
+		GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) + 
+									 "\nY:" + std::to_string(pos.y) + 
+									 "\nZ:" + std::to_string(pos.z));
+			//CameraManager::GetCamera(0).SetTarget(this->transform_->position_ + XMVectorSet(0, 0, 1, 0));
 		moveVec_ = XMVectorSet(0, 0, 0, 0);
 	}
 	CameraControll();
@@ -82,16 +88,36 @@ void Player::CameraControll()
 	cameraRotate_.y += rotate.y;
 	cameraRotate_.y = Clamp<float>(cameraRotate_.y, rotateDownerLimitY_, rotateUperLimitY_);
 	transform_->RotateEular(cameraRotate_.y, cameraRotate_.x, 0);//RotateEular(XMConvertToDegrees(cameraRotate_.y), XMConvertToDegrees(cameraRotate_.x*10), 0);
+	XMFLOAT3 pos = CameraManager::GetCamera(0).GetPosition();
+	GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) +
+		"\nY:" + std::to_string(pos.y) +
+		"\nZ:" + std::to_string(pos.z));
+	
 	CameraManager::GetCamera(0).SetTarget(transform_->position_ + transform_->GetFront());
 }
 void Player::Release()
 {
 }
 
-void Player::OnCollisionEnter(GameObject* pTarget)
+void Player::OnCollision(Object* pTarget)
 {
-	if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
-	{
-		GetComponent<Text>().SetText(pTarget->GetObjectName());
-	}
+	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
+	//{
+	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
+	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
+	//								 "\nX:"+std::to_string(pos.x)+
+	//								 "\nY:"+std::to_string(pos.y)+
+	//								 "\nZ:"+std::to_string(pos.z));
+	//}
+	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
+	//{
+	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
+	//	GetComponent<Text>().SetText(pTarget->GetObjectName() +
+	//								 "\nX:" + std::to_string(pos.x) +
+	//								 "\nY:" + std::to_string(pos.y) +
+	//								 "\nZ:" + std::to_string(pos.z));
+	//
+	//}
+
+
 }

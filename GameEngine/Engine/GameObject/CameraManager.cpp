@@ -115,7 +115,9 @@ void CameraManager::AllRmoveCamera(UINT num)
 
 void CameraManager::UpdateCameraNum(int num)
 {
-	currentViewPort_ = num;
+	if (num >= cameraList_.size())
+		currentViewPort_ = cameraList_.size()-1;
+	
 }
 
 int CameraManager::GetCurrentCameraNum()

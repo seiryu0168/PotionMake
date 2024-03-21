@@ -1,6 +1,7 @@
 #pragma once
 #include"../DirectX_11/Math.h"
 #include<memory>
+#include<List>
 using namespace DirectX;
 class Transform
 {
@@ -20,6 +21,7 @@ public:
 	XMVECTOR baseVec_;	//基準となるベクトル
 
 	Transform* pParent_;//親の情報
+	std::list<Transform*> childList_;
 
 	//コンストラクタ
 	//Transform();
@@ -28,8 +30,15 @@ public:
 	//デストラクタ
 	~Transform();
 
+	void PushBackChild(Transform* child);
+
 	//各行列の計算
 	void Calclation();
+
+	//更新
+	void Update();
+
+	void UpdateSub();
 	//回転
 	void RotateAxis(const XMVECTOR& axis, float angle);
 	void RotateEular(const XMFLOAT3& rotation);
@@ -67,6 +76,6 @@ public:
 		return StoreFloat3(add1 + add2);
 	}
 
-	
+	void RemoveChild();
 };
 

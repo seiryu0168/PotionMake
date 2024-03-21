@@ -1,5 +1,6 @@
 #include "Play_ManagementPart_CraftTable.h"
 #include"Engine/Systems/ModelSystem.h"
+#include"Engine/Systems/ColliderSystem.h"
 Play_ManagementPart_CraftTable::Play_ManagementPart_CraftTable(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_CraftTable")
 {
@@ -11,6 +12,12 @@ Play_ManagementPart_CraftTable::~Play_ManagementPart_CraftTable()
 
 void Play_ManagementPart_CraftTable::Initialize()
 {
+	HitBox tableHitBox({ 1,1,2 });
+	Collider coll({ 0,0,0 });
+	coll.SetCollider(tableHitBox);
+	coll.SetAttachObject(this);
+	AddComponent<Collider>(coll);
+
 	Test_Model_ECSver tableModel(this);
 	tableModel.Load("Assets/Model/tableCloth.fbx");
 	AddComponent<Test_Model_ECSver>(tableModel);
