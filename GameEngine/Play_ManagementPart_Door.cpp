@@ -23,6 +23,7 @@ void Play_ManagementPart_Door::Initialize()
 	doorModel.Load("Assets/Model/doorway.fbx");
 	AddComponent<Test_Model_ECSver>(doorModel);
 
+	transform_->position_ = XMVectorSet(0, 0, -20, 0);
 }
 
 void Play_ManagementPart_Door::Update()

@@ -2,6 +2,8 @@
 #include"../GameObject/GameObject.h"
 #include"../DirectX_11/Direct3D.h"
 #include"../GameObject/CameraManager.h"
+
+
 void ColliderSystem::CreateVB()
 {
 	//HitBox用バーテックスバッファ
@@ -354,9 +356,36 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 	default:
 		break;
 	}
-	//当たってたらオブジェクトの関数を呼び出す
+
 	if (isCollision)
-		firstTarget->GetAttachedObject()->OnCollision(secondTarget->GetAttachedObject());
+	{
+		//前フレームまで当たっていなかったら
+		if (!firstTarget->prevHit_&&!firstTarget->nowHit_)
+		{	
+			firstTarget->prevHit_ = true;
+			firstTarget->nowHit_ = true;
+			firstTarget->GetAttachedObject()->OnCollisionEnter(secondTarget->GetAttachedObject());
+		}
+		//前フレームも当たっていたら
+		else if (firstTarget->prevHit_&& firstTarget->nowHit_)
+		{
+			firstTarget->nowHit_ = true;
+			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
+		}
+	}
+	////前フレームまで当たっていたら
+	//else
+	//{
+	//	firstTarget->nowHit_ = false;
+	//	if (firstTarget->prevHit_ && !firstTarget->nowHit_)
+	//	{
+	//		firstTarget->prevHit_ = false;
+	//		firstTarget->GetAttachedObject()->OnCollisionExit(secondTarget->GetAttachedObject());
+	//	}
+	//}
+	////当たってたらオブジェクトの関数を呼び出す
+	//if (isCollision)
+	//	firstTarget->GetAttachedObject()->OnCollision(secondTarget->GetAttachedObject());
 
 }
 
@@ -372,11 +401,11 @@ bool ColliderSystem::IsHitBox_Box(Collider* firstTarget,Collider* secondTarget) 
 		(boxPos1.z + firstTarget->GetCollisionShape<HitBox>().size_.z) > (boxPos2.z - secondTarget->GetCollisionShape<HitBox>().size_.z) &&
 		(boxPos1.z - firstTarget->GetCollisionShape<HitBox>().size_.z) < (boxPos2.z + secondTarget->GetCollisionShape<HitBox>().size_.z))
 	{
-		firstTarget->HitEnable(true);
+		//firstTarget->HitEnable(true);
 		return true;
 	}
 
-	firstTarget->HitEnable(false);
+	//firstTarget->HitEnable(false);
 	return false;
 }
 
@@ -408,10 +437,10 @@ bool ColliderSystem::IsHitSphere_Sphere(Collider* firstTarget, Collider* secondT
 
 	if (sphereDistance < distance)
 	{
-		firstTarget->HitEnable(true);
+		//firstTarget->HitEnable(true);
 		return true;
 	}
 
-	firstTarget->HitEnable(false);
+	//firstTarget->HitEnable(false);
 	return false;
 }

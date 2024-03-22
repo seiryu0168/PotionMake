@@ -8,6 +8,8 @@ using namespace DirectX;
 //ëOï˚êÈåæ
 class GameObject;
 
+class ColliderSystem;
+
 struct HitBox
 {
 	XMFLOAT3 size_;
@@ -32,14 +34,17 @@ enum class ColliderType
 class Collider
 {
 private:
+	friend class ColliderSystem;
 	//friend class Test_BoxCollider_ECSver;
 	XMFLOAT3     center_;		//å¥ì_
 	Entity	colliderEntity_;
 	ColliderType colliderType_;
 	bool isKill_;
+	GameObject* attachObject_;
 	bool prevHit_;
 	bool nowHit_;
-	GameObject* attachObject_;
+	bool SetPrevHit(bool hit) { prevHit_ = hit; };
+	bool SetNowHit(bool hit) { nowHit_ = hit; };
 public:
 	bool isShowHitArea_;
 
@@ -83,7 +88,8 @@ public:
 	void KillCollider() { isKill_ = true; }
 
 	bool IsKill() const { return isKill_; }
-
+	bool IsPrevHit() { return prevHit_; };
+	bool IsNowHit() { return nowHit_; };
 	void Draw();
 
 	void Release();

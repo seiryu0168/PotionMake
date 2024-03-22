@@ -35,6 +35,7 @@ namespace newSceneManager
 	void ChangeScene(const SCENE_ID& sceneId, float countDown);
 	//ECSアーキテクチャの初期化
 	void ECSInitialize();
+	std::string GetCurrentSceneName();
 	void Release();
 
 	std::shared_ptr<ImageSystem> GetImageSystem();

@@ -235,6 +235,11 @@ namespace newSceneManager
 		Coordinator::SetSystemSignature<ImageSystem>(image_signature);
 	}
 
+	std::string GetCurrentSceneName()
+	{
+		return currentScene_->GetSceneName();
+	}
+
 	void Release()
 	{
 		Division::setLoad(true);
@@ -260,7 +265,7 @@ namespace newSceneManager
 	{
 		sceneList_.insert({ SCENE_ID::TITLE, std::make_unique<Scene_Title>("Title") });
 		sceneList_.insert({ SCENE_ID::MENU, std::make_unique<Scene_Menu>("Menu") });
-		sceneList_.insert({ SCENE_ID::PLAY_MANAGEMENT,std::make_unique<Scene_Play_ManagementPart>() });
+		sceneList_.insert({ SCENE_ID::PLAY_MANAGEMENT,std::make_unique<Scene_Play_ManagementPart>("Play_ManagementPart")});
 		sceneList_.insert({ SCENE_ID::PLAY, std::make_unique<Scene_Play>("Play") });
 		sceneList_.insert({ SCENE_ID::RESULT, std::make_unique<Scene_Result>("Result") });
 	}

@@ -17,7 +17,8 @@ public:
 	void Update() override;
 	void CameraControll();
 	void Release() override;
-
-	void OnCollision(Object* pTarget) override;
+	void OnCollisionStay(GameObject* pTarget) override;
+	void OnCollisionExit(GameObject* pTarget) override;
+	//void OnCollision(Object* pTarget) override;
 };
 

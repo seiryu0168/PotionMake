@@ -18,6 +18,7 @@ public:
 	void SetRootObject(std::shared_ptr<Object> obj);
 	std::shared_ptr<Object> GetRootObject();
 	void ObjectSet();
+	std::string GetSceneName() { return sceneName_; };
 	void SetFile(const std::string& name);
 	void Update();
 	void StaticUpdate();

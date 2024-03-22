@@ -99,26 +99,41 @@ void Player::Release()
 {
 }
 
-void Player::OnCollision(Object* pTarget)
+void Player::OnCollisionStay(GameObject* pTarget)
 {
-
-		XMFLOAT3 pos = StoreFloat3(transform_->position_);
-		GetComponent<Text>().SetText(pTarget->GetObjectName() +
-									 "\nX:" + std::to_string(pos.x) +
-									 "\nY:" + std::to_string(pos.y) +
-									 "\nZ:" + std::to_string(pos.z));
-	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
-	//{
-	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
-	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
-	//								 "\nX:"+std::to_string(pos.x)+
-	//								 "\nY:"+std::to_string(pos.y)+
-	//								 "\nZ:"+std::to_string(pos.z));
-	//}
-	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
-	//{
-	//
-	//}
-
-
+	//XMFLOAT3 pos = StoreFloat3(transform_->position_);
+	//GetComponent<Text>().SetText(pTarget->GetObjectName() +
+	//	"\nX:" + std::to_string(pos.x) +
+	//	"\nY:" + std::to_string(pos.y) +
+	//	"\nZ:" + std::to_string(pos.z));
+	//GetComponent<Text>().SetText("Exit");
+	GetComponent<Text>().SetText(pTarget->GetObjectName());
 }
+
+void Player::OnCollisionExit(GameObject* pTarget)
+{
+}
+
+//void Player::OnCollision(Object* pTarget)
+//{
+//
+//		XMFLOAT3 pos = StoreFloat3(transform_->position_);
+//		GetComponent<Text>().SetText(pTarget->GetObjectName() +
+//									 "\nX:" + std::to_string(pos.x) +
+//									 "\nY:" + std::to_string(pos.y) +
+//									 "\nZ:" + std::to_string(pos.z));
+//	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
+//	//{
+//	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
+//	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
+//	//								 "\nX:"+std::to_string(pos.x)+
+//	//								 "\nY:"+std::to_string(pos.y)+
+//	//								 "\nZ:"+std::to_string(pos.z));
+//	//}
+//	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
+//	//{
+//	//
+//	//}
+//
+//
+//}

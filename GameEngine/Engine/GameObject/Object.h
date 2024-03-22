@@ -91,7 +91,7 @@ public:
 	Object* FindChild(const std::string& name) const;
 	Object* FindChildAtTag(const std::string& tagName) const;
 
-	Object* GetScene();
+	std::string GetSceneName();
 	std::list<std::shared_ptr<Object>>* GetChildList() { return &childList_; }
 	Transform* GetTransform() const;
 	void KillAllChildren();

@@ -1,6 +1,7 @@
 #include "Object.h"
 #include"../Systems/PhysicsSystem.h"
 #include"../SAFE_DELETE_RELEASE.h"
+#include"../newSceneManager.h"
 #include "../../Division.h"
 
 int objectcount = 0;
@@ -266,10 +267,11 @@ Object* Object::FindChildAtTag(const std::string& tagName) const
 	return nullptr;
 }
 
-Object* Object::GetScene()
+std::string Object::GetSceneName()
 {
-	auto itr = GetRootObject()->GetChildList()->begin();
-	return (*itr)->GetChildList()->begin()->get();
+	return newSceneManager::GetCurrentSceneName();
+	//auto itr = GetRootObject()->GetChildList()->begin();
+	//return (*itr)->GetChildList()->begin()->get();
 }
 
 Transform* Object::GetTransform() const
