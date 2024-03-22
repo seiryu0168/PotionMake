@@ -27,9 +27,9 @@ void Player::Initialize()
 	//floorModel.Load("Assets/Model/ground_grass.fbx");
 	//AddComponent<Test_Model_ECSver>(floorModel);
 	
-	HitSphere sphereCollider(1.0f);
-	Collider coll({ 0,-10,0 });
-	coll.SetCollider(sphereCollider);
+	HitBox collShape({2,2,2});
+	Collider coll({ 0,-5,0 });
+	coll.SetCollider(collShape);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 
@@ -102,23 +102,23 @@ void Player::Release()
 void Player::OnCollision(Object* pTarget)
 {
 
-	if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
-	{
-		XMFLOAT3 pos = StoreFloat3(transform_->position_);
-		GetComponent<Text>().SetText(pTarget->GetObjectName()+
-									 "\nX:"+std::to_string(pos.x)+
-									 "\nY:"+std::to_string(pos.y)+
-									 "\nZ:"+std::to_string(pos.z));
-	}
-	else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
-	{
 		XMFLOAT3 pos = StoreFloat3(transform_->position_);
 		GetComponent<Text>().SetText(pTarget->GetObjectName() +
 									 "\nX:" + std::to_string(pos.x) +
 									 "\nY:" + std::to_string(pos.y) +
 									 "\nZ:" + std::to_string(pos.z));
-	
-	}
+	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
+	//{
+	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
+	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
+	//								 "\nX:"+std::to_string(pos.x)+
+	//								 "\nY:"+std::to_string(pos.y)+
+	//								 "\nZ:"+std::to_string(pos.z));
+	//}
+	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
+	//{
+	//
+	//}
 
 
 }

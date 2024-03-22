@@ -232,6 +232,7 @@
     <ClCompile Include="ManagementPart_Floor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Play_ManagementPart_CraftTable.cpp" />
+    <ClCompile Include="Play_ManagementPart_Door.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
@@ -316,6 +317,7 @@
     <ClInclude Include="ManagementPart_Floor.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Play_ManagementPart_CraftTable.h" />
+    <ClInclude Include="Play_ManagementPart_Door.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />

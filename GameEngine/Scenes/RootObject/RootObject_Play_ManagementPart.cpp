@@ -3,6 +3,7 @@
 #include"../../Player.h"
 #include"../../Play_ManagementPart_Shelf.h"
 #include"../../Play_ManagementPart_CraftTable.h"
+#include"../../Play_ManagementPart_Door.h"
 RootObject_Play_ManagementPart::RootObject_Play_ManagementPart()
 {
 }
@@ -17,6 +18,7 @@ void RootObject_Play_ManagementPart::Initialize()
 	Instantiate<ManagementPart_Floor>(this);
 	Instantiate<Play_ManagementPart_Shelf>(this);
 	Instantiate<Play_ManagementPart_CraftTable>(this);
+	Instantiate<Play_ManagementPart_Door>(this);
 }
 
 void RootObject_Play_ManagementPart::Release()

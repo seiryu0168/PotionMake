@@ -27,14 +27,14 @@ private:
 	};
 
 	VERTEX boxVertices_[8] = 
-	  { {XMVectorSet(-0.5f,0.5f,-0.5f,0)},
-		{XMVectorSet(0.5f,0.5f,-0.5f,0)},
-		{XMVectorSet(0.5f,-0.5f,-0.5f,0)},
-		{XMVectorSet(-0.5f,-0.5f,-0.5f,0)},
-		{XMVectorSet(-0.5f,0.5f,0.5,0)},
-		{XMVectorSet(0.5f,0.5f,0.5f,0)},
-		{XMVectorSet(0.5f,-0.5f,0.5f,0)},
-		{XMVectorSet(-0.5f,-0.5f,0.5f,0)}
+	  { {XMVectorSet(-1,1,-1,0)},
+		{XMVectorSet(1,1,-1,0)},
+		{XMVectorSet(1,-1,-1,0)},
+		{XMVectorSet(-1,-1,-1,0)},
+		{XMVectorSet(-1,1,1,0)},
+		{XMVectorSet(1,1,1,0)},
+		{XMVectorSet(1,-1,1,0)},
+		{XMVectorSet(-1,-1,1,0)}
 	  };
 
 	VERTEX sphereVertices_[36];

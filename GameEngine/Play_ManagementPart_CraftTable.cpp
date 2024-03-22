@@ -12,8 +12,8 @@ Play_ManagementPart_CraftTable::~Play_ManagementPart_CraftTable()
 
 void Play_ManagementPart_CraftTable::Initialize()
 {
-	HitBox tableHitBox({ 1,1,2 });
-	Collider coll({ 0,5,0 });
+	HitBox tableHitBox({ 2,3,5 });
+	Collider coll({ 1,5,4 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
