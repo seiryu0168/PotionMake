@@ -3,6 +3,9 @@
 class Player : public GameObject
 {
 private:
+	std::string collisionObjectName_;
+	int collisionUINum_;
+	Object* UIManagerObject_;
 	XMVECTOR moveVec_;
 	float speed_;
 	XMVECTOR cameraTargetVec_;
@@ -14,6 +17,7 @@ public:
 	Player(Object* parent);
 	~Player();
 	void Initialize() override;
+	void Start() override;
 	void Update() override;
 	void CameraControll();
 	void Release() override;

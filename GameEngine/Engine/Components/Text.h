@@ -4,6 +4,7 @@
 #include<string>
 typedef D2D_RECT_F TEXT_RECT;//left top right bottom
 typedef D2D1_POINT_2F TEXT_POSITION;
+class GameObject;
 
 	struct FontData
 	{
@@ -27,6 +28,7 @@ typedef D2D1_POINT_2F TEXT_POSITION;
 class Text
 {
 private:
+	GameObject* attachObject_;
 	size_t				  textLength_;		//テキストの長さ
 	D2D1_RECT_F			  layoutRect_;		//レイアウトレクト
 	std::wstring		  pText_;			//テキスト
@@ -39,6 +41,7 @@ private:
 	TEXT_POSITION defaultPos_;
 public:
 	TEXT_POSITION				  transform2D;		//座標
+	Text(GameObject* object);
 	Text(const int& renderTargetNum=0);
 	Text(const std::string& text, const std::string& fontName, const TEXT_RECT& rect, int renderTargetNum = 0 ,int layerNum = 0, const DWRITE_FONT_WEIGHT& wight = DWRITE_FONT_WEIGHT_NORMAL, const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL, const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL, const ALIGNMENT_TYPE& type = LEFT_TOP);
 	//Text(std::string text);
@@ -129,6 +132,7 @@ public:
 	/// </summary>
 	/// <returns>サイズ</returns>
 	int GetTextSize() const;
+	GameObject* GetAttachedObject() const { return attachObject_; }
 	void Release();
 
 };

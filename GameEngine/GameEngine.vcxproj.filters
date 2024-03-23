@@ -297,6 +297,12 @@
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="UIBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPartObjectBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -539,35 +545,41 @@
     <ClInclude Include="Scenes\Scene_Play_ManagementPart.h">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ManagementPart_Floor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_Shelf.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_CraftTable.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_Door.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Play_UIManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_ManagementPart_CraftUI.h">
+    <ClInclude Include="UIBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_ManagementPart_PotionManagerUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Play_ManagementPart_Shelf.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_ManagementPart_OutingUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart_Floor.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPartObjectBase.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Play_ManagementPart_BaseUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_ManagementPart_CraftTable.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_ManagementPart_CraftUI.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_ManagementPart_Door.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_ManagementPart_OutingUI.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_ManagementPart_PotionManagerUI.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

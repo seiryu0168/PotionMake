@@ -7,6 +7,7 @@ public:
 	TextSystem();
 	~TextSystem() {};
 	void Draw(int layerNum) override;
+	void CheckRemove() override;
 	void Release() override;
 };
 

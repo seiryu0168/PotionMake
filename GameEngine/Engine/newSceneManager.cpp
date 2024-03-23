@@ -165,7 +165,7 @@ namespace newSceneManager
 		pParticleSystem_->CheckRemove();
 		pLineParticleSystem_->CheckRemove();
 		pImageSystem_->CheckRemove();
-		//pTextSystem_->CheckRemove();
+		pTextSystem_->CheckRemove();
 		currentScene_->CheckKillObject();
 	}
 

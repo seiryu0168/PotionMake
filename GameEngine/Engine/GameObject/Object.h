@@ -49,6 +49,7 @@ public:
 	~Object();
 
 	virtual void Initialize() = 0;
+	virtual void Start() {};
 	virtual void Update() {};
 	virtual void StaticUpdate() {};
 	virtual void Draw() {};

@@ -2,7 +2,7 @@
 #include"Engine/Systems/ModelSystem.h"
 #include"Engine/Systems/ColliderSystem.h"
 Play_ManagementPart_CraftTable::Play_ManagementPart_CraftTable(Object* parent)
-	:GameObject(parent,"Play_ManagementPart_CraftTable")
+	:ManagementPartObjectBase(parent,"Play_ManagementPart_CraftTable")
 {
 }
 
@@ -12,6 +12,7 @@ Play_ManagementPart_CraftTable::~Play_ManagementPart_CraftTable()
 
 void Play_ManagementPart_CraftTable::Initialize()
 {
+	accessUINum_ = 2;
 	HitBox tableHitBox({ 2,3,5 });
 	Collider coll({ 1,5,4 });
 	coll.SetCollider(tableHitBox);

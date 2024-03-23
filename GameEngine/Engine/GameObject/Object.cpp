@@ -77,6 +77,7 @@ void Object::UpdateSub()
 		//Object* p = GetRootObject();
 		//Division::setLoad(true);
 		//this->Initialize();
+		Start();
 		this->startFlag_ = true;
 		//Division::setLoad(false);
 	}

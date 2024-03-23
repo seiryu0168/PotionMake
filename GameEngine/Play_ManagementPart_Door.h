@@ -1,6 +1,6 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-class Play_ManagementPart_Door : public GameObject
+#include"ManagementPartObjectBase.h"
+class Play_ManagementPart_Door : public ManagementPartObjectBase
 {
 private:
 public:

@@ -3,7 +3,7 @@
 #include"Engine/Systems/ColliderSystem.h"
 
 Play_ManagementPart_Shelf::Play_ManagementPart_Shelf(Object* parent)
-	:GameObject(parent,"Play_ManagementPart_Shelf")
+	:ManagementPartObjectBase(parent,"Play_ManagementPart_Shelf")
 {
 }
 
@@ -13,6 +13,7 @@ Play_ManagementPart_Shelf::~Play_ManagementPart_Shelf()
 
 void Play_ManagementPart_Shelf::Initialize()
 {
+	accessUINum_ = 1;
 	HitBox tableHitBox({ 5,5,1 });
 	Collider coll({ -4,5,0 });
 	coll.SetCollider(tableHitBox);

@@ -229,6 +229,7 @@
     <ClCompile Include="InterSceneData.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="ManagementPartObjectBase.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
@@ -256,6 +257,7 @@
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Division.h" />
@@ -319,6 +321,7 @@
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="InterSceneData.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="ManagementPartObjectBase.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Play_ManagementPart_BaseUI.h" />
@@ -348,6 +351,7 @@
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestObjectChild.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="UIBase.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BillBoard.hlsl">

@@ -140,6 +140,7 @@ void ColliderSystem::Update()
 	for (auto const& firstEntity : entities_)
 	{
 		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+		firstCollision.nowHit_ = false;
 		for (auto const& secondEntity : entities_)
 		{
 			if (firstEntity == secondEntity)
@@ -359,19 +360,16 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 
 	if (isCollision)
 	{
-		//前フレームまで当たっていなかったら
-		if (!firstTarget->prevHit_&&!firstTarget->nowHit_)
-		{	
-			firstTarget->prevHit_ = true;
-			firstTarget->nowHit_ = true;
-			firstTarget->GetAttachedObject()->OnCollisionEnter(secondTarget->GetAttachedObject());
-		}
+		////前フレームまで当たっていなかったら
+		//if (!firstTarget->prevHit_&&!firstTarget->nowHit_)
+		//{	
+		//	firstTarget->prevHit_ = true;
+		//	firstTarget->nowHit_ = true;
+		//	firstTarget->GetAttachedObject()->OnCollisionEnter(secondTarget->GetAttachedObject());
+		//}
 		//前フレームも当たっていたら
-		else if (firstTarget->prevHit_&& firstTarget->nowHit_)
-		{
 			firstTarget->nowHit_ = true;
 			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
-		}
 	}
 	////前フレームまで当たっていたら
 	//else

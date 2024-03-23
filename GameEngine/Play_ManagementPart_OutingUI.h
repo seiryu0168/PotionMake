@@ -1,6 +1,6 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-class Play_ManagementPart_OutingUI : public GameObject
+#include"UIBase.h"
+class Play_ManagementPart_OutingUI : public UIBase
 {
 private:
 public:

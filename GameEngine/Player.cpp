@@ -5,6 +5,10 @@
 #include"Engine/Systems/ColliderSystem.h"
 #include"Engine/Systems/TextSystem.h"
 #include"Engine/GameObject/CameraManager.h"
+#include"Play_UIManager.h"
+#include"ManagementPartObjectBase.h"
+#include"Play_ManagementPart_BaseUI.h"
+#include"UIBase.h"
 Player::Player(Object* parent)
 	:GameObject(parent, "Player"),
 	moveVec_(XMVectorSet(0,0,0,0)),
@@ -13,7 +17,8 @@ Player::Player(Object* parent)
 	cameraTargetVec_(XMVectorSet(0,0,1,0)),
 	moveTime_(0),
 	rotateUperLimitY_(60),
-	rotateDownerLimitY_(-60)
+	rotateDownerLimitY_(-60),
+	collisionObjectName_("")
 {
 }
 
@@ -33,7 +38,7 @@ void Player::Initialize()
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 
-	Text noticeText;
+	Text noticeText(this);
 	noticeText.SetText("Name");
 	TEXT_RECT rect = { 0,0,1000,500 };
 	noticeText.SetRect(rect);
@@ -42,6 +47,11 @@ void Player::Initialize()
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0,10,1,0));
+}
+
+void Player::Start()
+{
+	UIManagerObject_ = FindObject("Play_UIManager");
 }
 
 void Player::Update()
@@ -71,14 +81,25 @@ void Player::Update()
 
 		transform_->position_ += XMVector3Normalize(moveVec_)*0.1f;
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
-		//XMFLOAT3 pos = StoreFloat3(transform_->position_);
-		//GetComponent<Text>().SetText("\nX:" + std::to_string(pos.x) + 
-		//							 "\nY:" + std::to_string(pos.y) + 
-		//							 "\nZ:" + std::to_string(pos.z));
-			//CameraManager::GetCamera(0).SetTarget(this->transform_->position_ + XMVectorSet(0, 0, 1, 0));
 		moveVec_ = XMVectorSet(0, 0, 0, 0);
 	}
 	CameraControll();
+
+
+	//Š÷‚©’I‚©ƒhƒA‚É“–‚½‚Á‚Ä‚¢‚½‚ç
+	if (GetComponent<Collider>().IsHit())
+	{
+		UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText(collisionObjectName_);
+		//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
+		//
+		if(Input::IsKeyDown(DIK_F))
+		{
+			((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->AccessUI(collisionUINum_);
+		}
+		
+	}
+	else
+		UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText("");
 }
 void Player::CameraControll()
 {
@@ -107,7 +128,10 @@ void Player::OnCollisionStay(GameObject* pTarget)
 	//	"\nY:" + std::to_string(pos.y) +
 	//	"\nZ:" + std::to_string(pos.z));
 	//GetComponent<Text>().SetText("Exit");
-	GetComponent<Text>().SetText(pTarget->GetObjectName());
+	collisionObjectName_ = pTarget->GetObjectName();
+	collisionUINum_ = ((ManagementPartObjectBase*)pTarget)->GetAccessUINumber();
+	//UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText(pTarget->GetObjectName());
+	//GetComponent<Text>().SetText(pTarget->GetObjectName());
 }
 
 void Player::OnCollisionExit(GameObject* pTarget)

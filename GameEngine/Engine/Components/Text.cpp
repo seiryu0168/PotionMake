@@ -3,6 +3,22 @@
 #include<filesystem>
 #include"../GameObject/CameraManager.h"
 
+Text::Text(GameObject* object)
+	:attachObject_(object)
+{
+	textLength_ = 0;
+	transform2D = { 0,0 };
+	layoutRect_ = { 0,0,100,100 };
+
+	pText_ = L"";
+	pColorBrush_ = nullptr;
+	//pWriteFactory_ = nullptr;
+	pTextFormat_ = nullptr;
+	pLayout_ = nullptr;
+	renderTargetNum_ = 0;
+	Initialize();
+}
+
 Text::Text(const int& renderTargetNum)
 	:layerNum_(0)
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-class Play_ManagementPart_CraftTable : public GameObject
+#include"ManagementPartObjectBase.h"
+class Play_ManagementPart_CraftTable : public ManagementPartObjectBase
 {
 private:
 public:

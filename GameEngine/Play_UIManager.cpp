@@ -21,6 +21,14 @@ void Play_UIManager::Update()
 {
 }
 
+void Play_UIManager::AccessUI(int uiNum)
+{
+	if (GetSceneName() == "Play_ManagementPart")
+	{
+		((Play_ManagementPart_BaseUI*)FindChild("Play_ManagementPart_BaseUI"))->AccessUI(uiNum);
+	}
+}
+
 void Play_UIManager::Release()
 {
 }
