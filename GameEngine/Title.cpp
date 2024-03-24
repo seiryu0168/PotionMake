@@ -22,7 +22,7 @@ Title::~Title()
 
 void Title::Initialize()
 {
-	Image image;
+	Image image(this);
 	image.Load("Assets/Image/StartButtonImage.png");
 	XMFLOAT3 pos = { 0,-0.5f,0 };
 	image.SetPosition(pos);

@@ -86,7 +86,7 @@ void ObjectSetter::AddModel(GameObject* object, std::string fileName)
 
 void ObjectSetter::AddImage(GameObject* object, std::string fileName, XMFLOAT3 pos, XMFLOAT3 size, XMFLOAT3 rotate, float alpha)
 {
-	 Image image;
+	 Image image(object);
 	 image.Load(fileName);
 	 image.SetPosition(pos);
 	 image.SetSize(size);

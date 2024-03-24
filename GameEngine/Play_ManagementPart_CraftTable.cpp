@@ -13,6 +13,7 @@ Play_ManagementPart_CraftTable::~Play_ManagementPart_CraftTable()
 void Play_ManagementPart_CraftTable::Initialize()
 {
 	accessUINum_ = 2;
+	actionName_ = "ƒ|[ƒVƒ‡ƒ“‚ğì‚é";
 	HitBox tableHitBox({ 2,3,5 });
 	Collider coll({ 1,5,4 });
 	coll.SetCollider(tableHitBox);

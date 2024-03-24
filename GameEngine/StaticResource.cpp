@@ -17,14 +17,14 @@ namespace StaticResource
 			
 	}
 
-	void StaticImageLoad(std::string imageName, std::string fileName, int cameraNum, int layerNum)
-	{
-		Image image(cameraNum, layerNum);
-		if (image.StaticLoad(fileName)==false)
-			return;
-		staticImages_.insert({ imageName,image });
-
-	}
+	//void StaticImageLoad(std::string imageName, std::string fileName, int cameraNum, int layerNum)
+	//{
+	//	Image image(cameraNum, layerNum);
+	//	if (image.StaticLoad(fileName)==false)
+	//		return;
+	//	staticImages_.insert({ imageName,image });
+	//
+	//}
 
 	void AddText(std::string textName, Text text)
 	{

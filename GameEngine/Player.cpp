@@ -128,7 +128,7 @@ void Player::OnCollisionStay(GameObject* pTarget)
 	//	"\nY:" + std::to_string(pos.y) +
 	//	"\nZ:" + std::to_string(pos.z));
 	//GetComponent<Text>().SetText("Exit");
-	collisionObjectName_ = pTarget->GetObjectName();
+	collisionObjectName_ = ((ManagementPartObjectBase*)pTarget)->GetActionName();
 	collisionUINum_ = ((ManagementPartObjectBase*)pTarget)->GetAccessUINumber();
 	//UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText(pTarget->GetObjectName());
 	//GetComponent<Text>().SetText(pTarget->GetObjectName());

@@ -14,6 +14,7 @@ Play_ManagementPart_Door::~Play_ManagementPart_Door()
 void Play_ManagementPart_Door::Initialize()
 {
 	accessUINum_ = 0;
+	actionName_ = "äOèo";
 	HitBox collShape({ 3,7,1 });
 	Collider coll({ -2,5,0 });
 	coll.SetCollider(collShape);

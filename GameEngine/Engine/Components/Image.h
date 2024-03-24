@@ -1,9 +1,12 @@
 #pragma once
 #include"../DirectX_11/Sprite.h"
 #include<memory>
+
+class GameObject;
 class Image
 {
 private:
+	GameObject* attachObject_;
 	std::string imageName_;
 	std::shared_ptr<Sprite> pSprite_;
 	RECT rect_;
@@ -16,7 +19,8 @@ private:
 	bool isStatic_;
 	bool isDraw_;
 public:
-	Image(int cameraNum = -1,int layerNum=0);
+	Image(int cameraNum = -1, int layerNum = 0);
+	Image(GameObject* object,int cameraNum = -1,int layerNum=0);
 	~Image();
 	//âÊëúÉçÅ[Éh
 	bool Load(const std::string& name, const std::string& tab = "");
@@ -59,5 +63,6 @@ public:
 	XMFLOAT3 GetPosition() const { XMFLOAT3 pos; XMStoreFloat3(&pos, transform_.position_); return pos; }
 
 	bool IsHitCursor();
+	GameObject* GetAttachedObject() const { return attachObject_; }
 };
 

@@ -1,5 +1,6 @@
 #include "ImageSystem.h"
 #include"../Coordinator.h"
+#include"../GameObject/GameObject.h"
 ImageSystem::ImageSystem() : System()
 {
 }
@@ -16,12 +17,12 @@ void ImageSystem::Draw(int layerNum)
 
 void ImageSystem::CheckRemove()
 {
-	//std::set<Entity> subEntities = entities_;
-	//for (Entity entity : subEntities)
-	//{
-	//	if (Coordinator::GetComponent<Image>(entity).GetAttachedObject()->IsDead())
-	//		Coordinator::RemoveComponent<Image>(entity);
-	//}
+	std::set<Entity> subEntities = entities_;
+	for (Entity entity : subEntities)
+	{
+		if (Coordinator::GetComponent<Image>(entity).GetAttachedObject()!=nullptr&&Coordinator::GetComponent<Image>(entity).GetAttachedObject()->IsDead())
+			Coordinator::RemoveComponent<Image>(entity);
+	}
 }
 
 void ImageSystem::Release()

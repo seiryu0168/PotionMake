@@ -11,7 +11,7 @@ namespace StaticResource
 	//画像の追加
 	Image GetImage(std::string imageName);
 	//画像の読み込み
-	void StaticImageLoad(std::string imageName, std::string fileName,int cameraNum,int layerNum);
+	//void StaticImageLoad(std::string imageName, std::string fileName,int cameraNum,int layerNum);
 	//テキストの生成、追加
 	void AddText(std::string textName,Text text);
 	//テキストの取得

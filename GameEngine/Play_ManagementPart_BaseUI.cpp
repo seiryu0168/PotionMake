@@ -39,6 +39,7 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 	switch (uiNum)
 	{
 	case 0:
+		if (!FindChild("Play_ManagementPart_OutingUI"))
 		Instantiate<Play_ManagementPart_OutingUI>(this);
 	default:
 		break;

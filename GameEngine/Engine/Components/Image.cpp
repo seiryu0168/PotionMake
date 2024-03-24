@@ -37,7 +37,22 @@ XMFLOAT3 Image::GetRatio()
 	return StoreFloat3(transform_.position_);
 }
 
-Image::Image(int cameraNum,int layerNum)
+Image::Image(int cameraNum, int layerNum)
+	:alpha_(1.0f),
+	rect_({ 0,0,1,1 }),
+	color_({ 1,1,1,1 }),
+	imageName_(""),
+	pSprite_(),
+	transform_(),
+	drawTargetNumber_(cameraNum),
+	layerNum_(layerNum),
+	scroll_({ 0,0 }),
+	isStatic_(false),
+	isDraw_(true)
+{
+}
+
+Image::Image(GameObject* object,int cameraNum,int layerNum)
 	:alpha_(1.0f),
 	rect_({ 0,0,1,1 }),
 	color_({1,1,1,1}),
@@ -48,7 +63,8 @@ Image::Image(int cameraNum,int layerNum)
 	layerNum_(layerNum),
 	scroll_({0,0}),
 	isStatic_(false),
-	isDraw_(true)
+	isDraw_(true),
+	attachObject_(object)
 {
 }
 
