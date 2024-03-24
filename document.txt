@@ -28,3 +28,14 @@ Collider
 　
 　coll.SetCollider(box);
 　coll.SetAttachObject(this);
+
+Text
+文字の表示をする。
+設定でフォント、アライメント、文字サイズなどを変えられる
+以下はTextを表示するプログラム
+　text text(this);
+　text.SetText("Test");
+　AddComponent(text);
+
+Image
+画像を表示する。
