@@ -1,11 +1,12 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
-class Play_ManagementPart_CraftUI : public GameObject
+class CloseButton : public GameObject
 {
 public:
-	Play_ManagementPart_CraftUI(Object* parent);
-	~Play_ManagementPart_CraftUI();
+	CloseButton(Object* parent);
+	~CloseButton();
 	void Initialize() override;
+	void Start() override;
 	void Update() override;
 	void Release() override;
 };

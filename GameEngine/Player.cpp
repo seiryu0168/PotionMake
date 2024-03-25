@@ -89,7 +89,8 @@ void Player::Update()
 	//Š÷‚©’I‚©ƒhƒA‚É“–‚½‚Á‚Ä‚¢‚½‚ç
 	if (GetComponent<Collider>().IsHit())
 	{
-		UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText(collisionObjectName_);
+		((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);
+
 		//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
 		//
 		if(Input::IsKeyDown(DIK_F))
@@ -99,7 +100,7 @@ void Player::Update()
 		
 	}
 	else
-		UIManagerObject_->FindChild("Play_ManagementPart_BaseUI")->GetComponent<Text>().SetText("");
+		((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction("", false);
 }
 void Player::CameraControll()
 {
@@ -137,27 +138,3 @@ void Player::OnCollisionStay(GameObject* pTarget)
 void Player::OnCollisionExit(GameObject* pTarget)
 {
 }
-
-//void Player::OnCollision(Object* pTarget)
-//{
-//
-//		XMFLOAT3 pos = StoreFloat3(transform_->position_);
-//		GetComponent<Text>().SetText(pTarget->GetObjectName() +
-//									 "\nX:" + std::to_string(pos.x) +
-//									 "\nY:" + std::to_string(pos.y) +
-//									 "\nZ:" + std::to_string(pos.z));
-//	//if (pTarget->GetObjectName() == "Play_ManagementPart_Shelf")
-//	//{
-//	//	XMFLOAT3 pos = StoreFloat3(transform_->position_);
-//	//	GetComponent<Text>().SetText(pTarget->GetObjectName()+
-//	//								 "\nX:"+std::to_string(pos.x)+
-//	//								 "\nY:"+std::to_string(pos.y)+
-//	//								 "\nZ:"+std::to_string(pos.z));
-//	//}
-//	//else if(pTarget->GetObjectName() == "Play_ManagementPart_CraftTable")
-//	//{
-//	//
-//	//}
-//
-//
-//}

@@ -198,14 +198,15 @@ void Image::SetLayer(int layer)
 
 bool Image::IsHitCursor()
 {
-    UINT wid = (UINT)(pSprite_->GetSize().x * transform_.scale_.x / 2);
-    UINT hgt = (UINT)(pSprite_->GetSize().y * transform_.scale_.y / 2);
+	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
+    float wid = (pSprite_->GetSize().x * transform_.scale_.x / 2);
+    float hgt = (pSprite_->GetSize().y * transform_.scale_.y / 2);
     float Left = (XMVectorGetX(transform_.position_) + 1) * (Direct3D::GetScreenWidth() / 2.0f) - wid;
     float Right = (XMVectorGetX(transform_.position_) + 1) * (Direct3D::GetScreenWidth() / 2.0f) + wid;
     float Top = (-XMVectorGetY(transform_.position_) + 1) * (Direct3D::GetScreenHeight() / 2.0f) - hgt;
     float Bottom = (-XMVectorGetY(transform_.position_) + 1) * (Direct3D::GetScreenHeight() / 2.0f) + hgt;
-    if (Left <= XMVectorGetX(Input::GetMousePosition()) && XMVectorGetX(Input::GetMousePosition()) <= Right &&
-        Top <= XMVectorGetY(Input::GetMousePosition()) && XMVectorGetY(Input::GetMousePosition()) <= Bottom)
+    if (Left <= mousePos.x && mousePos.x <= Right &&
+        Top <= mousePos.y && mousePos.y <= Bottom)
     {
         return true;
     }

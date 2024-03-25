@@ -306,6 +306,9 @@
     <ClCompile Include="P_MP_OutingUI_ActionText.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="CloseButton.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -585,6 +588,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="P_MP_OutingUI_ActionText.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CloseButton.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,7 @@ public:
 	void Update() override;
 	void Release() override;
 	void AccessUI(int uiNum);
+	void DisplayAction(std::string action, bool isDisplay);
 	int GetUINum() { return UINum_; }
 };
 
