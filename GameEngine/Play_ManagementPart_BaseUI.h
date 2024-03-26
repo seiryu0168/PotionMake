@@ -5,7 +5,6 @@ class Play_ManagementPart_BaseUI : public GameObject
 private:
 
 	int UINum_;
-
 public:
 	Play_ManagementPart_BaseUI(Object* parent);
 	~Play_ManagementPart_BaseUI();

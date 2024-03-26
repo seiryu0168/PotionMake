@@ -241,8 +241,9 @@
     <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
-    <ClCompile Include="P_MP_CraftUI_PotionStockUI.cpp" />
+    <ClCompile Include="P_MP_PotionManagerUI_PotionStockUI.cpp" />
     <ClCompile Include="P_MP_OutingUI_ActionText.cpp" />
+    <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
@@ -336,8 +337,9 @@
     <ClInclude Include="Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Play_UIManager.h" />
-    <ClInclude Include="P_MP_CraftUI_PotionStockUI.h" />
+    <ClInclude Include="P_MP_PotionManagerUI_PotionStockUI.h" />
     <ClInclude Include="P_MP_OutingUI_ActionText.h" />
+    <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />

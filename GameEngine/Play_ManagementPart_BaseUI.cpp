@@ -49,15 +49,24 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 	{
 	case 0:
 		if (!FindChild("Play_ManagementPart_OutingUI"))
+		{
+			DisplayAction("", false);
 			Instantiate<Play_ManagementPart_OutingUI>(this);
+		}
 		break;
 	case 1:
 		if (!FindChild("Play_ManagementPart_PotionManagerUI"))
+		{
+			DisplayAction("", false);
 			Instantiate<Play_ManagementPart_PotionManagerUI>(this);
+		}
 		break;
 	case 2:
 		if (!FindChild("Play_ManagementPart_CraftUI"))
+		{
+			DisplayAction("", false);
 			Instantiate<Play_ManagementPart_CraftUI>(this);
+		}
 		break;
 
 	default:
@@ -67,6 +76,9 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 
 void Play_ManagementPart_BaseUI::DisplayAction(std::string action,bool isDisplay)
 {
+	//q‹Ÿ‚ª‚¢‚½‚ç(UI‚ªŠJ‚©‚ê‚Ä‚¢‚éó‹µ‚¾‚Á‚½‚ç)
+	if (!childList_.empty())
+		return;
 	GetComponent<Text>().SetText(action);
 	GetComponent<Image>().SetAlpha(isDisplay);
 }

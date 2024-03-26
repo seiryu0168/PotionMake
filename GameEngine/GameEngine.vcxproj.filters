@@ -309,7 +309,10 @@
     <ClCompile Include="CloseButton.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_PotionStockUI.cpp">
+    <ClCompile Include="P_MP_PotionManagerUI_PotionStockUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -596,7 +599,10 @@
     <ClInclude Include="CloseButton.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_PotionStockUI.h">
+    <ClInclude Include="P_MP_PotionManagerUI_PotionStockUI.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

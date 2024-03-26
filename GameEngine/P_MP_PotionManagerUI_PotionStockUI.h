@@ -1,9 +1,10 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
-class P_MP_CraftUI_PotionStockUI : public GameObject
+class P_MP_PotionManagerUI_PotionStockUI : public GameObject
 {
-	P_MP_CraftUI_PotionStockUI(Object* parent);
-	~P_MP_CraftUI_PotionStockUI();
+public:
+	P_MP_PotionManagerUI_PotionStockUI(Object* parent);
+	~P_MP_PotionManagerUI_PotionStockUI();
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
