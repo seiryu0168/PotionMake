@@ -315,6 +315,15 @@
     <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="P_MP_PotionManagerUI_DisposeStockUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_Play_CollectionPart.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\RootObject\RootObject_Play_CollectionPart.cpp">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -604,6 +613,15 @@
     </ClInclude>
     <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_PotionManagerUI_DisposeStockUI.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_Play_CollectionPart.h">
+      <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\RootObject\RootObject_Play_CollectionPart.h">
+      <Filter>ソース ファイル\Scenes\RootObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

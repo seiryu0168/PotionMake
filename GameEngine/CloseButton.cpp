@@ -14,7 +14,8 @@ void CloseButton::Initialize()
 {
 	Image closeImage(this);
 	closeImage.Load("Assets/Image/CloseButtonImage.png");
-	closeImage.SetPosition({ -0.5f,0.8,0 });
+	closeImage.SetPosition({ -0.95f,0.9f,0 });
+	closeImage.SetSize({ 0.6f,0.6f,0 });
 	AddComponent<Image>(closeImage);
 }
 

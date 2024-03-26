@@ -1,6 +1,7 @@
 #include"../Scenes/Scene_Title.h"
 #include"../Scenes/Scene_Menu.h"
 #include"../Scenes/Scene_Play_ManagementPart.h"
+#include"../Scenes/Scene_Play_CollectionPart.h"
 #include"../Scenes/Scene_Play.h"
 #include"../Scenes/Scene_Result.h"
 
@@ -266,6 +267,7 @@ namespace newSceneManager
 		sceneList_.insert({ SCENE_ID::TITLE, std::make_unique<Scene_Title>("Title") });
 		sceneList_.insert({ SCENE_ID::MENU, std::make_unique<Scene_Menu>("Menu") });
 		sceneList_.insert({ SCENE_ID::PLAY_MANAGEMENT,std::make_unique<Scene_Play_ManagementPart>("Play_ManagementPart")});
+		sceneList_.insert({ SCENE_ID::PLAY_COLLECTION,std::make_unique<Scene_Play_CollectionPart>("Play_CollectionPart")});
 		sceneList_.insert({ SCENE_ID::PLAY, std::make_unique<Scene_Play>("Play") });
 		sceneList_.insert({ SCENE_ID::RESULT, std::make_unique<Scene_Result>("Result") });
 	}

@@ -4,6 +4,7 @@
 #include"CloseButton.h"
 #include"P_MP_PotionManagerUI_PotionStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
+#include"P_MP_PotionManagerUI_DisposeStockUI.h"
 Play_ManagementPart_PotionManagerUI::Play_ManagementPart_PotionManagerUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_PotionManagerUI")
 {
@@ -21,11 +22,12 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 
 	Text uiTitleText(this);
 	uiTitleText.SetText("É|Å[ÉVÉáÉìä«óù");
-	uiTitleText.SetPosition({ 1000.0f,500.0f });
+	uiTitleText.SetPosition({ 600,30 });
 	AddComponent<Text>(uiTitleText);
 
 	Instantiate<P_MP_PotionManagerUI_PotionStockUI>(this);
 	Instantiate<P_MP_PotionManagerUI_SellStockUI>(this);
+	Instantiate<P_MP_PotionManagerUI_DisposeStockUI>(this);
 	Instantiate<CloseButton>(this);
 }
 

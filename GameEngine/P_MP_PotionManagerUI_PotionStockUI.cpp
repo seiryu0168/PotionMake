@@ -14,7 +14,8 @@ void P_MP_PotionManagerUI_PotionStockUI::Initialize()
 {
 	Image uiBaseImage(this);
 	uiBaseImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	uiBaseImage.SetPosition({ 0.45,0,0 });
+	uiBaseImage.SetPosition({ 0.45f,-0.1f,0 });
+	uiBaseImage.SetSize({ 1,0.8f,0 });
 	AddComponent<Image>(uiBaseImage);
 }
 
