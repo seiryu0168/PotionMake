@@ -3,6 +3,9 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"CloseButton.h"
 #include"Engine/DirectX_11/Input.h"
+#include"P_MP_CraftUI_ResourceStockUI.h"
+#include"P_MP_CraftUI_PotionStatusUI.h"
+#include"P_MP_CraftUI_PrepareUI.h"
 Play_ManagementPart_CraftUI::Play_ManagementPart_CraftUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_CraftUI")
 {
@@ -16,9 +19,11 @@ void Play_ManagementPart_CraftUI::Initialize()
 {
 	Text craftUIText(this);
 	craftUIText.SetText("É|Å[ÉVÉáÉìÇçÏÇÈ");
-	craftUIText.SetPosition({ 1000.0f,500.0f });
+	craftUIText.SetPosition({ 600,30 });
 	AddComponent<Text>(craftUIText);
-
+	Instantiate<P_MP_CraftUI_ResourceStockUI>(this);
+	Instantiate<P_MP_CraftUI_PotionStatusUI>(this);
+	Instantiate<P_MP_CraftUI_PrepareUI>(this);
 	Instantiate<CloseButton>(this);
 }
 

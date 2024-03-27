@@ -324,6 +324,21 @@
     <ClCompile Include="Scenes\RootObject\RootObject_Play_CollectionPart.cpp">
       <Filter>ソース ファイル\Scenes\RootObjects</Filter>
     </ClCompile>
+    <ClCompile Include="P_MP_CraftUI_ResourceStockUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceItem.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -622,6 +637,21 @@
     </ClInclude>
     <ClInclude Include="Scenes\RootObject\RootObject_Play_CollectionPart.h">
       <Filter>ソース ファイル\Scenes\RootObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_CraftUI_ResourceStockUI.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_CraftUI_PrepareUI.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceItem.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

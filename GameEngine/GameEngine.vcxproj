@@ -229,6 +229,7 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="InterSceneData.cpp" />
     <ClCompile Include="EngineTime.cpp" />
+    <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ManagementPartObjectBase.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
@@ -241,10 +242,14 @@
     <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp" />
+    <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp" />
+    <ClCompile Include="P_MP_CraftUI_ResourceStockUI.cpp" />
     <ClCompile Include="P_MP_PotionManagerUI_DisposeStockUI.cpp" />
     <ClCompile Include="P_MP_PotionManagerUI_PotionStockUI.cpp" />
     <ClCompile Include="P_MP_OutingUI_ActionText.cpp" />
     <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp" />
+    <ClCompile Include="ResourceItem.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
@@ -328,6 +333,7 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="InterSceneData.h" />
+    <ClInclude Include="ItemBase.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ManagementPartObjectBase.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
@@ -340,10 +346,14 @@
     <ClInclude Include="Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h" />
+    <ClInclude Include="P_MP_CraftUI_PrepareUI.h" />
+    <ClInclude Include="P_MP_CraftUI_ResourceStockUI.h" />
     <ClInclude Include="P_MP_PotionManagerUI_DisposeStockUI.h" />
     <ClInclude Include="P_MP_PotionManagerUI_PotionStockUI.h" />
     <ClInclude Include="P_MP_OutingUI_ActionText.h" />
     <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h" />
+    <ClInclude Include="ResourceItem.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />
