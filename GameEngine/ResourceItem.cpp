@@ -3,8 +3,11 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
 #include"P_MP_CraftUI_CraftPot.h"
+
+
 ResourceItem::ResourceItem(Object* parent)
-	:ItemBase(parent,"ResourceItem")
+	:ItemBase(parent,"ResourceItem"),
+	haveItem_(false)
 {
 }
 
@@ -34,6 +37,17 @@ void ResourceItem::Update()
 	//{
 	//	GetComponent<Image>().SetColor({ 0.3f,0.3f,0.3f });
 	//}
+}
+
+void ResourceItem::SetItem(int itemNum)
+{
+	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	RemoveComponent<Image>();
+
+	Image itemBaseImage(this);
+	itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
+	itemBaseImage.SetPosition(pos);
+	AddComponent<Image>(itemBaseImage);
 }
 
 void ResourceItem::Release()

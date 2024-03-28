@@ -7,6 +7,7 @@ class P_MP_CraftUI_CraftPot : public GameObject
 {
 private:
 	XMFLOAT2 standPosition_;
+	std::vector<GameObject*> objects_;
 	std::vector<XMFLOAT3> resourceImagePos_;
 	std::unordered_map<int, int> dataMap_;
 public:
