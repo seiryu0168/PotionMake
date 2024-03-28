@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// ƒ|[ƒVƒ‡ƒ“ŠÇ—‚ÌUI
+/// </summary>
 class Play_ManagementPart_PotionManagerUI : public GameObject
 {
 private:

@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// UI‚ð•Â‚¶‚éƒ{ƒ^ƒ“
+/// </summary>
 class CloseButton : public GameObject
 {
 public:

@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// 捨てるポーションを表示するUI
+/// </summary>
 class P_MP_PotionManagerUI_DisposeStockUI : public GameObject
 {
 public:

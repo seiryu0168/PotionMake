@@ -1,5 +1,8 @@
 #pragma once
 #include"ManagementPartObjectBase.h"
+/// <summary>
+/// ポーション政策を行う机
+/// </summary>
 class Play_ManagementPart_CraftTable : public ManagementPartObjectBase
 {
 private:

@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// ポーション制作を行う時のUI
+/// </summary>
 class Play_ManagementPart_CraftUI : public GameObject
 {
 public:

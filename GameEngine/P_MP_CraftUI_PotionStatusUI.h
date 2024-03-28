@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// ポーションの各パラメータを表示するクラス
+/// </summary>
 class P_MP_CraftUI_PotionStatusUI : public GameObject
 {
 public:

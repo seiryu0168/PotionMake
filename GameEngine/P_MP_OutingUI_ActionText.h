@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// Ç«Ç±Ç…èoÇ©ÇØÇÈÇ©Çï\é¶Ç∑ÇÈUI
+/// </summary>
 class P_MP_OutingUI_ActionText : public GameObject
 {
 public:

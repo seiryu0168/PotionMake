@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// 全てのUIの親
+/// ここから全UIが作られているので、アクセスはここから行う
+/// </summary>
 class Play_UIManager : public GameObject
 {
 private:

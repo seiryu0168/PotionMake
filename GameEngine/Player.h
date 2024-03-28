@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// ƒvƒŒƒCƒ„[
+/// </summary>
 class Player : public GameObject
 {
 private:

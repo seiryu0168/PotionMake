@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// 売るポーションを表示するUI
+/// </summary>
 class P_MP_PotionManagerUI_SellStockUI : public GameObject
 {
 public:

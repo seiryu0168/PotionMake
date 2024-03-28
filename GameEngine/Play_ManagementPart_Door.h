@@ -1,5 +1,8 @@
 #pragma once
 #include"ManagementPartObjectBase.h"
+/// <summary>
+/// 外出用のドア
+/// </summary>
 class Play_ManagementPart_Door : public ManagementPartObjectBase
 {
 private:

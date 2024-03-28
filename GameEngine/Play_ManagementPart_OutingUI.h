@@ -1,5 +1,8 @@
 #pragma once
 #include"UIBase.h"
+/// <summary>
+/// ŠOo‚ÌUI
+/// </summary>
 class Play_ManagementPart_OutingUI : public UIBase
 {
 private:

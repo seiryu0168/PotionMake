@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// 経営パートの基本的な動作を表示するUI
+/// ポーション制作、管理、外出等のアクションを表示
+/// </summary>
 class Play_ManagementPart_BaseUI : public GameObject
 {
 private:

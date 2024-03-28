@@ -1,5 +1,8 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+/// <summary>
+/// ポーションの素材を表示するUI
+/// </summary>
 class P_MP_CraftUI_ResourceStockUI : public GameObject
 {
 public:
