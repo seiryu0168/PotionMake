@@ -50,8 +50,9 @@ public:
 	XMFLOAT3 ConvertToRatio(XMFLOAT3 pos);
 	XMFLOAT3 ConvertToPixel(XMFLOAT3 pos);
 	XMFLOAT3 ConvertToPixel(XMVECTOR pos);
-	XMFLOAT3 GetPosition();
+	XMFLOAT3 GetPositionAtPixel();
 	XMFLOAT3 GetRatio();
+	XMFLOAT3 GetPosition() const { XMFLOAT3 pos; XMStoreFloat3(&pos, transform_.position_); return pos; }
 	//描画
 	void Draw();
 	void Draw(int layerNum);
@@ -60,7 +61,6 @@ public:
 	//レイヤー番号のセッター
 	void SetLayer(int layer);
 
-	XMFLOAT3 GetPosition() const { XMFLOAT3 pos; XMStoreFloat3(&pos, transform_.position_); return pos; }
 
 	bool IsHitCursor();
 	GameObject* GetAttachedObject() const { return attachObject_; }

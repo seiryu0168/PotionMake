@@ -6,8 +6,7 @@
 
 
 ResourceItem::ResourceItem(Object* parent)
-	:ItemBase(parent,"ResourceItem"),
-	haveItem_(false)
+	:ItemBase(parent,"ResourceItem")
 {
 }
 
@@ -24,30 +23,19 @@ void ResourceItem::Initialize()
 
 void ResourceItem::Start()
 {
-	//potObject_ = (GameObject*)FindObject("P_MP_CraftUI_CraftPot");
+	potObject_ = (GameObject*)FindObject("P_MP_CraftUI_CraftPot");
 }
 
 void ResourceItem::Update()
 {
-	//if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
-	//{
-	//	((P_MP_CraftUI_CraftPot*)potObject_)->
-	//}
+	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
+	{
+		((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_);
+	}
 	//if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
 	//{
 	//	GetComponent<Image>().SetColor({ 0.3f,0.3f,0.3f });
 	//}
-}
-
-void ResourceItem::SetItem(int itemNum)
-{
-	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
-	RemoveComponent<Image>();
-
-	Image itemBaseImage(this);
-	itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
-	itemBaseImage.SetPosition(pos);
-	AddComponent<Image>(itemBaseImage);
 }
 
 void ResourceItem::Release()

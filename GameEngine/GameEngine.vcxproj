@@ -251,6 +251,8 @@
     <ClCompile Include="P_MP_OutingUI_ActionText.cpp" />
     <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp" />
     <ClCompile Include="ResourceItem.cpp" />
+    <ClCompile Include="ResourceItemSlot.cpp" />
+    <ClCompile Include="SaveDataLoader.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Play.cpp" />
@@ -356,6 +358,8 @@
     <ClInclude Include="P_MP_OutingUI_ActionText.h" />
     <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h" />
     <ClInclude Include="ResourceItem.h" />
+    <ClInclude Include="ResourceItemSlot.h" />
+    <ClInclude Include="SaveDataLoader.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Play.h" />

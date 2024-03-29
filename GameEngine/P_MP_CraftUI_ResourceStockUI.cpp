@@ -37,6 +37,7 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 			itemPos.x = -0.3f;
 			itemPos.y -= 0.27f;
 		}
+		((ResourceItem*)item)->SetItemNum(i);
 	}
 }
 

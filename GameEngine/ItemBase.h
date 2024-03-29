@@ -2,7 +2,7 @@
 #include"Engine/GameObject/GameObject.h"
 class ItemBase : public GameObject
 {
-private:
+protected:
 	int itemNum_;
 	std::string itemName_;
 public:

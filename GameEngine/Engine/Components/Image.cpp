@@ -27,7 +27,7 @@ XMFLOAT3 Image::ConvertToPixel(XMVECTOR pos)
 	return retPos;
 }
 
-XMFLOAT3 Image::GetPosition()
+XMFLOAT3 Image::GetPositionAtPixel()
 {
 	return ConvertToPixel(transform_.position_);
 }
