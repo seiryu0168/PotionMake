@@ -2,6 +2,7 @@
 #include"../../Engine/Components/Transform.h"
 #include"../../StaticResource.h"
 #include"../../Title.h"
+#include"../../SaveDataLoader.h"
 //#include"../../TestObject.h"
 //#include"../../SelectUI.h"
 //#include"../../Title.h"
@@ -34,6 +35,9 @@ void RootObject_Title::Initialize()
 	//	StaticResource::AddImage("GameFinishImage", image);
 	//}
 	//
+	SaveDataLoader loader;
+	loader.Init();
+	loader.Load("Assets/SaveData/PlayerData01");
 	Instantiate<Title>(this);
 }
 
