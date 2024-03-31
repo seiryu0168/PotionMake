@@ -1,15 +1,6 @@
 #include "SaveDataLoader.h"
 #include<fstream>
-namespace
-{
-	struct SaveData
-	{
-		std::string name_;
-		std::string resourceFileName_;
-		std::string potionDataFileName_;
-		std::vector<std::pair<std::string, int>> itemData_;
-	};
-}
+
 SaveDataLoader::SaveDataLoader()
 {
 }
@@ -31,14 +22,14 @@ void SaveDataLoader::Init()
 
 }
 
-void SaveDataLoader::Load(std::string fileName)
+void SaveDataLoader::Load(std::string fileName, PlayerData_Test::SaveData& data)
 {
 	nlohmann::json playerFile;
 	std::ifstream ifs(fileName+".json", std::ios::in);
 	if (!ifs.good()) return;
 
 	playerFile = nlohmann::json::parse(ifs);
-	SaveData data;
+	//PlayerData::SaveData data;
 	data.name_ = playerFile["Name"];
 	data.potionDataFileName_ = playerFile["PotionDataFileName"];
 	data.resourceFileName_ = playerFile["ResourceFileName"];

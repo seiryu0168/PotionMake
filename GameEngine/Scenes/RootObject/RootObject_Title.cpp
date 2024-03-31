@@ -3,6 +3,8 @@
 #include"../../StaticResource.h"
 #include"../../Title.h"
 #include"../../SaveDataLoader.h"
+#include"../../InterSceneData.h"
+#include"../../PlayerData.h"
 //#include"../../TestObject.h"
 //#include"../../SelectUI.h"
 //#include"../../Title.h"
@@ -36,8 +38,17 @@ void RootObject_Title::Initialize()
 	//}
 	//
 	SaveDataLoader loader;
+	PlayerData_Test::SaveData data;
 	loader.Init();
-	loader.Load("Assets/SaveData/PlayerData01");
+	loader.Load("Assets/SaveData/PlayerData01",data);
+	PlayerData* pData = new PlayerData;
+	pData->dataName_ = "Data01";
+	pData->name_ = data.name_;
+	pData->potionDataFileName_ = data.potionDataFileName_;
+	pData->resourceFileName_ = data.resourceFileName_;
+	pData->itemDataList_ = data.itemData_;
+	InterSceneData::AddData_NonOverWrite(pData);
+	PlayerData* pd = InterSceneData::GetData<PlayerData>("Data01");
 	Instantiate<Title>(this);
 }
 

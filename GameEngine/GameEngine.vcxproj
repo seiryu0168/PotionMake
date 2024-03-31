@@ -341,6 +341,7 @@
     <ClInclude Include="ManagementPartObjectBase.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="Play_ManagementPart_CraftTable.h" />
     <ClInclude Include="Play_ManagementPart_CraftUI.h" />
@@ -377,6 +378,7 @@
     <ClInclude Include="ObjectSetter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="StandData.h" />
     <ClInclude Include="StaticResource.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestObjectChild.h" />

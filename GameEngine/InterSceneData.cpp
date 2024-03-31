@@ -1,15 +1,56 @@
 #include "InterSceneData.h"
-#include"Engine/SAFE_DELETE_RELEASE.h"
+//#include"Engine/SAFE_DELETE_RELEASE.h"
 
 #include<vector>
 namespace InterSceneData
 {
+    std::list<StandData*> datas_;
+
+    void AddData_OverWrite(StandData* data)
+    {
+        for (auto itr = datas_.begin(); itr != datas_.end(); itr++)
+        {
+            if (data->dataName_ == (*itr)->dataName_)
+            {
+                delete(*itr);
+                itr = datas_.erase(itr);
+                datas_.push_back(data);
+                return;
+            }
+        }
+        datas_.push_back(data);
+    }
+
+    bool AddData_NonOverWrite(StandData* data)
+    {
+        for (auto itr = datas_.begin(); itr != datas_.end(); itr++)
+        {
+            if (data->dataName_ == (*itr)->dataName_)
+            {
+                return false;
+            }
+        }
+        datas_.push_back(data);
+        return true;
+    }
+    void DeleteData(std::string name)
+    {
+        for (auto itr = datas_.begin(); itr != datas_.end(); itr++)
+        {
+            if ((*itr)->dataName_ == name)
+            {
+                delete(*itr);
+                itr = datas_.erase(itr);
+            }
+        }
+    }
+
    // struct Data
    // {
    //     std::variant<bool, std::string, short, int, float > value_;
    //     std::string dataName_;
    // };
-    std::vector<Data> interScenedatas_;
+    //std::vector<Data> interScenedatas_;
     //union Data
     //{
     //    bool varBool;
