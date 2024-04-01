@@ -4,8 +4,8 @@ class ItemBase : public GameObject
 {
 protected:
 	int itemNum_;
-	std::string itemName_;
 public:
+	std::string itemName_;
 	XMFLOAT3 imagePos_;
 	ItemBase(Object* parent, std::string name);
 	~ItemBase();

@@ -1,1 +1,1 @@
-{"ItemList":{"Item01":10,"Item02":5,"Item03":7},"Name":"player01","PotionDataFileName":"Assets/SaveData/PotionDataFile01","ResourceFileName":"Assets/SaveData/ResourceFile01"}
+{"ItemList":[["Item01","ResourceImage01.png",10],["Item02","ResourceImage02.png",5],["Item03","ResourceImage03.png",7]],"Name":"player01","PotionDataFileName":"Assets/SaveData/PotionDataFile01","ResourceFileName":"Assets/SaveData/ResourceFile01"}

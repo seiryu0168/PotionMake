@@ -35,13 +35,28 @@ namespace InterSceneData
     }
     void DeleteData(std::string name)
     {
-        for (auto itr = datas_.begin(); itr != datas_.end(); itr++)
+        for (auto itr = datas_.begin(); itr != datas_.end();itr++)
         {
             if ((*itr)->dataName_ == name)
             {
                 delete(*itr);
                 itr = datas_.erase(itr);
+                    return;
+                //if (itr != datas_.end())
+                //    itr++;
             }
+        }
+    }
+
+    void AllDelete()
+    {
+        for (auto itr = datas_.begin(); itr != datas_.end();)
+        {
+            delete(*itr);
+            itr = datas_.erase(itr);
+            if (itr == datas_.end())
+                return;
+            itr++;
         }
     }
 

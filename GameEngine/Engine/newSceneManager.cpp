@@ -24,7 +24,7 @@
 
 #include"Coordinator.h"
 #include "newSceneManager.h"
-
+#include"../InterSceneData.h"
 #include "ResourceManager/Audio.h"
 #include "../Division.h"
 
@@ -243,6 +243,7 @@ namespace newSceneManager
 
 	void Release()
 	{
+		InterSceneData::AllDelete();
 		Division::setLoad(true);
 		currentScene_->AllKillObject();
 

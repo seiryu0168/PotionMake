@@ -2,6 +2,8 @@
 #include"ResourceItem.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
+#include"InterSceneData.h"
+#include"PlayerData.h"
 P_MP_CraftUI_ResourceStockUI::P_MP_CraftUI_ResourceStockUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_ResourceStockUI"),
 	uiPos_({0,0,0})
@@ -26,11 +28,19 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 	uiTitleText.SetPosition({ 1200,30 });
 	AddComponent<Text>(uiTitleText);
 	XMFLOAT2 itemPos = { -0.3f,0.68f };
+	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	for (int i = 0; i < 30; i++)
 	{
 		GameObject* item = Instantiate<ResourceItem>(this);
+		int resourceCount = 0;
+		if (i < data->itemDataList_.size())
+			resourceCount = data->itemDataList_[i].itemCount_;
+		((ResourceItem*)item)->LoadItem(data->itemDataList_[i % data->itemDataList_.size()].itemImageName_,resourceCount);
+		((ResourceItem*)item)->itemName_ = data->itemDataList_[i % data->itemDataList_.size()].itemName_;
 		item->GetComponent<Image>().SetPosition({ uiPos_.x + itemPos.x,uiPos_.y + itemPos.y,0 });
-		item->GetComponent<Image>().SetSize({ 0.9f,0.9f,0 });
+		if(resourceCount>0)
+		item->GetComponent<Image>().SetSize({ 128.0f/512.0f,128.0f/ 521.0f,0 });
+
 		itemPos.x += 0.15f;
 		if((i+1)%5==0)
 		{

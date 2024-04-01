@@ -106,6 +106,8 @@ namespace InterSceneData
 		return nullptr;
 	}
 
+	void AllDelete();
+
 	//struct Data
 	//{
 	//	std::variant<bool, std::string, short, int, float, std::vector<SNOWCONE_DATA>> value_;
