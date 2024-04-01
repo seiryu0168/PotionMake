@@ -9,6 +9,7 @@ public:
 	XMFLOAT3 imagePos_;
 	ItemBase(Object* parent, std::string name);
 	~ItemBase();
+	int GetItemNumber() { return itemNum_; }
 
 };
 

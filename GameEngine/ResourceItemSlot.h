@@ -1,17 +1,19 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-class ResourceItemSlot : public GameObject
+#include"ItemBase.h"
+class ResourceItemSlot : public ItemBase
 {
 private:
-	bool haveItem_;
+	bool haveResource_;
+	int resourceCount_;
 public:
 	ResourceItemSlot(Object* parent);
 	~ResourceItemSlot();
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void SetItem(int itemNum);
-	bool HaveItem() { return haveItem_; }
+	void SetItem(std::string imageName,int itemNum);
+	void ItemEmpty();
+	bool HaveItem() { return haveResource_; }
 	void Release() override;
 };
 

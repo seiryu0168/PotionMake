@@ -43,15 +43,30 @@ void P_MP_CraftUI_CraftPot::Update()
 {
 }
 
-void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum)
+void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName, std::string imageName)
 {
 	if (dataMap_.find(itemNum) == dataMap_.end())
 	{
-		dataMap_.insert({ itemNum, 1 });
+		ResourceData data{ resourceName,imageName,1 };
+		dataMap_.insert({ itemNum, data });
 		DisplayResource(itemNum);
 		return;
 	}
-	dataMap_[itemNum]++;
+	dataMap_[itemNum].resourceCount_++;
+}
+
+bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
+{
+	if (dataMap_.find(itemNum) == dataMap_.end())
+		return false;
+
+		dataMap_.find(itemNum)->second.resourceCount_--;
+		if (dataMap_.find(itemNum)->second.resourceCount_ <= 0)
+		{
+			HiddenResource(itemNum);
+			dataMap_.erase(itemNum);
+		}
+		return true;
 }
 
 void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
@@ -60,13 +75,24 @@ void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
 	{
 		if (!((ResourceItemSlot*)objects_[i])->HaveItem())
 		{
-			((ResourceItemSlot*)objects_[i])->SetItem(itemNum);
+			((ResourceItemSlot*)objects_[i])->SetItem(dataMap_[itemNum].imageName_,itemNum);
 			return;
-
 		}
-
 	}
 }
+
+void P_MP_CraftUI_CraftPot::HiddenResource(int itemNum)
+{
+	for (int i = 0; i < objects_.size(); i++)
+	{
+		if (((ResourceItemSlot*)objects_[i])->GetItemNumber()==itemNum)
+		{
+			((ResourceItemSlot*)objects_[i])->ItemEmpty();
+			return;
+		}
+	}
+}
+
 
 void P_MP_CraftUI_CraftPot::Release()
 {

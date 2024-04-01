@@ -8,7 +8,9 @@
 ResourceItem::ResourceItem(Object* parent)
 	:ItemBase(parent,"ResourceItem"),
 	isLoadedImage_(false),
-	resourceCount_(0)
+	resourceCount_(0), 
+	resourceImageName_(""),
+	textPos_({ 0,0 })
 {
 }
 
@@ -18,6 +20,10 @@ ResourceItem::~ResourceItem()
 
 void ResourceItem::Initialize()
 {
+	Text countText(this);
+	countText.SetTextSize(50);
+	countText.SetText("0");
+	AddComponent<Text>(countText);
 	//Image itemBaseImage(this);
 	//itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
 	//AddComponent<Image>(itemBaseImage);
@@ -30,9 +36,24 @@ void ResourceItem::Start()
 
 void ResourceItem::Update()
 {
+	//画像をクリックしたら
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
 	{
-		((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_);
+		//CraftPotにデータ反映
+		((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_,itemName_,resourceImageName_);
+		if (resourceCount_ > 0)
+		{
+			resourceCount_--;
+			GetComponent<Text>().SetText(std::to_string(resourceCount_));
+		}
+	}
+	else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor())
+	{
+		//CraftPotにデータ反映
+		if (!((P_MP_CraftUI_CraftPot*)potObject_)->SubResourceData(itemNum_))
+			return;
+			resourceCount_++;
+			GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	}
 	//if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
 	//{
@@ -40,11 +61,10 @@ void ResourceItem::Update()
 	//}
 }
 
-void ResourceItem::LoadItem(std::string name,int resourceCount)
+void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 {
 	if (isLoadedImage_ == true)
 		return;
-	resourceCount_ = resourceCount;
 	if (resourceCount <= 0)
 	{
 		Image itemBaseImage(this);
@@ -54,9 +74,12 @@ void ResourceItem::LoadItem(std::string name,int resourceCount)
 	else
 	{
 		Image itemBaseImage(this);
-		itemBaseImage.Load("Assets/Image/" + name);
+		itemBaseImage.Load("Assets/Image/" + imagename);
+		resourceImageName_ = imagename;
 		AddComponent<Image>(itemBaseImage);
 
+		resourceCount_ = resourceCount;
+		GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	}
 	isLoadedImage_ = true;
 }

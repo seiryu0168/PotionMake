@@ -7,6 +7,8 @@ class ResourceItem : public ItemBase
 {
 private:
 	bool isLoadedImage_;
+	std::string resourceImageName_;
+	XMFLOAT2 textPos_;
 	XMFLOAT3 imagePos_;
 	int resourceCount_;
 	GameObject* potObject_;
@@ -18,7 +20,7 @@ public:
 	void Update() override;
 	void SetItemNum(int num) { itemNum_ = num; }
 	int GetItemNum() { return itemNum_; }
-	void LoadItem(std::string name,int resourceCount);
+	void LoadItem(std::string imagename,int resourceCount);
 	bool IsLoaded() { return isLoadedImage_; }
 	void Release() override;
 };

@@ -14,8 +14,9 @@ XMFLOAT3 Image::ConvertToRatio(XMFLOAT3 pos)
 
 XMFLOAT3 Image::ConvertToPixel(XMFLOAT3 pos)
 {
-	pos.x = pos.x * (float)Direct3D::GetScreenWidth();
-	pos.y = pos.y * (float)Direct3D::GetScreenHeight();
+	XMFLOAT2 halfScreen = { Direct3D::GetScreenWidth() / 2.0f,Direct3D::GetScreenHeight() / 2.0f };
+	pos.x = halfScreen.x+((pos.x * halfScreen.x));
+	pos.y = halfScreen.y + ((-pos.y * halfScreen.y));
 
 	return pos;
 }

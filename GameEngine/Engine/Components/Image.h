@@ -43,6 +43,8 @@ public:
 	void SetScroll(const XMFLOAT2& scroll);
 	//‰æ‘œƒTƒCƒYİ’è
 	void SetSize(const XMFLOAT3& size);
+	XMFLOAT3 GetSize() {return transform_.scale_;}
+	XMFLOAT3 GetSizeAtPixel() { return pSprite_->GetSize(); }
 	//‰æ‘œ‰ñ“]
 	void SetRotation(const XMFLOAT3& rotate);
 	//•`‰æ‘ÎÛİ’è(•¡”‰æ–Ê)
