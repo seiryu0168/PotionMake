@@ -199,6 +199,9 @@ void Image::SetLayer(int layer)
 
 bool Image::IsHitCursor()
 {
+	if (!isDraw_)
+		return false;
+
 	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
     float wid = (pSprite_->GetSize().x * transform_.scale_.x / 2);
     float hgt = (pSprite_->GetSize().y * transform_.scale_.y / 2);

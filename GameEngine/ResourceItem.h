@@ -22,5 +22,6 @@ public:
 	int GetItemNum() { return itemNum_; }
 	void LoadItem(std::string imagename,int resourceCount);
 	bool IsLoaded() { return isLoadedImage_; }
+	void ActiveUI(bool isActive);
 	void Release() override;
 };

@@ -9,7 +9,8 @@ void TextSystem::Draw(int layerNum)
 {
 	for (Entity entity : entities_)
 	{
-		Coordinator::GetComponent<Text>(entity).Draw(layerNum);
+		if (Coordinator::GetComponent<Text>(entity).isDraw_)
+			Coordinator::GetComponent<Text>(entity).Draw(layerNum);
 	}
 }
 

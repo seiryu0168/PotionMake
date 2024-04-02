@@ -21,8 +21,10 @@ ResourceItem::~ResourceItem()
 void ResourceItem::Initialize()
 {
 	Text countText(this);
-	countText.SetTextSize(50);
+	countText.SetRect({ 0,0,50,50 });
+	countText.SetTextSize(40);
 	countText.SetText("0");
+	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	AddComponent<Text>(countText);
 	//Image itemBaseImage(this);
 	//itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
@@ -40,9 +42,9 @@ void ResourceItem::Update()
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
 	{
 		//CraftPot‚Éƒf[ƒ^”½‰f
-		((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_,itemName_,resourceImageName_);
 		if (resourceCount_ > 0)
 		{
+			((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_, itemName_, resourceImageName_);
 			resourceCount_--;
 			GetComponent<Text>().SetText(std::to_string(resourceCount_));
 		}
@@ -82,6 +84,12 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 		GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	}
 	isLoadedImage_ = true;
+}
+
+void ResourceItem::ActiveUI(bool isActive)
+{
+	GetComponent<Image>().SetDraw(isActive);
+	GetComponent<Text>().isDraw_ = isActive;
 }
 
 void ResourceItem::Release()

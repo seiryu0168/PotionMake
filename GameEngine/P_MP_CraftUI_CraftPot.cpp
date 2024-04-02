@@ -24,6 +24,8 @@ void P_MP_CraftUI_CraftPot::Initialize()
 	{
 		GameObject* item = Instantiate<ResourceItemSlot>(this);
 		item->GetComponent<Image>().SetPosition({ standPosition_.x+itemPos.x,standPosition_.y+itemPos.y,0 });
+		XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
+		item->GetComponent<Text>().SetPosition({ textBasePos.x + 10,textBasePos.y+15 });
 		itemPos.x += 0.15f;
 		if ((i + 1) % 4 == 0)
 		{
@@ -53,6 +55,15 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		return;
 	}
 	dataMap_[itemNum].resourceCount_++;
+
+	for (GameObject* obj : objects_)
+	{
+		if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
+		{
+			((ResourceItemSlot*)obj)->AddCount(1);
+			break;
+		}
+	}
 }
 
 bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
@@ -65,6 +76,15 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 		{
 			HiddenResource(itemNum);
 			dataMap_.erase(itemNum);
+			return true;
+		}
+		for (GameObject* obj : objects_)
+		{
+			if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
+			{
+				((ResourceItemSlot*)obj)->SubCount(1);
+				break;
+			}
 		}
 		return true;
 }

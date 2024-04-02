@@ -6,6 +6,7 @@
 Text::Text(GameObject* object)
 	:attachObject_(object)
 {
+	isDraw_ = true;
 	textLength_ = 0;
 	transform2D = { 0,0 };
 	layoutRect_ = { 0,0,100,100 };
@@ -22,6 +23,7 @@ Text::Text(GameObject* object)
 Text::Text(const int& renderTargetNum)
 	:layerNum_(0)
 {
+	isDraw_ = true;
 	textLength_	   = 0;
 	transform2D = { 0,0 };
 	layoutRect_ = { 0,0,100,100 };
@@ -42,6 +44,7 @@ Text::Text(const int& renderTargetNum)
 Text::Text(const std::string& text, const std::string& fontName, const TEXT_RECT& rect, int renderTargetNum,int layerNum, const DWRITE_FONT_WEIGHT& wight, const DWRITE_FONT_STYLE& style, const DWRITE_FONT_STRETCH& stretch, const ALIGNMENT_TYPE& type)
 	:layerNum_(layerNum)
 {
+	isDraw_ = true;
 	if (renderTargetNum < D2D::GetRenderTargetCount() && renderTargetNum >= 0)
 		renderTargetNum_ = renderTargetNum;
 	else

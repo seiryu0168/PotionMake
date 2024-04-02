@@ -40,6 +40,7 @@ private:
 	int layerNum_;
 	TEXT_POSITION defaultPos_;
 public:
+	bool isDraw_;
 	TEXT_POSITION				  transform2D;		//ç¿ïW
 	Text(GameObject* object);
 	Text(const int& renderTargetNum=0);
