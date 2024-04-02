@@ -110,6 +110,7 @@ public:
 	
 	void SetTransform(const TEXT_POSITION& pos);
 	void SetTextLayout();
+	void SetLayer(int layerNum = 0) { layerNum_ = layerNum; }
 	/// <summary>
 	/// ‰æ–Ê‚ÌŠ„‡‚ÅˆÊ’uİ’è(0`1)
 	/// ‰æ–Ê¶ã‚ªŒ´“_

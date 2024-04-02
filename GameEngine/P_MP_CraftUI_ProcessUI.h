@@ -4,6 +4,7 @@ class P_MP_CraftUI_ProcessUI : public GameObject
 {
 private:
 	int processNum_;
+	GameObject* craftPotObject_;
 public:
 	P_MP_CraftUI_ProcessUI(Object* parent);
 	~P_MP_CraftUI_ProcessUI();

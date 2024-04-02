@@ -242,6 +242,7 @@
     <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="PotionStatusGauge.cpp" />
     <ClCompile Include="P_MP_CraftUI_CraftPot.cpp" />
     <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp" />
     <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="PotionStatusGauge.h" />
     <ClInclude Include="P_MP_CraftUI_CraftPot.h" />
     <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h" />
     <ClInclude Include="P_MP_CraftUI_PrepareUI.h" />

@@ -34,11 +34,11 @@ void ResourceMenuChangeButton::Update()
 	//‰æ‘œ‚ðƒNƒŠƒbƒN‚µ‚½‚ç
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>(0).IsHitCursor())
 	{
-		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
+		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
 	}
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>(1).IsHitCursor())
 	{
-		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
+		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
 	}
 	//else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor())
 	//{

@@ -21,6 +21,7 @@ ResourceItem::~ResourceItem()
 void ResourceItem::Initialize()
 {
 	Text countText(this);
+	countText.SetLayer(1);
 	countText.SetRect({ 0,0,50,50 });
 	countText.SetTextSize(40);
 	countText.SetText("0");
@@ -70,12 +71,14 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 	if (resourceCount <= 0)
 	{
 		Image itemBaseImage(this);
+		itemBaseImage.SetLayer(1);
 		itemBaseImage.Load("Assets/Image/ItemSlotImage.png");
 		AddComponent<Image>(itemBaseImage);
 	}
 	else
 	{
 		Image itemBaseImage(this);
+		itemBaseImage.SetLayer(1);
 		itemBaseImage.Load("Assets/Image/" + imagename);
 		resourceImageName_ = imagename;
 		AddComponent<Image>(itemBaseImage);

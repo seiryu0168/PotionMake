@@ -19,8 +19,9 @@ P_MP_CraftUI_ResourceStockUI::~P_MP_CraftUI_ResourceStockUI()
 void P_MP_CraftUI_ResourceStockUI::Initialize()
 {
 	//UIの土台となる画像を用意
-	uiPos_ = { 0.6,-0.13f,0 };
+	uiPos_ = { 0.5f,-0.13f,0 };
 	Image uiBaseImage(this);
+	uiBaseImage.SetLayer(1);
 	uiBaseImage.Load("Assets/Image/PotionManagerUIBase1.png");
 	uiBaseImage.SetPosition(uiPos_);
 	uiBaseImage.SetSize({ 0.7f,0.87f,0 });
@@ -79,8 +80,8 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 	}
 	//UI変更用ボタン
 	GameObject* changeButton = Instantiate<ResourceMenuChangeButton>(this);
-	changeButton->GetComponent<Image>(0).SetPosition({ uiPos_.x - 0.7f,uiPos_.y+0.5f,0 });
-	changeButton->GetComponent<Image>(1).SetPosition({ uiPos_.x - 0.7f,uiPos_.y+0.3f,0 });
+	changeButton->GetComponent<Image>(0).SetPosition({ uiPos_.x + 0.4f,uiPos_.y+0.5f,0 });
+	changeButton->GetComponent<Image>(1).SetPosition({ uiPos_.x + 0.4f,uiPos_.y,0 });
 	ModeChange(ResourceMenuMode::ResourceSelect);
 	
 }

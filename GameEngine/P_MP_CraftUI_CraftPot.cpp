@@ -7,7 +7,7 @@
 
 P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_CraftPot"),
-	standPosition_({-0.8f,0.6f})
+	standPosition_({-0.8f,0.5f})
 {
 }
 
@@ -17,8 +17,6 @@ P_MP_CraftUI_CraftPot::~P_MP_CraftUI_CraftPot()
 
 void P_MP_CraftUI_CraftPot::Initialize()
 {
-	//GameObject* item = Instantiate<ResourceItem>(this);
-	//item->GetComponent<Image>().SetPosition({ standPosition_.x,standPosition_.y,0 });
 	XMFLOAT2 itemPos = { 0,0 };
 	for (int i = 0; i < 12; i++)
 	{
@@ -32,7 +30,6 @@ void P_MP_CraftUI_CraftPot::Initialize()
 			itemPos.x = 0;
 			itemPos.y -= 0.27f;
 		}
-		//((ResourceItemSlot*)item)->SetItem(true);
 		objects_.push_back(item);
 	}
 }
@@ -87,6 +84,13 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 			}
 		}
 		return true;
+}
+
+void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
+{
+	ProcessData data;
+	data.procssNum_ = processNum;
+	processList_.push_back(data);
 }
 
 void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
