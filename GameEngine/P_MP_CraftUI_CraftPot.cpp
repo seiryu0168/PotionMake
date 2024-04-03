@@ -48,24 +48,33 @@ void P_MP_CraftUI_CraftPot::Update()
 
 void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName, std::string imageName)
 {
+	//データマップにデータが無かったら
 	if (dataMap_.find(itemNum) == dataMap_.end())
 	{
+		//素材データをデータマップに追加
 		ResourceData data{ resourceName,imageName,1 };
 		dataMap_.insert({ itemNum, data });
-		dataMap_[itemNum].resourceCount_++;
+
+		//追加した素材を表示
 		DisplayResource(itemNum);
+		
+		//素材のデータをパラメータに反映
 		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 		return;
 	}
 
+
+	//データマップにデータがあったら
+	//素材の数を増やす
 	dataMap_[itemNum].resourceCount_++;
 
+	//素材の数を更新
 	for (GameObject* obj : objects_)
 	{
 		if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
 		{
 			((ResourceItemSlot*)obj)->AddCount(1);
-
+			//パラメータに反映
 			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 			break;
 		}
@@ -77,24 +86,34 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 	if (dataMap_.find(itemNum) == dataMap_.end())
 		return false;
 
-		dataMap_.find(itemNum)->second.resourceCount_--;
-		if (dataMap_.find(itemNum)->second.resourceCount_ <= 0)
-		{
-			HiddenResource(itemNum);
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
-			dataMap_.erase(itemNum);
-			return true;
-		}
-		for (GameObject* obj : objects_)
-		{
-			if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
-			{
-				((ResourceItemSlot*)obj)->SubCount(1);
-				((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
-				break;
-			}
-		}
+	//素材の数を減らす
+	dataMap_.find(itemNum)->second.resourceCount_--;
+	
+	//もし素材の数が0になったら
+	if (dataMap_.find(itemNum)->second.resourceCount_ <= 0)
+	{
+		//該当する素材の枠をデフォルトに戻す
+		HiddenResource(itemNum);
+		//パラメータに反映
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+		//データマップから削除
+		dataMap_.erase(itemNum);
 		return true;
+	}
+	//素材の数が0じゃない場合
+	for (GameObject* obj : objects_)
+	{
+		//itemNumが一致する奴を更新
+		if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
+		{
+			((ResourceItemSlot*)obj)->SubCount(1);
+			
+			//パラメータに反映
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+			break;
+		}
+	}
+	return true;
 }
 
 void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
@@ -102,6 +121,22 @@ void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 	ProcessData data;
 	data.procssNum_ = processNum;
 	processList_.push_back(data);
+	//パラメータに反映
+	((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+}
+
+void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
+{
+	for (auto itr = processList_.begin(); itr != processList_.end();itr++)
+	{
+		if (itr->procssNum_ == processNum)
+		{
+			itr = processList_.erase(itr);
+			//パラメータに反映
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+			return;
+		}
+	}
 }
 
 void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
@@ -140,6 +175,15 @@ std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()
 		statusList[2] += data->resourceDataMap_[itr->first].status02_ * itr->second.resourceCount_;
 		statusList[3] += data->resourceDataMap_[itr->first].status03_ * itr->second.resourceCount_;
 		statusList[4] += data->resourceDataMap_[itr->first].status04_ * itr->second.resourceCount_;
+	}
+
+	for (auto &process : processList_)
+	{
+		statusList[0] = statusList[0] * data->processDataMap_[process.procssNum_].status00_;
+		statusList[1] = statusList[1] * data->processDataMap_[process.procssNum_].status01_;
+		statusList[2] = statusList[2] * data->processDataMap_[process.procssNum_].status02_;
+		statusList[3] = statusList[3] * data->processDataMap_[process.procssNum_].status03_;
+		statusList[4] = statusList[4] * data->processDataMap_[process.procssNum_].status04_;
 	}
 	return statusList;
 }

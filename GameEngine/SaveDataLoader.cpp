@@ -24,6 +24,9 @@ void SaveDataLoader::Init()
 	resourceStatusFile["StatusList"] ={ {0,0.2f,0.1f,0.3f,0.2f,0.4f},
 									    {1,0.5f,0.2f,0.1f,0.1f,0.3f},
 									    {2,0.1f,0.6f,0.1f,0.1f,0.1f} };
+	resourceStatusFile["ProcessList"] = { {0,1.1f,1.2f,0.7f,0.8f,1.3f},
+										  {1,0.7f,1.7f,1.0f,1.1f,1.2f},
+										  {2,1.3f,0.5f,1.4f,1.2f,0.8f} };
 
 	std::ofstream rof("Assets/SaveData/ResourceData.json", std::ios::out);
 	rof << resourceStatusFile << std::endl;
@@ -47,6 +50,7 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 		std::string itemName      = itr.value().at(0);
 		std::string itemImageName = itr.value().at(1);
 		int itemCount             = itr.value().at(2).get<int>();
+		
 		PlayerData::ResourceData_ rData;
 		rData.itemName_      = itemName;
 		rData.itemImageName_ = itemImageName;
@@ -80,4 +84,18 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 		statusData.status04_	   = itr.value().at(5);
 		data.resourceDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
+
+	for (auto itr = resourceStatusFile["ProcessList"].begin(); itr != resourceStatusFile["ProcessList"].end(); itr++)
+	{
+		ResourceStatusData::ResourceStatus statusData;
+
+		statusData.resourceNumber_ = itr.value().at(0);
+		statusData.status00_	   = itr.value().at(1);
+		statusData.status01_	   = itr.value().at(2);
+		statusData.status02_	   = itr.value().at(3);
+		statusData.status03_	   = itr.value().at(4);
+		statusData.status04_	   = itr.value().at(5);
+		data.processDataMap_.insert({ statusData.resourceNumber_,statusData });
+	}
+
 }

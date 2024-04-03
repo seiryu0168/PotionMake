@@ -75,6 +75,7 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessImage("Assets/Image/SelectImage4.png");
 		processUI->GetComponent<Image>().SetSize({ 1,0.3f,0 });
 		processUI->GetComponent<Image>().SetPosition({ uiPos_.x,uiPos_.y+posY,0 });
+		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessNumber(i);
 		processObjects_.push_back(processUI);
 		posY += -0.5f;
 	}

@@ -14,6 +14,7 @@ public:
 		float status04_;
 	};
 	std::unordered_map<int, ResourceStatus> resourceDataMap_;
+	std::unordered_map<int, ResourceStatus> processDataMap_;
 	//void AddResourceStatus()
 };
 

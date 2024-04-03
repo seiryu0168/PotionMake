@@ -3,6 +3,7 @@
 class P_MP_CraftUI_ProcessUI : public GameObject
 {
 private:
+	bool isClicked_;
 	int processNum_;
 	GameObject* craftPotObject_;
 public:

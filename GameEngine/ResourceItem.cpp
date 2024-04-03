@@ -58,16 +58,13 @@ void ResourceItem::Update()
 			resourceCount_++;
 			GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	}
-	//if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
-	//{
-	//	GetComponent<Image>().SetColor({ 0.3f,0.3f,0.3f });
-	//}
 }
 
 void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 {
 	if (isLoadedImage_ == true)
 		return;
+	//‘fŞ‚Ì”‚ª0ˆÈ‰º‚¾‚Á‚½‚ç
 	if (resourceCount <= 0)
 	{
 		Image itemBaseImage(this);
