@@ -4,6 +4,14 @@ struct ProcessData
 {
 	int procssNum_;
 };
+struct ResourceStatus
+{
+	float status00_;
+	float status01_;
+	float status02_;
+	float status03_;
+	float status04_;
+};
 /// <summary>
 /// –ò‚ğ’²‡‚·‚é“ç‚ÌƒNƒ‰ƒX
 /// </summary>
@@ -14,6 +22,7 @@ private:
 	{
 		std::string resourceName_;
 		std::string imageName_;
+		ResourceStatus status_;
 		int resourceCount_;
 	};
 	XMFLOAT2 standPosition_;
@@ -21,6 +30,7 @@ private:
 	std::vector<XMFLOAT3> resourceImagePos_;
 	std::unordered_map<int, ResourceData> dataMap_;
 	std::list<ProcessData> processList_;
+	GameObject* potionStatusObject_;
 public:
 
 	P_MP_CraftUI_CraftPot(Object* parent);
@@ -33,6 +43,7 @@ public:
 	void AddProcessData(int processNum);
 	void DisplayResource(int itemNum);
 	void HiddenResource(int itemNum);
+	std::vector<float> CalcPotionStatus();
 	void Release() override;
 };
 

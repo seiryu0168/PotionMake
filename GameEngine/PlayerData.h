@@ -1,5 +1,5 @@
 #pragma once
-#include"InterSceneData.h"
+#include"StandData.h"
 class PlayerData : public StandData
 {
 public:

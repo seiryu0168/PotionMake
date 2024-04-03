@@ -41,13 +41,18 @@ void RootObject_Title::Initialize()
 	PlayerData* data = new PlayerData;
 	loader.Init();
 	loader.Load("Assets/SaveData/PlayerData01",*data);
-	PlayerData* pData = new PlayerData;
+
+	ResourceStatusData* rData = new ResourceStatusData;
+	loader.ResourceDataLoad("Assets/SaveData/ResourceData",*rData);
+	//PlayerData* pData = new PlayerData;
 	//pData->dataName_ = "Data01";
 	//pData->name_ = data.name_;
 	//pData->potionDataFileName_ = data.potionDataFileName_;
 	//pData->resourceFileName_ = data.resourceFileName_;
 	//pData->itemDataList_ = data.itemData_;
+	rData->dataName_ = "ResourceData";
 	data->dataName_ = "Data01";
+	InterSceneData::AddData_NonOverWrite(rData);
 	InterSceneData::AddData_NonOverWrite(data);
 	////PlayerData* pd = InterSceneData::GetData<PlayerData>("Data01");
 	////InterSceneData::DeleteData("Data01");

@@ -255,6 +255,7 @@
     <ClCompile Include="ResourceItem.cpp" />
     <ClCompile Include="ResourceItemSlot.cpp" />
     <ClCompile Include="ResourceMenuChangeButton.cpp" />
+    <ClCompile Include="ResourceStatusData.cpp" />
     <ClCompile Include="SaveDataLoader.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject_Menu.cpp" />
@@ -366,6 +367,7 @@
     <ClInclude Include="ResourceItem.h" />
     <ClInclude Include="ResourceItemSlot.h" />
     <ClInclude Include="ResourceMenuChangeButton.h" />
+    <ClInclude Include="ResourceStatusData.h" />
     <ClInclude Include="SaveDataLoader.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
     <ClInclude Include="Scenes\RootObject\RootObject_Menu.h" />

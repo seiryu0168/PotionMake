@@ -1,6 +1,7 @@
 #pragma once
 #include"Engine/ResourceManager/json.hpp"
 #include"PlayerData.h"
+#include"ResourceStatusData.h"
 namespace PlayerData_Test
 {
 	struct SaveData
@@ -20,5 +21,6 @@ public:
 	~SaveDataLoader();
 	void Init();
 	void Load(std::string fileName,PlayerData& data);
+	void ResourceDataLoad(std::string fileName,ResourceStatusData& data);
 };
 

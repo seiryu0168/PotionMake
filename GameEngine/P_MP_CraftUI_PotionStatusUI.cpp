@@ -27,6 +27,8 @@ void P_MP_CraftUI_PotionStatusUI::Initialize()
 		GameObject* gauge = Instantiate<PotionStatusGauge>(this);
 		gauge->GetComponent<Image>().SetPosition({ uiPos_.x + diff.x,uiPos_.y + diff.y,0 });
 		diff.x += 0.1f;
+
+		statusObjectList_.push_back(gauge);
 	}
 
 
@@ -38,6 +40,14 @@ void P_MP_CraftUI_PotionStatusUI::Start()
 
 void P_MP_CraftUI_PotionStatusUI::Update()
 {
+}
+
+void P_MP_CraftUI_PotionStatusUI::ApplicationStatusData(std::vector<float> status)
+{
+	for (int i = 0; i < statusObjectList_.size(); i++)
+	{
+		statusObjectList_[i]->GetComponent<Image>().SetSize({ 1.0f*0.3f,status[i]*0.3f,0});
+	}
 }
 
 void P_MP_CraftUI_PotionStatusUI::Release()

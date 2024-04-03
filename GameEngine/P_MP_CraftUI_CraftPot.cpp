@@ -1,8 +1,11 @@
 #include "P_MP_CraftUI_CraftPot.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
+#include"P_MP_CraftUI_PotionStatusUI.h"
 #include"ResourceItem.h"
 #include"ResourceItemSlot.h"
+#include"InterSceneData.h"
+#include"ResourceStatusData.h"
 
 
 P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
@@ -36,6 +39,7 @@ void P_MP_CraftUI_CraftPot::Initialize()
 
 void P_MP_CraftUI_CraftPot::Start()
 {
+	potionStatusObject_ = (GameObject*)FindObject("P_MP_CraftUI_PotionStatusUI");
 }
 
 void P_MP_CraftUI_CraftPot::Update()
@@ -48,9 +52,12 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 	{
 		ResourceData data{ resourceName,imageName,1 };
 		dataMap_.insert({ itemNum, data });
+		dataMap_[itemNum].resourceCount_++;
 		DisplayResource(itemNum);
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 		return;
 	}
+
 	dataMap_[itemNum].resourceCount_++;
 
 	for (GameObject* obj : objects_)
@@ -58,6 +65,8 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
 		{
 			((ResourceItemSlot*)obj)->AddCount(1);
+
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 			break;
 		}
 	}
@@ -72,6 +81,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 		if (dataMap_.find(itemNum)->second.resourceCount_ <= 0)
 		{
 			HiddenResource(itemNum);
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 			dataMap_.erase(itemNum);
 			return true;
 		}
@@ -80,6 +90,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 			if (((ResourceItemSlot*)obj)->GetItemNumber() == itemNum)
 			{
 				((ResourceItemSlot*)obj)->SubCount(1);
+				((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
 				break;
 			}
 		}
@@ -115,6 +126,22 @@ void P_MP_CraftUI_CraftPot::HiddenResource(int itemNum)
 			return;
 		}
 	}
+}
+
+std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()
+{
+	std::vector<float> statusList = { 0,0,0,0,0 };
+	ResourceStatusData* data = InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	//キーをもとに素材のパラメータの合計値を計算を
+	for (auto itr = dataMap_.begin(); itr != dataMap_.end();itr++)
+	{
+		statusList[0] += data->resourceDataMap_[itr->first].status00_ * itr->second.resourceCount_;
+		statusList[1] += data->resourceDataMap_[itr->first].status01_ * itr->second.resourceCount_;
+		statusList[2] += data->resourceDataMap_[itr->first].status02_ * itr->second.resourceCount_;
+		statusList[3] += data->resourceDataMap_[itr->first].status03_ * itr->second.resourceCount_;
+		statusList[4] += data->resourceDataMap_[itr->first].status04_ * itr->second.resourceCount_;
+	}
+	return statusList;
 }
 
 

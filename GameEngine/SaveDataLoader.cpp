@@ -20,6 +20,14 @@ void SaveDataLoader::Init()
 	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
 	of << playerFile << std::endl;
 
+	nlohmann::json resourceStatusFile;
+	resourceStatusFile["StatusList"] ={ {0,0.2f,0.1f,0.3f,0.2f,0.4f},
+									    {1,0.5f,0.2f,0.1f,0.1f,0.3f},
+									    {2,0.1f,0.6f,0.1f,0.1f,0.1f} };
+
+	std::ofstream rof("Assets/SaveData/ResourceData.json", std::ios::out);
+	rof << resourceStatusFile << std::endl;
+
 }
 
 void SaveDataLoader::Load(std::string fileName, PlayerData& data)
@@ -36,13 +44,40 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 
 	for (auto itr = playerFile["ItemList"].begin(); itr != playerFile["ItemList"].end(); itr++)
 	{
-		std::string itemName = itr.value().at(0);
+		std::string itemName      = itr.value().at(0);
 		std::string itemImageName = itr.value().at(1);
-		int itemCount = itr.value().at(2).get<int>();
+		int itemCount             = itr.value().at(2).get<int>();
 		PlayerData::ResourceData_ rData;
-		rData.itemName_ = itemName;
+		rData.itemName_      = itemName;
 		rData.itemImageName_ = itemImageName;
-		rData.itemCount_ = itemCount;
+		rData.itemCount_     = itemCount;
+
 		data.itemDataList_.push_back(rData);
+	}
+}
+
+void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& data)
+{
+	nlohmann::json resourceStatusFile;
+	std::ifstream ifs(fileName + ".json", std::ios::in);
+	if (!ifs.good()) return;
+
+	resourceStatusFile = nlohmann::json::parse(ifs);
+	//PlayerData::SaveData data;
+	//data.name_ = playerFile["Name"];
+	//data.potionDataFileName_ = playerFile["PotionDataFileName"];
+	//data.resourceFileName_ = playerFile["ResourceFileName"];
+
+	for (auto itr = resourceStatusFile["StatusList"].begin(); itr != resourceStatusFile["StatusList"].end(); itr++)
+	{
+		ResourceStatusData::ResourceStatus statusData;
+
+		statusData.resourceNumber_ = itr.value().at(0);
+		statusData.status00_	   = itr.value().at(1);
+		statusData.status01_	   = itr.value().at(2);
+		statusData.status02_	   = itr.value().at(3);
+		statusData.status03_	   = itr.value().at(4);
+		statusData.status04_	   = itr.value().at(5);
+		data.resourceDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
 }
