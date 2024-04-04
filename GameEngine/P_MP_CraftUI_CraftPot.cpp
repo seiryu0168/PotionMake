@@ -167,7 +167,7 @@ std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()
 {
 	std::vector<float> statusList = { 0,0,0,0,0 };
 	ResourceStatusData* data = InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	//キーをもとに素材のパラメータの合計値を計算を
+	//キーをもとに素材のパラメータの合計値を計算
 	for (auto itr = dataMap_.begin(); itr != dataMap_.end();itr++)
 	{
 		statusList[0] += data->resourceDataMap_[itr->first].status00_ * itr->second.resourceCount_;
@@ -176,7 +176,7 @@ std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()
 		statusList[3] += data->resourceDataMap_[itr->first].status03_ * itr->second.resourceCount_;
 		statusList[4] += data->resourceDataMap_[itr->first].status04_ * itr->second.resourceCount_;
 	}
-
+	//加工によるパラメータの補正を反映
 	for (auto &process : processList_)
 	{
 		statusList[0] = statusList[0] * data->processDataMap_[process.procssNum_].status00_;

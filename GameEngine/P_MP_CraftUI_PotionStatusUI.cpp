@@ -21,11 +21,16 @@ void P_MP_CraftUI_PotionStatusUI::Initialize()
 	AddComponent<Image>(uiBaseImage);
 
 	XMFLOAT2 diff = { -0.3f,-0.1f };
+	XMFLOAT3 color = { 0.2f,0.3f,0.1f };
 	//ポーションの各パラメータを表示
 	for (int i = 0; i < 5; i++)
 	{
 		GameObject* gauge = Instantiate<PotionStatusGauge>(this);
 		gauge->GetComponent<Image>().SetPosition({ uiPos_.x + diff.x,uiPos_.y + diff.y,0 });
+		gauge->GetComponent<Image>().SetColor(color);
+		color.x += 0.12f;
+		color.y += 0.11f;
+		color.z += 0.18f;
 		diff.x += 0.1f;
 
 		statusObjectList_.push_back(gauge);

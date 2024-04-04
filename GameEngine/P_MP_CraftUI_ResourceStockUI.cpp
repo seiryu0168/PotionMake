@@ -106,6 +106,7 @@ void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 
 		for(int i = 0; i < processObjects_.size(); i++)
 			((P_MP_CraftUI_ProcessUI*)processObjects_[i])->ActiveUI(false);
+		GetComponent<Text>().SetText("ëfçﬁ");
 		break;
 	case ResourceMenuMode::ProcessSelect:
 		for (int i = 0; i < processObjects_.size(); i++)
@@ -113,6 +114,7 @@ void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 
 		for (int i = 0; i < resourceObjects_.size(); i++)
 			((ResourceItem*)resourceObjects_[i])->ActiveUI(false);
+		GetComponent<Text>().SetText("â¡çHï˚ñ@");
 		break;
 	default:
 		break;

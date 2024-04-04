@@ -2,8 +2,6 @@
 #include"../../Engine/Components/Transform.h"
 #include"../../StaticResource.h"
 #include"../../MainMenu.h"
-//#include"../../SelectUI.h"
-//#include"../../Select_StaticUI.h"
 
 RootObject_Menu::RootObject_Menu()
 {
