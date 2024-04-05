@@ -5,7 +5,8 @@
 #include"InterSceneData.h"
 #include"PlayerData.h"
 P_MP_PotionManagerUI_PotionStockUI::P_MP_PotionManagerUI_PotionStockUI(Object* parent)
-	:GameObject(parent,"P_MP_PotionManagerUI_PotionStockUI")
+	:GameObject(parent,"P_MP_PotionManagerUI_PotionStockUI"),
+	potionImageBasePos_({0.1f,0.6f})
 {
 }
 
@@ -35,16 +36,30 @@ void P_MP_PotionManagerUI_PotionStockUI::Update()
 void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 {
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
-	int i = 0;
-	for (auto &potion : data->potionDataList_)
+	//int i = 0;
+	XMFLOAT2 diff = { 0,0 };
+	for (int i=0;i<30;i++)
 	{
 		PotionStock* stock = Instantiate<PotionStock>(this);
-		//ポーションの各データを入れる
-		stock->SetPotionStatus_(i, potion.potionName_, potion.potionStatus_[0],
-													   potion.potionStatus_[1],
-													   potion.potionStatus_[2],
-													   potion.potionStatus_[3],
-													   potion.potionStatus_[4]);
+		stock->GetComponent<Image>().SetPosition({ potionImageBasePos_.x + diff.x,potionImageBasePos_.y + diff.y,0 });
+
+		if (i < data->potionDataList_.size())
+		{
+
+			//ポーションの各データを入れる
+			stock->SetPotionStatus_(i, data->potionDataList_[i].potionName_,
+									   data->potionDataList_[i].potionStatus_[0],
+									   data->potionDataList_[i].potionStatus_[1],
+									   data->potionDataList_[i].potionStatus_[2],
+									   data->potionDataList_[i].potionStatus_[3],
+									   data->potionDataList_[i].potionStatus_[4]);
+		}
+		diff.x += 0.15f;
+		if ((i + 1) % 5 == 0)
+		{
+			diff.x = 0;
+			diff.y -= 0.3f;
+		}
 	}
 }
 

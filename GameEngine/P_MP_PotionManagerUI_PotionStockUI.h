@@ -5,7 +5,7 @@
 /// </summary>
 class P_MP_PotionManagerUI_PotionStockUI : public GameObject
 {
-
+	XMFLOAT2 potionImageBasePos_;
 	std::vector<GameObject* > potionList_;
 public:
 	P_MP_PotionManagerUI_PotionStockUI(Object* parent);

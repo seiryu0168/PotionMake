@@ -5,6 +5,8 @@
 /// </summary>
 class P_MP_PotionManagerUI_DisposeStockUI : public GameObject
 {
+	XMFLOAT2 standPosition_;
+	std::vector<GameObject*> objects_;
 public:
 	P_MP_PotionManagerUI_DisposeStockUI(Object* parent);
 	~P_MP_PotionManagerUI_DisposeStockUI();

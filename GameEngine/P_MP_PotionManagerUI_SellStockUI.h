@@ -5,6 +5,8 @@
 /// </summary>
 class P_MP_PotionManagerUI_SellStockUI : public GameObject
 {
+	XMFLOAT2 standPosition_;
+	std::vector<GameObject*> objects_;
 public:
 	P_MP_PotionManagerUI_SellStockUI(Object* parent);
 	~P_MP_PotionManagerUI_SellStockUI();

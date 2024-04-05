@@ -1,8 +1,10 @@
 #include "P_MP_PotionManagerUI_SellStockUI.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
+#include"PotionSlot.h"
 P_MP_PotionManagerUI_SellStockUI::P_MP_PotionManagerUI_SellStockUI(Object* parent)
-	:GameObject(parent,"P_MP_PotionManagerUI_SellStockUI")
+	:GameObject(parent,"P_MP_PotionManagerUI_SellStockUI"),
+	standPosition_({-0.9f,0.23f})
 {
 }
 
@@ -23,6 +25,15 @@ void P_MP_PotionManagerUI_SellStockUI::Initialize()
 	uiTitleText.SetTextSize(55.0f);
 	uiTitleText.SetPosition({ 30,210 });	
 	AddComponent<Text>(uiTitleText);
+
+	XMFLOAT2 diff = { 0,0 };
+	for (int i = 0; i < 5; i++)
+	{
+		GameObject* potion = Instantiate<PotionSlot>(this);
+		potion->GetComponent<Image>().SetPosition({ standPosition_.x + diff.x,standPosition_.y + diff.y,0 });
+		diff.x += 0.15;
+		objects_.push_back(potion);
+	}
 }
 
 void P_MP_PotionManagerUI_SellStockUI::Start()

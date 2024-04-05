@@ -18,7 +18,7 @@ void SaveDataLoader::Init()
 	playerFile["ItemList"] = { {"Item01","ResourceImage01.png",10},{"Item02","ResourceImage02.png",5},{"Item03","ResourceImage03.png",7}};
 	playerFile["PotionList"] = { {"Potion01",2.3f,1.1f,1.5f,0.6f,2.1f},
 								 {"Potion02",1.6f,2.1f,1.2f,1.6f,1.3f},
-								 {"Potion03",2.1f,1.9f,0.5f,1.3f,2.0f} };
+								 {"Potion03",2.1f,2.9f,2.5f,1.3f,2.0f} };
 	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
 	of << playerFile << std::endl;
 
