@@ -28,7 +28,7 @@ void P_MP_PotionManagerUI_DisposeStockUI::Initialize()
 	XMFLOAT2 diff = { 0,0 };
 	for (int i = 0; i < 5; i++)
 	{
-		GameObject* potion = Instantiate<PotionSlot>(this);
+		PotionSlot* potion = Instantiate<PotionSlot>(this);
 		potion->GetComponent<Image>().SetPosition({ standPosition_.x + diff.x,standPosition_.y + diff.y,0 });
 		diff.x += 0.15;
 		objects_.push_back(potion);
@@ -41,6 +41,30 @@ void P_MP_PotionManagerUI_DisposeStockUI::Start()
 
 void P_MP_PotionManagerUI_DisposeStockUI::Update()
 {
+}
+
+void P_MP_PotionManagerUI_DisposeStockUI::AddDisposePotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor)
+{
+	for (GameObject* potion : objects_)
+	{
+		if (((PotionSlot*)potion)->GetPotionNumber() == -1)
+		{
+			((PotionSlot*)potion)->SetPotion(potionNum,name, potionColor);
+			return;	
+		}
+	}
+}
+
+void P_MP_PotionManagerUI_DisposeStockUI::SubDisposePotion(int potionNum)
+{
+	for (GameObject* potion : objects_)
+	{
+		if (((PotionSlot*)potion)->GetPotionNumber() == potionNum)
+		{
+			((PotionSlot*)potion)->RemovePotion();
+			return;
+		}
+	}
 }
 
 void P_MP_PotionManagerUI_DisposeStockUI::Release()

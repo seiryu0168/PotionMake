@@ -136,6 +136,14 @@ void Image::SetColor(const XMFLOAT3& color) noexcept
 	color_.z = color.z;
 }
 
+void Image::SetColor(const XMFLOAT4& color) noexcept
+{
+	color_.x = color.x;
+	color_.y = color.y;
+	color_.z = color.z;
+	alpha_   = color.w;
+}
+
 void Image::SetScroll(const XMFLOAT2& scroll)
 {
 	scroll_ = scroll;

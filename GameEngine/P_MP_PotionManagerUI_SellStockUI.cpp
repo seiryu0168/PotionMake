@@ -44,6 +44,30 @@ void P_MP_PotionManagerUI_SellStockUI::Update()
 {
 }
 
+void P_MP_PotionManagerUI_SellStockUI::AddSellPotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor)
+{
+	for (GameObject* potion : objects_)
+	{
+		if (((PotionSlot*)potion)->GetPotionNumber() == -1)
+		{
+			((PotionSlot*)potion)->SetPotion(potionNum, name, potionColor);
+			return;
+		}
+	}
+}
+
+void P_MP_PotionManagerUI_SellStockUI::SubSellPotion(int potionNum)
+{
+	for (GameObject* potion : objects_)
+	{
+		if (((PotionSlot*)potion)->GetPotionNumber() == potionNum)
+		{
+			((PotionSlot*)potion)->RemovePotion();
+			return;
+		}
+	}
+}
+
 void P_MP_PotionManagerUI_SellStockUI::Release()
 {
 }

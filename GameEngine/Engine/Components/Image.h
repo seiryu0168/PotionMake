@@ -39,6 +39,7 @@ public:
 	//色設定
 	void SetColor(const float color) noexcept;
 	void SetColor(const XMFLOAT3& color) noexcept;
+	void SetColor(const XMFLOAT4& color) noexcept;
 	//画像のスクロール量設定
 	void SetScroll(const XMFLOAT2& scroll);
 	//画像サイズ設定

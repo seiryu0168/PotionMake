@@ -1,6 +1,8 @@
 #include "PotionStock.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/DirectX_11/Input.h"
+#include"P_MP_PotionManagerUI_DisposeStockUI.h"
+#include"P_MP_PotionManagerUI_SellStockUI.h"
 namespace
 {
 	XMFLOAT3 PotionColorArray[5] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//柔らかい赤系の色
@@ -13,7 +15,9 @@ namespace
 
 PotionStock::PotionStock(Object* parent)
 	:GameObject(parent,"PotionStock"),
-	havePotion_(false)
+	havePotion_(false),
+	potionImageNum_(-1),
+	potionColor_({0,0,0})
 {
 
 }
@@ -32,20 +36,22 @@ void PotionStock::Initialize()
 
 void PotionStock::Start()
 {
+	disposeUI_ = (P_MP_PotionManagerUI_DisposeStockUI*)FindObject("P_MP_PotionManagerUI_DisposeStockUI");
+	sellUI_ = (P_MP_PotionManagerUI_SellStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI");
 }
 
 void PotionStock::Update()
 {
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
 	{
-
+		sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
 	}
 }
 
 void PotionStock::SetPotionColor()
 {
 	bool isMax_ = false;
-	XMFLOAT3 color = { 0,0,0 };
+	//XMFLOAT3 color = { 0,0,0 };
 	
 	//最も値が大きいステータスを探してポーションの色を変える
 	for (int i = 4; i > -1; i--)
@@ -58,9 +64,9 @@ void PotionStock::SetPotionColor()
 				//colorRatio = 1/(PotionColorArray[j].x + PotionColorArray[j].y + PotionColorArray[j].z);
 				
 				//色を足す
-				color.x += PotionColorArray[j].x * colorRatio;
-				color.y += PotionColorArray[j].y * colorRatio;
-				color.z += PotionColorArray[j].z * colorRatio;
+				potionColor_.x += PotionColorArray[j].x * colorRatio;
+				potionColor_.y += PotionColorArray[j].y * colorRatio;
+				potionColor_.z += PotionColorArray[j].z * colorRatio;
 				colorRatio *=0.13f;
 				isMax_ = true;
 			}
@@ -68,7 +74,7 @@ void PotionStock::SetPotionColor()
 		if (isMax_)
 			break;
 	}
-	GetComponent<Image>(potionImageNum_).SetColor(color);
+	GetComponent<Image>(potionImageNum_).SetColor(potionColor_);
 }
 
 void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int sts0, int sts1, int sts2, int sts3, int sts4)

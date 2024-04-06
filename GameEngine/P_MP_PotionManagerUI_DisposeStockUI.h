@@ -13,6 +13,8 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void AddDisposePotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor);
+	void SubDisposePotion(int potionNum);
 	void Release() override;
 };
 

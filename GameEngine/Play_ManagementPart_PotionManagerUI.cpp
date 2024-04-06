@@ -5,6 +5,7 @@
 #include"P_MP_PotionManagerUI_PotionStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
 #include"P_MP_PotionManagerUI_DisposeStockUI.h"
+
 Play_ManagementPart_PotionManagerUI::Play_ManagementPart_PotionManagerUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_PotionManagerUI")
 {
