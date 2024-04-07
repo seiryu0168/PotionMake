@@ -3,6 +3,7 @@
 #include"Engine/DirectX_11/Input.h"
 #include"P_MP_PotionManagerUI_DisposeStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
+#include"P_MP_PotionManagerUI_PotionStockUI.h"
 namespace
 {
 	XMFLOAT3 PotionColorArray[5] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//è_ÇÁÇ©Ç¢ê‘ånÇÃêF
@@ -17,7 +18,8 @@ PotionStock::PotionStock(Object* parent)
 	:GameObject(parent,"PotionStock"),
 	havePotion_(false),
 	potionImageNum_(-1),
-	potionColor_({0,0,0})
+	potionColor_({0,0,0}),
+	isSelect_(true)
 {
 
 }
@@ -42,9 +44,12 @@ void PotionStock::Start()
 
 void PotionStock::Update()
 {
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
+	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor()&&isSelect_)
 	{
-		sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
+		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
+		
+		//sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
 	}
 }
 

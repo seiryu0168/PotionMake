@@ -4,6 +4,7 @@
 #include"PotionStock.h"
 #include"InterSceneData.h"
 #include"PlayerData.h"
+#include"PotionMenu.h"
 P_MP_PotionManagerUI_PotionStockUI::P_MP_PotionManagerUI_PotionStockUI(Object* parent)
 	:GameObject(parent,"P_MP_PotionManagerUI_PotionStockUI"),
 	potionImageBasePos_({0.1f,0.6f})
@@ -54,12 +55,28 @@ void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 									   data->potionDataList_[i].potionStatus_[3],
 									   data->potionDataList_[i].potionStatus_[4]);
 		}
+		potionList_.push_back(stock);
 		diff.x += 0.15f;
 		if ((i + 1) % 5 == 0)
 		{
 			diff.x = 0;
 			diff.y -= 0.3f;
 		}
+	}
+}
+
+void P_MP_PotionManagerUI_PotionStockUI::CreatePotionMenu(int potionNum, const std::string& name, const XMFLOAT3& color)
+{
+	GameObject* potionMenu = Instantiate<PotionMenu>(this);
+	potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
+	((PotionMenu*)potionMenu)->CreateMenu(potionNum, name, color);
+}
+
+void P_MP_PotionManagerUI_PotionStockUI::SetEnablePotionStock(bool isEnable)
+{
+	for (auto potion : potionList_)
+	{
+			((PotionStock*)potion)->isSelect_ = isEnable;
 	}
 }
 

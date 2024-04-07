@@ -242,6 +242,7 @@
     <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="PotionMenu.cpp" />
     <ClCompile Include="PotionSlot.cpp" />
     <ClCompile Include="PotionStatusGauge.cpp" />
     <ClCompile Include="PotionStock.cpp" />
@@ -356,6 +357,7 @@
     <ClInclude Include="Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="PotionMenu.h" />
     <ClInclude Include="PotionSlot.h" />
     <ClInclude Include="PotionStatusGauge.h" />
     <ClInclude Include="PotionStock.h" />

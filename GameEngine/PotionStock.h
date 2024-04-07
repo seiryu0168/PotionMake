@@ -22,11 +22,13 @@ public:
 	PotionStock(Object* parent);
 	~PotionStock();
 
+	bool isSelect_;
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
 	void SetPotionColor();
 	void SetPotionStatus_(int potionNum,const std::string& name,int sts0, int sts1, int sts2, int sts3, int sts4);
+	bool GetPotionNumber() { return potionNum_; }
 	void Release() override;
 };
 
