@@ -4,6 +4,7 @@
 #include"P_MP_PotionManagerUI_DisposeStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
 #include"P_MP_PotionManagerUI_PotionStockUI.h"
+#include"PotionMenu.h"
 namespace
 {
 	XMFLOAT3 PotionColorArray[5] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢ÔŒn‚ÌF
@@ -19,7 +20,9 @@ PotionStock::PotionStock(Object* parent)
 	havePotion_(false),
 	potionImageNum_(-1),
 	potionColor_({0,0,0}),
-	isSelect_(true)
+	isSelect_(true),
+	isCountDown_(false),
+	time_(0)
 {
 
 }
@@ -44,9 +47,22 @@ void PotionStock::Start()
 
 void PotionStock::Update()
 {
+
+	if (isCountDown_)
+	{
+		time_ += 0.017f;
+		if (time_ >= 0.3f)
+		{
+			isCountDown_ = false;
+			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
+		}
+	}
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor()&&isSelect_)
 	{
-		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
+		GameObject* potionMenu = Instantiate<PotionMenu>(this);
+		potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
+		((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_);
+		//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
 		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
 		
 		//sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
@@ -94,12 +110,6 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int s
 	havePotion_ = true;
 
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
-	//Image potionBackImage(this);
-	//potionBackImage.Load("Assets/Image/Potion_BackImage.png");
-	//potionBackImage.SetLayer(0);
-	//potionBackImage.SetPosition(pos);
-	//potionBackImage.SetSize({0.25f,0.25,0});
-	//AddComponent<Image>(potionBackImage);
 
 	Image potionBaseImage(this);
 	potionBaseImage.Load("Assets/Image/Potion_BaseImage.png");
@@ -116,6 +126,20 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int s
 	AddComponent<Image>(potionEdgeImage);
 
 	SetPotionColor();
+}
+
+void PotionStock::AddSellPotion()
+{
+	sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+	isCountDown_ = true;
+	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
+}
+
+void PotionStock::AddDisposePotion()
+{
+	disposeUI_->AddDisposePotion(potionNum_, potionName_, potionColor_);
+	isCountDown_ = true;
+	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 }
 
 void PotionStock::Release()

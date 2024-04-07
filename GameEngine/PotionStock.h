@@ -14,9 +14,12 @@ class PotionStock : public GameObject
 	std::vector<float> potionStatus_;
 	XMFLOAT3 potionColor_;
 	bool havePotion_;
+	bool isCountDown_;
 	int potionImageNum_;
 	P_MP_PotionManagerUI_DisposeStockUI* disposeUI_;
 	P_MP_PotionManagerUI_SellStockUI* sellUI_;
+
+	float time_;
 
 public:
 	PotionStock(Object* parent);
@@ -29,6 +32,8 @@ public:
 	void SetPotionColor();
 	void SetPotionStatus_(int potionNum,const std::string& name,int sts0, int sts1, int sts2, int sts3, int sts4);
 	bool GetPotionNumber() { return potionNum_; }
+	void AddSellPotion();
+	void AddDisposePotion();
 	void Release() override;
 };
 
