@@ -247,6 +247,7 @@
     <ClCompile Include="PotionSlot.cpp" />
     <ClCompile Include="PotionStatusGauge.cpp" />
     <ClCompile Include="PotionStock.cpp" />
+    <ClCompile Include="PotionStockDummy.cpp" />
     <ClCompile Include="P_MP_CraftUI_CraftPot.cpp" />
     <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp" />
     <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp" />
@@ -363,6 +364,7 @@
     <ClInclude Include="PotionSlot.h" />
     <ClInclude Include="PotionStatusGauge.h" />
     <ClInclude Include="PotionStock.h" />
+    <ClInclude Include="PotionStockDummy.h" />
     <ClInclude Include="P_MP_CraftUI_CraftPot.h" />
     <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h" />
     <ClInclude Include="P_MP_CraftUI_PrepareUI.h" />

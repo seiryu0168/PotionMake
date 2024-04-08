@@ -15,6 +15,7 @@ public:
 	void Update() override;
 	void InputPotionData();
 	void CreatePotionMenu(int potionNum, const std::string& name, const XMFLOAT3& color);
+	void ConfirmPotionManagement();
 	void SetEnablePotionStock(bool isEnable);
 	void Release() override;
 

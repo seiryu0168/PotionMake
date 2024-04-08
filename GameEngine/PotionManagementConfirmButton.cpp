@@ -1,6 +1,7 @@
 #include "PotionManagementConfirmButton.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/DirectX_11/Input.h"
+#include"P_MP_PotionManagerUI_PotionStockUI.h"
 PotionManagementConfirmButton::PotionManagementConfirmButton(Object* parent)
 	:GameObject(parent,"PotionManagementConfirmButton")
 {
@@ -25,7 +26,7 @@ void PotionManagementConfirmButton::Update()
 {
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
 	{
-
+		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->ConfirmPotionManagement();
 	}
 }
 

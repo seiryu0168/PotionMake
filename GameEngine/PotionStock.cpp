@@ -18,12 +18,14 @@ namespace
 PotionStock::PotionStock(Object* parent)
 	:GameObject(parent,"PotionStock"),
 	havePotion_(false),
+	potionNum_(-1),
 	potionImageNum_(-1),
 	potionColor_({0,0,0}),
-	isSelect_(true),
+	isSelect_(false),
 	isCountDown_(false),
 	isConfirm_(false),
 	confirmImageNum_(-1),
+	selectedSlot_(SelectSlot::None),
 	time_(0)
 {
 
@@ -45,6 +47,9 @@ void PotionStock::Start()
 {
 	disposeUI_ = (P_MP_PotionManagerUI_DisposeStockUI*)FindObject("P_MP_PotionManagerUI_DisposeStockUI");
 	sellUI_ = (P_MP_PotionManagerUI_SellStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI");
+
+	if (selectedSlot_ == SelectSlot::Sell)
+		AddSellPotion();
 }
 
 void PotionStock::Update()
@@ -59,7 +64,7 @@ void PotionStock::Update()
 			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 		}
 	}
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor()&&isSelect_)
+	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor() && isSelect_)
 	{
 		GameObject* potionMenu = Instantiate<PotionMenu>(this);
 		potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
@@ -100,7 +105,7 @@ void PotionStock::SetPotionColor()
 	GetComponent<Image>(potionImageNum_).SetColor(potionColor_);
 }
 
-void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int sts0, int sts1, int sts2, int sts3, int sts4)
+void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool isSale, int sts0, int sts1, int sts2, int sts3, int sts4)
 {
 	potionNum_ = potionNum;
 	potionName_ = name;
@@ -126,6 +131,10 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int s
 	potionEdgeImage.SetPosition(pos);
 	potionEdgeImage.SetSize({0.25f,0.25,0});
 	AddComponent<Image>(potionEdgeImage);
+
+	if (isSale)
+		selectedSlot_ = SelectSlot::Sell;
+	isSelect_ = true;
 
 	SetPotionColor();
 }
@@ -195,6 +204,7 @@ void PotionStock::SubPotion()
 		disposeUI_->SubDisposePotion(potionNum_);
 		GetComponent<Image>(confirmImageNum_).SetAlpha(0);
 	}
+	selectedSlot_ = SelectSlot::None;
 	isConfirm_ = false;
 	isCountDown_ = true;
 

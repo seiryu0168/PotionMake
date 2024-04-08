@@ -16,9 +16,15 @@ void SaveDataLoader::Init()
 	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
 	playerFile["ItemList"] = { {"Item01","ResourceImage01.png",10},{"Item02","ResourceImage02.png",5},{"Item03","ResourceImage03.png",7}};
-	playerFile["PotionList"] = { {"Potion01",2.3f,1.1f,1.5f,0.6f,2.1f},
-								 {"Potion02",1.6f,2.1f,1.2f,1.6f,1.3f},
-								 {"Potion03",2.1f,2.9f,2.5f,1.3f,2.0f} };
+	playerFile["PotionList"] = { {"Potion01",false,2.3f,1.1f,1.5f,0.6f,2.1f},
+								 {"Potion02",false,1.6f,2.1f,1.2f,1.6f,1.3f},
+								 {"Potion03",false,2.1f,2.9f,2.5f,1.3f,2.0f} };
+
+	//playerFile["SellPotionList"] = { {"",0,0,0,0,0},
+	//								 {"",0,0,0,0,0},
+	//								 {"",0,0,0,0,0},
+	//								 {"",0,0,0,0,0},
+	//								 {"",0,0,0,0,0} };
 	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
 	of << playerFile << std::endl;
 
@@ -64,11 +70,12 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 	{
 		PlayerData::PotionData pData;
 		pData.potionName_	   = itr.value().at(0);
-		pData.potionStatus_[0] = itr.value().at(1);
-		pData.potionStatus_[1] = itr.value().at(2);
-		pData.potionStatus_[2] = itr.value().at(3);
-		pData.potionStatus_[3] = itr.value().at(4);
-		pData.potionStatus_[4] = itr.value().at(5);
+		pData.isSale_		   = itr.value().at(1);
+		pData.potionStatus_[0] = itr.value().at(2);
+		pData.potionStatus_[1] = itr.value().at(3);
+		pData.potionStatus_[2] = itr.value().at(4);
+		pData.potionStatus_[3] = itr.value().at(5);
+		pData.potionStatus_[4] = itr.value().at(6);
 		data.potionDataList_.push_back(pData);
 	}
 }

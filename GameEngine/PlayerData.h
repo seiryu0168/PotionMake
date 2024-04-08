@@ -18,10 +18,12 @@ public:
 	struct PotionData
 	{
 		std::string potionName_;
+		bool isSale_;
 		std::vector<float> potionStatus_;
 		PotionData()
 		{
 			potionName_ = "";
+			isSale_ = false;
 			potionStatus_ = { 0,0,0,0,0 };
 		}
 	};

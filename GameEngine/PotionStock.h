@@ -9,11 +9,34 @@ class P_MP_PotionManagerUI_SellStockUI;
 /// </summary>
 class PotionStock : public GameObject
 {
+
+public:
 	enum class SelectSlot
 	{
-		Sell = 0,
+		None = 0,
+		Sell,
 		Dispose,
 	};
+
+	PotionStock(Object* parent);
+	~PotionStock();
+
+	bool isSelect_;
+	void Initialize() override;
+	void Start() override;
+	void Update() override;
+	void SetPotionColor();
+	void SetPotionStatus_(int potionNum, const std::string& name,bool isSale, int sts0, int sts1, int sts2, int sts3, int sts4);
+	int GetPotionNumber() { return potionNum_; }
+	void AddSellPotion();
+	void AddDisposePotion();
+	void SubPotion();
+	const std::string& GetPotionName() { return potionName_; }
+	const std::vector<float>& GetPotionStatus() { return potionStatus_; }
+	SelectSlot GetSelectedSlot() { return selectedSlot_; }
+	void Release() override;
+
+private:
 	SelectSlot selectedSlot_;
 	int potionNum_;
 	std::string potionName_;
@@ -29,20 +52,5 @@ class PotionStock : public GameObject
 
 	float time_;
 
-public:
-	PotionStock(Object* parent);
-	~PotionStock();
-
-	bool isSelect_;
-	void Initialize() override;
-	void Start() override;
-	void Update() override;
-	void SetPotionColor();
-	void SetPotionStatus_(int potionNum,const std::string& name,int sts0, int sts1, int sts2, int sts3, int sts4);
-	bool GetPotionNumber() { return potionNum_; }
-	void AddSellPotion();
-	void AddDisposePotion();
-	void SubPotion();
-	void Release() override;
 };
 

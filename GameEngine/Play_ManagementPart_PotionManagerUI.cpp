@@ -26,9 +26,9 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 	uiTitleText.SetPosition({ 600,30 });
 	AddComponent<Text>(uiTitleText);
 
-	Instantiate<P_MP_PotionManagerUI_PotionStockUI>(this);
 	Instantiate<P_MP_PotionManagerUI_SellStockUI>(this);
 	Instantiate<P_MP_PotionManagerUI_DisposeStockUI>(this);
+	Instantiate<P_MP_PotionManagerUI_PotionStockUI>(this);
 	Instantiate<CloseButton>(this);
 }
 
