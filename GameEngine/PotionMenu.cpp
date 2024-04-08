@@ -3,7 +3,8 @@
 #include"Engine/DirectX_11/Input.h"
 #include"PotionStock.h"
 PotionMenu::PotionMenu(Object* parent)
-	:GameObject(parent,"PotionMenu")
+	:GameObject(parent,"PotionMenu"),
+	isConfirm_(false)
 {
 }
 
@@ -26,42 +27,84 @@ void PotionMenu::Update()
 {
 	if (Input::IsMouseButtonDown(0))
 	{
-		if (GetComponent<Image>(sellButtonImageNum_).IsHitCursor())
+		if (isConfirm_)
 		{
-			((PotionStock*)pParent_)->AddSellPotion();
-			KillMe();
+			if (GetComponent<Image>(cancelButtonImageNum_).IsHitCursor())
+			{
+				((PotionStock*)pParent_)->SubPotion();
+				KillMe();
+			}
 		}
-
-		if (GetComponent<Image>(disposeButtonImageNum_).IsHitCursor())
+		else
 		{
-			((PotionStock*)pParent_)->AddDisposePotion();
-			KillMe();
+
+			if (GetComponent<Image>(sellButtonImageNum_).IsHitCursor())
+			{
+				((PotionStock*)pParent_)->AddSellPotion();
+				KillMe();
+			}
+
+			if (GetComponent<Image>(disposeButtonImageNum_).IsHitCursor())
+			{
+				((PotionStock*)pParent_)->AddDisposePotion();
+				KillMe();
+			}
 		}
 	}
 }
 
-void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOAT3& color)
+void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOAT3& color,bool isConfirm)
 {
+	isConfirm_ = isConfirm;
 	//ポーションの画像
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	Image potionBaseImage(this);
+	potionBaseImage.Load("Assets/Image/ItemBaseImage.png");
+	potionBaseImage.SetSize({ 2.0f,2.0f,0, });
+	potionBaseImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
+	AddComponent<Image>(potionBaseImage);
+
 	Image potionImage(this);
-	potionImage.Load("Assets/Image/ItemBaseImage.png");
-	potionImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
+	potionImage.Load("Assets/Image/Potion_BaseImage.png");
+	potionImage.SetColor(color);
+	potionImage.SetSize({ 0.5f,0.5f,0 });
+	potionImage.SetPosition({ pos.x,pos.y+0.2f,0 });
 	AddComponent<Image>(potionImage);
 	
-	//販売ボタン
-	Image sellButton(this);
-	sellButton.Load("Assets/Image/ItemBaseImage.png");
-	sellButton.SetPosition({ pos.x-0.15f,pos.y - 0.2f,0 });
-	sellButton.SetSize({ 1,0.3f,0 });
-	sellButtonImageNum_ = AddComponent<Image>(sellButton);
+	Image potionEdgeImage(this);
+	potionEdgeImage.Load("Assets/Image/Potion_EdgeImage.png");
+	potionEdgeImage.SetSize({ 0.5f,0.5f,0 });
+	potionEdgeImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
+	AddComponent<Image>(potionEdgeImage);
 
-	//破棄ボタン
-	Image disposeButton(this);
-	disposeButton.Load("Assets/Image/ItemBaseImage.png");
-	disposeButton.SetPosition({ pos.x + 0.15f,pos.y - 0.2f,0 });
-	disposeButton.SetSize({ 1,0.3f,0 });
-	disposeButtonImageNum_ = AddComponent<Image>(disposeButton);
+	if (isConfirm)
+	{
+
+		//販売ボタン
+		Image cancelButton(this);
+		cancelButton.Load("Assets/Image/ItemBaseImage.png");
+		cancelButton.SetPosition({ pos.x,pos.y - 0.2f,0 });
+		cancelButton.SetSize({ 1.5f,0.5f,0 });
+		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);
+	}
+	else
+	{
+
+
+		//販売ボタン
+		Image sellButton(this);
+		sellButton.Load("Assets/Image/ItemBaseImage.png");
+		sellButton.SetPosition({ pos.x - 0.15f,pos.y - 0.2f,0 });
+		sellButton.SetSize({ 1,0.3f,0 });
+		sellButtonImageNum_ = AddComponent<Image>(sellButton);
+
+		//破棄ボタン
+		Image disposeButton(this);
+		disposeButton.Load("Assets/Image/ItemBaseImage.png");
+		disposeButton.SetPosition({ pos.x + 0.15f,pos.y - 0.2f,0 });
+		disposeButton.SetSize({ 1,0.3f,0 });
+		disposeButtonImageNum_ = AddComponent<Image>(disposeButton);
+	}
 }
 
 void PotionMenu::Release()

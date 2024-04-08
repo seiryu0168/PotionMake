@@ -22,6 +22,8 @@ PotionStock::PotionStock(Object* parent)
 	potionColor_({0,0,0}),
 	isSelect_(true),
 	isCountDown_(false),
+	isConfirm_(false),
+	confirmImageNum_(-1),
 	time_(0)
 {
 
@@ -47,13 +49,13 @@ void PotionStock::Start()
 
 void PotionStock::Update()
 {
-
 	if (isCountDown_)
 	{
 		time_ += 0.017f;
 		if (time_ >= 0.3f)
 		{
 			isCountDown_ = false;
+			time_ = 0;
 			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 		}
 	}
@@ -61,7 +63,7 @@ void PotionStock::Update()
 	{
 		GameObject* potionMenu = Instantiate<PotionMenu>(this);
 		potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
-		((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_);
+		((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_,isConfirm_);
 		//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
 		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
 		
@@ -130,16 +132,72 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, int s
 
 void PotionStock::AddSellPotion()
 {
+	//販売枠に追加する
 	sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+	//操作可能になるまでのカウントダウンを開始
 	isCountDown_ = true;
+	//確定
+	isConfirm_ = true;
+	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	selectedSlot_ = SelectSlot::Sell;
+	//既に画像があるなら表示させる
+	if (confirmImageNum_ != -1)
+	{
+		GetComponent<Image>(confirmImageNum_).SetAlpha(1);
+		return;
+	}
+
+	//操作が確定した時の画像を入れる
+	Image confirmImage(this);
+	confirmImage.Load("Assets/Image/ItemSlotImage.png");
+	confirmImage.SetLayer(1);
+	confirmImage.SetPosition(pos);
+	confirmImage.SetSize({ 1,0.3f,0 });
+	confirmImageNum_ = AddComponent<Image>(confirmImage);
 	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 }
 
 void PotionStock::AddDisposePotion()
 {
+	//破棄枠に追加する
 	disposeUI_->AddDisposePotion(potionNum_, potionName_, potionColor_);
+	//操作可能になるまでのカウントダウンを開始
 	isCountDown_ = true;
+	//確定
+	isConfirm_ = true;
+	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	selectedSlot_ = SelectSlot::Dispose;
+	//既に画像があるなら表示させる
+	if (confirmImageNum_ != -1)
+	{
+		GetComponent<Image>(confirmImageNum_).SetAlpha(1);
+		return;
+	}
+	//操作が確定した時の画像
+	Image confirmImage(this);
+	confirmImage.Load("Assets/Image/ItemSlotImage.png");
+	confirmImage.SetLayer(1);
+	confirmImage.SetPosition(pos);
+	confirmImage.SetSize({ 1,0.3f,0 });
+	confirmImageNum_ = AddComponent<Image>(confirmImage);
 	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
+}
+
+void PotionStock::SubPotion()
+{
+	if (selectedSlot_ == SelectSlot::Sell)
+	{
+		sellUI_->SubSellPotion(potionNum_);
+		GetComponent<Image>(confirmImageNum_).SetAlpha(0);
+	}
+	else if (selectedSlot_ == SelectSlot::Dispose)
+	{
+		disposeUI_->SubDisposePotion(potionNum_);
+		GetComponent<Image>(confirmImageNum_).SetAlpha(0);
+	}
+	isConfirm_ = false;
+	isCountDown_ = true;
+
 }
 
 void PotionStock::Release()

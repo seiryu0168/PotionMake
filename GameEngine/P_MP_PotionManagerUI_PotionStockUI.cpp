@@ -5,9 +5,10 @@
 #include"InterSceneData.h"
 #include"PlayerData.h"
 #include"PotionMenu.h"
+#include"PotionManagementConfirmButton.h"
 P_MP_PotionManagerUI_PotionStockUI::P_MP_PotionManagerUI_PotionStockUI(Object* parent)
 	:GameObject(parent,"P_MP_PotionManagerUI_PotionStockUI"),
-	potionImageBasePos_({0.1f,0.6f})
+	potionImageBasePos_({-0.1f,0.48f})
 {
 }
 
@@ -19,11 +20,13 @@ void P_MP_PotionManagerUI_PotionStockUI::Initialize()
 {
 	Image uiBaseImage(this);
 	uiBaseImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	uiBaseImage.SetPosition({ 0.45f,-0.1f,0 });
+	uiBaseImage.SetPosition({ 0.35f,-0.1f,0 });
 	uiBaseImage.SetSize({ 1,0.8f,0 });
 	AddComponent<Image>(uiBaseImage);
 
 	InputPotionData();
+	GameObject* confirmButton = Instantiate<PotionManagementConfirmButton>(this);
+	confirmButton->GetComponent<Image>().SetPosition({ 0.7f,-0.7f,0 });
 }
 
 void P_MP_PotionManagerUI_PotionStockUI::Start()
@@ -67,9 +70,9 @@ void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 
 void P_MP_PotionManagerUI_PotionStockUI::CreatePotionMenu(int potionNum, const std::string& name, const XMFLOAT3& color)
 {
-	GameObject* potionMenu = Instantiate<PotionMenu>(this);
-	potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
-	((PotionMenu*)potionMenu)->CreateMenu(potionNum, name, color);
+	//GameObject* potionMenu = Instantiate<PotionMenu>(this);
+	//potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
+	//((PotionMenu*)potionMenu)->CreateMenu(potionNum, name, color);
 }
 
 void P_MP_PotionManagerUI_PotionStockUI::SetEnablePotionStock(bool isEnable)

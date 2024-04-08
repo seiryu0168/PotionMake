@@ -46,6 +46,7 @@ void P_MP_PotionManagerUI_SellStockUI::Update()
 
 void P_MP_PotionManagerUI_SellStockUI::AddSellPotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor)
 {
+	//販売するポーション枠に追加する
 	for (GameObject* potion : objects_)
 	{
 		if (((PotionSlot*)potion)->GetPotionNumber() == -1)
@@ -58,6 +59,7 @@ void P_MP_PotionManagerUI_SellStockUI::AddSellPotion(int potionNum, const std::s
 
 void P_MP_PotionManagerUI_SellStockUI::SubSellPotion(int potionNum)
 {
+	//販売するポーション枠から消す
 	for (GameObject* potion : objects_)
 	{
 		if (((PotionSlot*)potion)->GetPotionNumber() == potionNum)
