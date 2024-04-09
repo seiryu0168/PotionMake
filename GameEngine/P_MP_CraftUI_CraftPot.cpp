@@ -139,7 +139,7 @@ void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 
 void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 {
-	for (auto itr = processList_.begin(); itr != processList_.end();itr++)
+	for (auto itr = processList_.begin(); itr != processList_.end(); itr++)
 	{
 		if (itr->procssNum_ == processNum)
 		{
@@ -157,7 +157,7 @@ void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
 	{
 		if (!((ResourceItemSlot*)objects_[i])->HaveItem())
 		{
-			((ResourceItemSlot*)objects_[i])->SetItem(dataMap_[itemNum].imageName_,itemNum);
+			((ResourceItemSlot*)objects_[i])->SetItem(dataMap_[itemNum].resourceName_,dataMap_[itemNum].imageName_, itemNum);
 			return;
 		}
 	}
@@ -167,7 +167,7 @@ void P_MP_CraftUI_CraftPot::HiddenResource(int itemNum)
 {
 	for (int i = 0; i < objects_.size(); i++)
 	{
-		if (((ResourceItemSlot*)objects_[i])->GetItemNumber()==itemNum)
+		if (((ResourceItemSlot*)objects_[i])->GetItemNumber() == itemNum)
 		{
 			((ResourceItemSlot*)objects_[i])->ItemEmpty();
 			return;
@@ -180,7 +180,6 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	if (dataMap_.empty())
 		return;
 
-	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	std::vector<float> status = CalcPotionStatus();
 
 	std::string potionName = "";
@@ -196,10 +195,10 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 		{
 			if ((int)status[j] == i)
 			{
-				maxStatus |= 1<<j;
+				maxStatus |= 1 << j;
 				lastStatus = j;
 				//potionName += statusName[i];
-				
+
 				//colorRatio = 1/(PotionColorArray[j].x + PotionColorArray[j].y + PotionColorArray[j].z);
 
 				////色を足す
@@ -215,7 +214,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	}
 
 	int statusCount = 0;
-	for (int i = 0; i < lastStatus+1; i++)
+	for (int i = 0; i < lastStatus + 1; i++)
 	{
 		if (maxStatus & (1 << i))
 		{
@@ -234,11 +233,25 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	else
 		potionName += "のポーション";
 
+	//データ更新
+	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	PlayerData::PotionData pData;
+	for (int i = 0; i < objects_.size(); i++)
+	{
+		if (((ResourceItemSlot*)objects_[i])->GetItemNumber() != -1)
+		{
+
+			int num = ((ResourceItemSlot*)objects_[i])->GetItemNumber();
+			PlayerData::ResourceData_ rData = data->itemDataList_[num];
+			data->itemDataList_[num].itemCount_ = rData.itemCount_ - dataMap_[num].resourceCount_;
+		}
+
+	}
 	pData.potionName_ = potionName;
 	pData.isSale_ = false;
 	pData.potionStatus_ = status;
 	data->potionDataList_.push_back(pData);
+	pParent_->GetParent()->KillMe();
 }
 
 std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()

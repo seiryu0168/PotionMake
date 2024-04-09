@@ -36,7 +36,7 @@ void ResourceItemSlot::Update()
 {
 }
 
-void ResourceItemSlot::SetItem(std::string imageName,int itemNum)
+void ResourceItemSlot::SetItem(const std::string& resourceName, const std::string& imageName,int itemNum)
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 
@@ -53,6 +53,7 @@ void ResourceItemSlot::SetItem(std::string imageName,int itemNum)
 	resourceCount_++;
 	GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	itemNum_ = itemNum;
+	itemName_ = resourceName;
 }
 
 void ResourceItemSlot::ItemEmpty()

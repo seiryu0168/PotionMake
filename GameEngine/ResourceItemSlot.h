@@ -11,7 +11,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void SetItem(std::string imageName,int itemNum);
+	void SetItem(const std::string& resourceName,const std::string& imageName,int itemNum);
 	void ItemEmpty();
 	void AddCount(int increase);
 	void SubCount(int subtract);
