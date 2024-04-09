@@ -42,9 +42,11 @@ void P_MP_PotionManagerUI_PotionStockUI::Update()
 
 void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 {
+	//セーブデータを取り出す
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	//int i = 0;
 	XMFLOAT2 diff = { 0,0 };
+	//セーブデータにあるデータを元にポーションの画像を並べていく
 	for (int i=0;i<30;i++)
 	{
 		GameObject* stock;
@@ -63,6 +65,7 @@ void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 				data->potionDataList_[i].potionStatus_[4]);
 			potionList_.push_back(stock);
 		}
+		//ポーションのデータが無くなった時のダミー
 		else
 		{
 			stock = Instantiate<PotionStockDummy>(this);
@@ -90,6 +93,7 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 	//((P_MP_PotionManagerUI_SellStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI"))->
 	//((P_MP_PotionManagerUI_DisposeStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI"))->
 	
+	//セーブデータを更新
 	std::vector<PlayerData::PotionData> newPotionDataList;
 	for (int i = 0; i < potionList_.size(); i++)
 	{

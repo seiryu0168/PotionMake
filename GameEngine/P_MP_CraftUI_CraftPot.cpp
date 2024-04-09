@@ -5,8 +5,13 @@
 #include"ResourceItem.h"
 #include"ResourceItemSlot.h"
 #include"InterSceneData.h"
+#include"PlayerData.h"
 #include"ResourceStatusData.h"
-
+#include"P_MP_CraftUI_PrepareButton.h"
+namespace
+{
+	std::string statusName = "筋防魔速運";
+}
 
 P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_CraftPot"),
@@ -20,6 +25,12 @@ P_MP_CraftUI_CraftPot::~P_MP_CraftUI_CraftPot()
 
 void P_MP_CraftUI_CraftPot::Initialize()
 {
+	//Image potImage(this);
+	//potImage.Load("Assets/Image/PreparePot03.png");
+	//potImage.SetPosition({ -0.06f,0.05f,0 });
+	//potImage.SetSize({ 0.5f,0.5f,0 });
+	//AddComponent<Image>(potImage);
+
 	XMFLOAT2 itemPos = { 0,0 };
 	for (int i = 0; i < 12; i++)
 	{
@@ -35,6 +46,7 @@ void P_MP_CraftUI_CraftPot::Initialize()
 		}
 		objects_.push_back(item);
 	}
+	Instantiate<P_MP_CraftUI_PrepareButton>(this);
 }
 
 void P_MP_CraftUI_CraftPot::Start()
@@ -161,6 +173,72 @@ void P_MP_CraftUI_CraftPot::HiddenResource(int itemNum)
 			return;
 		}
 	}
+}
+
+void P_MP_CraftUI_CraftPot::CreatePotion()
+{
+	if (dataMap_.empty())
+		return;
+
+	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
+	std::vector<float> status = CalcPotionStatus();
+
+	std::string potionName = "";
+	bool isMax_ = false;
+	//XMFLOAT3 color = { 0,0,0 };
+	int maxStatus = 0;
+	int lastStatus = 0;
+	//最も値が大きいステータスを探す
+	for (int i = 4; i > -1; i--)
+	{
+		float colorRatio = 1.0f;
+		for (int j = 0; j < 5; j++)
+		{
+			if ((int)status[j] == i)
+			{
+				maxStatus |= 1<<j;
+				lastStatus = j;
+				//potionName += statusName[i];
+				
+				//colorRatio = 1/(PotionColorArray[j].x + PotionColorArray[j].y + PotionColorArray[j].z);
+
+				////色を足す
+				//potionColor_.x += PotionColorArray[j].x * colorRatio;
+				//potionColor_.y += PotionColorArray[j].y * colorRatio;
+				//potionColor_.z += PotionColorArray[j].z * colorRatio;
+				//colorRatio *= 0.13f;
+				isMax_ = true;
+			}
+		}
+		if (isMax_)
+			break;
+	}
+
+	int statusCount = 0;
+	for (int i = 0; i < lastStatus+1; i++)
+	{
+		if (maxStatus & (1 << i))
+		{
+			statusCount++;
+			std::string chr = { statusName[2 * i],statusName[(2 * i) + 1] };
+			potionName += chr;
+			// potionName += statusName[(2 * i) + 1];
+
+			if (i != lastStatus)
+				potionName += "・";
+		}
+	}
+
+	if (statusCount >= 4)
+		potionName = "万能ポーション" + potionName;
+	else
+		potionName += "のポーション";
+
+	PlayerData::PotionData pData;
+	pData.potionName_ = potionName;
+	pData.isSale_ = false;
+	pData.potionStatus_ = status;
+	data->potionDataList_.push_back(pData);
 }
 
 std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()

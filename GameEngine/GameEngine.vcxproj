@@ -250,6 +250,7 @@
     <ClCompile Include="PotionStockDummy.cpp" />
     <ClCompile Include="P_MP_CraftUI_CraftPot.cpp" />
     <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp" />
+    <ClCompile Include="P_MP_CraftUI_PrepareButton.cpp" />
     <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp" />
     <ClCompile Include="P_MP_CraftUI_ResourceStockUI.cpp" />
     <ClCompile Include="P_MP_CraftUI_ProcessUI.cpp" />
@@ -367,6 +368,7 @@
     <ClInclude Include="PotionStockDummy.h" />
     <ClInclude Include="P_MP_CraftUI_CraftPot.h" />
     <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h" />
+    <ClInclude Include="P_MP_CraftUI_PrepareButton.h" />
     <ClInclude Include="P_MP_CraftUI_PrepareUI.h" />
     <ClInclude Include="P_MP_CraftUI_ResourceStockUI.h" />
     <ClInclude Include="P_MP_CraftUI_ProcessUI.h" />

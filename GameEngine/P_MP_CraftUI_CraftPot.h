@@ -49,6 +49,7 @@ public:
 	void SubProcessData(int processNum);
 	void DisplayResource(int itemNum);
 	void HiddenResource(int itemNum);
+	void CreatePotion();
 	std::vector<float> CalcPotionStatus();
 	void Release() override;
 };

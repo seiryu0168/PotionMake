@@ -79,7 +79,7 @@ void Player::Update()
 		moveBuff.y = 0;
 		moveVec_ = XMLoadFloat3(&moveBuff);
 
-		transform_->position_ += XMVector3Normalize(moveVec_)*0.1f;
+		transform_->position_ += XMVector3Normalize(moveVec_)*0.2f;
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 		moveVec_ = XMVectorSet(0, 0, 0, 0);
 	}
