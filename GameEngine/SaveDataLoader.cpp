@@ -15,7 +15,11 @@ void SaveDataLoader::Init()
 	playerFile["Name"] = "player01";
 	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
-	playerFile["ItemList"] = { {"Item01","ResourceImage01.png",10},{"Item02","ResourceImage02.png",5},{"Item03","ResourceImage03.png",7}};
+
+	playerFile["ItemList"] = { {0,"Item01","ResourceImage01.png",10},
+							   {1,"Item02","ResourceImage02.png",5},
+							   {2,"Item03","ResourceImage03.png",7}};
+
 	playerFile["PotionList"] = { {"Potion01",false,2.3f,1.1f,1.5f,0.6f,2.1f},
 								 {"Potion02",false,1.6f,2.1f,1.2f,1.6f,1.3f},
 								 {"Potion03",false,2.1f,2.9f,2.5f,1.3f,2.0f} };
@@ -29,9 +33,9 @@ void SaveDataLoader::Init()
 	of << playerFile << std::endl;
 
 	nlohmann::json resourceStatusFile;
-	resourceStatusFile["StatusList"] ={ {0,0.2f,0.1f,0.3f,0.2f,0.4f},
-									    {1,0.5f,0.2f,0.1f,0.1f,0.3f},
-									    {2,0.1f,0.6f,0.1f,0.1f,0.1f} };
+	resourceStatusFile["StatusList"] ={ {0,"Item01","ResourceImage01.png",0.2f,0.1f,0.3f,0.2f,0.4f},
+									    {1,"Item02","ResourceImage02.png",0.5f,0.2f,0.1f,0.1f,0.3f},
+									    {2,"Item02","ResourceImage03.png",0.1f,0.6f,0.1f,0.1f,0.1f} };
 	resourceStatusFile["ProcessList"] = { {0,1.1f,1.2f,0.7f,0.8f,1.3f},
 										  {1,0.7f,1.7f,1.0f,1.1f,1.2f},
 										  {2,1.3f,0.5f,1.4f,1.2f,0.8f} };
@@ -55,14 +59,15 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 
 	for (auto itr = playerFile["ItemList"].begin(); itr != playerFile["ItemList"].end(); itr++)
 	{
-		std::string itemName      = itr.value().at(0);
-		std::string itemImageName = itr.value().at(1);
-		int itemCount             = itr.value().at(2).get<int>();
+		//std::string itemName      = itr.value().at(1);
+		//std::string itemImageName = itr.value().at(2);
+		//int itemCount             = itr.value().at(3).get<int>();
 		
 		PlayerData::ResourceData_ rData;
-		rData.itemName_      = itemName;
-		rData.itemImageName_ = itemImageName;
-		rData.itemCount_     = itemCount;
+		rData.itemNum_		 = itr.value().at(0);
+		rData.itemName_      = itr.value().at(1);
+		rData.itemImageName_ = itr.value().at(2);
+		rData.itemCount_	 = itr.value().at(3).get<int>();
 
 		data.itemDataList_.push_back(rData);
 	}
@@ -96,12 +101,14 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 	{
 		ResourceStatusData::ResourceStatus statusData;
 
-		statusData.resourceNumber_ = itr.value().at(0);
-		statusData.status00_	   = itr.value().at(1);
-		statusData.status01_	   = itr.value().at(2);
-		statusData.status02_	   = itr.value().at(3);
-		statusData.status03_	   = itr.value().at(4);
-		statusData.status04_	   = itr.value().at(5);
+		statusData.resourceNumber_		= itr.value().at(0);
+		statusData.resourceName_		= itr.value().at(1);
+		statusData.resourceImageName_   = itr.value().at(2);
+		statusData.status00_			= itr.value().at(3);
+		statusData.status01_			= itr.value().at(4);
+		statusData.status02_			= itr.value().at(5);
+		statusData.status03_			= itr.value().at(6);
+		statusData.status04_			= itr.value().at(7);
 		data.resourceDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
 

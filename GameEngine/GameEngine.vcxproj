@@ -234,6 +234,7 @@
     <ClCompile Include="ManagementPartObjectBase.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
     <ClCompile Include="Play_ManagementPart_CraftTable.cpp" />
     <ClCompile Include="Play_ManagementPart_CraftUI.cpp" />
@@ -242,6 +243,8 @@
     <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="PotionCraftAnimation.cpp" />
+    <ClCompile Include="PotionCraftAnimationPot.cpp" />
     <ClCompile Include="PotionManagementConfirmButton.cpp" />
     <ClCompile Include="PotionMenu.cpp" />
     <ClCompile Include="PotionSlot.cpp" />
@@ -360,6 +363,8 @@
     <ClInclude Include="Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="Play_ManagementPart_Shelf.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="PotionCraftAnimation.h" />
+    <ClInclude Include="PotionCraftAnimationPot.h" />
     <ClInclude Include="PotionManagementConfirmButton.h" />
     <ClInclude Include="PotionMenu.h" />
     <ClInclude Include="PotionSlot.h" />

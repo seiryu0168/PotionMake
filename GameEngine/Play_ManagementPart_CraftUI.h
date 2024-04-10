@@ -1,5 +1,6 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
 /// <summary>
 /// ポーション制作を行う時のUI
 /// </summary>
@@ -10,6 +11,7 @@ public:
 	~Play_ManagementPart_CraftUI();
 	void Initialize() override;
 	void Update() override;
+	void DisplayCraftProcess(const std::vector<int>& itemNumList);
 	void Release() override;
 };
 

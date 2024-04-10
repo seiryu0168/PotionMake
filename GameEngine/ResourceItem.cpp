@@ -64,21 +64,31 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 {
 	if (isLoadedImage_ == true)
 		return;
+	Image itemBaseImage(this);
+	itemBaseImage.SetLayer(1);
+	itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
+	resourceImageName_ = imagename;
+	AddComponent<Image>(itemBaseImage);
 	//ëfçﬁÇÃêîÇ™0à»â∫ÇæÇ¡ÇΩÇÁ
 	if (resourceCount <= 0)
 	{
-		Image itemBaseImage(this);
-		itemBaseImage.SetLayer(1);
-		itemBaseImage.Load("Assets/Image/ItemSlotImage.png");
-		AddComponent<Image>(itemBaseImage);
+		GetComponent<Image>().SetColor(0.7f);
 	}
 	else
 	{
-		Image itemBaseImage(this);
-		itemBaseImage.SetLayer(1);
-		itemBaseImage.Load("Assets/Image/" + imagename);
+		Image itemImage(this);
+		itemImage.SetLayer(1);
+		itemImage.Load("Assets/Image/" + imagename);
+		itemImage.SetSize({ 0.25f,0.25f,0 });
 		resourceImageName_ = imagename;
-		AddComponent<Image>(itemBaseImage);
+		AddComponent<Image>(itemImage);
+
+	}
+	
+
+	//}
+	if (resourceCount > 0)
+	{
 
 		resourceCount_ = resourceCount;
 		GetComponent<Text>().SetText(std::to_string(resourceCount_));

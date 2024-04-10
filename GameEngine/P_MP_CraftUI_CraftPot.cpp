@@ -7,6 +7,7 @@
 #include"InterSceneData.h"
 #include"PlayerData.h"
 #include"ResourceStatusData.h"
+#include"Play_ManagementPart_CraftUI.h"
 #include"P_MP_CraftUI_PrepareButton.h"
 namespace
 {
@@ -236,22 +237,28 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	//データ更新
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	PlayerData::PotionData pData;
+	std::vector<int> itemNumList_;
 	for (int i = 0; i < objects_.size(); i++)
 	{
-		if (((ResourceItemSlot*)objects_[i])->GetItemNumber() != -1)
+		int num = ((ResourceItemSlot*)objects_[i])->GetItemNumber();
+		if (num != -1)
 		{
 
-			int num = ((ResourceItemSlot*)objects_[i])->GetItemNumber();
-			PlayerData::ResourceData_ rData = data->itemDataList_[num];
-			data->itemDataList_[num].itemCount_ = rData.itemCount_ - dataMap_[num].resourceCount_;
+			//PlayerData::ResourceData_
+			auto rData = std::find_if(data->itemDataList_.begin(), data->itemDataList_.end(), [&](PlayerData::ResourceData_ value) {return value.itemNum_ == num; });
+			rData->itemCount_ = rData->itemCount_ - dataMap_[num].resourceCount_;
+			itemNumList_.push_back(num);
 		}
 
 	}
 	pData.potionName_ = potionName;
 	pData.isSale_ = false;
 	pData.potionStatus_ = status;
+	//ソート
+	data->SortResourceList();
 	data->potionDataList_.push_back(pData);
-	pParent_->GetParent()->KillMe();
+	((Play_ManagementPart_CraftUI*)pParent_->GetParent())->DisplayCraftProcess(itemNumList_);
+	//pParent_->GetParent()->KillMe();
 }
 
 std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()

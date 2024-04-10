@@ -15,7 +15,8 @@ ResourceItemSlot::~ResourceItemSlot()
 void ResourceItemSlot::Initialize()
 {
 	Image slotImage(this);
-	slotImage.Load("Assets/Image/ItemSlotImage.png");
+	slotImage.Load("Assets/Image/ItemBaseImage.png");
+	slotImage.SetColor(0.7f);
 	AddComponent<Image>(slotImage);
 
 	Text countText(this);
@@ -39,8 +40,8 @@ void ResourceItemSlot::Update()
 void ResourceItemSlot::SetItem(const std::string& resourceName, const std::string& imageName,int itemNum)
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
-
-	RemoveComponent<Image>();
+	GetComponent<Image>().SetColor(1);
+	//RemoveComponent<Image>();
 
 	Image slotImage(this);
 	slotImage.Load("Assets/Image/"+ imageName);
@@ -59,15 +60,16 @@ void ResourceItemSlot::SetItem(const std::string& resourceName, const std::strin
 void ResourceItemSlot::ItemEmpty()
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	GetComponent<Image>().SetColor(0.7f);
 
-	RemoveComponent<Image>();
+	RemoveComponent<Image>(1);
 
-	Image slotImage(this);
-	slotImage.Load("Assets/Image/ItemSlotImage.png");
-	XMFLOAT3 size = slotImage.GetSizeAtPixel();
-	slotImage.SetSize({ 128.0f / size.x,128.0f / size.y,0 });
-	slotImage.SetPosition(pos);
-	AddComponent<Image>(slotImage);
+	//Image slotImage(this);
+	//slotImage.Load("Assets/Image/ItemSlotImage.png");
+	//XMFLOAT3 size = slotImage.GetSizeAtPixel();
+	//slotImage.SetSize({ 128.0f / size.x,128.0f / size.y,0 });
+	//slotImage.SetPosition(pos);
+	//AddComponent<Image>(slotImage);
 	haveResource_ = false;
 	resourceCount_ = 0;
 	GetComponent<Text>().SetText(std::to_string(resourceCount_));

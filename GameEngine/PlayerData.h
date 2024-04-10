@@ -1,15 +1,18 @@
 #pragma once
 #include"StandData.h"
+#include<vector>
 class PlayerData : public StandData
 {
 public:
 	struct ResourceData_
 	{
+		int itemNum_;
 		std::string itemName_;
 		std::string itemImageName_;
 		int itemCount_;
 		ResourceData_()
 		{
+			itemNum_;
 			itemName_ = "";
 			itemImageName_ = "";
 			itemCount_ = 0;
@@ -27,6 +30,7 @@ public:
 			potionStatus_ = { 0,0,0,0,0 };
 		}
 	};
+	void SortResourceList();
 	std::string name_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;

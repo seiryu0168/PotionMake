@@ -7,6 +7,8 @@ public:
 	struct ResourceStatus
 	{
 		int resourceNumber_;
+		std::string resourceName_;
+		std::string resourceImageName_;
 		float status00_;
 		float status01_;
 		float status02_;

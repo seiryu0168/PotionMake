@@ -6,6 +6,7 @@
 #include"P_MP_CraftUI_ProcessUI.h"
 #include"ResourceMenuChangeButton.h"
 #include"PlayerData.h"
+#include"ResourceStatusData.h"
 P_MP_CraftUI_ResourceStockUI::P_MP_CraftUI_ResourceStockUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_ResourceStockUI"),
 	uiPos_({0,0,0})
@@ -36,6 +37,7 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 	//素材の画像をセーブデータを参照して表示
 	XMFLOAT2 itemPos = { -0.3f,0.68f };
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
+	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
 	for (int i = 0; i < 30; i++)
 	{
 		//リソースオブジェクトの生成
@@ -43,20 +45,34 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 
 
 		int resourceCount = 0;
+		//番号がセーブデータの範囲内だったら
 		if (i < data->itemDataList_.size())
-			resourceCount = data->itemDataList_[i].itemCount_;
-
-		((ResourceItem*)item)->LoadItem(data->itemDataList_[i % data->itemDataList_.size()].itemImageName_, resourceCount);
-		item->GetComponent<Image>().SetPosition({ uiPos_.x + itemPos.x,uiPos_.y + itemPos.y,0 });
-			XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
-			item->GetComponent<Text>().SetPosition({ textBasePos.x+10,textBasePos.y+15 });
-		if (resourceCount > 0)
 		{
-			((ResourceItem*)item)->itemName_ = data->itemDataList_[i % data->itemDataList_.size()].itemName_;
-
-			item->GetComponent<Image>().SetSize({ 128.0f / 512.0f,128.0f / 521.0f,0 });
+			//素材の個数
+			resourceCount = data->itemDataList_[i].itemCount_;
+			//画像名
+			std::string imageName = rData->resourceDataMap_[data->itemDataList_[i].itemNum_].resourceImageName_;
+			//画像読み込み
+			((ResourceItem*)item)->LoadItem(imageName, resourceCount);
+			//位置設定
+			item->GetComponent<Image>().SetPosition({ uiPos_.x + itemPos.x,uiPos_.y + itemPos.y,0 });
+			item->GetComponent<Image>(1).SetPosition({ uiPos_.x + itemPos.x,uiPos_.y + itemPos.y,0 });
+			//テキストの位置設定
+			XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
+			item->GetComponent<Text>().SetPosition({ textBasePos.x + 10,textBasePos.y + 15 });
+			((ResourceItem*)item)->SetItemNum(rData->processDataMap_[data->itemDataList_[i].itemNum_].resourceNumber_);
+			if (resourceCount > 0)
+			{
+				((ResourceItem*)item)->itemName_ = rData->resourceDataMap_[data->itemDataList_[i].itemNum_].resourceName_;
+				//item->GetComponent<Image>().SetSize({ 128.0f / 512.0f,128.0f / 521.0f,0 });
+			}
 		}
-
+		else
+		{
+			((ResourceItem*)item)->LoadItem("ItemSlotImage.png", resourceCount);
+			//位置設定
+			item->GetComponent<Image>().SetPosition({ uiPos_.x + itemPos.x,uiPos_.y + itemPos.y,0 });
+		}
 		itemPos.x += 0.15f;
 		if ((i + 1) % 5 == 0)
 		{
@@ -64,7 +80,6 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 			itemPos.y -= 0.27f;
 		}
 		resourceObjects_.push_back(item);
-		((ResourceItem*)item)->SetItemNum(i);
 	}
 
 	//加工方法選択UI
