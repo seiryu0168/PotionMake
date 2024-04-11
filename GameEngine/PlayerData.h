@@ -1,6 +1,7 @@
 #pragma once
 #include"StandData.h"
 #include<vector>
+#include"Engine/DirectX_11/Math.h"
 class PlayerData : public StandData
 {
 public:
@@ -23,11 +24,13 @@ public:
 		std::string potionName_;
 		bool isSale_;
 		std::vector<float> potionStatus_;
+		XMFLOAT3 potionColor_;
 		PotionData()
 		{
 			potionName_ = "";
 			isSale_ = false;
 			potionStatus_ = { 0,0,0,0,0 };
+			potionColor_ = { 0,0,0 };
 		}
 	};
 	void SortResourceList();

@@ -9,6 +9,8 @@
 #include"ResourceStatusData.h"
 #include"Play_ManagementPart_CraftUI.h"
 #include"P_MP_CraftUI_PrepareButton.h"
+#include"InterSceneData.h"
+#include"ResourceStatusData.h"
 namespace
 {
 	std::string statusName = "筋防魔速運";
@@ -48,6 +50,7 @@ void P_MP_CraftUI_CraftPot::Initialize()
 		objects_.push_back(item);
 	}
 	Instantiate<P_MP_CraftUI_PrepareButton>(this);
+	potionColorArray_ = InterSceneData::GetData<ResourceStatusData>("ResourceData")->statusColor_;
 }
 
 void P_MP_CraftUI_CraftPot::Start()
@@ -188,6 +191,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	//XMFLOAT3 color = { 0,0,0 };
 	int maxStatus = 0;
 	int lastStatus = 0;
+	XMFLOAT3 potionColor = { 0,0,0 };
 	//最も値が大きいステータスを探す
 	for (int i = 4; i > -1; i--)
 	{
@@ -202,11 +206,11 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 
 				//colorRatio = 1/(PotionColorArray[j].x + PotionColorArray[j].y + PotionColorArray[j].z);
 
-				////色を足す
-				//potionColor_.x += PotionColorArray[j].x * colorRatio;
-				//potionColor_.y += PotionColorArray[j].y * colorRatio;
-				//potionColor_.z += PotionColorArray[j].z * colorRatio;
-				//colorRatio *= 0.13f;
+				//色を足す
+				potionColor.x += potionColorArray_[j].x * colorRatio;
+				potionColor.y += potionColorArray_[j].y * colorRatio;
+				potionColor.z += potionColorArray_[j].z * colorRatio;
+				colorRatio *= 0.13f;
 				isMax_ = true;
 			}
 		}
@@ -254,6 +258,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	pData.potionName_ = potionName;
 	pData.isSale_ = false;
 	pData.potionStatus_ = status;
+	pData.potionColor_ = potionColor;
 	//ソート
 	data->SortResourceList();
 	data->potionDataList_.push_back(pData);

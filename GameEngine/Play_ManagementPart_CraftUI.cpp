@@ -7,6 +7,7 @@
 #include"P_MP_CraftUI_PotionStatusUI.h"
 #include"P_MP_CraftUI_PrepareUI.h"
 #include"PotionCraftAnimation.h"
+#include"FinishCraftUI.h"
 Play_ManagementPart_CraftUI::Play_ManagementPart_CraftUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_CraftUI")
 {
@@ -36,6 +37,11 @@ void Play_ManagementPart_CraftUI::DisplayCraftProcess(const std::vector<int>& it
 {
 	PotionCraftAnimation* potion = Instantiate<PotionCraftAnimation>(this);
 	potion->InitAnimation(itemNumList);
+}
+
+void Play_ManagementPart_CraftUI::DisplayResult()
+{
+	FinishCraftUI* result = Instantiate<FinishCraftUI>(this);
 }
 
 void Play_ManagementPart_CraftUI::Release()

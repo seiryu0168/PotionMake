@@ -33,6 +33,13 @@ void SaveDataLoader::Init()
 	of << playerFile << std::endl;
 
 	nlohmann::json resourceStatusFile;
+	resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢ÔŒn‚ÌF
+										  {193.0f / 255.0f,237.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢‰©—ÎŒn‚ÌF
+										  {111.0f / 255.0f,237.0f / 255.0f,181.0f / 255.0f},//_‚ç‚©‚¢—ÎŒn‚ÌF
+										  {111.0f / 255.0f,143.0f / 255.0f,237.0f / 255.0f},//_‚ç‚©‚¢ÂŽ‡Œn‚ÌF
+										  {231.0f / 255.0f,111.0f / 255.0f,237.0f / 255.0f}//_‚ç‚©‚¢Ž‡Œn‚ÌF 
+										};
+
 	resourceStatusFile["StatusList"] ={ {0,"Item01","ResourceImage01.png",0.2f,0.1f,0.3f,0.2f,0.4f},
 									    {1,"Item02","ResourceImage02.png",0.5f,0.2f,0.1f,0.1f,0.3f},
 									    {2,"Item02","ResourceImage03.png",0.1f,0.6f,0.1f,0.1f,0.1f} };
@@ -92,11 +99,11 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 	if (!ifs.good()) return;
 
 	resourceStatusFile = nlohmann::json::parse(ifs);
-	//PlayerData::SaveData data;
-	//data.name_ = playerFile["Name"];
-	//data.potionDataFileName_ = playerFile["PotionDataFileName"];
-	//data.resourceFileName_ = playerFile["ResourceFileName"];
 
+	for (auto itr = resourceStatusFile["StatusColor"].begin(); itr != resourceStatusFile["StatusColor"].end(); itr++)
+	{
+		data.statusColor_.push_back({ itr.value().at(0),itr.value().at(1),itr.value().at(2) });
+	}
 	for (auto itr = resourceStatusFile["StatusList"].begin(); itr != resourceStatusFile["StatusList"].end(); itr++)
 	{
 		ResourceStatusData::ResourceStatus statusData;

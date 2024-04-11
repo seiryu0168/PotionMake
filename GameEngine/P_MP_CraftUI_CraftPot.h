@@ -36,6 +36,7 @@ private:
 	std::unordered_map<int, ResourceData> dataMap_;
 	std::list<ProcessData> processList_;
 	GameObject* potionStatusObject_;
+	std::vector<XMFLOAT3> potionColorArray_;
 public:
 
 	P_MP_CraftUI_CraftPot(Object* parent);

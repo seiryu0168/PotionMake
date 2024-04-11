@@ -1,6 +1,7 @@
 #pragma once
 #include"StandData.h"
 #include<unordered_map>
+#include"Engine/DirectX_11/Math.h"
 class ResourceStatusData : public StandData
 {
 public:
@@ -14,9 +15,21 @@ public:
 		float status02_;
 		float status03_;
 		float status04_;
+		ResourceStatus()
+		{
+			resourceNumber_ = -1;
+			resourceName_ = "";
+			resourceImageName_ = "";
+			status00_=0;
+			status01_=0;
+			status02_=0;
+			status03_=0;
+			status04_=0;
+		}
 	};
 	std::unordered_map<int, ResourceStatus> resourceDataMap_;
 	std::unordered_map<int, ResourceStatus> processDataMap_;
+	std::vector<XMFLOAT3> statusColor_;
 	//void AddResourceStatus()
 };
 

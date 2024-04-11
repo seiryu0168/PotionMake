@@ -44,8 +44,8 @@ void PotionCraftAnimationPot::Update()
 	}
 	if (time_ >= 3.0f)
 	{
-		Instantiate<FinishCraftUI>(this);
-		//pParent_->GetParent()->KillMe();
+		Instantiate<FinishCraftUI>(pParent_->GetParent());
+		KillMe();
 	}
 }
 
