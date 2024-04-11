@@ -175,6 +175,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CloseButton.cpp" />
+    <ClCompile Include="CraftSteam2D.cpp" />
     <ClCompile Include="Division.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="DebugUI.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="Engine\Systems\TextSystem.cpp" />
     <ClCompile Include="Engine\Systems\TransformSystem.cpp" />
     <ClCompile Include="Engine\Time.cpp" />
+    <ClCompile Include="FinishCraftUI.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
@@ -289,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloseButton.h" />
+    <ClInclude Include="CraftSteam2D.h" />
     <ClInclude Include="Division.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="DebugUI.h" />
@@ -340,6 +343,7 @@
     <ClInclude Include="Engine\Systems\TextSystem.h" />
     <ClInclude Include="Engine\Systems\TransformSystem.h" />
     <ClInclude Include="Engine\Time.h" />
+    <ClInclude Include="FinishCraftUI.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_dx11.h" />

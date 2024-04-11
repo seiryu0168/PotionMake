@@ -3,6 +3,7 @@
 class PotionCraftAnimationPot : public GameObject
 {
 	std::vector<int> imageNum_;
+	std::vector<XMFLOAT2> posList_;
 	float time_;
 public:
 	PotionCraftAnimationPot(Object* parent);
