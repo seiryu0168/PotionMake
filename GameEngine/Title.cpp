@@ -12,7 +12,12 @@ namespace
 }
 
 Title::Title(Object* parent)
-	:GameObject(parent, "Title"), State_(STATE::WAIT), time_(nullptr), Frame_(0), hAudio_(0)
+	:GameObject(parent, "Title"),
+	State_(STATE::WAIT),
+	time_(nullptr),
+	Frame_(0),
+	hAudio_(0),
+	timeF_(0)
 {
 }
 
@@ -32,6 +37,8 @@ void Title::Initialize()
 
 void Title::Update()
 {
+	timeF_ += 2.0f;
+	GetComponent<Image>().SetRotation({ 0,0,timeF_ });
 	if(Input::IsKeyDown(DIK_SPACE))
 	{
 		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);

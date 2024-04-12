@@ -45,7 +45,7 @@ void ResourceItemSlot::SetItem(const std::string& resourceName, const std::strin
 
 	Image slotImage(this);
 	slotImage.Load("Assets/Image/"+ imageName);
-	XMFLOAT3 size = slotImage.GetSizeAtPixel();
+	XMFLOAT3 size = slotImage.GetOriginalImageSize();
 	slotImage.SetSize({ 128.0f / size.x,128.0f / size.y,0 });
 	slotImage.SetPosition(pos);
 	AddComponent<Image>(slotImage);

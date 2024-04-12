@@ -58,7 +58,7 @@ void Sprite::Draw(Transform& transform, const RECT& rect, const XMFLOAT4& change
 	CONSTANT_BUFFER cb;
 	
 	//ç≈èIìIÇ»çsóÒ
-	cb.matWorld = XMMatrixTranspose(matCut*transform.GetWorldScaleMatrix() * matImageSize * transform.GetWorldRotateMatrix() * transform.GetWorldTranslateMatrix());
+	cb.matWorld = XMMatrixTranspose(matCut*transform.GetWorldScaleMatrix() *  transform.GetWorldRotateMatrix() * matImageSize * transform.GetWorldTranslateMatrix());
 	
 	XMMATRIX matTexTrans = XMMatrixTranslation((float)rect.left / size_.x, (float)rect.top / size_.y, 1.0f);
 	XMMATRIX matTexScale = XMMatrixScaling((float)rect.right / size_.x, (float)rect.bottom / size_.y, 1.0f);

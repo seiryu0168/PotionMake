@@ -16,6 +16,8 @@ private:
 	std::unique_ptr<Time::Watch> time_;
 	void Waiting();
 	void Pushed();
+
+	float timeF_;
 public:
 	Title(Object* parent);
 	~Title();

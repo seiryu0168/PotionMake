@@ -18,7 +18,7 @@ namespace
 
 P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_CraftPot"),
-	standPosition_({-0.8f,0.5f})
+	standPosition_({-0.84f,0.53f})
 {
 }
 
@@ -41,11 +41,11 @@ void P_MP_CraftUI_CraftPot::Initialize()
 		item->GetComponent<Image>().SetPosition({ standPosition_.x+itemPos.x,standPosition_.y+itemPos.y,0 });
 		XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
 		item->GetComponent<Text>().SetPosition({ textBasePos.x + 10,textBasePos.y+15 });
-		itemPos.x += 0.15f;
+		itemPos.x += 0.16f;
 		if ((i + 1) % 4 == 0)
 		{
 			itemPos.x = 0;
-			itemPos.y -= 0.27f;
+			itemPos.y -= 0.28f;
 		}
 		objects_.push_back(item);
 	}
