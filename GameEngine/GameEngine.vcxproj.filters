@@ -49,6 +49,18 @@
     <Filter Include="ソース ファイル\Engine\ResourceManager">
       <UniqueIdentifier>{c08edbe2-834c-4fbd-ab53-e8cd5e03f960}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\ManagementPart">
+      <UniqueIdentifier>{79223fec-7c12-4bd5-b424-b817ba68d13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ManagementPart\Craft">
+      <UniqueIdentifier>{d30c447b-86bf-4867-8d36-207e6aaa6cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ManagementPart\PotionManagement">
+      <UniqueIdentifier>{471af442-036f-431c-97f1-567bd23934f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ManagementPart\Outing">
+      <UniqueIdentifier>{ebe2b116-a2af-4a09-967c-22e8ec40f65e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -273,25 +285,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Play_ManagementPart_Shelf.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_CraftTable.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_Door.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Play_UIManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_CraftUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_PotionManagerUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_OutingUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp">
@@ -303,19 +297,7 @@
     <ClCompile Include="ManagementPartObjectBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="P_MP_OutingUI_ActionText.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CloseButton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_PotionManagerUI_PotionStockUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_PotionManagerUI_SellStockUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_PotionManagerUI_DisposeStockUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_Play_CollectionPart.cpp">
@@ -324,74 +306,104 @@
     <ClCompile Include="Scenes\RootObject\RootObject_Play_CollectionPart.cpp">
       <Filter>ソース ファイル\Scenes\RootObjects</Filter>
     </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_ResourceStockUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_PotionStatusUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_PrepareUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceItem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ItemBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_CraftPot.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceItemSlot.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SaveDataLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_ProcessUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceMenuChangeButton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionStatusGauge.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceStatusData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionStock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionSlot.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionMenu.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionManagementConfirmButton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionStockDummy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_CraftUI_PrepareButton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionCraftAnimation.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionCraftAnimationPot.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="PlayerData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CraftSteam2D.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="ManagementPart\Craft\CraftSteam2D.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClCompile>
-    <ClCompile Include="FinishCraftUI.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="ManagementPart\Craft\FinishCraftUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_CraftPot.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_PotionStatusUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_PrepareButton.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_PrepareUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_ProcessUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\P_MP_CraftUI_ResourceStockUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_CraftTable.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_CraftUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\PotionCraftAnimation.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\PotionCraftAnimationPot.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\PotionStatusGauge.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\ResourceItem.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\ResourceItemSlot.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Craft\ResourceMenuChangeButton.cpp">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\P_MP_OutingUI_ActionText.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\Play_ManagementPart_Door.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\Play_ManagementPart_OutingUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_DisposeStockUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\PotionMenu.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\PotionSlot.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\PotionStock.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\PotionManagement\PotionStockDummy.cpp">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -623,29 +635,11 @@
     <ClInclude Include="Division.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\RootObject\RootObject_Play_ManagementPart.h">
       <Filter>ソース ファイル\Scenes\RootObjects</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_Play_ManagementPart.h">
       <Filter>ソース ファイル\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_UIManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_Shelf.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ManagementPart_Floor.h">
       <Filter>ソース ファイル</Filter>
@@ -656,113 +650,131 @@
     <ClInclude Include="Play_ManagementPart_BaseUI.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_ManagementPart_CraftTable.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_CraftUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_Door.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_OutingUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_ManagementPart_PotionManagerUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_OutingUI_ActionText.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CloseButton.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_PotionManagerUI_PotionStockUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_PotionManagerUI_SellStockUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_PotionManagerUI_DisposeStockUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\Scene_Play_CollectionPart.h">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\RootObject\RootObject_Play_CollectionPart.h">
       <Filter>ソース ファイル\Scenes\RootObjects</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_ResourceStockUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="UIBase.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_PotionStatusUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_PrepareUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceItem.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="CloseButton.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ItemBase.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_CraftPot.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="MainMenu.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceItemSlot.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Play_UIManager.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SaveDataLoader.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="PlayerData.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="StandData.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_ProcessUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceMenuChangeButton.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionStatusGauge.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ResourceStatusData.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PotionStock.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SaveDataLoader.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PotionSlot.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="StandData.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PotionMenu.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Title.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PotionManagementConfirmButton.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\CraftSteam2D.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="PotionStockDummy.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\FinishCraftUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_CraftUI_PrepareButton.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_CraftPot.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="PotionCraftAnimation.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_PotionStatusUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="PotionCraftAnimationPot.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_PrepareButton.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="CraftSteam2D.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_PrepareUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClInclude>
-    <ClInclude Include="FinishCraftUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_ProcessUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\P_MP_CraftUI_ResourceStockUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_CraftTable.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_CraftUI.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\PotionCraftAnimation.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\PotionCraftAnimationPot.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\PotionStatusGauge.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\ResourceItem.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\ResourceItemSlot.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Craft\ResourceMenuChangeButton.h">
+      <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Outing\P_MP_OutingUI_ActionText.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Outing\Play_ManagementPart_Door.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Outing\Play_ManagementPart_OutingUI.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_DisposeStockUI.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\PotionMenu.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\PotionSlot.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\PotionStock.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\PotionManagement\PotionStockDummy.h">
+      <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
