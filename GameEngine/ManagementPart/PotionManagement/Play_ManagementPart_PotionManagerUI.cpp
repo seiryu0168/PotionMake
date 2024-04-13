@@ -17,10 +17,6 @@ Play_ManagementPart_PotionManagerUI::~Play_ManagementPart_PotionManagerUI()
 
 void Play_ManagementPart_PotionManagerUI::Initialize()
 {
-	//Image baseUI(this);
-	//baseUI.Load("Assets/Image/PotionManagerUIBase1.png");
-	//AddComponent<Image>(baseUI);
-
 	Text uiTitleText(this);
 	uiTitleText.SetText("ƒ|[ƒVƒ‡ƒ“ŠÇ—");
 	uiTitleText.SetPosition({ 600,30 });

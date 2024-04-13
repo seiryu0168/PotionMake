@@ -158,11 +158,7 @@ void P_MP_PotionManagerUI_PotionStockUI::CreatePotionMenu(int potionNum, const s
 
 void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 {
-	
-	//((P_MP_PotionManagerUI_SellStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI"))->
-	//((P_MP_PotionManagerUI_DisposeStockUI*)FindObject("P_MP_PotionManagerUI_SellStockUI"))->
-	
-	//セーブデータを更新
+	//ポーションリストのデータを更新
 	std::vector<PlayerData::PotionData> newPotionDataList;
 	for (int i = 0; i < potionList_.size(); i++)
 	{
@@ -178,6 +174,7 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 
 	}
 	
+	//セーブデータを更新
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	data->potionDataList_ = newPotionDataList;
 
@@ -186,6 +183,7 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 
 void P_MP_PotionManagerUI_PotionStockUI::SetEnablePotionStock(bool isEnable)
 {
+	//ポーションを選べるかどうかを設定
 	for (auto potion : potionList_)
 	{
 			((PotionStock*)potion)->isSelect_ = isEnable;

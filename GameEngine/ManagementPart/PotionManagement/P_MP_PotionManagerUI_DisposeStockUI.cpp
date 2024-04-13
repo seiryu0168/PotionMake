@@ -15,11 +15,6 @@ P_MP_PotionManagerUI_DisposeStockUI::~P_MP_PotionManagerUI_DisposeStockUI()
 
 void P_MP_PotionManagerUI_DisposeStockUI::Initialize()
 {
-	//Image stockBaseImage(this);
-	//stockBaseImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	//stockBaseImage.SetPosition(uiPos_);
-	//stockBaseImage.SetSize({ 0.7f,0.3f,0 });
-	//AddComponent<Image>(stockBaseImage);
 	CreateBase();
 
 	Text uiTitleText(this);
@@ -113,6 +108,7 @@ void P_MP_PotionManagerUI_DisposeStockUI::CreateBase()
 
 void P_MP_PotionManagerUI_DisposeStockUI::AddDisposePotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor)
 {
+	//ポーション番号が-1ならそこにポーション情報を入れる
 	for (GameObject* potion : objects_)
 	{
 		if (((PotionSlot*)potion)->GetPotionNumber() == -1)
@@ -125,6 +121,7 @@ void P_MP_PotionManagerUI_DisposeStockUI::AddDisposePotion(int potionNum, const 
 
 void P_MP_PotionManagerUI_DisposeStockUI::SubDisposePotion(int potionNum)
 {
+	//指定した番号のポーションを消す
 	for (GameObject* potion : objects_)
 	{
 		if (((PotionSlot*)potion)->GetPotionNumber() == potionNum)

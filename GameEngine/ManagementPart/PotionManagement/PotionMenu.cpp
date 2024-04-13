@@ -25,8 +25,10 @@ void PotionMenu::Start()
 
 void PotionMenu::Update()
 {
+	//kクリックしたら
 	if (Input::IsMouseButtonDown(0))
 	{
+		//売るか捨てるか選択されてたら
 		if (isConfirm_)
 		{
 			if (GetComponent<Image>(cancelButtonImageNum_).IsHitCursor())
@@ -35,6 +37,7 @@ void PotionMenu::Update()
 				KillMe();
 			}
 		}
+		//選択されてなければ売るか捨てるか決められる
 		else
 		{
 
@@ -77,16 +80,18 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionEdgeImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
 	AddComponent<Image>(potionEdgeImage);
 
+	//売るか捨てるか選択されてたらキャンセルボタンを表示
 	if (isConfirm)
 	{
 
-		//販売ボタン
+		//キャンセルボタン
 		Image cancelButton(this);
 		cancelButton.Load("Assets/Image/ItemBaseImage.png");
 		cancelButton.SetPosition({ pos.x,pos.y - 0.2f,0 });
 		cancelButton.SetSize({ 1.5f,0.5f,0 });
 		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);
 	}
+	//選択されてなければ販売/破棄ボタンを表示
 	else
 	{
 

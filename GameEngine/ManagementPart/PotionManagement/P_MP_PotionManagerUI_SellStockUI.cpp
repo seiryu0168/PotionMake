@@ -15,12 +15,6 @@ P_MP_PotionManagerUI_SellStockUI::~P_MP_PotionManagerUI_SellStockUI()
 
 void P_MP_PotionManagerUI_SellStockUI::Initialize()
 {
-	//Image stockBaseImage(this);
-	//stockBaseImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	//stockBaseImage.SetPosition(uiPos_);
-	//stockBaseImage.SetSize({ 0.7f,0.3f,0 });
-	//AddComponent<Image>(stockBaseImage);
-
 	CreateBase();
 
 	Text uiTitleText(this);

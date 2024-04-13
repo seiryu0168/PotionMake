@@ -32,6 +32,7 @@ void P_MP_OutingUI_ActionText::Start()
 
 void P_MP_OutingUI_ActionText::Update()
 {
+	//マウスの位置によって強調する
 	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
 	float screenH = (float)Direct3D::GetScreenHeight();
 	if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&

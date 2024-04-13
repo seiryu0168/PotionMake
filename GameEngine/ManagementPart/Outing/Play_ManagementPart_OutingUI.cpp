@@ -28,23 +28,16 @@ void Play_ManagementPart_OutingUI::Initialize()
 
 void Play_ManagementPart_OutingUI::Update()
 {
-		//XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
-		//if (!(mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-		//	mousePos.y >= 270 && mousePos.y <= 790.0f))
-		//{
-		//	GetComponent<Text>().SetText("X:" + std::to_string(mousePos.x) +
-		//							   "\nY:" + std::to_string(mousePos.y) +
-		//							   "\nZ:" + std::to_string(mousePos.z));
-		//}
-		if (Input::IsMouseButtonDown(0))
+	//ƒNƒŠƒbƒN‚µ‚½‚ç
+	if (Input::IsMouseButtonDown(0))
+	{
+		XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
+		if (!(mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
+			mousePos.y >= 270 && mousePos.y <= 790.0f))
 		{
-			XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
-			if (!(mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-				mousePos.y >= 270 && mousePos.y <= 790.0f))
-			{
-				KillMe();
-			}
+			KillMe();
 		}
+	}
 }
 
 void Play_ManagementPart_OutingUI::Release()

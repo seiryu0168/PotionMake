@@ -42,12 +42,14 @@ void PotionSlot::Update()
 
 void PotionSlot::SetPotion(int potionNum, const std::string& name, const XMFLOAT3& color)
 {
+	//ポーションデータを設定
 	potionNum_ = potionNum;
 	GetComponent<Image>(potionImageNum_).SetColor({ color.x,color.y,color.z,1 });
 }
 
 void PotionSlot::RemovePotion()
 {
+	//ポーションを消す
 	GetComponent<Image>(potionImageNum_).SetColor({ 1,1,1,0.4f });
 	potionNum_ = -1;
 }

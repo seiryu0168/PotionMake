@@ -79,7 +79,6 @@ void PotionStock::Update()
 void PotionStock::SetPotionColor()
 {
 	bool isMax_ = false;
-	//XMFLOAT3 color = { 0,0,0 };
 	
 	//最も値が大きいステータスを探してポーションの色を変える
 	for (int i = 4; i > -1; i--)
@@ -107,6 +106,7 @@ void PotionStock::SetPotionColor()
 
 void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool isSale, int sts0, int sts1, int sts2, int sts3, int sts4)
 {
+	//ポーションデータを設定
 	potionNum_ = potionNum;
 	potionName_ = name;
 	potionStatus_.push_back(sts0);
@@ -117,7 +117,8 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	havePotion_ = true;
 
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
-
+	
+	//ポーションを表示
 	Image potionBaseImage(this);
 	potionBaseImage.Load("Assets/Image/Potion_BaseImage.png");
 	potionBaseImage.SetLayer(0);
@@ -136,6 +137,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 		selectedSlot_ = SelectSlot::Sell;
 	isSelect_ = true;
 
+	//色を設定
 	SetPotionColor();
 }
 
@@ -143,12 +145,15 @@ void PotionStock::AddSellPotion()
 {
 	//販売枠に追加する
 	sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+	
 	//操作可能になるまでのカウントダウンを開始
 	isCountDown_ = true;
+	
 	//確定
 	isConfirm_ = true;
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	selectedSlot_ = SelectSlot::Sell;
+	
 	//既に画像があるなら表示させる
 	if (confirmImageNum_ != -1)
 	{
@@ -163,25 +168,28 @@ void PotionStock::AddSellPotion()
 	confirmImage.SetPosition(pos);
 	confirmImage.SetSize({ 1,0.3f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);
-	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 }
 
 void PotionStock::AddDisposePotion()
 {
 	//破棄枠に追加する
 	disposeUI_->AddDisposePotion(potionNum_, potionName_, potionColor_);
+	
 	//操作可能になるまでのカウントダウンを開始
 	isCountDown_ = true;
+	
 	//確定
 	isConfirm_ = true;
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	selectedSlot_ = SelectSlot::Dispose;
+	
 	//既に画像があるなら表示させる
 	if (confirmImageNum_ != -1)
 	{
 		GetComponent<Image>(confirmImageNum_).SetAlpha(1);
 		return;
 	}
+
 	//操作が確定した時の画像
 	Image confirmImage(this);
 	confirmImage.Load("Assets/Image/ItemSlotImage.png");
@@ -189,7 +197,6 @@ void PotionStock::AddDisposePotion()
 	confirmImage.SetPosition(pos);
 	confirmImage.SetSize({ 1,0.3f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);
-	//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 }
 
 void PotionStock::SubPotion()
