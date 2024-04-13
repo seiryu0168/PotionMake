@@ -179,6 +179,7 @@ void P_MP_CraftUI_ResourceStockUI::CreateBase()
 
 void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 {
+	//ƒ‚[ƒh‚É‚æ‚Á‚Ä•\¦‚·‚é‚à‚Ì‚ğØ‚è‘Ö‚¦‚é
 	mode_ = mode; 
 	switch (mode_)
 	{

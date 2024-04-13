@@ -86,7 +86,7 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 	}
 	
 
-	//}
+	//‘fÞ‚ª0ˆÈã‚¾‚Á‚½‚ç
 	if (resourceCount > 0)
 	{
 

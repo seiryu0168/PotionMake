@@ -39,10 +39,12 @@ void ResourceItemSlot::Update()
 
 void ResourceItemSlot::SetItem(const std::string& resourceName, const std::string& imageName,int itemNum)
 {
+	//”wŒi‚ğ–¾‚é‚­‚·‚é
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	GetComponent<Image>().SetColor(1);
 	//RemoveComponent<Image>();
 
+	//‘fŞ‚Ì‰æ‘œ‚ğİ’è
 	Image slotImage(this);
 	slotImage.Load("Assets/Image/"+ imageName);
 	XMFLOAT3 size = slotImage.GetOriginalImageSize();
@@ -59,17 +61,12 @@ void ResourceItemSlot::SetItem(const std::string& resourceName, const std::strin
 
 void ResourceItemSlot::ItemEmpty()
 {
+	//”wŒi‚ğˆÃ‚­‚µA‘fŞ‚Ì‰æ‘œ‚ğÁ‚·
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	GetComponent<Image>().SetColor(0.7f);
 
 	RemoveComponent<Image>(1);
 
-	//Image slotImage(this);
-	//slotImage.Load("Assets/Image/ItemSlotImage.png");
-	//XMFLOAT3 size = slotImage.GetSizeAtPixel();
-	//slotImage.SetSize({ 128.0f / size.x,128.0f / size.y,0 });
-	//slotImage.SetPosition(pos);
-	//AddComponent<Image>(slotImage);
 	haveResource_ = false;
 	resourceCount_ = 0;
 	GetComponent<Text>().SetText(std::to_string(resourceCount_));

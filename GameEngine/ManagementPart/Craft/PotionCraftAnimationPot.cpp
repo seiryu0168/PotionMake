@@ -16,13 +16,18 @@ PotionCraftAnimationPot::~PotionCraftAnimationPot()
 
 void PotionCraftAnimationPot::Initialize()
 {
+	//鍋の画像(後ろ側)
 	Image potImage(this);
 	potImage.Load("Assets/Image/PreparePot06.png");
 	AddComponent<Image>(potImage);
+	
+	//鍋の画像(前側)
 	Image potFrontImage(this);
 	potFrontImage.Load("Assets/Image/CraftPot_Front.png");
 	potFrontImage.SetLayer(1);
 	AddComponent<Image>(potFrontImage);
+
+	//湯気オブジェクトの生成
 	CraftSteam2D* smoke = Instantiate<CraftSteam2D>(this);
 	smoke->SetSmokeParameter(3.0f, 0, 30, 0.1f, 0.6f, {-0.2f,0.2f});
 	smoke->PlaySmoke();
@@ -53,6 +58,8 @@ void PotionCraftAnimationPot::InputResourceNumber(const std::vector<int> numList
 {
 	ResourceStatusData* data = InterSceneData::GetData<ResourceStatusData>("ResourceData");
 	XMFLOAT3 pos = { -0.1f,0.1f,0 };
+	
+	//素材番号をもとに素材を表示
 	for (int num : numList)
 	{
 		Image resourceImage(this);

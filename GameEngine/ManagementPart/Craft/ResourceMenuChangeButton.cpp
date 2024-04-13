@@ -40,14 +40,6 @@ void ResourceMenuChangeButton::Update()
 	{
 		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
 	}
-	//else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor())
-	//{
-	//	//CraftPot‚Éƒf[ƒ^”½‰f
-	//	if (!((P_MP_CraftUI_CraftPot*)potObject_)->SubResourceData(itemNum_))
-	//		return;
-	//	resourceCount_++;
-	//	GetComponent<Text>().SetText(std::to_string(resourceCount_));
-	//}
 }
 
 void ResourceMenuChangeButton::Release()
