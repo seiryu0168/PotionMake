@@ -15,9 +15,9 @@ void PotionManagementConfirmButton::Initialize()
 {
 	//Šm’èƒ{ƒ^ƒ“‚Ì‰æ‘œ
 	Image confirmImage(this);
-	confirmImage.Load("Assets/Image/ConfirmImage01.png");
+	confirmImage.Load("Assets/Image/ConfirmButtonImage01.png");
 	confirmImage.SetPosition({ -0.7f,-0.7f,0 });
-	confirmImage.SetSize({ 1.5f,0.5f,0 });
+	confirmImage.SetSize({ 0.7f,0.7f,0 });
 	AddComponent<Image>(confirmImage);
 }
 

@@ -217,6 +217,11 @@ void PotionStock::SubPotion()
 
 }
 
+void PotionStock::SetEnablePotionStock(bool enable)
+{
+	((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(enable);
+}
+
 void PotionStock::Release()
 {
 }

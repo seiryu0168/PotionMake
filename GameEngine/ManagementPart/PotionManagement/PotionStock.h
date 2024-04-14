@@ -31,6 +31,7 @@ public:
 	void AddSellPotion();
 	void AddDisposePotion();
 	void SubPotion();
+	void SetEnablePotionStock(bool enable);
 	const std::string& GetPotionName() { return potionName_; }
 	const std::vector<float>& GetPotionStatus() { return potionStatus_; }
 	SelectSlot GetSelectedSlot() { return selectedSlot_; }
