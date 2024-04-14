@@ -29,6 +29,11 @@ void Play_UIManager::AccessUI(int uiNum)
 	}
 }
 
+bool Play_UIManager::IsAccessUI()
+{
+	return ((Play_ManagementPart_BaseUI*)FindChild("Play_ManagementPart_BaseUI"))->IsAccessUI();
+}
+
 void Play_UIManager::Release()
 {
 }

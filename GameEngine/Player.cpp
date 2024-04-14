@@ -56,6 +56,8 @@ void Player::Start()
 
 void Player::Update()
 {
+	if (((Play_UIManager*)UIManagerObject_)->IsAccessUI())
+		return;
 	if (Input::IsKey(DIK_W))
 	{
 		moveVec_ += XMVectorSet(0,0, speed_, 0);

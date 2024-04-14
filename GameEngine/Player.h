@@ -1,11 +1,17 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+class Play_ManagementPart_BaseUI;
+
 /// <summary>
 /// ÉvÉåÉCÉÑÅ[
 /// </summary>
 class Player : public GameObject
 {
 private:
+
+	Play_ManagementPart_BaseUI* UIBase_;
+
 	std::string collisionObjectName_;
 	int collisionUINum_;
 	Object* UIManagerObject_;

@@ -12,8 +12,9 @@ public:
 	Play_UIManager(Object* parent);
 	~Play_UIManager();
 	void Initialize() override;
-	void Update() override;
+	void Update() override;	
 	void AccessUI(int uiNum);
+	bool IsAccessUI();
 	void Release() override;
 
 };

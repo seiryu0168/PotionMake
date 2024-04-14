@@ -2,6 +2,7 @@
 #include"../../Engine/Systems/TextSystem.h"
 #include"../../Engine/Systems/ImageSystem.h"
 #include"../../Engine/DirectX_11/Input.h"
+#include"../../Play_ManagementPart_BaseUI.h"
 #include"P_MP_OutingUI_ActionText.h"
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
 	:UIBase(parent,"Play_ManagementPart_OutingUI")
@@ -42,4 +43,5 @@ void Play_ManagementPart_OutingUI::Update()
 
 void Play_ManagementPart_OutingUI::Release()
 {
+	((Play_ManagementPart_BaseUI*)pParent_)->SetAccessUIFlag(false);
 }

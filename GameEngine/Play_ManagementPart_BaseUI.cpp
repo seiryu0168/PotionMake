@@ -6,7 +6,8 @@
 #include"ManagementPart/PotionManagement/Play_ManagementPart_PotionManagerUI.h"
 Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),
-	UINum_(0)
+	UINum_(0),
+	isAccessUI_(false)
 {
 }
 
@@ -51,19 +52,22 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 		if (!FindChild("Play_ManagementPart_OutingUI"))
 		{
 			DisplayAction("", false);
+			isAccessUI_ = true;
 			Instantiate<Play_ManagementPart_OutingUI>(this);
 		}
 		break;
 	case 1:
-		if (!FindChild("Play_ManagementPart_PotionManagerUI"))
+		if (!FindChild("Play_ManagementPart_Pot	ionManagerUI"))
 		{
 			DisplayAction("", false);
+			isAccessUI_ = true;
 			Instantiate<Play_ManagementPart_PotionManagerUI>(this);
 		}
 		break;
 	case 2:
 		if (!FindChild("Play_ManagementPart_CraftUI"))
 		{
+			isAccessUI_ = true;
 			DisplayAction("", false);
 			Instantiate<Play_ManagementPart_CraftUI>(this);
 		}

@@ -5,6 +5,7 @@
 #include"P_MP_PotionManagerUI_PotionStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
 #include"P_MP_PotionManagerUI_DisposeStockUI.h"
+#include"../../Play_ManagementPart_BaseUI.h"
 
 Play_ManagementPart_PotionManagerUI::Play_ManagementPart_PotionManagerUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_PotionManagerUI")
@@ -34,4 +35,5 @@ void Play_ManagementPart_PotionManagerUI::Update()
 
 void Play_ManagementPart_PotionManagerUI::Release()
 {
+	((Play_ManagementPart_BaseUI*)pParent_)->SetAccessUIFlag(false);
 }

@@ -1,9 +1,9 @@
 #include "RootObject_Play_ManagementPart.h"
 #include"../../ManagementPart_Floor.h"
 #include"../../Player.h"
-#include"../../Play_ManagementPart_Shelf.h"
-#include"../../Play_ManagementPart_CraftTable.h"
-#include"../../Play_ManagementPart_Door.h"
+#include"../../ManagementPart/PotionManagement/Play_ManagementPart_Shelf.h"
+#include"../../ManagementPart/Craft/Play_ManagementPart_CraftTable.h"
+#include"../../ManagementPart/Outing/Play_ManagementPart_Door.h"
 #include"../../Play_UIManager.h"
 RootObject_Play_ManagementPart::RootObject_Play_ManagementPart()
 {

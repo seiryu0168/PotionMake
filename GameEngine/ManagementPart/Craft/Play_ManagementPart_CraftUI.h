@@ -13,6 +13,7 @@ public:
 	void Update() override;
 	void DisplayCraftProcess(const std::vector<int>& itemNumList);
 	void DisplayResult();
+	void BeforeDeath() override;
 	void Release() override;
 };
 

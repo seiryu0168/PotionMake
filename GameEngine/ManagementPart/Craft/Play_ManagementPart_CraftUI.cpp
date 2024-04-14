@@ -6,6 +6,7 @@
 #include"P_MP_CraftUI_ResourceStockUI.h"
 #include"P_MP_CraftUI_PotionStatusUI.h"
 #include"P_MP_CraftUI_PrepareUI.h"
+#include"../../Play_ManagementPart_BaseUI.h"
 #include"PotionCraftAnimation.h"
 #include"FinishCraftUI.h"
 Play_ManagementPart_CraftUI::Play_ManagementPart_CraftUI(Object* parent)
@@ -44,6 +45,11 @@ void Play_ManagementPart_CraftUI::DisplayResult()
 	FinishCraftUI* result = Instantiate<FinishCraftUI>(this);
 }
 
+void Play_ManagementPart_CraftUI::BeforeDeath()
+{
+}
+
 void Play_ManagementPart_CraftUI::Release()
 {
+	((Play_ManagementPart_BaseUI*)pParent_)->SetAccessUIFlag(false);
 }
