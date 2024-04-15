@@ -16,6 +16,10 @@ namespace PlayerData_Test
 class SaveDataLoader
 {
 	nlohmann::json jsonFile_;
+
+	std::string utf8_to_SJis(std::string const& str);
+	//std::u8string wide_to_utf8(std::wstring const& wstr);
+
 public:
 	SaveDataLoader();
 	~SaveDataLoader();

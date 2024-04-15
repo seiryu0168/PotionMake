@@ -82,6 +82,7 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 		itemImage.SetSize({ 0.25f,0.25f,0 });
 		resourceImageName_ = imagename;
 		AddComponent<Image>(itemImage);
+		isLoadedImage_ = true;
 
 	}
 	
@@ -93,12 +94,15 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 		resourceCount_ = resourceCount;
 		GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	}
-	isLoadedImage_ = true;
 }
 
 void ResourceItem::ActiveUI(bool isActive)
 {
 	GetComponent<Image>().SetDraw(isActive);
+
+	if(isLoadedImage_)
+	GetComponent<Image>(1).SetDraw(isActive);
+
 	GetComponent<Text>().isDraw_ = isActive;
 }
 

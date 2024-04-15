@@ -78,12 +78,15 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 
 	//‰ÁH•û–@‘I‘ğUI
 	float posY = 0.5f;
-	for (int i = 0; i < 3; i++)
+	for (int i=0;i<rData->processDataMap_.size();i++)
 	{
+		ResourceStatusData::ResourceStatus pData = rData->processDataMap_[i];
 		GameObject* processUI = Instantiate<P_MP_CraftUI_ProcessUI>(this);
-		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessImage("Assets/Image/SelectImage4.png");
-		processUI->GetComponent<Image>().SetSize({ 1,0.3f,0 });
+		((P_MP_CraftUI_ProcessUI*)processUI)->CreateBase({ uiPos_.x,uiPos_.y + posY,0 });
 		processUI->GetComponent<Image>().SetPosition({ uiPos_.x,uiPos_.y+posY,0 });
+		//processUI->GetComponent<Image>().SetSize({ 1,0.3f,0 });
+		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessImage(pData.resourceImageName_);
+		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessData(pData.resourceName_);
 		((P_MP_CraftUI_ProcessUI*)processUI)->SetProcessNumber(i);
 		processObjects_.push_back(processUI);
 		posY += -0.5f;

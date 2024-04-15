@@ -126,8 +126,18 @@ void Image::SetAlpha(float alpha)
 
 void Image::SetColor(const float color) noexcept
 {
-	SetColor({ color, color, color });
+	SetColor(XMFLOAT3{ color, color, color });
 }
+
+//void Image::SetColor(const int color) noexcept
+//{
+//	SetColor(255.0f / color);
+//}
+//
+//void Image::SetColor(const XMINT3& color) noexcept
+//{
+//	SetColor(XMFLOAT3{ 255.0f / color.x,255.0f / color.y,255.0f / color.z });
+//}
 
 void Image::SetColor(const XMFLOAT3& color) noexcept
 {

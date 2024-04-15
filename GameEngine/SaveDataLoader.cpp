@@ -1,5 +1,24 @@
 #include "SaveDataLoader.h"
+#include<Windows.h>
 #include<fstream>
+
+std::string SaveDataLoader::utf8_to_SJis(std::string const& str)
+{
+	//ワイド文字列に変換(utf8->unicode)
+	int unicodeLength = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.size() + 1, NULL, 0);
+	wchar_t* buffUnicode = new wchar_t[unicodeLength];
+	MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.size() + 1, buffUnicode, unicodeLength);
+
+	//マルチバイト文字列に変換(unicode->ShiftJIS)
+	int sjisLength = WideCharToMultiByte(CP_THREAD_ACP, 0, buffUnicode, -1, NULL, 0, NULL, NULL);
+	char* buffSjis = new char[sjisLength];
+	WideCharToMultiByte(CP_THREAD_ACP, 0, buffUnicode, unicodeLength + 1, buffSjis, sjisLength, NULL, NULL);
+	std::string strJis(buffSjis);
+	delete buffUnicode;
+	delete buffSjis;
+	return strJis;
+
+}
 
 SaveDataLoader::SaveDataLoader()
 {
@@ -39,13 +58,12 @@ void SaveDataLoader::Init()
 										  {111.0f / 255.0f,143.0f / 255.0f,237.0f / 255.0f},//柔らかい青紫系の色
 										  {231.0f / 255.0f,111.0f / 255.0f,237.0f / 255.0f}//柔らかい紫系の色 
 										};
-
 	resourceStatusFile["StatusList"] ={ {0,"Item01","ResourceImage01.png",0.2f,0.1f,0.3f,0.2f,0.4f},
 									    {1,"Item02","ResourceImage02.png",0.5f,0.2f,0.1f,0.1f,0.3f},
 									    {2,"Item02","ResourceImage03.png",0.1f,0.6f,0.1f,0.1f,0.1f} };
-	resourceStatusFile["ProcessList"] = { {0,1.1f,1.2f,0.7f,0.8f,1.3f},
-										  {1,0.7f,1.7f,1.0f,1.1f,1.2f},
-										  {2,1.3f,0.5f,1.4f,1.2f,0.8f} };
+	resourceStatusFile["ProcessList"] = { {0,u8"切り刻む","ProcessImage_Chop.png",1.1f,1.2f,0.7f,0.8f,1.3f},
+										  {1,u8"茹でる","ProcessImage_Boil.png",0.7f,1.7f,1.0f,1.1f,1.2f},
+										  {2,u8"すりつぶす","ProcessImage_Grind.png",1.3f,0.5f,1.4f,1.2f,0.8f}};
 
 	std::ofstream rof("Assets/SaveData/ResourceData.json", std::ios::out);
 	rof << resourceStatusFile << std::endl;
@@ -108,6 +126,7 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 	{
 		ResourceStatusData::ResourceStatus statusData;
 
+
 		statusData.resourceNumber_		= itr.value().at(0);
 		statusData.resourceName_		= itr.value().at(1);
 		statusData.resourceImageName_   = itr.value().at(2);
@@ -123,12 +142,17 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 	{
 		ResourceStatusData::ResourceStatus statusData;
 
-		statusData.resourceNumber_ = itr.value().at(0);
-		statusData.status00_	   = itr.value().at(1);
-		statusData.status01_	   = itr.value().at(2);
-		statusData.status02_	   = itr.value().at(3);
-		statusData.status03_	   = itr.value().at(4);
-		statusData.status04_	   = itr.value().at(5);
+		std::u8string str=itr.value().at(1);
+		std::string processNameUtf8= (const char*)str.c_str();
+
+		statusData.resourceNumber_	  = itr.value().at(0);
+		statusData.resourceName_	  = utf8_to_SJis(processNameUtf8);
+		statusData.resourceImageName_ = itr.value().at(2);
+		statusData.status00_		  = itr.value().at(3);
+		statusData.status01_		  = itr.value().at(4);
+		statusData.status02_		  = itr.value().at(5);
+		statusData.status03_		  = itr.value().at(6);
+		statusData.status04_		  = itr.value().at(7);
 		data.processDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
 
