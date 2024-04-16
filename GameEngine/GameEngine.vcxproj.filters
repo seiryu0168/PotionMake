@@ -61,6 +61,9 @@
     <Filter Include="ソース ファイル\ManagementPart\Outing">
       <UniqueIdentifier>{ebe2b116-a2af-4a09-967c-22e8ec40f65e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CollectionPart">
+      <UniqueIdentifier>{921bf140-2b91-48fd-83e9-30677bb9e32f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -404,6 +407,15 @@
     </ClCompile>
     <ClCompile Include="ManagementPart\PotionManagement\PotionStockDummy.cpp">
       <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_CollectionPart.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart_Ground.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_ManagementPart.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -775,6 +787,15 @@
     </ClInclude>
     <ClInclude Include="ManagementPart\PotionManagement\PotionStockDummy.h">
       <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_CollectionPart.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart_Ground.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_ManagementPart.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

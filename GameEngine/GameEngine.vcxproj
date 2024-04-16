@@ -175,6 +175,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CloseButton.cpp" />
+    <ClCompile Include="CollectionPart_Ground.cpp" />
     <ClCompile Include="Division.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="DebugUI.cpp" />
@@ -264,6 +265,8 @@
     <ClCompile Include="ManagementPart_Floor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="Player_CollectionPart.cpp" />
+    <ClCompile Include="Player_ManagementPart.cpp" />
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
@@ -291,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloseButton.h" />
+    <ClInclude Include="CollectionPart_Ground.h" />
     <ClInclude Include="Division.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="DebugUI.h" />
@@ -386,6 +390,8 @@
     <ClInclude Include="ManagementPart_Floor.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="Player_CollectionPart.h" />
+    <ClInclude Include="Player_ManagementPart.h" />
     <ClInclude Include="Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="Play_UIManager.h" />
     <ClInclude Include="ResourceStatusData.h" />
