@@ -269,6 +269,7 @@
     <ClCompile Include="Player_ManagementPart.cpp" />
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="P_CP_ResourceItem.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
     <ClCompile Include="SaveDataLoader.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
@@ -286,6 +287,7 @@
     <ClCompile Include="Scenes\Scene_Result.cpp" />
     <ClCompile Include="Scenes\Scene_Title.cpp" />
     <ClCompile Include="ObjectSetter.cpp" />
+    <ClCompile Include="StageSetter.cpp" />
     <ClCompile Include="StaticResource.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
@@ -394,6 +396,7 @@
     <ClInclude Include="Player_ManagementPart.h" />
     <ClInclude Include="Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="P_CP_ResourceItem.h" />
     <ClInclude Include="ResourceStatusData.h" />
     <ClInclude Include="SaveDataLoader.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
@@ -413,6 +416,7 @@
     <ClInclude Include="ObjectSetter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="EngineTime.h" />
+    <ClInclude Include="StageSetter.h" />
     <ClInclude Include="StandData.h" />
     <ClInclude Include="StaticResource.h" />
     <ClInclude Include="TestObject.h" />
