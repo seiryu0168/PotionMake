@@ -23,6 +23,18 @@ bool Test_Model_ECSver::Load(const std::string& fileName)
 
 void Test_Model_ECSver::RayCast(RayCastData& rayData)
 {
+	//ワールドの逆行列とレイの発射地点、方向ベクトルを作成
+	XMMATRIX invW = XMMatrixInverse(nullptr, attachObject_->GetTransform()->GetWorldMatrix());
+	XMVECTOR startVec = XMLoadFloat3(&rayData.start);
+	XMVECTOR dirVec = XMVectorSet(rayData.start.x + rayData.dir.x, rayData.start.y + rayData.dir.y, rayData.start.z + rayData.dir.z, 0);
+
+	//逆行列をかける
+	startVec = XMVector3TransformCoord(startVec, invW);
+	dirVec = XMVector3TransformCoord(dirVec, invW);
+
+	XMVECTOR rayVec = dirVec - startVec;
+	XMStoreFloat3(&rayData.start, startVec);
+	XMStoreFloat3(&rayData.dir, rayVec);
 	fbx_->RayCast(rayData, *attachObject_->GetTransform());
 }
 
