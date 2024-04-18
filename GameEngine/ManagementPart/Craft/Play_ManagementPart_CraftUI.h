@@ -6,6 +6,7 @@
 /// </summary>
 class Play_ManagementPart_CraftUI : public GameObject
 {
+	//GameObject* craftUIs[3];
 public:
 	Play_ManagementPart_CraftUI(Object* parent);
 	~Play_ManagementPart_CraftUI();

@@ -294,7 +294,7 @@ void Object::KillAllChildren()
 		//delete* itr;
 		//itr = this->childList_.erase(itr);
 	}
-	childList_.clear();
+	//childList_.clear();
 }
 
 void Object::KillObjectSub(Object* pTarget)
@@ -307,9 +307,11 @@ void Object::KillObjectSub(Object* pTarget)
 			//SAFE_DELETE(*itr);
 			//itr = pTarget->childList_.erase(itr);
 		}
-		pTarget->childList_.clear();
-		pTarget->transform_->childList_.clear();
+		//pTarget->childList_.clear();
+		//pTarget->transform_->childList_.clear();
 	}
+	pTarget->KillMe();
+	pTarget->SetUpdate(false);
 	pTarget->Release();
 }
 void Object::PushBackChild(const std::shared_ptr<Object>& pTarget)

@@ -19,12 +19,13 @@ void PotionCraftAnimationPot::Initialize()
 	//鍋の画像(後ろ側)
 	Image potImage(this);
 	potImage.Load("Assets/Image/PreparePot06.png");
+	potImage.SetLayer(1);
 	AddComponent<Image>(potImage);
 	
 	//鍋の画像(前側)
 	Image potFrontImage(this);
 	potFrontImage.Load("Assets/Image/CraftPot_Front.png");
-	potFrontImage.SetLayer(1);
+	potFrontImage.SetLayer(2);
 	AddComponent<Image>(potFrontImage);
 
 	//湯気オブジェクトの生成
@@ -65,6 +66,7 @@ void PotionCraftAnimationPot::InputResourceNumber(const std::vector<int> numList
 		Image resourceImage(this);
 		resourceImage.Load("Assets/Image/" + data->resourceDataMap_[num].resourceImageName_);
 		resourceImage.SetPosition(pos);
+		resourceImage.SetLayer(1);
 		resourceImage.SetSize({ 0.25f,0.25f,0 });
 		posList_.push_back({ pos.x,pos.y });
 		imageNum_.push_back(AddComponent<Image>(resourceImage));

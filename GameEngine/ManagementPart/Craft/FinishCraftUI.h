@@ -7,6 +7,7 @@
 class FinishCraftUI : public GameObject
 {
 	int okButtonImageNum_;
+	XMFLOAT3 uiPos_;
 public:
 	FinishCraftUI(Object* parent);
 	~FinishCraftUI();
@@ -14,6 +15,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void DisplayResult(const XMFLOAT3& color);
+	void CreateBase();
 	void Release() override;
 };
 

@@ -36,6 +36,7 @@ void Play_ManagementPart_CraftUI::Update()
 
 void Play_ManagementPart_CraftUI::DisplayCraftProcess(const std::vector<int>& itemNumList)
 {
+	KillAllChildren();
 	PotionCraftAnimation* potion = Instantiate<PotionCraftAnimation>(this);
 	potion->InitAnimation(itemNumList);
 }

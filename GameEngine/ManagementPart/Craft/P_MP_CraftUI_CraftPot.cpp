@@ -265,7 +265,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	data->SortResourceList();
 	data->potionDataList_.push_back(pData);
 	((Play_ManagementPart_CraftUI*)pParent_->GetParent())->DisplayCraftProcess(itemNumList_);
-	pParent_->KillMe();
+	//pParent_->KillMe();
 }
 
 std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()

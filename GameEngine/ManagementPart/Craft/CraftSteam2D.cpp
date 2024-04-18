@@ -42,6 +42,7 @@ void CraftSteam2D::Update()
 			XMFLOAT2 firstPos = { emitterPosition_.x + randomFloatGenerator_(mt),0 };
 			Image steamImage(this);
 			steamImage.Load("Assets/Image/SmokeImage00.png");
+			steamImage.SetLayer(1);
 			steamImage.SetPosition({ firstPos.x,firstPos.y,0 });
 			int imageNum = AddComponent<Image>(steamImage);
 			SteamParticleData data(imageNum, particleLifeTime_, firstPos, { 0,0.01f }, { 1,1 }, { 1,1,1,1 });
