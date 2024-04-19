@@ -23,10 +23,8 @@ void Play_ManagementPart_BaseUI::Initialize()
 	actionImage.SetSize({0.7,0.7f,0});
 	AddComponent<Image>(actionImage);
 	Text text(this);
-	//text.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_CENTER);
 	text.SetText("Text");
 	text.SetRect({ 0,0,500,500 });
-	//text.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	text.SetPosition({ 1320,500 });
 	AddComponent<Text>(text);
 }
@@ -57,7 +55,7 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 		}
 		break;
 	case 1:
-		if (!FindChild("Play_ManagementPart_Pot	ionManagerUI"))
+		if (!FindChild("Play_ManagementPart_PotionManagerUI"))
 		{
 			DisplayAction("", false);
 			isAccessUI_ = true;

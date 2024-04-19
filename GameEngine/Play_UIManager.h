@@ -14,6 +14,7 @@ public:
 	void Initialize() override;
 	void Update() override;	
 	void AccessUI(int uiNum);
+	//GameObject* GetUI(std::string name);
 	bool IsAccessUI();
 	void Release() override;
 

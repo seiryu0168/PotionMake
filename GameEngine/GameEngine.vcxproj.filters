@@ -420,7 +420,13 @@
     <ClCompile Include="P_CP_ResourceItem.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="StageSetter.cpp">
+    <ClCompile Include="Play_CollectionPart_StageManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="P_CP_Player_ItemGetter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Play_CollectionPart_BaseUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -794,19 +800,25 @@
     <ClInclude Include="ManagementPart\PotionManagement\PotionStockDummy.h">
       <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Player_CollectionPart.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CollectionPart_Ground.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_ManagementPart.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="P_CP_ResourceItem.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_CollectionPart.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_ManagementPart.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_CollectionPart_StageManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="StageSetter.h">
+    <ClInclude Include="P_CP_Player_ItemGetter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_CollectionPart_BaseUI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
