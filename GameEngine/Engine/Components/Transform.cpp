@@ -19,7 +19,7 @@ Transform::Transform(Transform* parent)
 	matRotate_(XMMatrixIdentity()),
 	matScale_(XMMatrixIdentity()),
 	position_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),
-	rotate_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),
+	rotate_(XMQuaternionIdentity()),
 	scale_(XMFLOAT3(1.0f, 1.0f, 1.0f)),
 	baseVec_(XMVectorSet(0, 0, 1, 0)),
 	pParent_(parent),

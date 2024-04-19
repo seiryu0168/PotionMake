@@ -2,6 +2,7 @@
 #include"Engine/Systems/TextSystem.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"InterSceneData.h"
+#include"Play_CollectionPart_StageManager.h"
 
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_CollectionPart_BaseUI")
@@ -14,10 +15,6 @@ Play_CollectionPart_BaseUI::~Play_CollectionPart_BaseUI()
 
 void Play_CollectionPart_BaseUI::Initialize()
 {
-	itemName_.push_back("Item1");
-	itemName_.push_back("Item2");
-	itemName_.push_back("Item3");
-	itemName_.push_back("Item4	");
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
@@ -33,6 +30,7 @@ void Play_CollectionPart_BaseUI::Initialize()
 
 void Play_CollectionPart_BaseUI::Start()
 {
+	itemName_ = ((Play_CollectionPart_StageManager*)FindObject("Play_CollectionPart_StageManager"))->GetItemNameList();
 }
 
 void Play_CollectionPart_BaseUI::Update()

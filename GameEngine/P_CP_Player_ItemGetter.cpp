@@ -4,7 +4,8 @@
 #include"Engine/DirectX_11/Input.h"
 #include"P_CP_ResourceItem.h"
 P_CP_Player_ItemGetter::P_CP_Player_ItemGetter(Object* parent)
-	:GameObject(parent,"P_CP_Player_ItemGetter")
+	:GameObject(parent,"P_CP_Player_ItemGetter"),
+	targetItemNum_(-1)
 {
 }
 
@@ -23,6 +24,7 @@ void P_CP_Player_ItemGetter::Initialize()
 	Test_Model_ECSver model(this);
 	model.Load("Assets/Model/flower_red3.fbx");
 	AddComponent<Test_Model_ECSver>(model);
+	transform_->position_ = XMVectorSet(0, 100, 0, 0);
 }
 
 void P_CP_Player_ItemGetter::Start()

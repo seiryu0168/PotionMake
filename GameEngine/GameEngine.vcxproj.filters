@@ -813,13 +813,13 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Play_CollectionPart_StageManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="P_CP_Player_ItemGetter.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Play_CollectionPart_BaseUI.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

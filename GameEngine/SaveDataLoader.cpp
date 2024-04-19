@@ -1,7 +1,7 @@
 #include "SaveDataLoader.h"
 #include<Windows.h>
 #include<fstream>
-
+#include"Engine/ResourceManager/CsvReader.h"
 std::string SaveDataLoader::utf8_to_SJis(std::string const& str)
 {
 	//ƒƒCƒh•¶Žš—ñ‚É•ÏŠ·(utf8->unicode)
@@ -14,8 +14,8 @@ std::string SaveDataLoader::utf8_to_SJis(std::string const& str)
 	char* buffSjis = new char[sjisLength];
 	WideCharToMultiByte(CP_THREAD_ACP, 0, buffUnicode, unicodeLength + 1, buffSjis, sjisLength, NULL, NULL);
 	std::string strJis(buffSjis);
-	delete buffUnicode;
-	delete buffSjis;
+	delete[] buffUnicode;
+	delete[] buffSjis;
 	return strJis;
 
 }
@@ -117,24 +117,25 @@ void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& 
 	if (!ifs.good()) return;
 
 	resourceStatusFile = nlohmann::json::parse(ifs);
-
+	CsvReader reader("Assets/SaveData/ModelNameList.csv");
 	for (auto itr = resourceStatusFile["StatusColor"].begin(); itr != resourceStatusFile["StatusColor"].end(); itr++)
 	{
 		data.statusColor_.push_back({ itr.value().at(0),itr.value().at(1),itr.value().at(2) });
 	}
-	for (auto itr = resourceStatusFile["StatusList"].begin(); itr != resourceStatusFile["StatusList"].end(); itr++)
+	for (int i=0;i<reader.GetLines();i++)
 	{
 		ResourceStatusData::ResourceStatus statusData;
 
 
-		statusData.resourceNumber_		= itr.value().at(0);
-		statusData.resourceName_		= itr.value().at(1);
-		statusData.resourceImageName_   = itr.value().at(2);
-		statusData.status00_			= itr.value().at(3);
-		statusData.status01_			= itr.value().at(4);
-		statusData.status02_			= itr.value().at(5);
-		statusData.status03_			= itr.value().at(6);
-		statusData.status04_			= itr.value().at(7);
+		statusData.resourceNumber_		= reader.GetInt(i,0);
+		statusData.resourceImageName_   = reader.GetString(i,1);
+		statusData.resourceModelName_   = reader.GetString(i, 2);
+		statusData.resourceName_		= utf8_to_SJis(reader.GetString(i,3));
+		statusData.status00_			= reader.GetFloat(i,4);
+		statusData.status01_			= reader.GetFloat(i,5);
+		statusData.status02_			= reader.GetFloat(i,6);
+		statusData.status03_			= reader.GetFloat(i,7);
+		statusData.status04_			= reader.GetFloat(i,8);
 		data.resourceDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
 

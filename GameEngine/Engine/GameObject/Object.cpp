@@ -81,7 +81,7 @@ void Object::UpdateSub()
 		this->startFlag_ = true;
 		//Division::setLoad(false);
 	}
-	if (activeFlag_ && isUpdate_ && killFlag_ == false)
+	else if (activeFlag_ && isUpdate_ && killFlag_ == false)
 	{
 		Update();
 		//transform_->Calclation();
