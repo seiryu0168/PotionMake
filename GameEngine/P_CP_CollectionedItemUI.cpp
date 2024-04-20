@@ -1,5 +1,11 @@
 #include "P_CP_CollectionedItemUI.h"
 #include"Engine/Systems/ImageSystem.h"
+#include"Engine/Systems/TextSystem.h"
+#include"PickupedItem.h"
+#include"Player_CollectionPart.h"
+#include"InterSceneData.h"
+#include"ResourceStatusData.h"
+#include"CloseButton.h"
 P_CP_CollectionedItemUI::P_CP_CollectionedItemUI(Object* parent)
 	:GameObject(parent,"P_CP_CollectionedItemUI"),
 	uiPos_({0.5,0,0})
@@ -13,6 +19,42 @@ P_CP_CollectionedItemUI::~P_CP_CollectionedItemUI()
 void P_CP_CollectionedItemUI::Initialize()
 {
 	CreateBase();
+	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
+	XMFLOAT2 pos = { -0.32f,0.56f };
+	int stockCount = 0;
+	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	for (auto& itr : player->GetItem())
+	{
+		PickupedItem* item = Instantiate<PickupedItem>(this);
+		item->SetItemData(itr.first,
+						  rData->resourceDataMap_[itr.first].resourceName_,
+						  itr.second,
+						  rData->resourceDataMap_[itr.first].resourceImageName_,
+						  { uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
+		stockCount++;
+		pos.x += 0.16f;
+		if ((stockCount+1) % 5 == 0)
+		{
+			pos.x = -0.32f;
+			pos.y -= 0.28f;
+		}
+	}
+	for (stockCount; stockCount < 25; stockCount++)
+	{
+		Image backImage(this);
+		backImage.Load("Assets/Image/ItemBaseImage.png");
+		backImage.SetPosition({ uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
+		AddComponent<Image>(backImage);
+		pos.x += 0.16f;
+		if ((stockCount + 1) % 5 == 0)
+		{
+			pos.x = -0.32f;
+			pos.y -= 0.28f;
+		}
+	}
+
+	GameObject* button = Instantiate<CloseButton>(this);
+	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 }
 
 void P_CP_CollectionedItemUI::Start()
@@ -29,9 +71,8 @@ void P_CP_CollectionedItemUI::CreateBase()
 	XMFLOAT3 imageRatio;
 	Image uiBaseImage(this);
 	uiBaseImage.Load("Assets/Image/UIBaseImage2.png");
-	uiBaseImage.SetLayer(1);
 	uiBaseImage.SetPosition({ uiPos_.x,uiPos_.y,0 });
-	uiBaseImage.SetSize({ 16 * 0.7f,16 * 0.87f,0 });
+	uiBaseImage.SetSize({ 16 * 0.8f,16 * 0.8f,0 });
 	windowSize = uiBaseImage.GetSizeAtPixel();
 	imageRatio = uiBaseImage.GetSize();
 	AddComponent<Image>(uiBaseImage);
@@ -40,40 +81,34 @@ void P_CP_CollectionedItemUI::CreateBase()
 				   windowSize.y / (Direct3D::GetScreenHeight()),0 };
 	Image uiWidthEdgeImage1(this);
 	uiWidthEdgeImage1.Load("Assets/Image/UIEdge_Width.png");
-	uiWidthEdgeImage1.SetLayer(1);
 	uiWidthEdgeImage1.SetPosition({ uiPos_.x,uiPos_.y + windowSize.y * 0.95f,0 });
 	uiWidthEdgeImage1.SetSize({ imageRatio.x * 0.95f,0.3f,0 });
 	AddComponent<Image>(uiWidthEdgeImage1);
 	Image uiWidthEdgeImage2(this);
 	uiWidthEdgeImage2.Load("Assets/Image/UIEdge_Width.png");
-	uiWidthEdgeImage2.SetLayer(1);
 	uiWidthEdgeImage2.SetPosition({ uiPos_.x,uiPos_.y - windowSize.y * 0.95f,0 });
 	uiWidthEdgeImage2.SetSize({ imageRatio.x * 0.95f,0.3f,0 });
 	AddComponent<Image>(uiWidthEdgeImage2);
 
 	Image uiHeightEdgeImage1(this);
 	uiHeightEdgeImage1.Load("Assets/Image/UIEdge_Height.png");
-	uiHeightEdgeImage1.SetLayer(1);
 	uiHeightEdgeImage1.SetPosition({ uiPos_.x + windowSize.x * 0.95f,uiPos_.y,0 });
 	uiHeightEdgeImage1.SetSize({ 0.3f,imageRatio.y * 0.95f,0 });
 	AddComponent<Image>(uiHeightEdgeImage1);
 	Image uiHeightEdgeImage2(this);
 	uiHeightEdgeImage2.Load("Assets/Image/UIEdge_Height.png");
-	uiHeightEdgeImage2.SetLayer(1);
 	uiHeightEdgeImage2.SetPosition({ uiPos_.x - windowSize.x * 0.95f,uiPos_.y,0 });
 	uiHeightEdgeImage2.SetSize({ 0.3f,imageRatio.y * 0.95f,0 });
 	AddComponent<Image>(uiHeightEdgeImage2);
 
 	Image uiCornerImage1(this);
 	uiCornerImage1.Load("Assets/Image/UIEdge_Corner.png");
-	uiCornerImage1.SetLayer(1);
 	uiCornerImage1.SetPosition({ uiPos_.x + windowSize.x * 0.95f,uiPos_.y + windowSize.y * 0.951f,0 });
 	uiCornerImage1.SetSize({ 0.3f,0.3f,0 });
 	AddComponent<Image>(uiCornerImage1);
 
 	Image uiCornerImage2(this);
 	uiCornerImage2.Load("Assets/Image/UIEdge_Corner.png");
-	uiCornerImage2.SetLayer(1);
 	uiCornerImage2.SetPosition({ uiPos_.x + windowSize.x * 0.9495f,uiPos_.y - windowSize.y * 0.951f,0 });
 	uiCornerImage2.SetSize({ 0.3f,0.3f,0 });
 	uiCornerImage2.SetRotation({ 0,0,-90 });
@@ -81,7 +116,6 @@ void P_CP_CollectionedItemUI::CreateBase()
 
 	Image uiCornerImage3(this);
 	uiCornerImage3.Load("Assets/Image/UIEdge_Corner.png");
-	uiCornerImage3.SetLayer(1);
 	uiCornerImage3.SetPosition({ uiPos_.x - windowSize.x * 0.9505f,uiPos_.y - windowSize.y * 0.951f,0 });
 	uiCornerImage3.SetSize({ 0.3f,0.3f,0 });
 	uiCornerImage3.SetRotation({ 0,0,180 });
@@ -89,7 +123,6 @@ void P_CP_CollectionedItemUI::CreateBase()
 
 	Image uiCornerImage4(this);
 	uiCornerImage4.Load("Assets/Image/UIEdge_Corner.png");
-	uiCornerImage4.SetLayer(1);
 	uiCornerImage4.SetPosition({ uiPos_.x - windowSize.x * 0.95f,uiPos_.y + windowSize.y * 0.95f,0 });
 	uiCornerImage4.SetSize({ 0.3f,0.3f,0 });
 	uiCornerImage4.SetRotation({ 0,0,90 });

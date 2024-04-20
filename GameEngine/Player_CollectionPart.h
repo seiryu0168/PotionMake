@@ -20,6 +20,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void AddItem(int itemNum);
+	const std::unordered_map<int, int>& GetItem() { return itemCount_; }
 	//void CameraControll();
 	void Release() override;
 };

@@ -7,7 +7,8 @@
 #include"P_CP_CollectionedItemUI.h"
 
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
-	:GameObject(parent,"Play_CollectionPart_BaseUI")
+	:GameObject(parent, "Play_CollectionPart_BaseUI"),
+	isUIOpened_(false)
 {
 }
 
@@ -37,7 +38,7 @@ void Play_CollectionPart_BaseUI::Start()
 
 void Play_CollectionPart_BaseUI::Update()
 {
-	if (Input::IsKeyDown(DIK_ESCAPE))
+	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
 		Instantiate<P_CP_CollectionedItemUI>(this);
 	}

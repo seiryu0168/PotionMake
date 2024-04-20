@@ -3,6 +3,7 @@
 class Play_CollectionPart_BaseUI : public GameObject
 {
 	std::vector<std::string> itemName_;
+	bool isUIOpened_;
 public:
 	Play_CollectionPart_BaseUI(Object* parent);
 	~Play_CollectionPart_BaseUI();
