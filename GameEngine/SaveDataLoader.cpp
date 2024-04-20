@@ -30,43 +30,43 @@ SaveDataLoader::~SaveDataLoader()
 
 void SaveDataLoader::Init()
 {
-	nlohmann::json playerFile;
-	playerFile["Name"] = "player01";
-	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
-	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
-
-	playerFile["ItemList"] = { {0,"Item01","ResourceImage01.png",10},
-							   {1,"Item02","ResourceImage02.png",5},
-							   {2,"Item03","ResourceImage03.png",7}};
-
-	playerFile["PotionList"] = { {"Potion01",false,2.3f,1.1f,1.5f,0.6f,2.1f},
-								 {"Potion02",false,1.6f,2.1f,1.2f,1.6f,1.3f},
-								 {"Potion03",false,2.1f,2.9f,2.5f,1.3f,2.0f} };
-
-	//playerFile["SellPotionList"] = { {"",0,0,0,0,0},
-	//								 {"",0,0,0,0,0},
-	//								 {"",0,0,0,0,0},
-	//								 {"",0,0,0,0,0},
-	//								 {"",0,0,0,0,0} };
-	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
-	of << playerFile << std::endl;
-
-	nlohmann::json resourceStatusFile;
-	resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢ÔŒn‚ÌF
-										  {193.0f / 255.0f,237.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢‰©—ÎŒn‚ÌF
-										  {111.0f / 255.0f,237.0f / 255.0f,181.0f / 255.0f},//_‚ç‚©‚¢—ÎŒn‚ÌF
-										  {111.0f / 255.0f,143.0f / 255.0f,237.0f / 255.0f},//_‚ç‚©‚¢ÂŽ‡Œn‚ÌF
-										  {231.0f / 255.0f,111.0f / 255.0f,237.0f / 255.0f}//_‚ç‚©‚¢Ž‡Œn‚ÌF 
-										};
-	resourceStatusFile["StatusList"] ={ {0,"Item01","ResourceImage01.png",0.2f,0.1f,0.3f,0.2f,0.4f},
-									    {1,"Item02","ResourceImage02.png",0.5f,0.2f,0.1f,0.1f,0.3f},
-									    {2,"Item02","ResourceImage03.png",0.1f,0.6f,0.1f,0.1f,0.1f} };
-	resourceStatusFile["ProcessList"] = { {0,u8"Ø‚è‚Þ","ProcessImage_Chop.png",1.1f,1.2f,0.7f,0.8f,1.3f},
-										  {1,u8"ä¥‚Å‚é","ProcessImage_Boil.png",0.7f,1.7f,1.0f,1.1f,1.2f},
-										  {2,u8"‚·‚è‚Â‚Ô‚·","ProcessImage_Grind.png",1.3f,0.5f,1.4f,1.2f,0.8f}};
-
-	std::ofstream rof("Assets/SaveData/ResourceData.json", std::ios::out);
-	rof << resourceStatusFile << std::endl;
+	//nlohmann::json playerFile;
+	//playerFile["Name"] = "player01";
+	//playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
+	//playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
+	//
+	//playerFile["ItemList"] = { {0,"Item01","ResourceImage01.png",10},
+	//						   {1,"Item02","ResourceImage02.png",5},
+	//						   {2,"Item03","ResourceImage03.png",7}};
+	//
+	//playerFile["PotionList"] = { {"Potion01",false,2.3f,1.1f,1.5f,0.6f,2.1f},
+	//							 {"Potion02",false,1.6f,2.1f,1.2f,1.6f,1.3f},
+	//							 {"Potion03",false,2.1f,2.9f,2.5f,1.3f,2.0f} };
+	//
+	////playerFile["SellPotionList"] = { {"",0,0,0,0,0},
+	////								 {"",0,0,0,0,0},
+	////								 {"",0,0,0,0,0},
+	////								 {"",0,0,0,0,0},
+	////								 {"",0,0,0,0,0} };
+	//std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
+	//of << playerFile << std::endl;
+	//
+	//nlohmann::json resourceStatusFile;
+	//resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢ÔŒn‚ÌF
+	//									  {193.0f / 255.0f,237.0f / 255.0f,111.0f / 255.0f},//_‚ç‚©‚¢‰©—ÎŒn‚ÌF
+	//									  {111.0f / 255.0f,237.0f / 255.0f,181.0f / 255.0f},//_‚ç‚©‚¢—ÎŒn‚ÌF
+	//									  {111.0f / 255.0f,143.0f / 255.0f,237.0f / 255.0f},//_‚ç‚©‚¢ÂŽ‡Œn‚ÌF
+	//									  {231.0f / 255.0f,111.0f / 255.0f,237.0f / 255.0f}//_‚ç‚©‚¢Ž‡Œn‚ÌF 
+	//									};
+	//resourceStatusFile["StatusList"] ={ {0,"Item01","ResourceImage01.png",0.2f,0.1f,0.3f,0.2f,0.4f},
+	//								    {1,"Item02","ResourceImage02.png",0.5f,0.2f,0.1f,0.1f,0.3f},
+	//								    {2,"Item02","ResourceImage03.png",0.1f,0.6f,0.1f,0.1f,0.1f} };
+	//resourceStatusFile["ProcessList"] = { {0,u8"Ø‚è‚Þ","ProcessImage_Chop.png",1.1f,1.2f,0.7f,0.8f,1.3f},
+	//									  {1,u8"ä¥‚Å‚é","ProcessImage_Boil.png",0.7f,1.7f,1.0f,1.1f,1.2f},
+	//									  {2,u8"‚·‚è‚Â‚Ô‚·","ProcessImage_Grind.png",1.3f,0.5f,1.4f,1.2f,0.8f}};
+	//
+	//std::ofstream rof("Assets/SaveData/ResourceData.json", std::ios::out);
+	//rof << resourceStatusFile << std::endl;
 
 }
 

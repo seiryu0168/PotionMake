@@ -271,6 +271,7 @@
     <ClCompile Include="Play_CollectionPart_StageManager.cpp" />
     <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="P_CP_CollectionedItemUI.cpp" />
     <ClCompile Include="P_CP_Player_ItemGetter.cpp" />
     <ClCompile Include="P_CP_ResourceItem.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
@@ -400,6 +401,7 @@
     <ClInclude Include="Play_CollectionPart_StageManager.h" />
     <ClInclude Include="Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="P_CP_CollectionedItemUI.h" />
     <ClInclude Include="P_CP_Player_ItemGetter.h" />
     <ClInclude Include="P_CP_ResourceItem.h" />
     <ClInclude Include="ResourceStatusData.h" />

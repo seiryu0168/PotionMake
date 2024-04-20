@@ -429,6 +429,9 @@
     <ClCompile Include="Play_CollectionPart_BaseUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="P_CP_CollectionedItemUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -820,6 +823,9 @@
     </ClInclude>
     <ClInclude Include="Play_CollectionPart_BaseUI.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_CP_CollectionedItemUI.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

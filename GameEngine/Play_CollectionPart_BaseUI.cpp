@@ -3,6 +3,8 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"InterSceneData.h"
 #include"Play_CollectionPart_StageManager.h"
+#include"Engine/DirectX_11/Input.h"
+#include"P_CP_CollectionedItemUI.h"
 
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_CollectionPart_BaseUI")
@@ -35,6 +37,10 @@ void Play_CollectionPart_BaseUI::Start()
 
 void Play_CollectionPart_BaseUI::Update()
 {
+	if (Input::IsKeyDown(DIK_ESCAPE))
+	{
+		Instantiate<P_CP_CollectionedItemUI>(this);
+	}
 }
 
 void Play_CollectionPart_BaseUI::DisplayItemName(int itemNum)
