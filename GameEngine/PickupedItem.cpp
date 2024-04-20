@@ -4,7 +4,8 @@
 #include"Engine/DirectX_11/Input.h"
 #include"PickupedItemDetailUI.h"
 PickupedItem::PickupedItem(Object* parent)
-	:ItemBase(parent,"PickupedItem")
+	:ItemBase(parent,"PickupedItem"),
+	itemCount_(0)
 {
 }
 
@@ -49,6 +50,7 @@ void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int ite
 	countText.SetTextSize(40);
 	countText.SetText(std::to_string(itemCount));
 	AddComponent<Text>(countText);
+	itemCount_ = itemCount;
 	itemNum_ = itemNum;
 	itemName_ = itemName;
 

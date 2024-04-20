@@ -1,4 +1,4 @@
-#include "P_CP_CollectionedItemUI.h"
+#include "P_CP_CollectedItemUI.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
 #include"PickupedItem.h"
@@ -6,17 +6,17 @@
 #include"InterSceneData.h"
 #include"ResourceStatusData.h"
 #include"CloseButton.h"
-P_CP_CollectionedItemUI::P_CP_CollectionedItemUI(Object* parent)
-	:GameObject(parent,"P_CP_CollectionedItemUI"),
+P_CP_CollectedItemUI::P_CP_CollectedItemUI(Object* parent)
+	:GameObject(parent,"P_CP_CollectedItemUI"),
 	uiPos_({0.5,0,0})
 {
 }
 
-P_CP_CollectionedItemUI::~P_CP_CollectionedItemUI()
+P_CP_CollectedItemUI::~P_CP_CollectedItemUI()
 {
 }
 
-void P_CP_CollectionedItemUI::Initialize()
+void P_CP_CollectedItemUI::Initialize()
 {
 	CreateBase();
 	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
@@ -31,13 +31,14 @@ void P_CP_CollectionedItemUI::Initialize()
 						  itr.second,
 						  rData->resourceDataMap_[itr.first].resourceImageName_,
 						  { uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
-		stockCount++;
+		itemNumList_.push_back(itr.first);
 		pos.x += 0.16f;
 		if ((stockCount+1) % 5 == 0)
 		{
 			pos.x = -0.32f;
 			pos.y -= 0.28f;
 		}
+		stockCount++;
 	}
 	for (stockCount; stockCount < 25; stockCount++)
 	{
@@ -52,20 +53,17 @@ void P_CP_CollectionedItemUI::Initialize()
 			pos.y -= 0.28f;
 		}
 	}
-
-	GameObject* button = Instantiate<CloseButton>(this);
-	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 }
 
-void P_CP_CollectionedItemUI::Start()
+void P_CP_CollectedItemUI::Start()
 {
 }
 
-void P_CP_CollectionedItemUI::Update()
+void P_CP_CollectedItemUI::Update()
 {
 }
 
-void P_CP_CollectionedItemUI::CreateBase()
+void P_CP_CollectedItemUI::CreateBase()
 {
 	XMFLOAT3 windowSize;
 	XMFLOAT3 imageRatio;
@@ -129,6 +127,6 @@ void P_CP_CollectionedItemUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
-void P_CP_CollectionedItemUI::Release()
+void P_CP_CollectedItemUI::Release()
 {
 }

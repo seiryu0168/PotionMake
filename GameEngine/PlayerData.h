@@ -34,6 +34,7 @@ public:
 		}
 	};
 	void SortResourceList();
+	void AddResourceItemData(const ResourceData_& resource);
 	std::string name_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;

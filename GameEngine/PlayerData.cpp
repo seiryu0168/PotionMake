@@ -26,3 +26,14 @@ void PlayerData::SortResourceList()
 									   {return value.itemCount_ <= 0; }),
 									   itemDataList_.end());
 }
+
+void PlayerData::AddResourceItemData(const ResourceData_& resource)
+{
+	auto rData = std::find_if(itemDataList_.begin(), itemDataList_.end(), [&](PlayerData::ResourceData_ value) {return value.itemNum_ == resource.itemNum_; });
+	if (rData == itemDataList_.end())
+	{
+		itemDataList_.push_back(resource);
+	}
+	else
+		rData->itemCount_ += resource.itemCount_;
+}

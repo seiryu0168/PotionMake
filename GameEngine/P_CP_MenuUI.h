@@ -1,16 +1,18 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
-class P_CP_CollectionedItemUI : public GameObject
+
+class P_CP_MenuUI : public GameObject
 {
-	XMFLOAT3 uiPos_;
+	int returnImageNum_;
+
 public:
-	P_CP_CollectionedItemUI(Object* parent);
-	~P_CP_CollectionedItemUI();
+	P_CP_MenuUI(Object* parent);
+	~P_CP_MenuUI();
 
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void CreateBase();
+	void SaveItemData();
 	void Release() override;
 };
 

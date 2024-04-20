@@ -55,7 +55,7 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 			//テキストの位置設定
 			XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
 			item->GetComponent<Text>().SetPosition({ textBasePos.x + 10,textBasePos.y + 15 });
-			((ResourceItem*)item)->SetItemNum(rData->processDataMap_[data->itemDataList_[i].itemNum_].resourceNumber_);
+			((ResourceItem*)item)->SetItemNum(rData->resourceDataMap_[data->itemDataList_[i].itemNum_].resourceNumber_);
 			if (resourceCount > 0)
 			{
 				((ResourceItem*)item)->itemName_ = rData->resourceDataMap_[data->itemDataList_[i].itemNum_].resourceName_;

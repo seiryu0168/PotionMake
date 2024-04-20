@@ -4,7 +4,7 @@
 #include"InterSceneData.h"
 #include"Play_CollectionPart_StageManager.h"
 #include"Engine/DirectX_11/Input.h"
-#include"P_CP_CollectionedItemUI.h"
+#include"P_CP_MenuUI.h"
 
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
 	:GameObject(parent, "Play_CollectionPart_BaseUI"),
@@ -29,6 +29,8 @@ void Play_CollectionPart_BaseUI::Initialize()
 	itemNameText.SetRect({ 0,0,500,500 });
 	itemNameText.SetPosition({ 1320,500 });
 	AddComponent<Text>(itemNameText);
+
+	
 }
 
 void Play_CollectionPart_BaseUI::Start()
@@ -40,7 +42,7 @@ void Play_CollectionPart_BaseUI::Update()
 {
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
-		Instantiate<P_CP_CollectionedItemUI>(this);
+		Instantiate<P_CP_MenuUI>(this);
 	}
 }
 
