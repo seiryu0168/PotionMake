@@ -13,6 +13,7 @@ public:
 	void Update() override;
 	void CreateBase();
 	const std::vector<int>& GetItemNumList() { return itemNumList_; }
+	void SetSelectFlag(bool flag);
 	void Release() override;
 };
 

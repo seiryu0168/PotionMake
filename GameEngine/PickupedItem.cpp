@@ -2,6 +2,7 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
 #include"Engine/DirectX_11/Input.h"
+#include"P_CP_CollectedItemUI.h"
 #include"PickupedItemDetailUI.h"
 PickupedItem::PickupedItem(Object* parent)
 	:ItemBase(parent,"PickupedItem"),
@@ -23,9 +24,10 @@ void PickupedItem::Start()
 
 void PickupedItem::Update()
 {
-	if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor())
+	if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor()&&canSelect_)
 	{
-		Instantiate<PickupedItemDetailUI>(this);
+		Instantiate<PickupedItemDetailUI>(this)->SetItemData(itemNum_);
+		((P_CP_CollectedItemUI*)pParent_)->SetSelectFlag(false);
 	}
 }
 

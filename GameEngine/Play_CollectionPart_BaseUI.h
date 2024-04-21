@@ -14,6 +14,7 @@ public:
 	void DisplayItemName(int itemNum);
 	std::vector<std::string>& GetitemNameList() { return itemName_; }
 	void HiddenItemName();
+	void SetUIOpenFlag(bool flag) { isUIOpened_ = flag; };
 	void Release() override;
 };
 

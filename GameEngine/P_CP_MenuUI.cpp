@@ -9,6 +9,7 @@
 #include"PlayerData.h"
 #include"ResourceStatusData.h"
 #include"PickupedItem.h"
+#include"Play_CollectionPart_BaseUI.h"
 P_CP_MenuUI::P_CP_MenuUI(Object* parent)
 	:GameObject(parent,"P_CP_MenuUI"),
 	returnImageNum_(-1)
@@ -23,14 +24,14 @@ void P_CP_MenuUI::Initialize()
 {
 	Image returnHome(this);
 	returnHome.Load("Assets/Image/SelectImage3.png");
-	returnHome.SetPosition({ -0.85f,0.5f,0 });
+	returnHome.SetPosition({ -1.2f,0.5f,0 });
 	returnHome.SetRotation({ 0,0,180 });
 	//returnHome.SetSize({ 5,2,0 });
 	returnImageNum_ = AddComponent<Image>(returnHome);
 	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
 	Text commandText(this);
 	commandText.SetText("‰Æ‚É–ß‚é");
-	commandText.SetPosition({ textPos.x,textPos.y });
+	commandText.SetPosition({ textPos.x+200,textPos.y-50 });
 	AddComponent<Text>(commandText);
 
 	Instantiate<P_CP_CollectedItemUI>(this);
@@ -48,7 +49,7 @@ void P_CP_MenuUI::Update()
 {
 	if (GetComponent<Image>(returnImageNum_).IsHitCursor())
 	{
-		GetComponent<Image>(returnImageNum_).SetPosition({ -0.8,0.5,0 });
+		GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
 
 		if (Input::IsMouseButtonUp(0))
 		{
@@ -58,7 +59,7 @@ void P_CP_MenuUI::Update()
 
 	}
 	else
-		GetComponent<Image>(returnImageNum_).SetPosition({ -0.85f,0.5f,0 });
+		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
 
 }
 
@@ -83,4 +84,5 @@ void P_CP_MenuUI::SaveItemData()
 
 void P_CP_MenuUI::Release()
 {
+	((Play_CollectionPart_BaseUI*)pParent_)->SetUIOpenFlag(false);
 }

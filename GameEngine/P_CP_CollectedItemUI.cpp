@@ -127,6 +127,14 @@ void P_CP_CollectedItemUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
+void P_CP_CollectedItemUI::SetSelectFlag(bool flag)
+{
+	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
+	{
+		((PickupedItem*)itr->get())->SetCanSelect(false);
+	}
+}
+
 void P_CP_CollectedItemUI::Release()
 {
 }

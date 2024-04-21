@@ -43,6 +43,7 @@ void Play_CollectionPart_BaseUI::Update()
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
 		Instantiate<P_CP_MenuUI>(this);
+		isUIOpened_ = true;
 	}
 }
 
