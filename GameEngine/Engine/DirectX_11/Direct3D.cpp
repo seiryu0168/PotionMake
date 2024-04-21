@@ -15,6 +15,7 @@ namespace Direct3D
 	ID3D11BlendState* pBlendState[(int)BLEND_MODE::BLEND_MAX];					//ブレンドステート
 	ID3D11DepthStencilState* pDepthStencilState[(int)BLEND_MODE::BLEND_MAX];	//デプスステンシルステート
 	HWND hWnd_;
+	RECT* clipRect_ = nullptr;
 
 	struct SHADER_BUNDLE
 	{
@@ -757,6 +758,30 @@ int Direct3D::GetViewNumber()
 {
 	return viewNumber_;
 }
+BOOL Direct3D::SetClipCursor(const RECT& range)
+{
+	
+	if (range.left == -10000)
+	{
+		delete clipRect_;
+		clipRect_ = nullptr;
+	}
+	else
+	{
+		if (clipRect_ == nullptr)
+			clipRect_ = new RECT;
+		clipRect_->left = range.left;
+		clipRect_->top = range.top;
+		clipRect_->right = range.right;
+		clipRect_->bottom = range.bottom;
+	}
+	return ClipCursor(clipRect_);
+}
+const RECT& Direct3D::GetClipRect()
+{
+	return *clipRect_;
+	// TODO: return ステートメントをここに挿入します
+}
 //描画開始
 void Direct3D::BeginDraw()
 {
@@ -788,6 +813,12 @@ void Direct3D::EndDraw()
 //解放処理
 void Direct3D::Release()
 {
+	if (clipRect_ != nullptr)
+	{
+		ClipCursor(NULL);
+		delete clipRect_;
+	}
+
 	//解放処理
 	for (int releaseShader = 0; releaseShader < (int)SHADER_TYPE::SHADER_MAX; releaseShader++)
 	{

@@ -85,6 +85,8 @@ namespace Direct3D
 	void RemoveViewPort(UINT index);
 	void SetViewPort(D3D11_VIEWPORT viewPort);
 	int GetViewNumber();
+	BOOL  SetClipCursor(const RECT& range = {-10000,0,0,0});
+	const RECT& GetClipRect();
 
 	//•`‰æŠJŽn
 	void BeginDraw();

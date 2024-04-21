@@ -1,8 +1,11 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+class Player_CollectionPart;
 class Play_CollectionPart_BaseUI : public GameObject
 {
 	std::vector<std::string> itemName_;
+	Player_CollectionPart* player_;
 	bool isUIOpened_;
 public:
 	Play_CollectionPart_BaseUI(Object* parent);
@@ -14,7 +17,7 @@ public:
 	void DisplayItemName(int itemNum);
 	std::vector<std::string>& GetitemNameList() { return itemName_; }
 	void HiddenItemName();
-	void SetUIOpenFlag(bool flag) { isUIOpened_ = flag; };
+	void SetUIOpenFlag(bool flag);
 	void Release() override;
 };
 

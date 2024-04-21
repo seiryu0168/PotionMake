@@ -7,7 +7,8 @@
 #include"Play_UIManager.h"
 #include"Play_CollectionPart_BaseUI.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
-	:Player(parent,"Player_CollectionPart")
+	:Player(parent,"Player_CollectionPart"),
+	canControl_(true)
 {
 }
 
@@ -33,31 +34,35 @@ void Player_CollectionPart::Start()
 
 void Player_CollectionPart::Update()
 {
-	MoveControll();
-
-	int itemNum = itemGetter_->GetItemNumber();
-	if (itemNum >= 0)
+	if (canControl_)
 	{
-		((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
-		if (Input::IsMouseButtonDown(0))
+
+		MoveControll();
+
+		int itemNum = itemGetter_->GetItemNumber();
+
+		if (itemNum >= 0)
 		{
-			AddItem(itemNum);
-			itemGetter_->KillHitObject();
+			((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
+			if (Input::IsMouseButtonDown(0))
+			{
+				AddItem(itemNum);
+				itemGetter_->KillHitObject();
+			}
 		}
-	}
-	else
-		((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->HiddenItemName();
+		else
+			((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->HiddenItemName();
 
+		CameraControll();
 
-	CameraControll();
-
-	RayCastData data;
-	data.start = StoreFloat3(transform_->position_);
-	data.dir = StoreFloat3(transform_->GetFront());
-	ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
-	if (data.hit&&data.dist<=15.0f)
-	{
-		itemGetter_->GetTransform()->position_ = data.hitPos;
+		RayCastData data;
+		data.start = StoreFloat3(transform_->position_);
+		data.dir = StoreFloat3(transform_->GetFront());
+		ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
+		if (data.hit && data.dist <= 15.0f)
+		{
+			itemGetter_->GetTransform()->position_ = data.hitPos;
+		}
 	}
 }
 

@@ -2,6 +2,7 @@
 #include"Engine/GameObject/GameObject.h"
 class PickupedItemDetailUI : public GameObject
 {
+	XMFLOAT3 uiPos_;
 public:
 	PickupedItemDetailUI(Object* parent);
 	~PickupedItemDetailUI();

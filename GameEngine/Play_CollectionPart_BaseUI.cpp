@@ -5,10 +5,19 @@
 #include"Play_CollectionPart_StageManager.h"
 #include"Engine/DirectX_11/Input.h"
 #include"P_CP_MenuUI.h"
+#include"Player_CollectionPart.h"
+
+namespace
+{
+
+
+	RECT clipRange;
+}
 
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
 	:GameObject(parent, "Play_CollectionPart_BaseUI"),
-	isUIOpened_(false)
+	isUIOpened_(false),
+	player_(nullptr)
 {
 }
 
@@ -18,6 +27,9 @@ Play_CollectionPart_BaseUI::~Play_CollectionPart_BaseUI()
 
 void Play_CollectionPart_BaseUI::Initialize()
 {
+	XMINT2 range = { (int)(Direct3D::GetScreenWidth() * 0.5f),(int)(Direct3D::GetScreenHeight() * 0.5f) };
+	clipRange = { range.x,range.y,range.x+1,range.y+1 };
+	Direct3D::SetClipCursor(clipRange);
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
@@ -36,6 +48,7 @@ void Play_CollectionPart_BaseUI::Initialize()
 void Play_CollectionPart_BaseUI::Start()
 {
 	itemName_ = ((Play_CollectionPart_StageManager*)FindObject("Play_CollectionPart_StageManager"))->GetItemNameList();
+	player_ = (Player_CollectionPart*)FindObject("Player_CollectionPart");
 }
 
 void Play_CollectionPart_BaseUI::Update()
@@ -43,7 +56,7 @@ void Play_CollectionPart_BaseUI::Update()
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
 		Instantiate<P_CP_MenuUI>(this);
-		isUIOpened_ = true;
+		SetUIOpenFlag(true);
 	}
 }
 
@@ -58,6 +71,20 @@ void Play_CollectionPart_BaseUI::HiddenItemName()
 {
 	GetComponent<Image>().SetDraw(false);
 	GetComponent<Text>().isDraw_=false;
+}
+
+void Play_CollectionPart_BaseUI::SetUIOpenFlag(bool flag)
+{
+	isUIOpened_ = flag;
+	player_->SetControllFlag(!flag);
+
+	if (!flag)
+	{
+		//RECT clipRange = { 0,0,Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight() };
+		Direct3D::SetClipCursor(clipRange);
+	}
+	else
+		Direct3D::SetClipCursor();
 }
 
 void Play_CollectionPart_BaseUI::Release()

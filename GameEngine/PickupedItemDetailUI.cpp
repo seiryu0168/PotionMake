@@ -6,7 +6,8 @@
 #include"InterSceneData.h"
 #include"ResourceStatusData.h"
 PickupedItemDetailUI::PickupedItemDetailUI(Object* parent)
-	:GameObject(parent, "PickupedItemDetailUI")
+	:GameObject(parent, "PickupedItemDetailUI"),
+	uiPos_({ -0.2f,0,0 })
 {
 }
 
@@ -16,8 +17,13 @@ PickupedItemDetailUI::~PickupedItemDetailUI()
 
 void PickupedItemDetailUI::Initialize()
 {
+	Image backImage(this);
+	backImage.Load("Assets/Image/UIBaseImage4.png");
+	backImage.SetPosition(uiPos_);
+	backImage.SetSize({ 6,10,0 });
+	AddComponent<Image>(backImage);
 	GameObject* button = Instantiate<CloseButton>(this);
-	button->GetComponent<Image>().SetPosition({ -0.4,0.5,0 });
+	button->GetComponent<Image>().SetPosition({ -0.4,0.6,0 });
 }
 
 void PickupedItemDetailUI::Start()
@@ -34,8 +40,17 @@ void PickupedItemDetailUI::SetItemData(int itemNum)
 	Image itemImage(this);
 	itemImage.Load("Assets/Image/"+rData->resourceDataMap_[itemNum].resourceImageName_);
 	itemImage.SetSize({ 0.5f,0.5f,0 });
+	itemImage.SetPosition({ uiPos_.x,uiPos_.y + 0.2f,0 });
 	AddComponent<Image>(itemImage);
-	
+
+	XMFLOAT3 textPos = itemImage.GetPositionAtPixel();
+	Text itemNameText(this);
+	itemNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+	itemNameText.SetTextSize(50);
+	itemNameText.SetRect({ 0,0,300,60 });
+	itemNameText.SetText(rData->resourceDataMap_[itemNum].resourceName_);
+	itemNameText.SetPosition({ textPos.x - 150,textPos.y+105 });
+	AddComponent<Text>(itemNameText);
 }
 
 void PickupedItemDetailUI::Release()

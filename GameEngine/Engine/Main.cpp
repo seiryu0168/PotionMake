@@ -42,7 +42,7 @@ const LPCWSTR WIN_TITLE_NAME = L"Festival";
 
 
 const int WINDOW_WIDTH = 1920;   //ウィンドウ幅
-const int WINDOW_HEIGHT = 1080;	 //ウィンドウ高さ	
+const int WINDOW_HEIGHT = 1080;	 //ウィンドウ高さ
 
 //int pxelUnit;
 //プロトタイプ宣言
@@ -97,11 +97,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	CoInitialize(nullptr);
 
-	if (FAILED(Direct3D::Initialize(WINDOW_WIDTH, WINDOW_HEIGHT, hWnd)))
+	if (FAILED(Direct3D::Initialize(winW, winH, hWnd)))
 	{
 		PostQuitMessage(0);
 	}
-	if (FAILED(D2D::Initialize(WINDOW_WIDTH, WINDOW_HEIGHT, hWnd)))
+	if (FAILED(D2D::Initialize(winW, winH, hWnd)))
 	{
 		PostQuitMessage(0);
 	}
@@ -248,39 +248,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEMOVE:
 		Input::SetMousePosition(LOWORD(lParam), HIWORD(lParam));
 		return 0;
-
-	//case WM_CREATE:
-	//{
-	//	RECT r;
-	//	GetWindowRect(hWnd, &r);
-	//	WINDOW_WIDTH = r.right + r.left;
-	//	WINDOW_HEIGHT = r.bottom + r.top;
-	//	RECT winRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
-	//	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
-	//	SetWindowPos(hWnd, HWND_TOP, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, SWP_SHOWWINDOW);
-	//	WINDOW_WIDTH = winRect.right + winRect.left;     //ウィンドウ幅
-	//	WINDOW_HEIGHT = winRect.bottom + winRect.top;     //ウィンドウ高さ
-	//	ShowWindow(hWnd, SW_SHOW);
-	//	
-	//}
-	//	return 0;
-
-	//case WM_SIZE:
-	//{
-	//	RECT r;
-	//	GetWindowRect(hWnd, &r);
-	//	WINDOW_WIDTH = r.right + r.left;
-	//	WINDOW_HEIGHT = r.bottom + r.top;
-	//	RECT winRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
-	//	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
-	//	WINDOW_WIDTH = winRect.right + winRect.left;     //ウィンドウ幅
-	//	WINDOW_HEIGHT = winRect.bottom + winRect.top;     //ウィンドウ高さ
-	//	Direct3D::SetScreenWidth(WINDOW_WIDTH);
-	//	Direct3D::SetScreenHeight(WINDOW_HEIGHT);
-	//}
-	//return 0;
+	case WM_ACTIVATE:
+		BOOL isSuccess_WmActive;
+		if (wParam == WA_INACTIVE)
+		{
+			ClipCursor(NULL);
+		}
+		else if (wParam == WA_ACTIVE||wParam == WA_CLICKACTIVE)
+			isSuccess_WmActive = ClipCursor(&Direct3D::GetClipRect());
+		return 0;
 
 	case WM_DESTROY:
+		ClipCursor(NULL);
 		PostQuitMessage(0);  //プログラム終了
 		return 0;
 	}
