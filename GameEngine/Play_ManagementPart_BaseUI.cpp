@@ -17,6 +17,7 @@ Play_ManagementPart_BaseUI::~Play_ManagementPart_BaseUI()
 
 void Play_ManagementPart_BaseUI::Initialize()
 {
+	Direct3D::ShowMouseCursor(false);
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
@@ -25,7 +26,7 @@ void Play_ManagementPart_BaseUI::Initialize()
 	Text text(this);
 	text.SetText("Text");
 	text.SetRect({ 0,0,500,500 });
-	text.SetPosition({ 1320,500 });
+	text.SetPosition({ 1320,520 });
 	AddComponent<Text>(text);
 }
 
@@ -44,6 +45,8 @@ void Play_ManagementPart_BaseUI::Release()
 
 void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 {
+	Direct3D::ShowMouseCursor(true);
+	Direct3D::SetClipCursor();
 	switch (uiNum)
 	{
 	case 0:

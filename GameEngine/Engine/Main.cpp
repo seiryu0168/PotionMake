@@ -97,11 +97,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	CoInitialize(nullptr);
 
-	if (FAILED(Direct3D::Initialize(winW, winH, hWnd)))
+	if (FAILED(Direct3D::Initialize(winW, winH, hWnd,{ WINDOW_WIDTH ,WINDOW_HEIGHT})))
 	{
 		PostQuitMessage(0);
 	}
-	if (FAILED(D2D::Initialize(winW, winH, hWnd)))
+	if (FAILED(D2D::Initialize(winW, winH, hWnd, { WINDOW_WIDTH ,WINDOW_HEIGHT })))
 	{
 		PostQuitMessage(0);
 	}
@@ -110,7 +110,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	DebugUI::Initialize(hWnd, Direct3D::GetDevice(), Direct3D::GetContext());
 	Input::Initialize(hWnd);
 	//ModelManager::Initialize();
-	CameraManager::Initialize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	CameraManager::Initialize(winW, winH);
 	Audio::Initialize();
 	Coordinator::Init();
 
@@ -252,14 +252,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		BOOL isSuccess_WmActive;
 		if (wParam == WA_INACTIVE)
 		{
+			do
+			{}while (ShowCursor(true) < 0);
 			ClipCursor(NULL);
-		}
-		else if (wParam == WA_ACTIVE||wParam == WA_CLICKACTIVE)
+		} 
+		else if (wParam == WA_ACTIVE || wParam == WA_CLICKACTIVE)
+		{
 			isSuccess_WmActive = ClipCursor(&Direct3D::GetClipRect());
+			ShowCursor(Direct3D::GetShowMouseCursor());
+		}
 		return 0;
 
 	case WM_DESTROY:
 		ClipCursor(NULL);
+		do
+		{} while (ShowCursor(true) < 0);
 		PostQuitMessage(0);  //ƒvƒƒOƒ‰ƒ€I—¹
 		return 0;
 	}

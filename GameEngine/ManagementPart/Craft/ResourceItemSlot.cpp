@@ -21,7 +21,7 @@ void ResourceItemSlot::Initialize()
 
 	Text countText(this);
 	countText.SetRect({ 0,0,50,50 });
-	countText.SetTextSize(40);
+	countText.SetTextSize(32);
 	countText.SetText("0");
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	AddComponent<Text>(countText);

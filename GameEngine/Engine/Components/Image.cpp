@@ -14,7 +14,9 @@ XMFLOAT3 Image::ConvertToRatio(XMFLOAT3 pos)
 
 XMFLOAT3 Image::ConvertToPixel(XMFLOAT3 pos)
 {
-	XMFLOAT2 halfScreen = { Direct3D::GetScreenWidth() / 2.0f,Direct3D::GetScreenHeight() / 2.0f };
+	XMFLOAT2 halfScreen = { Direct3D::GetScreenWidth()* 0.5f,Direct3D::GetScreenHeight()*0.5f};
+	//halfScreen.x = halfScreen.x * 0.5f;
+	//halfScreen.y = halfScreen.y * 0.5f;
 	pos.x = halfScreen.x+((pos.x * halfScreen.x));
 	pos.y = halfScreen.y + ((-pos.y * halfScreen.y));
 
@@ -82,9 +84,11 @@ bool Image::Load(const std::string& name, const std::string& tab)
 
 	XMFLOAT3 size = pSprite_->GetSize();
 	rect_ = { 0,0,(long)size.x,(long)size.y };
-
-	if (tab != "")
-		transform_ = ImageMediationer::Load(name, tab, pSprite_.use_count());
+	transform_.position_ = XMVectorSet(0, 0, 0, 0);
+	transform_.rotate_ = XMVectorSet(0, 0, 0, 0);
+	transform_.scale_ = { 1,1,1 };
+	//if (tab != "")
+	//	transform_ = //ImageMediationer::Load(name, tab, pSprite_.use_count());
 
 	return true;
 }
@@ -221,12 +225,15 @@ bool Image::IsHitCursor()
 		return false;
 
 	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
-    float wid = (pSprite_->GetSize().x * transform_.scale_.x / 2);
-    float hgt = (pSprite_->GetSize().y * transform_.scale_.y / 2);
-    float Left = (XMVectorGetX(transform_.position_) + 1) * (Direct3D::GetScreenWidth() / 2.0f) - wid;
-    float Right = (XMVectorGetX(transform_.position_) + 1) * (Direct3D::GetScreenWidth() / 2.0f) + wid;
-    float Top = (-XMVectorGetY(transform_.position_) + 1) * (Direct3D::GetScreenHeight() / 2.0f) - hgt;
-    float Bottom = (-XMVectorGetY(transform_.position_) + 1) * (Direct3D::GetScreenHeight() / 2.0f) + hgt;
+	XMFLOAT3 imagePos = ConvertToPixel(transform_.position_);
+    float wid = (pSprite_->GetSize().x * transform_.scale_.x*0.5f);
+    float hgt = (pSprite_->GetSize().y * transform_.scale_.y*0.5f);
+
+	float Left = imagePos.x	  - wid;
+	float Top = imagePos.y    - hgt;
+	float Right = imagePos.x  + wid;
+	float Bottom = imagePos.y + hgt;
+
     if (Left <= mousePos.x && mousePos.x <= Right &&
         Top <= mousePos.y && mousePos.y <= Bottom)
     {

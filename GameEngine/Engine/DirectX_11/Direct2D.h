@@ -25,7 +25,7 @@ namespace D2D
 	//extern ID2D1RenderTarget* pRenderTarget_;
 	extern IDWriteFontSetBuilder1* pFontSetBuilder_;
 
-	HRESULT Initialize(int winW, int winH, HWND hWnd);
+	HRESULT Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowSize = {1920,1080});
 	HRESULT CreateFontCollection();
 	IDWriteFontCollection* GetSystemFontCollection();
 	ID2D1Factory* Get2DFactory();
@@ -41,6 +41,7 @@ namespace D2D
 	void EndDraw();
 	int  GetdpiX();
 	int  GetdpiY();
+	const XMINT2& GetWindowSize();
 
 };
 

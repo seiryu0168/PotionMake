@@ -35,5 +35,8 @@ void Play_ManagementPart_PotionManagerUI::Update()
 
 void Play_ManagementPart_PotionManagerUI::Release()
 {
+	Direct3D::ShowMouseCursor(false);
+	XMINT2 rectPos = { (int)(Direct3D::GetScreenWidth() * 0.5f),(int)(Direct3D::GetScreenHeight() * 0.5f) };
+	Direct3D::SetClipCursor({ rectPos.x,rectPos.y,rectPos.x + 1,rectPos.y + 1 });
 	((Play_ManagementPart_BaseUI*)pParent_)->SetAccessUIFlag(false);
 }

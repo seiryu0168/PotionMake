@@ -23,7 +23,7 @@ void ResourceItem::Initialize()
 	Text countText(this);
 	countText.SetLayer(1);
 	countText.SetRect({ 0,0,50,50 });
-	countText.SetTextSize(40);
+	countText.SetTextSize(32);
 	countText.SetText("0");
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	AddComponent<Text>(countText);

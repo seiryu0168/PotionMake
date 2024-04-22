@@ -23,7 +23,7 @@ void PickupedItemDetailUI::Initialize()
 	backImage.SetSize({ 6,10,0 });
 	AddComponent<Image>(backImage);
 	GameObject* button = Instantiate<CloseButton>(this);
-	button->GetComponent<Image>().SetPosition({ -0.4,0.6,0 });
+	button->GetComponent<Image>().SetPosition({ -0.4,0.55,0 });
 }
 
 void PickupedItemDetailUI::Start()
@@ -51,6 +51,12 @@ void PickupedItemDetailUI::SetItemData(int itemNum)
 	itemNameText.SetText(rData->resourceDataMap_[itemNum].resourceName_);
 	itemNameText.SetPosition({ textPos.x - 150,textPos.y+105 });
 	AddComponent<Text>(itemNameText);
+	Text itemDetailText(this);
+	itemDetailText.SetText("Ç±Ç±Ç…ê‡ñæ");
+	itemDetailText.SetRect({ 0,0,300,240 });
+	itemDetailText.SetTextSize(25);
+	itemDetailText.SetPosition({ textPos.x - 150,textPos.y + 170 });
+	AddComponent<Text>(itemDetailText);
 }
 
 void PickupedItemDetailUI::Release()

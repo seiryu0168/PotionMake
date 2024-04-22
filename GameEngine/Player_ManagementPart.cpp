@@ -61,7 +61,7 @@ void Player_ManagementPart::Update()
 		//
 		if (Input::IsKeyDown(DIK_F))
 		{
-			((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->AccessUI(collisionUINum_);
+			((Play_UIManager*)GetUIManager())->AccessUI(collisionUINum_);
 		}
 
 	}

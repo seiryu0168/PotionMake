@@ -16,6 +16,8 @@ namespace Direct3D
 	ID3D11DepthStencilState* pDepthStencilState[(int)BLEND_MODE::BLEND_MAX];	//デプスステンシルステート
 	HWND hWnd_;
 	RECT* clipRect_ = nullptr;
+	bool showCursorFlag_ = true;
+	XMINT2 windowSize_ = {0,0};
 
 	struct SHADER_BUNDLE
 	{
@@ -42,7 +44,7 @@ namespace Direct3D
 }
 
 //初期化
-HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
+HRESULT Direct3D::Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowSize)
 {
 	hWnd_ = hWnd;
 	RECT desctopSize;
@@ -50,8 +52,9 @@ HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
 	GetWindowRect(desctopWnd, &desctopSize);
 	displaySize.x = desctopSize.right - desctopSize.left;
 	displaySize.y = desctopSize.bottom - desctopSize.top;
-	screenWidth = winW;
-	screenHeight = winH;
+	screenWidth = screenW;
+	screenHeight = screenH;
+	windowSize_ = windowSize;
 	///////////////////////////いろいろ準備するための設定///////////////////////////////
 	//いろいろな設定項目をまとめた構造体
 	DXGI_SWAP_CHAIN_DESC scDesc;
@@ -60,8 +63,8 @@ HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
 	ZeroMemory(&scDesc, sizeof(scDesc));
 
 	//描画先のフォーマット
-	scDesc.BufferDesc.Width = winW;		//画面幅
-	scDesc.BufferDesc.Height = winH;	//画面高さ
+	scDesc.BufferDesc.Width = screenW;		//画面幅
+	scDesc.BufferDesc.Height = screenH;	//画面高さ
 	scDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	// 何色使えるか
 
 	//FPS（1/60秒に1回）
@@ -130,8 +133,8 @@ HRESULT Direct3D::Initialize(int winW, int winH, HWND hWnd)
 
 	//深度ステンシルビューの作成
 	D3D11_TEXTURE2D_DESC descDepth;
-	descDepth.Width = winW;
-	descDepth.Height = winH;
+	descDepth.Width = screenW;
+	descDepth.Height = screenH;
 	descDepth.MipLevels = 1;
 	descDepth.ArraySize = 1;
 	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -781,6 +784,31 @@ const RECT& Direct3D::GetClipRect()
 {
 	return *clipRect_;
 	// TODO: return ステートメントをここに挿入します
+}
+void Direct3D::ShowMouseCursor(bool flag)
+{
+	if (flag)
+	{
+		do
+		{
+		} while (ShowCursor(flag) < 0);
+
+	}
+	else
+	{
+		do
+		{
+		} while (ShowCursor(flag)>= 0);
+	}
+	showCursorFlag_ = flag;
+}
+bool Direct3D::GetShowMouseCursor()
+{
+	return showCursorFlag_;
+}
+const XMINT2& Direct3D::GetWindwSize()
+{
+	return windowSize_;
 }
 //描画開始
 void Direct3D::BeginDraw()

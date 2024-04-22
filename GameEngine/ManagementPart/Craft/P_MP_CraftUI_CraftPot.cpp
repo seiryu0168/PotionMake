@@ -35,7 +35,7 @@ void P_MP_CraftUI_CraftPot::Initialize()
 		GameObject* item = Instantiate<ResourceItemSlot>(this);
 		item->GetComponent<Image>().SetPosition({ standPosition_.x+itemPos.x,standPosition_.y+itemPos.y,0 });
 		XMFLOAT3 textBasePos = item->GetComponent<Image>().GetPositionAtPixel();
-		item->GetComponent<Text>().SetPosition({ textBasePos.x + 10,textBasePos.y+15 });
+		item->GetComponent<Text>().SetPosition({ textBasePos.x + 5,textBasePos.y+10 });
 		itemPos.x += 0.16f;
 		if ((i + 1) % 4 == 0)
 		{

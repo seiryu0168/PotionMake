@@ -21,10 +21,12 @@ namespace D2D
 	D2D1_RECT_F			   layoutRect_;
 	float				   dpiScaleX_;
 	float				   dpiScaleY_;
+	XMINT2 windowSize_ = {0,0};
 }
 
-HRESULT D2D::Initialize(int winW, int winH, HWND hWnd)
+HRESULT D2D::Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowSize)
 {
+	windowSize_ = windowSize;
 	HRESULT hr;
 	hr= D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &pFactory_);
 	if (FAILED(hr))
@@ -38,71 +40,10 @@ HRESULT D2D::Initialize(int winW, int winH, HWND hWnd)
 	hr = pWriteFactory_->CreateFontSetBuilder(&pFontSetBuilder_);
 	assert(FAILED(hr) == false);
 	CreateFontCollection();
-	//std::filesystem::path path = "Assets/Font/holiday_mdjp05/HolidayMDJP.otf";
-	//hr = pWriteFactory_->CreateFontFileReference(path.wstring().c_str(), nullptr, &pFontFile_);
-	//assert(FAILED(hr) == false);
-	//
-	//
-	//pFontSetBuilder_->AddFontFile(pFontFile_);
-	//assert(FAILED(hr) == false);
-	//
-	//pFontSetBuilder_->CreateFontSet(&pFontSet_);
-	//assert(FAILED(hr) == false);
-	//
-	//pWriteFactory_->CreateFontCollectionFromFontSet(pFontSet_, &pFontCollection_);
-	//assert(FAILED(hr) == false);
-	//BOOL isSupport;// = nullptr;
-	//DWRITE_FONT_FILE_TYPE fileType;// = nullptr;
-	//DWRITE_FONT_FACE_TYPE faceType;// = nullptr;
-	//UINT32 count;// = nullptr;
-	//UINT32 familyCount;
-	//BOOL isFind;
-	//IDWriteFontFamily1* family=nullptr;
-	//hr = pFontCollection_->GetFontFamily(0,&family);
-	//IDWriteLocalizedStrings* name;
-	//family->GetFamilyNames(&name);
-	//std::wstring fontName;
-	//UINT32 length = 0;
-	//
-	//name->GetStringLength(0, &length);
-	//wchar_t* fontNameArray = new wchar_t[length];
-	//name->GetString(0, fontNameArray, length + 1);
-	//hr = pFontFile_->Analyze(&isSupport, &fileType, &faceType, &count);
 
 	IDXGISurface* pBackBuffer;	
 	Direct3D::GetSwapChain()->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
-	//hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),reinterpret_cast<IUnknown**>(&pWriteFactory_));
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : テキスト描画用ファクトリの作成に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
-	//pWszText = L"Hello World!";
-	//textLength_ = (UINT32)wcslen(pWszText);
-	//
-	////文字のフォーマット作成
-	//hr = pWriteFactory_->CreateTextFormat(L"Gabliora", NULL, DWRITE_FONT_WEIGHT_REGULAR, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, 72.0f, L"en-us", &pTextFormat_);
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : テキストフォント作成に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
-	//
-	//
-	////アライメント設定
-	//hr = pTextFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : アライメント設定に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
-	//
-	//hr = pTextFormat_->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : アライメント設定に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
+	
 	RECT rect;
 	GetClientRect(hWnd, &rect);
 	
@@ -112,40 +53,6 @@ HRESULT D2D::Initialize(int winW, int winH, HWND hWnd)
 
 	dpiScaleX_ = (float)GetDpiForWindow(hWnd);// * ((float)Direct3D::GetScreenWidth()/ (float)Direct3D::GetDisplaySize().x );
 	dpiScaleY_ = (float)GetDpiForWindow(hWnd);// * ( (float)Direct3D::GetScreenHeight()/(float)Direct3D::GetDisplaySize().y);
-
-	//D2D1_SIZE_U size = D2D1::Size<UINT>(rect.right, rect.bottom);
-	//D2D1_RENDER_TARGET_PROPERTIES prop = D2D1::RenderTargetProperties(D2D1_RENDER_TARGET_TYPE_DEFAULT, D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED), dpiScaleX_, dpiScaleY_);
-	//ID2D1RenderTarget* pRenderTarget = nullptr;
-	//hr = pFactory_->CreateDxgiSurfaceRenderTarget(pBackBuffer,prop , &pRenderTarget);
-	
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : レンダーターゲットの作成に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
-	//renderTargets_.push_back(pRenderTarget);
-
-	//hr = pRenderTarget_->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White),&pColorBrush_);
-	//if (FAILED(hr))
-	//{
-	//	MessageBox(nullptr, L"Direct2D : ブラシの作成に失敗", L"エラー", MB_OK);
-	//	return hr;
-	//}
-	//XMINT2 trns(0, 0);
-	//rect.top += trns.y;
-	//rect.bottom += trns.y;
-	//rect.left += trns.x;
-	//rect.right += trns.x;
-	//layoutRect_ = D2D1::RectF(static_cast<FLOAT>(rect.left) / dpiScaleX_,
-	//						  static_cast<FLOAT>(rect.top) / dpiScaleY_,
-	//						  static_cast<FLOAT>(rect.right - rect.left) / dpiScaleX_,
-	//						  static_cast<FLOAT>(rect.bottom - rect.top) / dpiScaleY_);	
-	//layoutRect_ = D2D1::RectF(static_cast<FLOAT>(rect.left),
-	//	static_cast<FLOAT>(rect.top),
-	//	static_cast<FLOAT>(rect.right - rect.left),
-	//	static_cast<FLOAT>(rect.bottom - rect.top));
-
-
 
 	return S_OK;
 }
@@ -298,4 +205,9 @@ int D2D::GetdpiX()
 int D2D::GetdpiY()
 {
 	return (int)dpiScaleY_;
+}
+
+const XMINT2& D2D::GetWindowSize()
+{
+	return windowSize_;
 }

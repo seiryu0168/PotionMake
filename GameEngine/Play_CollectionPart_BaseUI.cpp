@@ -30,6 +30,8 @@ void Play_CollectionPart_BaseUI::Initialize()
 	XMINT2 range = { (int)(Direct3D::GetScreenWidth() * 0.5f),(int)(Direct3D::GetScreenHeight() * 0.5f) };
 	clipRange = { range.x,range.y,range.x+1,range.y+1 };
 	Direct3D::SetClipCursor(clipRange);
+	Direct3D::ShowMouseCursor(false);
+		
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
@@ -39,10 +41,8 @@ void Play_CollectionPart_BaseUI::Initialize()
 	Text itemNameText(this);
 	itemNameText.SetText("");
 	itemNameText.SetRect({ 0,0,500,500 });
-	itemNameText.SetPosition({ 1320,500 });
+	itemNameText.SetPosition({ 1320,520 });
 	AddComponent<Text>(itemNameText);
-
-	
 }
 
 void Play_CollectionPart_BaseUI::Start()
@@ -78,13 +78,19 @@ void Play_CollectionPart_BaseUI::SetUIOpenFlag(bool flag)
 	isUIOpened_ = flag;
 	player_->SetControllFlag(!flag);
 
+	//メニューUIを閉じる
 	if (!flag)
 	{
 		//RECT clipRange = { 0,0,Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight() };
 		Direct3D::SetClipCursor(clipRange);
+		Direct3D::ShowMouseCursor(false);
 	}
+	//メニューUIを開く
 	else
+	{
 		Direct3D::SetClipCursor();
+		Direct3D::ShowMouseCursor(true);
+	}
 }
 
 void Play_CollectionPart_BaseUI::Release()

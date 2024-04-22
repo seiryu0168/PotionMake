@@ -54,7 +54,7 @@ namespace Direct3D
 	
 
 	//初期化
-	HRESULT Initialize(int winW, int winH, HWND hWnd);
+	HRESULT Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowSize = {1920,1080});
 
 	//シェーダー準備
     HRESULT InitShader();
@@ -87,6 +87,9 @@ namespace Direct3D
 	int GetViewNumber();
 	BOOL  SetClipCursor(const RECT& range = {-10000,0,0,0});
 	const RECT& GetClipRect();
+	void ShowMouseCursor(bool flag);
+	bool GetShowMouseCursor();
+	const XMINT2& GetWindwSize();
 
 	//描画開始
 	void BeginDraw();
