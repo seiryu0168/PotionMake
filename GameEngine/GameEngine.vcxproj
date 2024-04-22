@@ -277,6 +277,8 @@
     <ClCompile Include="P_CP_MenuUI.cpp" />
     <ClCompile Include="P_CP_Player_ItemGetter.cpp" />
     <ClCompile Include="P_CP_ResourceItem.cpp" />
+    <ClCompile Include="P_MP_SettiementUI_Potion.cpp" />
+    <ClCompile Include="P_MP_SettlementUI.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
     <ClCompile Include="SaveDataLoader.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
@@ -410,6 +412,8 @@
     <ClInclude Include="P_CP_MenuUI.h" />
     <ClInclude Include="P_CP_Player_ItemGetter.h" />
     <ClInclude Include="P_CP_ResourceItem.h" />
+    <ClInclude Include="P_MP_SettiementUI_Potion.h" />
+    <ClInclude Include="P_MP_SettlementUI.h" />
     <ClInclude Include="ResourceStatusData.h" />
     <ClInclude Include="SaveDataLoader.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />

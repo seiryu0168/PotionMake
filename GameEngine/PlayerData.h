@@ -23,12 +23,16 @@ public:
 	{
 		std::string potionName_;
 		bool isSale_;
+		int topStatus_;
+		int price_;
 		std::vector<float> potionStatus_;
 		XMFLOAT3 potionColor_;
 		PotionData()
 		{
 			potionName_ = "";
 			isSale_ = false;
+			topStatus_ = 0;
+			price_ = 0;
 			potionStatus_ = { 0,0,0,0,0 };
 			potionColor_ = { 0,0,0 };
 		}

@@ -3,6 +3,7 @@
 #include"../../Engine/Systems/ImageSystem.h"
 #include"../../Engine/Systems/TextSystem.h"
 #include"../../Engine/newSceneManager.h"
+#include"../../P_MP_SettlementUI.h"
 P_MP_OutingUI_ActionText::P_MP_OutingUI_ActionText(Object* parent)
 	:GameObject(parent,"P_MP_OutingUI_ActionText")
 {
@@ -67,6 +68,10 @@ void P_MP_OutingUI_ActionText::Outing(int outNum)
 	if (outNum == 0)
 	{
 		newSceneManager::ChangeScene(SCENE_ID::PLAY_COLLECTION);
+	}
+	else if (outNum == 1)
+	{
+		Instantiate<P_MP_SettlementUI>(this);
 	}
 }
 

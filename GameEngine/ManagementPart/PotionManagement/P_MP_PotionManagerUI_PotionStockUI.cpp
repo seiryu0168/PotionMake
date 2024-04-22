@@ -60,8 +60,11 @@ void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 			stock->GetComponent<Image>().SetPosition({ potionImageBasePos_.x + diff.x,potionImageBasePos_.y + diff.y,0 });
 
 			//ポーションの各データを入れる
-			((PotionStock*)stock)->SetPotionStatus_(i, data->potionDataList_[i].potionName_,
+			((PotionStock*)stock)->SetPotionStatus_(i,
+				data->potionDataList_[i].potionName_,
 				data->potionDataList_[i].isSale_,
+				data->potionDataList_[i].topStatus_,
+				data->potionDataList_[i].potionColor_,
 				data->potionDataList_[i].potionStatus_[0],
 				data->potionDataList_[i].potionStatus_[1],
 				data->potionDataList_[i].potionStatus_[2],
@@ -166,6 +169,8 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 		{
 			PlayerData::PotionData pData;
 			pData.potionName_ = ((PotionStock*)potionList_[i])->GetPotionName();
+			pData.potionColor_ = ((PotionStock*)potionList_[i])->GetPotionColor();
+			pData.topStatus_ = ((PotionStock*)potionList_[i])->GetTopStatus();
 			pData.potionStatus_ = ((PotionStock*)potionList_[i])->GetPotionStatus();
 			if (((PotionStock*)potionList_[i])->GetSelectedSlot() == PotionStock::SelectSlot::Sell)
 				pData.isSale_ = true;
@@ -177,7 +182,6 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 	//セーブデータを更新
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	data->potionDataList_ = newPotionDataList;
-
 	pParent_->KillMe();
 }
 
@@ -192,4 +196,5 @@ void P_MP_PotionManagerUI_PotionStockUI::SetEnablePotionStock(bool isEnable)
 
 void P_MP_PotionManagerUI_PotionStockUI::Release()
 {
+	potionList_.clear();
 }

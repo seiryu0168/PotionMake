@@ -55,29 +55,29 @@ void TestObject::Initialize()
 	//AddComponent<Draw3DComponent>(dObj);
 	 
 	//Draw3DComponent particle;
-	Particle particle(this);
-	EmitterData data;
-	data.acceleration = 0.3f;
-	data.delay = 30;
-	data.position = { 0,0,0 };
-	data.positionErr = { 10,10,10 };
-	data.dir = { 1,0,0 };
-	data.dirErr = { 0,0,0 };
-	data.gravity = -0.01f;
-	data.firstSpeed = 0.001f;
-	data.lifeTime = 100;
-	data.number = 10;
-	data.scale = { 1.0f,1.0f };
-	data.size = { 1,1 };
-	data.sizeErr = { 0,0 };
-	data.textureFileName = "Assets\\Image\\BrickTexture.jpg";
-	data.blendMode = BLEND_MODE::BLEND_DEFAULT;
-	particle.SetData(data);
-	AddComponent<Particle>(particle);
+	//Particle particle(this);
+	//EmitterData data;
+	//data.acceleration = 0.3f;
+	//data.delay = 30;
+	//data.position = { 0,0,0 };
+	//data.positionErr = { 10,10,10 };
+	//data.dir = { 1,0,0 };
+	//data.dirErr = { 0,0,0 };
+	//data.gravity = -0.01f;
+	//data.firstSpeed = 0.001f;
+	//data.lifeTime = 100;
+	//data.number = 10;
+	//data.scale = { 1.0f,1.0f };
+	//data.size = { 1,1 };
+	//data.sizeErr = { 0,0 };
+	//data.textureFileName = "Assets\\Image\\BrickTexture.jpg";
+	//data.blendMode = BLEND_MODE::BLEND_DEFAULT;
+	//particle.SetData(data);
+	//AddComponent<Particle>(particle);
 	
-	Test_Model_ECSver model(this);
-	model.Load("Assets\\Model\\AAA.fbx");
-	AddComponent<Test_Model_ECSver>(model);
+	//Test_Model_ECSver model(this);
+	//model.Load("Assets\\Model\\AAA.fbx");
+	//AddComponent<Test_Model_ECSver>(model);
 
 	//Text text;
 	//AddComponent<Text>(text);
@@ -86,30 +86,49 @@ void TestObject::Initialize()
 	//text2.SetColor({ 1,0,0,1 });
 	//AddComponent<Text>(text2);
 	//text2.SetPosition({ 0,0 });
-	LineParticle line(this);
-	LineData lineData;
-	lineData.length = 100;
-	lineData.textureName = "Assets\\Image\\Effect01.png";
-	lineData.width = 0.5f;
-	lineData.endWidth = 0.0f;
-	line.SetLineParameter(lineData);
-	line.SetBlendMode(BLEND_MODE::BLEND_DEFAULT);
-	AddComponent<LineParticle>(line);
+	//LineParticle line(this);
+	//LineData lineData;
+	//lineData.length = 100;
+	//lineData.textureName = "Assets\\Image\\Effect01.png";
+	//lineData.width = 0.5f;
+	//lineData.endWidth = 0.0f;
+	//line.SetLineParameter(lineData);
+	//line.SetBlendMode(BLEND_MODE::BLEND_DEFAULT);
+	//AddComponent<LineParticle>(line);
 	
 	
 	
 	Image image(this);
-	image.Load("Assets\\Image\\BrickTexture.jpg");
-	XMFLOAT3 pos = { -1.0f,0.001f,0 };
-	image.SetPosition(pos);
-	image.SetDrawTarget(0);
+	image.Load("Assets\\Image\\ItemBaseImage.png");
+	//XMFLOAT3 pos = { -1.0f,0.001f,0 };
+	//image.SetPosition({1,0,0});
+	//image.SetDrawTarget(0);
+	image.SetSize({ 1,1,0 });
+
 	AddComponent<Image>(image);	
+
+	Text txt(this);
+	txt.SetText("");
+	txt.SetTextSize(40);
+	AddComponent<Text>(txt);
+
 	//Instantiate<TestObjectChild>(this);
 
 }
 
 void TestObject::Update()
 {
+	XMFLOAT3 pos = StoreFloat3(Input::GetMousePosition());
+	std::string msg = "x:" + std::to_string(pos.x)+"\n";
+	msg += "y:" + std::to_string(pos.y)+"\n";
+	if (GetComponent<Image>().IsHitCursor())
+	{
+		msg += "Hit";
+	}
+	else
+		msg += "NotHit";
+	GetComponent<Text>().SetText(msg);
+
 	//time_++;
 	//vPos_ = XMVector3Rotate(vPos_, XMQuaternionRotationAxis(XMVectorSet(0, 1.0f, 0, 0), XMConvertToRadians(1)));
 	//transform_->position_ = vPos_;
@@ -143,5 +162,4 @@ void TestObject::Release()
 
 void TestObject::OnCollision(Object* target)
 {
-	int a = 0;
 }

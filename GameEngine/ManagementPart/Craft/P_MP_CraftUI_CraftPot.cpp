@@ -259,8 +259,10 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	PlayerData::PotionData pData;
 	pData.potionName_ = potionName;
 	pData.isSale_ = false;
+	pData.topStatus_ = maxStatus;
 	pData.potionStatus_ = status;
 	pData.potionColor_ = potionColor;
+
 	//ƒ\[ƒg
 	data->SortResourceList();
 	data->potionDataList_.push_back(pData);

@@ -4,6 +4,7 @@
 #include"Engine/newSceneManager.h"
 #include"Engine/Systems/TextSystem.h"
 #include "Engine/ResourceManager/Audio.h"
+#include"TestObject.h"
 
 namespace
 {
@@ -32,6 +33,8 @@ void Title::Initialize()
 	XMFLOAT3 pos = { 0,-0.5f,0 };
 	image.SetPosition(pos);
 	AddComponent<Image>(image);
+
+	Instantiate<TestObject>(this);
 
 }
 
