@@ -14,7 +14,7 @@ XMFLOAT3 Image::ConvertToRatio(XMFLOAT3 pos)
 
 XMFLOAT3 Image::ConvertToPixel(XMFLOAT3 pos)
 {
-	XMINT2 halfScreen =  Direct3D::GetWindwSize();// *0.5f,Direct3D::GetScreenHeight() * 0.5f };
+	XMINT2 halfScreen =  {Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight()};
 	//halfScreen.x = halfScreen.x * 0.5f;
 	//halfScreen.y = halfScreen.y * 0.5f;
 	pos.x = halfScreen.x*0.5f+((pos.x * halfScreen.x*0.5f));
@@ -229,7 +229,7 @@ bool Image::IsHitCursor()
     float wid = (pSprite_->GetSize().x * transform_.scale_.x*0.5f);
     float hgt = (pSprite_->GetSize().y * transform_.scale_.y*0.5f);
 
-	int diff =  (Direct3D::GetScreenHeight()/2- Direct3D::GetWindwSize().y/2)*0.5f;
+	int diff =  (Direct3D::GetScreenHeight()- Direct3D::GetWindwSize().y)*0.25f;
 
 	float Left = imagePos.x	  - wid;
 	float Top = imagePos.y - diff - hgt;

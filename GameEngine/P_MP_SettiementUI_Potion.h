@@ -5,6 +5,7 @@ class P_MP_SettiementUI_Potion : public GameObject
 	int potionTier_;
 	std::string potionName_;
 	XMFLOAT3 potionColor_;
+
 	int price_;
 	int totalGain_;
 
