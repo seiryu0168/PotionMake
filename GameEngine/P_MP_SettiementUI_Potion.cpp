@@ -2,7 +2,8 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
 P_MP_SettiementUI_Potion::P_MP_SettiementUI_Potion(Object* parent)
-	:GameObject(parent,"P_MP_SettiementUI_Potion")
+	:GameObject(parent,"P_MP_SettiementUI_Potion"),
+	isSetFirstPosition_(false)
 {
 }
 
@@ -53,11 +54,21 @@ void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& 
 	GetComponent<Text>().SetText(std::to_string(price));
 }
 
-void P_MP_SettiementUI_Potion::SetPosition(const XMFLOAT3& pos)
+void P_MP_SettiementUI_Potion::SetFirstPosition(const XMFLOAT3& pos)
 {
+	firstPos_ = pos;
 	GetComponent<Image>(0).SetPosition(pos);
 	GetComponent<Image>(1).SetPosition({ pos.x - 0.2f,pos.y,0 });
 	GetComponent<Image>(2).SetPosition({ pos.x - 0.2f,pos.y,0 });
+	XMFLOAT3 txtPos = GetComponent<Image>(0).GetPositionAtPixel();
+	GetComponent<Text>().SetPosition({ txtPos.x,txtPos.y + 40 });
+}
+
+void P_MP_SettiementUI_Potion::AddPosition(float move)
+{
+	GetComponent<Image>(0).SetPosition({ firstPos_.x,firstPos_.y + move,0 });
+	GetComponent<Image>(1).SetPosition({ firstPos_.x - 0.2f,firstPos_.y + move,0 });
+	GetComponent<Image>(2).SetPosition({ firstPos_.x - 0.2f,firstPos_.y + move,0 });
 	XMFLOAT3 txtPos = GetComponent<Image>(0).GetPositionAtPixel();
 	GetComponent<Text>().SetPosition({ txtPos.x,txtPos.y + 40 });
 }

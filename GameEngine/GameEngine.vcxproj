@@ -279,6 +279,7 @@
     <ClCompile Include="P_CP_ResourceItem.cpp" />
     <ClCompile Include="P_MP_SettiementUI_Potion.cpp" />
     <ClCompile Include="P_MP_SettlementUI.cpp" />
+    <ClCompile Include="P_MP_SettlementUI_PotionList.cpp" />
     <ClCompile Include="P_MP_SettlementUI_TotalGain.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
     <ClCompile Include="SaveDataLoader.cpp" />
@@ -416,6 +417,7 @@
     <ClInclude Include="P_CP_ResourceItem.h" />
     <ClInclude Include="P_MP_SettiementUI_Potion.h" />
     <ClInclude Include="P_MP_SettlementUI.h" />
+    <ClInclude Include="P_MP_SettlementUI_PotionList.h" />
     <ClInclude Include="P_MP_SettlementUI_TotalGain.h" />
     <ClInclude Include="ResourceStatusData.h" />
     <ClInclude Include="SaveDataLoader.h" />
