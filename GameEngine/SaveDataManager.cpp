@@ -1,8 +1,8 @@
-#include "SaveDataLoader.h"
+#include "SaveDataManager.h"
 #include<Windows.h>
 #include<fstream>
 #include"Engine/ResourceManager/CsvReader.h"
-std::string SaveDataLoader::utf8_to_SJis(std::string const& str)
+std::string SaveDataManager::utf8_to_SJis(std::string const& str)
 {
 	//ワイド文字列に変換(utf8->unicode)
 	int unicodeLength = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.size() + 1, NULL, 0);
@@ -20,47 +20,64 @@ std::string SaveDataLoader::utf8_to_SJis(std::string const& str)
 
 }
 
-SaveDataLoader::SaveDataLoader()
+std::u8string SaveDataManager::SJis_to_utf8(std::string const& str)
+{
+	//ワイド文字列に変換(ShiftJIS->unicode)
+	int unicodeLength = MultiByteToWideChar(CP_THREAD_ACP, 0, str.c_str(), str.size() + 1, NULL, 0);
+	wchar_t* buffUnicode = new wchar_t[unicodeLength];
+	MultiByteToWideChar(CP_THREAD_ACP, 0, str.c_str(), str.size() + 1, buffUnicode, unicodeLength);
+
+	//マルチバイト文字列に変換(unicode->utf8)
+	int utf8Length = WideCharToMultiByte(CP_UTF8, 0, buffUnicode, -1, NULL, 0, NULL, NULL);
+	char8_t* buffutf8 = new char8_t[utf8Length];
+	WideCharToMultiByte(CP_UTF8, 0, buffUnicode, unicodeLength + 1, (LPSTR)buffutf8, utf8Length, NULL, NULL);
+	std::u8string strJis(buffutf8);
+	delete[] buffUnicode;
+	delete[] buffutf8;
+	return strJis;
+}
+
+SaveDataManager::SaveDataManager()
 {
 }
 
-SaveDataLoader::~SaveDataLoader()
+SaveDataManager::~SaveDataManager()
 {
 }
 
-void SaveDataLoader::Init()
+void SaveDataManager::Init()
 {
-	nlohmann::json playerFile;
-	playerFile["Name"] = "player01";
-	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
-	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
-	
-	playerFile["ItemList"] = { {0,u8"パワーフラワー","ResourceImage01.png",999},
-							   {1,u8"魔力草","ResourceImage02.png",999},
-							   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
-							   {3,u8"ハーヤ草","ResourceImage03.png",999} };
-	
-	playerFile["PotionList"] = { {u8"筋・運のポーション Lv.2",
-								  false,
-								  17,
-								  300,
-								  2.3f,1.1f,1.5f,0.6f,2.1f,
-								  0.3f,0.3f,0.3f},
-								 {u8"防のポーション Lv.2",
-								  false,
-								  2,
-								  300,
-								  1.6f,2.1f,1.2f,1.6f,1.3f,
-								  0.3f,0.3f,0.3f},
-								 {u8"万能ポーション Lv.2\n筋・防・魔・運",
-								  false,
-								  23,
-								  300,
-								  2.1f,2.9f,2.5f,1.3f,2.0f,
-								  0.3f,0.3f,0.3f} };
-	
-	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
-	of << playerFile << std::endl;
+	//nlohmann::json playerFile;
+	//playerFile["Name"] = "player01";
+	//playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
+	//playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
+	//
+	//playerFile["ItemList"] = { {0,u8"パワーフラワー","ResourceImage01.png",999},
+	//						   {1,u8"魔力草","ResourceImage02.png",999},
+	//						   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
+	//						   {3,u8"ハーヤ草","ResourceImage03.png",999} };
+	//
+	//playerFile["PotionList"] = { {u8"筋・運のポーション Lv.2",
+	//							  false,
+	//							  17,
+	//							  300,
+	//							  2.3f,1.1f,1.5f,0.6f,2.1f,
+	//							  0.3f,0.3f,0.3f},
+	//							 {u8"防のポーション Lv.2",
+	//							  false,
+	//							  2,
+	//							  300,
+	//							  1.6f,2.1f,1.2f,1.6f,1.3f,
+	//							  0.3f,0.3f,0.3f},
+	//							 {u8"万能ポーション Lv.2\n筋・防・魔・運",
+	//							  false,
+	//							  23,
+	//							  300,
+	//							  2.1f,2.9f,2.5f,1.3f,2.0f,
+	//							  0.3f,0.3f,0.3f} };
+	//
+	//std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
+	//of << playerFile << std::endl;
 	//
 	//nlohmann::json resourceStatusFile;
 	//resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//柔らかい赤系の色
@@ -81,7 +98,7 @@ void SaveDataLoader::Init()
 
 }
 
-void SaveDataLoader::Load(std::string fileName, PlayerData& data)
+void SaveDataManager::Load(std::string fileName, PlayerData& data)
 {
 	nlohmann::json playerFile;
 	std::ifstream ifs(fileName+".json", std::ios::in);
@@ -130,7 +147,72 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 	}
 }
 
-void SaveDataLoader::ResourceDataLoad(std::string fileName, ResourceStatusData& data)
+void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
+{
+	nlohmann::json playerFile;
+	playerFile["Name"] = data.name_;
+	playerFile["ResourceFileName"] = data.resourceFileName_;	// "Assets/SaveData/ResourceFile01";
+	playerFile["PotionDataFileName"] = data.potionDataFileName_;//"Assets/SaveData/PotionDataFile01";
+
+	playerFile["ItemList"];
+
+	for (int i = 0; i < data.itemDataList_.size(); i++)
+	{
+
+		playerFile["ItemList"] += {data.itemDataList_[i].itemNum_,
+			SJis_to_utf8(data.itemDataList_[i].itemName_),
+			data.itemDataList_[i].itemImageName_,
+			data.itemDataList_[i].itemCount_};
+	}
+	
+	
+	//= { {0,u8"パワーフラワー","ResourceImage01.png",999},
+							//   {1,u8"魔力草","ResourceImage02.png",999},
+							//   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
+							//   {3,u8"ハーヤ草","ResourceImage03.png",999} };
+
+	playerFile["PotionList"];
+	for (int i = 0; i < data.potionDataList_.size(); i++)
+	{
+		playerFile["PotionList"] += {SJis_to_utf8(data.potionDataList_[i].potionName_),
+									 data.potionDataList_[i].isSale_,
+									 data.potionDataList_[i].topStatus_,
+									 data.potionDataList_[i].price_,
+									 data.potionDataList_[i].potionStatus_[0],
+									 data.potionDataList_[i].potionStatus_[1],
+									 data.potionDataList_[i].potionStatus_[2],
+									 data.potionDataList_[i].potionStatus_[3],
+									 data.potionDataList_[i].potionStatus_[4],
+									 data.potionDataList_[i].potionColor_.x,
+									 data.potionDataList_[i].potionColor_.y,
+									 data.potionDataList_[i].potionColor_.z, };
+	}
+	
+	
+								  //= { {u8"筋・運のポーション Lv.2",
+								  //false,
+								  //17,
+								  //300,
+								  //2.3f,1.1f,1.5f,0.6f,2.1f,
+								  //0.3f,0.3f,0.3f},
+								  //{u8"防のポーション Lv.2",
+								  //false,
+								  //2,
+								  //300,
+								  //1.6f,2.1f,1.2f,1.6f,1.3f,
+								  //0.3f,0.3f,0.3f},
+								  //{u8"万能ポーション Lv.2\n筋・防・魔・運",
+								  //false,
+								  //23,
+								  //300,
+								  //2.1f,2.9f,2.5f,1.3f,2.0f,
+								  //0.3f,0.3f,0.3f} };
+
+	std::ofstream of("Assets/SaveData/PlayerData02.json", std::ios::out);
+	of << playerFile << std::endl;
+}
+
+void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData& data)
 {
 	nlohmann::json resourceStatusFile;
 	std::ifstream ifs(fileName + ".json", std::ios::in);

@@ -312,7 +312,7 @@
     <ClCompile Include="ItemBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SaveDataLoader.cpp">
+    <ClCompile Include="SaveDataManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ResourceStatusData.cpp">
@@ -734,7 +734,7 @@
     <ClInclude Include="ResourceStatusData.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SaveDataLoader.h">
+    <ClInclude Include="SaveDataManager.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="StandData.h">

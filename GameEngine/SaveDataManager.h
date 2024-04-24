@@ -13,18 +13,19 @@ namespace PlayerData_Test
 	};
 }
 
-class SaveDataLoader
+class SaveDataManager
 {
-	nlohmann::json jsonFile_;
+	//nlohmann::json jsonFile_;
 
 	std::string utf8_to_SJis(std::string const& str);
-	//std::u8string wide_to_utf8(std::wstring const& wstr);
+	std::u8string SJis_to_utf8(std::string const& str);
 
 public:
-	SaveDataLoader();
-	~SaveDataLoader();
+	SaveDataManager();
+	~SaveDataManager();
 	void Init();
 	void Load(std::string fileName,PlayerData& data);
+	void Save(const std::string& fileName,PlayerData& data);
 	void ResourceDataLoad(std::string fileName,ResourceStatusData& data);
 };
 

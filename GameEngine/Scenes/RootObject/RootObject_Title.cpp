@@ -2,7 +2,7 @@
 #include"../../Engine/Components/Transform.h"
 #include"../../StaticResource.h"
 #include"../../Title.h"
-#include"../../SaveDataLoader.h"
+#include"../../SaveDataManager.h"
 #include"../../InterSceneData.h"
 #include"../../PlayerData.h"
 //#include"../../TestObject.h"
@@ -20,42 +20,22 @@ RootObject_Title::~RootObject_Title()
 
 void RootObject_Title::Initialize()
 {
-	//{
-	//
-	//	Image image(0, 3);
-	//	image.StaticLoad("Assets/Image/Filter.png");
-	//	image.SetSize({ 1920,1080,0 });
-	//	image.SetAlpha(0);
-	//	image.SetDraw(false);
-	//	StaticResource::AddImage("Filter", image);
-	//}
-	//{
-	//	Image image(0, 3);
-	//	image.StaticLoad("Assets/Image/Stripe_Red-White.jpg");
-	//	image.SetPosition({ 0, 2, 0 });
-	//	image.SetDraw(false);
-	//	StaticResource::AddImage("GameFinishImage", image);
-	//}
-	//
-	SaveDataLoader loader;
+	SaveDataManager loader;
 	PlayerData* data = new PlayerData;
 	loader.Init();
-	loader.Load("Assets/SaveData/PlayerData01",*data);
+	loader.Load("Assets/SaveData/PlayerData02",*data);
 
 	ResourceStatusData* rData = new ResourceStatusData;
 	loader.ResourceDataLoad("Assets/SaveData/ResourceData",*rData);
-	//PlayerData* pData = new PlayerData;
-	//pData->dataName_ = "Data01";
-	//pData->name_ = data.name_;
-	//pData->potionDataFileName_ = data.potionDataFileName_;
-	//pData->resourceFileName_ = data.resourceFileName_;
-	//pData->itemDataList_ = data.itemData_;
 	rData->dataName_ = "ResourceData";
 	data->dataName_ = "Data01";
 	InterSceneData::AddData_NonOverWrite(rData);
 	InterSceneData::AddData_NonOverWrite(data);
-	////PlayerData* pd = InterSceneData::GetData<PlayerData>("Data01");
-	////InterSceneData::DeleteData("Data01");
+
+
+	//PlayerData& playerData = *InterSceneData::GetData<PlayerData>("Data01");
+	//loader.Save("", playerData);
+
 	Instantiate<Title>(this);
 }
 
