@@ -20,8 +20,8 @@ void P_MP_SettlementUI::Initialize()
 	backImage.SetSize({ 2,2,0 });
 	AddComponent<Image>(backImage);
 
-	Instantiate<P_MP_SettlementUI_TotalGain>(this);
-	Instantiate<SettlementUI_EarningTransition>(this);
+	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(15240,"ëÂê∑ãµ!");
+	Instantiate<SettlementUI_EarningTransition>(this)->SetData({100,300,500,200,600});
 	Instantiate<P_MP_SettlementUI_PotionList>(this);
 	//potionDataList_ = InterSceneData::GetData<PlayerData>("Data01")->potionDataList_;
 

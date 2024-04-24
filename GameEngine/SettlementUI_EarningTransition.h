@@ -2,7 +2,9 @@
 #include"Engine/GameObject/GameObject.h"
 class SettlementUI_EarningTransition : public GameObject
 {
-
+	XMFLOAT3 uiPos_;
+	std::vector<int> gainList_;
+	int firstGaugeNum_;
 public:
 	SettlementUI_EarningTransition(Object* parent);
 	~SettlementUI_EarningTransition();
@@ -10,6 +12,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void SetData(const std::vector<int>& gainList);
 	void Release() override;
 };
 
