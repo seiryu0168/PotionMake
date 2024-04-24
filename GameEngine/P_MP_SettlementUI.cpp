@@ -33,7 +33,7 @@ void P_MP_SettlementUI::Initialize()
 	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
 	//potionDataList_ = InterSceneData::GetData<PlayerData>("Data01")->potionDataList_;
 
-	CreateResoultUI();
+	//CreateResoultUI();
 }
 
 void P_MP_SettlementUI::Start()

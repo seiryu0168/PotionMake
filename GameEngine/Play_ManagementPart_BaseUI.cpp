@@ -1,9 +1,12 @@
 #include "Play_ManagementPart_BaseUI.h"
 #include"Engine/Systems/TextSystem.h"
 #include"Engine/Systems/ImageSystem.h"
+#include"Engine/DirectX_11/Input.h"
+#include"P_MP_MenuUI.h"
 #include"ManagementPart/Outing/Play_ManagementPart_OutingUI.h"
 #include"ManagementPart/Craft/Play_ManagementPart_CraftUI.h"
 #include"ManagementPart/PotionManagement/Play_ManagementPart_PotionManagerUI.h"
+
 Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),
 	UINum_(0),
@@ -37,6 +40,12 @@ void Play_ManagementPart_BaseUI::Start()
 
 void Play_ManagementPart_BaseUI::Update()
 {
+	if (Input::IsKeyDown(DIK_ESCAPE)&&!isAccessUI_)
+	{
+		Direct3D::ShowMouseCursor(true);
+		Direct3D::SetClipCursor();
+		Instantiate<P_MP_MenuUI>(this);
+	}
 }
 
 void Play_ManagementPart_BaseUI::Release()
@@ -79,7 +88,7 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 	}
 }
 
-void Play_ManagementPart_BaseUI::DisplayAction(std::string action,bool isDisplay)
+void Play_ManagementPart_BaseUI::DisplayAction(std::string action, bool isDisplay)
 {
 	//q‹Ÿ‚ª‚¢‚½‚ç(UI‚ªŠJ‚©‚ê‚Ä‚¢‚éó‹µ‚¾‚Á‚½‚ç)
 	if (!childList_.empty())
