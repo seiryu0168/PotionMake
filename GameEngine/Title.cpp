@@ -44,7 +44,7 @@ void Title::Update()
 	GetComponent<Image>().SetRotation({ 0,0,timeF_ });
 	if(Input::IsKeyDown(DIK_SPACE))
 	{
-		newSceneManager::ChangeScene(SCENE_ID::PLAY_COLLECTION);
+		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 	}
 }
 

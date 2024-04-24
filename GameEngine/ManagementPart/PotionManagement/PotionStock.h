@@ -26,7 +26,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void SetPotionColor();
-	void SetPotionStatus_(int potionNum, const std::string& name,bool isSale,int topStatus,const XMFLOAT3& potionColor, float sts0, float sts1, float sts2, float sts3, float sts4);
+	void SetPotionStatus_(int potionNum, const std::string& name,bool isSale,int topStatus,int price,const XMFLOAT3& potionColor, float sts0, float sts1, float sts2, float sts3, float sts4);
 	void AddSellPotion();
 	void AddDisposePotion();
 	void SubPotion();
@@ -37,6 +37,7 @@ public:
 	const std::string&		  GetPotionName()   { return potionName_; }
 	SelectSlot				  GetSelectedSlot() { return selectedSlot_; }
 	int						  GetTopStatus()    { return topStatus_; }
+	int						  GetPrice()		{ return price_; }
 	const std::vector<float>& GetPotionStatus() { return potionStatus_; }
 	const XMFLOAT3&			  GetPotionColor()  { return potionColor_; }
 
@@ -45,6 +46,7 @@ private:
 	SelectSlot selectedSlot_;
 	int potionNum_;
 	int topStatus_;
+	int price_;
 	std::string potionName_;
 	std::vector<float> potionStatus_;
 	XMFLOAT3 potionColor_;

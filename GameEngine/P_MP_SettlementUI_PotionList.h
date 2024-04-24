@@ -1,5 +1,6 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+#include"PlayerData.h"
 class P_MP_SettlementUI_PotionList : public GameObject
 {
 	XMFLOAT3 uiPos_;
@@ -12,7 +13,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void CreateListUI();
+	void CreateListUI(const std::vector<PlayerData::PotionData>& potionList);
 	void Release() override;
 };
 

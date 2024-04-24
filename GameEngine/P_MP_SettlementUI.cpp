@@ -4,6 +4,8 @@
 #include"P_MP_SettlementUI_PotionList.h"
 #include"P_MP_SettlementUI_TotalGain.h"
 #include"SettlementUI_EarningTransition.h"
+#include"InterSceneData.h"
+#include"PlayerData.h"
 P_MP_SettlementUI::P_MP_SettlementUI(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI")
 {
@@ -19,10 +21,16 @@ void P_MP_SettlementUI::Initialize()
 	backImage.Load("Assets/Image/PotionManagerUIBase1.png");
 	backImage.SetSize({ 2,2,0 });
 	AddComponent<Image>(backImage);
-
-	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(15240,"ëÂê∑ãµ!");
+	int totalGain = 0;
+	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
+	for (PlayerData::PotionData& potionData : pData.potionDataList_)
+	{
+		if(potionData.isSale_)
+		totalGain += potionData.price_*5;
+	}
+	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"ëÂê∑ãµ!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData({100,300,500,200,600});
-	Instantiate<P_MP_SettlementUI_PotionList>(this);
+	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
 	//potionDataList_ = InterSceneData::GetData<PlayerData>("Data01")->potionDataList_;
 
 	CreateResoultUI();

@@ -193,6 +193,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	//XMFLOAT3 color = { 0,0,0 };
 	int maxStatus = 0;
 	int lastStatus = 0;
+	int level = 0;
 	XMFLOAT3 potionColor = { 0,0,0 };
 	//最も値が大きいステータスを探す
 	for (int i = 4; i > -1; i--)
@@ -214,7 +215,10 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 			}
 		}
 		if (isMax_)
+		{
+			level = i+1;
 			break;
+		}
 	}
 
 	//ポーションの名前を生成
@@ -234,9 +238,9 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 
 	//ステータスによっては名前を変える
 	if (statusCount >= 4)
-		potionName = "万能ポーション" + potionName;
+		potionName = "万能ポーション Lv." + std::to_string(level) + "\n" + potionName;
 	else
-		potionName += "のポーション";
+		potionName += "のポーション Lv." + std::to_string(level);
 
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	std::vector<int> itemNumList_;
@@ -257,11 +261,12 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 
 	//ポーションデータ更新
 	PlayerData::PotionData pData;
-	pData.potionName_ = potionName;
-	pData.isSale_ = false;
-	pData.topStatus_ = maxStatus;
+	pData.potionName_	= potionName;
+	pData.isSale_		= false;
+	pData.price_		= 100 + (200 * level);
+	pData.topStatus_    = maxStatus;
 	pData.potionStatus_ = status;
-	pData.potionColor_ = potionColor;
+	pData.potionColor_  = potionColor;
 
 	//ソート
 	data->SortResourceList();

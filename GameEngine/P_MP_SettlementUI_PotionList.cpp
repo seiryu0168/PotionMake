@@ -23,8 +23,6 @@ void P_MP_SettlementUI_PotionList::Initialize()
 	back.SetSize({ 9,15,0 });
 	back.SetPosition({ -0.6f,0.0f,0 });
 	AddComponent<Image>(back);
-
-	CreateListUI();
 }
 
 void P_MP_SettlementUI_PotionList::Start()
@@ -46,18 +44,18 @@ void P_MP_SettlementUI_PotionList::Update()
 
 }
 
-void P_MP_SettlementUI_PotionList::CreateListUI()
+void P_MP_SettlementUI_PotionList::CreateListUI(const std::vector<PlayerData::PotionData>& potionList)
 {
 	XMFLOAT3 potionPos = { 0,0.6f,0 };
-	for (int i=0;i<5;i++/*PlayerData::PotionData data : potionDataList_*/)
+	for (PlayerData::PotionData data : potionList)
 	{
-		//if (data.isSale_)
-		//{
+		if (data.isSale_)
+		{
 			P_MP_SettiementUI_Potion* potion = Instantiate<P_MP_SettiementUI_Potion>(this);
 			potion->SetPotionData(1, "Potion", { 1,1,1 }, 100);
 			potion->SetFirstPosition({ uiPos_.x + potionPos.x,uiPos_.y + potionPos.y,0 });
 			potionPos.y -= 0.5f;
-		//}
+		}
 	}
 }
 

@@ -30,26 +30,37 @@ SaveDataLoader::~SaveDataLoader()
 
 void SaveDataLoader::Init()
 {
-	//nlohmann::json playerFile;
-	//playerFile["Name"] = "player01";
-	//playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
-	//playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
-	//
-	//playerFile["ItemList"] = { {0,"Item01","ResourceImage01.png",10},
-	//						   {1,"Item02","ResourceImage02.png",5},
-	//						   {2,"Item03","ResourceImage03.png",7}};
-	//
-	//playerFile["PotionList"] = { {"Potion01",false,2.3f,1.1f,1.5f,0.6f,2.1f},
-	//							 {"Potion02",false,1.6f,2.1f,1.2f,1.6f,1.3f},
-	//							 {"Potion03",false,2.1f,2.9f,2.5f,1.3f,2.0f} };
-	//
-	////playerFile["SellPotionList"] = { {"",0,0,0,0,0},
-	////								 {"",0,0,0,0,0},
-	////								 {"",0,0,0,0,0},
-	////								 {"",0,0,0,0,0},
-	////								 {"",0,0,0,0,0} };
-	//std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
-	//of << playerFile << std::endl;
+	nlohmann::json playerFile;
+	playerFile["Name"] = "player01";
+	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
+	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
+	
+	playerFile["ItemList"] = { {0,u8"パワーフラワー","ResourceImage01.png",999},
+							   {1,u8"魔力草","ResourceImage02.png",999},
+							   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
+							   {3,u8"ハーヤ草","ResourceImage03.png",999} };
+	
+	playerFile["PotionList"] = { {u8"筋・運のポーション Lv.2",
+								  false,
+								  17,
+								  300,
+								  2.3f,1.1f,1.5f,0.6f,2.1f,
+								  0.3f,0.3f,0.3f},
+								 {u8"防のポーション Lv.2",
+								  false,
+								  2,
+								  300,
+								  1.6f,2.1f,1.2f,1.6f,1.3f,
+								  0.3f,0.3f,0.3f},
+								 {u8"万能ポーション Lv.2\n筋・防・魔・運",
+								  false,
+								  23,
+								  300,
+								  2.1f,2.9f,2.5f,1.3f,2.0f,
+								  0.3f,0.3f,0.3f} };
+	
+	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
+	of << playerFile << std::endl;
 	//
 	//nlohmann::json resourceStatusFile;
 	//resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//柔らかい赤系の色
@@ -84,13 +95,14 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 
 	for (auto itr = playerFile["ItemList"].begin(); itr != playerFile["ItemList"].end(); itr++)
 	{
-		//std::string itemName      = itr.value().at(1);
+		std::u8string str = itr.value().at(1);
+		std::string processNameUtf8 = (const char*)str.c_str();
 		//std::string itemImageName = itr.value().at(2);
 		//int itemCount             = itr.value().at(3).get<int>();
 		
 		PlayerData::ResourceData_ rData;
 		rData.itemNum_		 = itr.value().at(0);
-		rData.itemName_      = itr.value().at(1);
+		rData.itemName_      = utf8_to_SJis(processNameUtf8);
 		rData.itemImageName_ = itr.value().at(2);
 		rData.itemCount_	 = itr.value().at(3).get<int>();
 
@@ -99,13 +111,21 @@ void SaveDataLoader::Load(std::string fileName, PlayerData& data)
 	for (auto itr = playerFile["PotionList"].begin();itr!=playerFile["PotionList"].end();itr++)
 	{
 		PlayerData::PotionData pData;
-		pData.potionName_	   = itr.value().at(0);
+		std::u8string str = itr.value().at(0);
+		std::string processNameUtf8 = (const char*)str.c_str();
+		pData.potionName_	   = utf8_to_SJis(processNameUtf8);
 		pData.isSale_		   = itr.value().at(1);
-		pData.potionStatus_[0] = itr.value().at(2);
-		pData.potionStatus_[1] = itr.value().at(3);
-		pData.potionStatus_[2] = itr.value().at(4);
-		pData.potionStatus_[3] = itr.value().at(5);
-		pData.potionStatus_[4] = itr.value().at(6);
+		pData.topStatus_	   = itr.value().at(2);
+		pData.price_ = itr.value().at(3);
+		pData.potionStatus_[0] = itr.value().at(4);
+		pData.potionStatus_[1] = itr.value().at(5);
+		pData.potionStatus_[2] = itr.value().at(6);
+		pData.potionStatus_[3] = itr.value().at(7);
+		pData.potionStatus_[4] = itr.value().at(8);
+		pData.potionColor_.x = itr.value().at(9);
+		pData.potionColor_.y = itr.value().at(10);
+		pData.potionColor_.z = itr.value().at(11);
+
 		data.potionDataList_.push_back(pData);
 	}
 }

@@ -133,15 +133,27 @@ void Image::SetColor(const float color) noexcept
 	SetColor(XMFLOAT3{ color, color, color });
 }
 
-//void Image::SetColor(const int color) noexcept
-//{
-//	SetColor(255.0f / color);
-//}
-//
-//void Image::SetColor(const XMINT3& color) noexcept
-//{
-//	SetColor(XMFLOAT3{ 255.0f / color.x,255.0f / color.y,255.0f / color.z });
-//}
+void Image::SetColorInt(const int color) noexcept
+{
+	color_.x = (float)color / 255;
+	color_.y = (float)color / 255;
+	color_.z = (float)color / 255;
+}
+
+void Image::SetColorInt(const XMINT3& color) noexcept
+{
+	color_.x = color.x / 255.0f;
+	color_.y = color.y / 255.0f;
+	color_.z = color.z / 255.0f;
+}
+
+void Image::SetColorInt(const XMINT4& color) noexcept
+{
+	color_.x = color.x / 255.0f;
+	color_.y = color.y / 255.0f;
+	color_.z = color.z / 255.0f;
+	alpha_   = color.w / 255.0f;
+}
 
 void Image::SetColor(const XMFLOAT3& color) noexcept
 {
@@ -179,7 +191,6 @@ void Image::Draw()
 	{
 		if (drawTargetNumber_ == CameraManager::GetCurrentCameraNum() || drawTargetNumber_ == -1)
 			pSprite_->StaticDraw(transform_, rect_, color_, alpha_, scroll_);
-
 	}
 	else
 	{

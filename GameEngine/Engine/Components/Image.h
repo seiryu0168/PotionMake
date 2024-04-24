@@ -38,8 +38,9 @@ public:
 	void SetAlpha(float alpha);
 	//色設定
 	void SetColor(const float color) noexcept;
-	//void SetColor(const int color) noexcept;
-	//void SetColor(const XMINT3& color) noexcept;
+	void SetColorInt(const int color) noexcept;
+	void SetColorInt(const XMINT3& color) noexcept;
+	void SetColorInt(const XMINT4& color) noexcept;
 	void SetColor(const XMFLOAT3& color) noexcept;
 	void SetColor(const XMFLOAT4& color) noexcept;
 	//画像のスクロール量設定

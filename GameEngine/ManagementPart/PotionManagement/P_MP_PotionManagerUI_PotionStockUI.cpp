@@ -64,6 +64,7 @@ void P_MP_PotionManagerUI_PotionStockUI::InputPotionData()
 				data->potionDataList_[i].potionName_,
 				data->potionDataList_[i].isSale_,
 				data->potionDataList_[i].topStatus_,
+				data->potionDataList_[i].price_,
 				data->potionDataList_[i].potionColor_,
 				data->potionDataList_[i].potionStatus_[0],
 				data->potionDataList_[i].potionStatus_[1],
@@ -171,12 +172,12 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 			pData.potionName_ = ((PotionStock*)potionList_[i])->GetPotionName();
 			pData.potionColor_ = ((PotionStock*)potionList_[i])->GetPotionColor();
 			pData.topStatus_ = ((PotionStock*)potionList_[i])->GetTopStatus();
+			pData.price_ = ((PotionStock*)potionList_[i])->GetPrice();
 			pData.potionStatus_ = ((PotionStock*)potionList_[i])->GetPotionStatus();
 			if (((PotionStock*)potionList_[i])->GetSelectedSlot() == PotionStock::SelectSlot::Sell)
 				pData.isSale_ = true;
 			newPotionDataList.push_back(pData);
 		}
-
 	}
 	
 	//セーブデータを更新

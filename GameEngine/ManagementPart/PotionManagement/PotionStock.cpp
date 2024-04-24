@@ -104,7 +104,7 @@ void PotionStock::SetPotionColor()
 	GetComponent<Image>(potionImageNum_).SetColor(potionColor_);
 }
 
-void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool isSale,int topStatus, const XMFLOAT3& potionColor, float sts0, float sts1, float sts2, float sts3, float sts4)
+void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool isSale,int topStatus, int price, const XMFLOAT3& potionColor, float sts0, float sts1, float sts2, float sts3, float sts4)
 {
 	//ポーションデータを設定
 	potionNum_ = potionNum;
@@ -115,6 +115,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	potionStatus_.push_back(sts3);
 	potionStatus_.push_back(sts4);
 	topStatus_ = topStatus;
+	price_ = price;
 	potionColor_ = potionColor;
 	havePotion_ = true;
 
