@@ -4,6 +4,7 @@ class P_MP_SettlementUI_TotalGain : public GameObject
 {
 	int totalGain_;
 	std::string evaluation_;
+	XMFLOAT3 uiPos_;
 
 public:
 	P_MP_SettlementUI_TotalGain(Object* parent);
@@ -12,6 +13,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void CreateBase();
 	void SetData(int totalGain,const std::string& evaluation);
 	void Release() override;
 };

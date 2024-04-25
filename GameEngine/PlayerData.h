@@ -22,6 +22,7 @@ public:
 	struct PotionData
 	{
 		std::string potionName_;
+		int tier_;
 		bool isSale_;
 		int topStatus_;
 		int price_;

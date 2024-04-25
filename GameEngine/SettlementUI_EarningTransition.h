@@ -12,7 +12,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void CreateBase();
 	void SetData(const std::vector<int>& gainList);
 	void Release() override;
 };
-

@@ -18,8 +18,9 @@ P_MP_SettlementUI::~P_MP_SettlementUI()
 void P_MP_SettlementUI::Initialize()
 {
 	Image backImage(this);
-	backImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	backImage.SetSize({ 2,2,0 });
+	backImage.Load("Assets/Image/UIBaseImage2.png");
+	//backImage.SetColor({ 0,0,0 });
+	backImage.SetSize({ 32,20,0 });
 	AddComponent<Image>(backImage);
 	int totalGain = 0;
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");

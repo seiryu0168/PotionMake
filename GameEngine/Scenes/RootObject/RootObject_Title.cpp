@@ -23,10 +23,10 @@ void RootObject_Title::Initialize()
 	SaveDataManager loader;
 	PlayerData* data = new PlayerData;
 	loader.Init();
-	loader.Load("Assets/SaveData/PlayerData02",*data);
+	loader.Load("Assets/SaveData/PlayerData01",*data);
 
 	ResourceStatusData* rData = new ResourceStatusData;
-	loader.ResourceDataLoad("Assets/SaveData/ResourceData",*rData);
+	loader.ResourceDataLoad("Assets/SaveData/GameData/ResourceData",*rData);
 	rData->dataName_ = "ResourceData";
 	data->dataName_ = "Data01";
 	InterSceneData::AddData_NonOverWrite(rData);

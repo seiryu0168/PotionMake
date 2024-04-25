@@ -262,6 +262,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	//ポーションデータ更新
 	PlayerData::PotionData pData;
 	pData.potionName_	= potionName;
+	pData.tier_			= level;
 	pData.isSale_		= false;
 	pData.price_		= 100 + (200 * level);
 	pData.topStatus_    = maxStatus;

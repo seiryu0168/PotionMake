@@ -19,10 +19,17 @@ P_MP_SettlementUI_PotionList::~P_MP_SettlementUI_PotionList()
 void P_MP_SettlementUI_PotionList::Initialize()
 {
 	Image back(this);
-	back.Load("Assets/Image/UIBaseImage2.png");
+	back.Load("Assets/Image/UIBaseImage4.png");
 	back.SetSize({ 9,15,0 });
 	back.SetPosition({ -0.6f,0.0f,0 });
 	AddComponent<Image>(back);
+
+	Image edge(this);
+	edge.Load("Assets/Image/PotionLIstEdge07.png");
+	edge.SetPosition({ -0.6f,0.0f,0 });
+	edge.SetLayer(1);
+	AddComponent<Image>(edge);
+
 }
 
 void P_MP_SettlementUI_PotionList::Start()
@@ -52,7 +59,7 @@ void P_MP_SettlementUI_PotionList::CreateListUI(const std::vector<PlayerData::Po
 		if (data.isSale_)
 		{
 			P_MP_SettiementUI_Potion* potion = Instantiate<P_MP_SettiementUI_Potion>(this);
-			potion->SetPotionData(1, "Potion", { 1,1,1 }, 100);
+			potion->SetPotionData(data.tier_, data.potionName_, data.potionColor_, data.price_);
 			potion->SetFirstPosition({ uiPos_.x + potionPos.x,uiPos_.y + potionPos.y,0 });
 			potionPos.y -= 0.5f;
 		}
