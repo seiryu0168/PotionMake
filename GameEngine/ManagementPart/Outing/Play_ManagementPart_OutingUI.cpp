@@ -5,7 +5,8 @@
 #include"../../Play_ManagementPart_BaseUI.h"
 #include"P_MP_OutingUI_ActionText.h"
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
-	:UIBase(parent,"Play_ManagementPart_OutingUI")
+	:UIBase(parent,"Play_ManagementPart_OutingUI"),
+	canCloseUI_(true)
 {
 }
 
@@ -30,7 +31,7 @@ void Play_ManagementPart_OutingUI::Initialize()
 void Play_ManagementPart_OutingUI::Update()
 {
 	//ƒNƒŠƒbƒN‚µ‚½‚ç
-	if (Input::IsMouseButtonDown(0))
+	if (Input::IsMouseButtonDown(0)&& canCloseUI_)
 	{
 		XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
 		if (!(mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&

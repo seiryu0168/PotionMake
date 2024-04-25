@@ -6,6 +6,7 @@
 #include"SettlementUI_EarningTransition.h"
 #include"InterSceneData.h"
 #include"PlayerData.h"
+#include"CloseButton.h"
 P_MP_SettlementUI::P_MP_SettlementUI(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI")
 {
@@ -29,12 +30,13 @@ void P_MP_SettlementUI::Initialize()
 		if(potionData.isSale_)
 		totalGain += potionData.price_*5;
 	}
+	pData.gainList_.erase(pData.gainList_.begin());
+	pData.gainList_.push_back(totalGain);
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"ëÂê∑ãµ!");
-	Instantiate<SettlementUI_EarningTransition>(this)->SetData({100,300,500,200,600});
+	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
 	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
-	//potionDataList_ = InterSceneData::GetData<PlayerData>("Data01")->potionDataList_;
-
-	//CreateResoultUI();
+	
+	Instantiate<CloseButton>(this);
 }
 
 void P_MP_SettlementUI::Start()
@@ -68,4 +70,5 @@ void P_MP_SettlementUI::CreateResoultUI()
 
 void P_MP_SettlementUI::Release()
 {
+	pParent_->KillMe();
 }

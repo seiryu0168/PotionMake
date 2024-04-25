@@ -3,6 +3,7 @@
 #include"../../Engine/Systems/ImageSystem.h"
 #include"../../Engine/Systems/TextSystem.h"
 #include"../../Engine/newSceneManager.h"
+#include"Play_ManagementPart_OutingUI.h"
 #include"../../P_MP_SettlementUI.h"
 P_MP_OutingUI_ActionText::P_MP_OutingUI_ActionText(Object* parent)
 	:GameObject(parent,"P_MP_OutingUI_ActionText")
@@ -71,10 +72,12 @@ void P_MP_OutingUI_ActionText::Outing(int outNum)
 	}
 	else if (outNum == 1)
 	{
-		Instantiate<P_MP_SettlementUI>(this);
+		Instantiate<P_MP_SettlementUI>(pParent_);
+		KillMe();
 	}
 }
 
 void P_MP_OutingUI_ActionText::Release()
 {
+	((Play_ManagementPart_OutingUI*)pParent_)->SetCloseFlag(false);
 }

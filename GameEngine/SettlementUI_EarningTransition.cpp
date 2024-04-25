@@ -22,6 +22,8 @@ void SettlementUI_EarningTransition::Initialize()
 	//AddComponent<Image>(back);
 
 	CreateBase();
+	
+	//‰ß‹5‰ñ•ª‚Ì”„ã‚ğ•\¦‚·‚éˆ×‚Ì‰æ‘œ
 	XMFLOAT2 diffPos = { -0.3f, -0.2f};
 	for (int i = 0; i < 5; i++)
 	{
@@ -113,8 +115,8 @@ void SettlementUI_EarningTransition::CreateBase()
 
 void SettlementUI_EarningTransition::SetData(const std::vector<int>& gainList)
 {
+	//”„ã„ˆÚ‚Ìİ’è
 	gainList_ = gainList;
-
 	for (int i = 0; i < 5; i++)
 	{
 		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,gainList[i]*0.001f,0 });

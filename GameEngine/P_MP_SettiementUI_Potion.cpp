@@ -80,7 +80,7 @@ void P_MP_SettiementUI_Potion::AddPosition(float move)
 	GetComponent<Image>(2).SetPosition({ firstPos_.x - 0.2f,firstPos_.y + move,0 });
 	XMFLOAT3 txtPos = GetComponent<Image>(0).GetPositionAtPixel();
 	GetComponent<Text>(0).SetPosition({ txtPos.x-10,txtPos.y + 20 });
-	GetComponent<Text>(1).SetPosition({ txtPos.x - 210,txtPos.y - 100 });
+	GetComponent<Text>(1).SetPosition({ txtPos.x - 190,txtPos.y - 100 });
 }
 
 void P_MP_SettiementUI_Potion::Release()

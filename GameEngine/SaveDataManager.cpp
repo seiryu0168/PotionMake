@@ -78,6 +78,8 @@ void SaveDataManager::Init()
 								  300,
 								  2.1f,2.9f,2.5f,1.3f,2.0f,
 								  0.3f,0.3f,0.3f} };
+
+	playerFile["GainList"] = { 100,300,500,200,600 };
 	
 	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
 	of << playerFile << std::endl;
@@ -148,6 +150,11 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 		pData.potionColor_.z   = itr.value().at(12);
 
 		data.potionDataList_.push_back(pData);
+	}
+
+	for (auto itr = playerFile["GainList"].begin(); itr != playerFile["GainList"].end(); itr++)
+	{
+		data.gainList_.push_back(itr.value());
 	}
 }
 

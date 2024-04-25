@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// ポーションを売った時の売上の推移を表示するクラス
+/// </summary>
 class SettlementUI_EarningTransition : public GameObject
 {
 	XMFLOAT3 uiPos_;

@@ -25,6 +25,8 @@ void P_MP_SettlementUI_TotalGain::Initialize()
 	//AddComponent<Image>(edge);
 
 	CreateBase();
+
+	//項目名と金額と評価のテキスト準備
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
 	Text sectionText(this);
 	sectionText.SetText("売上");

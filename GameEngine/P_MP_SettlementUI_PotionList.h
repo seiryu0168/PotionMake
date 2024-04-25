@@ -1,6 +1,10 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
 #include"PlayerData.h"
+
+/// <summary>
+/// ポーションを売った時のポーション情報を表示するクラス
+/// </summary>
 class P_MP_SettlementUI_PotionList : public GameObject
 {
 	XMFLOAT3 uiPos_;

@@ -18,6 +18,7 @@ P_MP_SettlementUI_PotionList::~P_MP_SettlementUI_PotionList()
 
 void P_MP_SettlementUI_PotionList::Initialize()
 {
+	//UIのベース画像を配置
 	Image back(this);
 	back.Load("Assets/Image/UIBaseImage4.png");
 	back.SetSize({ 9,15,0 });
@@ -38,6 +39,7 @@ void P_MP_SettlementUI_PotionList::Start()
 
 void P_MP_SettlementUI_PotionList::Update()
 {
+	//スクロールした分ポーションの位置を動かす
 	float scroll = -XMVectorGetZ(XMVector3Normalize(Input::GetMouseMove()))* scrollSpeed_;
 	if (GetComponent<Image>().IsHitCursor() && abs(scroll)>=0.1f)
 	{
@@ -53,6 +55,7 @@ void P_MP_SettlementUI_PotionList::Update()
 
 void P_MP_SettlementUI_PotionList::CreateListUI(const std::vector<PlayerData::PotionData>& potionList)
 {
+	//ポーションリストUIを作る
 	XMFLOAT3 potionPos = { 0,0.6f,0 };
 	for (PlayerData::PotionData data : potionList)
 	{

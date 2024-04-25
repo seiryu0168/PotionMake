@@ -45,5 +45,6 @@ public:
 	std::string potionDataFileName_;
 	std::vector<ResourceData_> itemDataList_;
 	std::vector<PotionData> potionDataList_;
+	std::vector<int> gainList_;
 };
 

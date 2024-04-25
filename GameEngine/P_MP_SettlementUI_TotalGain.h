@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// ポーションを売った時の金額を表示するクラス
+/// </summary>
 class P_MP_SettlementUI_TotalGain : public GameObject
 {
 	int totalGain_;
