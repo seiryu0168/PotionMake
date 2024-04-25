@@ -60,7 +60,10 @@ void P_MP_OutingUI_ActionText::Update()
 	}
 	if (Input::IsMouseButtonUp(0)&& forcusNum>=0)
 	{
-		Outing(forcusNum);
+		((Play_ManagementPart_OutingUI*)pParent_)->SetCloseFlag(false);
+		((Play_ManagementPart_OutingUI*)pParent_)->SetOutNumber(forcusNum);
+		KillMe();
+		//Outing(forcusNum);
 	}
 }
 
@@ -79,5 +82,5 @@ void P_MP_OutingUI_ActionText::Outing(int outNum)
 
 void P_MP_OutingUI_ActionText::Release()
 {
-	((Play_ManagementPart_OutingUI*)pParent_)->SetCloseFlag(false);
+	
 }

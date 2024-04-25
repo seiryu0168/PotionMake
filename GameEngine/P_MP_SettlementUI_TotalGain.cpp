@@ -13,17 +13,6 @@ P_MP_SettlementUI_TotalGain::~P_MP_SettlementUI_TotalGain()
 
 void P_MP_SettlementUI_TotalGain::Initialize()
 {
-	//Image back(this);
-	//back.Load("Assets/Image/UIBaseImage2.png");
-	//back.SetSize({ 15,7,0 });
-	//back.SetPosition(uiPos_);
-	//AddComponent<Image>(back);
-	//
-	//Image edge(this);
-	//edge.Load("Assets/Image/TotalGainUIEdge.png");
-	//edge.SetPosition({ 0.5f,0.5f,0 });
-	//AddComponent<Image>(edge);
-
 	CreateBase();
 
 	//項目名と金額と評価のテキスト準備

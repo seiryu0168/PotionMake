@@ -4,9 +4,14 @@
 #include"../../Engine/DirectX_11/Input.h"
 #include"../../Play_ManagementPart_BaseUI.h"
 #include"P_MP_OutingUI_ActionText.h"
+#include"../../Engine/newSceneManager.h"
+#include"../../P_MP_SettlementUI.h"
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
 	:UIBase(parent,"Play_ManagementPart_OutingUI"),
-	canCloseUI_(true)
+	canCloseUI_(true),
+	isOuting_(false),
+	time_(0),
+	countLimit_(2)
 {
 }
 
@@ -20,6 +25,12 @@ void Play_ManagementPart_OutingUI::Initialize()
 	uiBaseImage.Load("Assets/Image/UIBaseImage1.png");
 	AddComponent<Image>(uiBaseImage);
 
+	Image fade(this);
+	fade.Load("Assets/Image/PotionManagerUIBase1.png");
+	fade.SetColor({ 0,0,0,0 });
+	fade.SetSize({ 2,2,0 });
+	AddComponent<Image>(fade);
+
 	Text collectionText(this);
 	collectionText.SetText("外出");
 	collectionText.SetPosition({ 880,300 });
@@ -30,6 +41,19 @@ void Play_ManagementPart_OutingUI::Initialize()
 
 void Play_ManagementPart_OutingUI::Update()
 {
+
+	if (!canCloseUI_)
+	{
+		time_ += 0.016;
+		GetComponent<Image>(1).SetAlpha(time_);
+		if (time_ >= countLimit_ && !isOuting_)
+		{
+			isOuting_ = true;
+			Outing(outingNumber_);
+		}
+
+		return;
+	}
 	//クリックしたら
 	if (Input::IsMouseButtonDown(0)&& canCloseUI_)
 	{
@@ -40,6 +64,24 @@ void Play_ManagementPart_OutingUI::Update()
 			KillMe();
 		}
 	}
+}
+
+void Play_ManagementPart_OutingUI::Outing(int num)
+{
+	if (num == 0)
+	{
+		newSceneManager::ChangeScene(SCENE_ID::PLAY_COLLECTION);
+	}
+	else if (num == 1)
+	{
+		Instantiate<P_MP_SettlementUI>(this);
+	}
+}
+
+void Play_ManagementPart_OutingUI::SetOutNumber(int num)
+{
+	outingNumber_ = num;
+	GetComponent<Text>().isDraw_ = false;
 }
 
 void Play_ManagementPart_OutingUI::Release()
