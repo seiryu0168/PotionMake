@@ -6,6 +6,7 @@ private:
 	int hModel_;
 	int time_;
 	XMVECTOR vPos_;
+	XMFLOAT3 imagePos_;
 public:
 	TestObject(Object* parent);
 	~TestObject();

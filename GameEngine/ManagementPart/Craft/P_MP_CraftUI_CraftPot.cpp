@@ -71,7 +71,7 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		DisplayResource(itemNum);
 		
 		//素材のデータをパラメータに反映
-		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 		return;
 	}
 
@@ -87,7 +87,7 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		{
 			((ResourceItemSlot*)obj)->AddCount(1);
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 			break;
 		}
 	}
@@ -107,7 +107,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 		//該当する素材の枠をデフォルトに戻す
 		HiddenResource(itemNum);
 		//パラメータに反映
-		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 		//データマップから削除
 		dataMap_.erase(itemNum);
 		return true;
@@ -121,7 +121,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 			((ResourceItemSlot*)obj)->SubCount(1);
 			
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 			break;
 		}
 	}
@@ -135,7 +135,7 @@ void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 	data.procssNum_ = processNum;
 	processList_.push_back(data);
 	//パラメータに反映
-	((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+	((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 }
 
 void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
@@ -147,7 +147,7 @@ void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 		{
 			itr = processList_.erase(itr);
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->ApplicationStatusData(CalcPotionStatus());
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
 			return;
 		}
 	}

@@ -113,7 +113,7 @@ void P_MP_CraftUI_PotionStatusUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
-void P_MP_CraftUI_PotionStatusUI::ApplicationStatusData(std::vector<float> status)
+void P_MP_CraftUI_PotionStatusUI::SetStatusData(std::vector<float> status)
 {
 	for (int i = 0; i < statusObjectList_.size(); i++)
 	{

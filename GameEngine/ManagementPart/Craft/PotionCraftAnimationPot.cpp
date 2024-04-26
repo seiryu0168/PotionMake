@@ -20,11 +20,13 @@ void PotionCraftAnimationPot::Initialize()
 	Image potImage(this);
 	potImage.Load("Assets/Image/PreparePot06.png");
 	potImage.SetLayer(1);
+	potImage.SetSize({ 2.3f,2.3f,0 });
 	AddComponent<Image>(potImage);
 	
 	//ìÁÇÃâÊëú(ëOë§)
 	Image potFrontImage(this);
 	potFrontImage.Load("Assets/Image/CraftPot_Front.png");
+	potFrontImage.SetSize({ 2.3f,2.3f,0 });
 	potFrontImage.SetLayer(2);
 	AddComponent<Image>(potFrontImage);
 
@@ -58,7 +60,7 @@ void PotionCraftAnimationPot::Update()
 void PotionCraftAnimationPot::InputResourceNumber(const std::vector<int> numList)
 {
 	ResourceStatusData* data = InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	XMFLOAT3 pos = { -0.1f,0.1f,0 };
+	XMFLOAT3 pos = { -0.1f,0.2f,0 };
 	
 	//ëfçﬁî‘çÜÇÇ‡Ç∆Ç…ëfçﬁÇï\é¶
 	for (int num : numList)

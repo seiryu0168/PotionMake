@@ -477,6 +477,7 @@ void Text::SetTransform(const TEXT_POSITION& pos)
 void Text::SetRect(const TEXT_RECT& rect)
 {	
 	layoutRect_ = rect;
+	D2D::GetDWriteFactory()->CreateTextLayout(pText_.c_str(), (UINT32)textLength_, pTextFormat_, (layoutRect_.right - layoutRect_.left), (layoutRect_.bottom - layoutRect_.top), &pLayout_);
 }
 void Text::SetAlignmentType(const ALIGNMENT_TYPE& type)
 {

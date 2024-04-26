@@ -1,6 +1,7 @@
 #include "PotionStock.h"
 #include"../../Engine/Systems/ImageSystem.h"
 #include"../../Engine/DirectX_11/Input.h"
+#include"../../Engine/Systems/TextSystem.h"
 #include"P_MP_PotionManagerUI_DisposeStockUI.h"
 #include"P_MP_PotionManagerUI_SellStockUI.h"
 #include"P_MP_PotionManagerUI_PotionStockUI.h"
@@ -38,9 +39,20 @@ PotionStock::~PotionStock()
 void PotionStock::Initialize()
 {
 	Image potionStockImage(this);
-	potionStockImage.Load("Assets/Image/ItemSlotImage.png");
+	potionStockImage.Load("Assets/Image/ItemBaseImage.png");
+	potionStockImage.SetColor(0.7f);
 	potionStockImage.SetLayer(0);
 	AddComponent<Image>(potionStockImage);
+
+	XMFLOAT3 imagePos = potionStockImage.GetPositionAtPixel();
+	Text statusText(this);
+	statusText.SetTextSize(25);
+	statusText.SetText("");
+	statusText.SetLayer(1);
+	statusText.isDraw_ = false;
+	statusText.SetRect({ 0,0,60,30 });
+	statusText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+	AddComponent<Text>(statusText);
 }
 
 void PotionStock::Start()
@@ -119,6 +131,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	potionColor_ = potionColor;
 	havePotion_ = true;
 
+	GetComponent<Image>().SetColor(1);
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	
 	//ポーションを表示
@@ -136,6 +149,9 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	potionEdgeImage.SetPosition(pos);
 	potionEdgeImage.SetSize({0.25f,0.25,0});
 	AddComponent<Image>(potionEdgeImage);
+
+	pos = potionBaseImage.GetPositionAtPixel();
+	GetComponent<Text>().SetPosition({ pos.x - 25, pos.y-5});
 
 	if (isSale)
 		selectedSlot_ = SelectSlot::Sell;
@@ -161,10 +177,13 @@ void PotionStock::AddSellPotion()
 	//既に画像があるなら表示させる
 	if (confirmImageNum_ != -1)
 	{
+		GetComponent<Text>().SetText("販売");
+		GetComponent<Text>().isDraw_ = true;
 		GetComponent<Image>(confirmImageNum_).SetAlpha(1);
 		return;
 	}
-
+	GetComponent<Text>().SetText("販売");
+	GetComponent<Text>().isDraw_ = true;
 	//操作が確定した時の画像を入れる
 	Image confirmImage(this);
 	confirmImage.Load("Assets/Image/ItemSlotImage.png");
@@ -190,16 +209,19 @@ void PotionStock::AddDisposePotion()
 	//既に画像があるなら表示させる
 	if (confirmImageNum_ != -1)
 	{
+		GetComponent<Text>().SetText("破棄");
+		GetComponent<Text>().isDraw_ = true;
 		GetComponent<Image>(confirmImageNum_).SetAlpha(1);
 		return;
 	}
-
+	GetComponent<Text>().SetText("破棄");
+	GetComponent<Text>().isDraw_ = true;
 	//操作が確定した時の画像
 	Image confirmImage(this);
-	confirmImage.Load("Assets/Image/ItemSlotImage.png");
+	confirmImage.Load("Assets/Image/UIBaseImage5.png");
 	confirmImage.SetLayer(1);
 	confirmImage.SetPosition(pos);
-	confirmImage.SetSize({ 1,0.3f,0 });
+	confirmImage.SetSize({ 2,0.6f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);
 }
 
@@ -215,6 +237,7 @@ void PotionStock::SubPotion()
 		disposeUI_->SubDisposePotion(potionNum_);
 		GetComponent<Image>(confirmImageNum_).SetAlpha(0);
 	}
+	GetComponent<Text>().isDraw_ = false;
 	selectedSlot_ = SelectSlot::None;
 	isConfirm_ = false;
 	isCountDown_ = true;

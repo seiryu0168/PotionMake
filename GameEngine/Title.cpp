@@ -4,7 +4,7 @@
 #include"Engine/newSceneManager.h"
 #include"Engine/Systems/TextSystem.h"
 #include "Engine/ResourceManager/Audio.h"
-//#include"TestObject.h"
+#include"TestObject.h"
 
 namespace
 {

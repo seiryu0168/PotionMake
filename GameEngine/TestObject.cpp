@@ -15,7 +15,8 @@ TestObject::TestObject(Object* parent)
 	:GameObject(parent,"TestObject"),
 	hModel_(-1),
 	time_(0),
-	vPos_(XMVectorSet(0,0,10.1f,0))
+	vPos_(XMVectorSet(0,0,10.1f,0)),
+	imagePos_({0,0,0})
 {
 	//DrawComponent<Test_Model_ECSver>()
 	
@@ -101,7 +102,7 @@ void TestObject::Initialize()
 	Image image(this);
 	image.Load("Assets\\Image\\ItemBaseImage.png");
 	//XMFLOAT3 pos = { -1.0f,0.001f,0 };
-	//image.SetPosition({1,0,0});
+	image.SetPosition({0,0.5f,0});
 	//image.SetDrawTarget(0);
 	image.SetSize({ 1,1,0 });
 
@@ -128,6 +129,17 @@ void TestObject::Update()
 	else
 		msg += "NotHit";
 	GetComponent<Text>().SetText(msg);
+
+	if (Input::IsKey(DIK_W))
+		imagePos_.y += 0.02f;
+	if (Input::IsKey(DIK_A))
+		imagePos_.x -= 0.02f;
+	if (Input::IsKey(DIK_S))
+		imagePos_.y -= 0.02f;
+	if (Input::IsKey(DIK_D))
+		imagePos_.x += 0.02f;
+
+	GetComponent<Image>().SetPosition(imagePos_);
 
 	//time_++;
 	//vPos_ = XMVector3Rotate(vPos_, XMQuaternionRotationAxis(XMVectorSet(0, 1.0f, 0, 0), XMConvertToRadians(1)));

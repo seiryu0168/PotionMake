@@ -106,19 +106,21 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 
 		//キャンセルボタン
 		Image cancelButton(this);
-		cancelButton.Load("Assets/Image/PotionManagerUIBase1.png");
+		cancelButton.Load("Assets/Image/ButtonImage02.png");
 		cancelButton.SetPosition({ pos.x,pos.y - 0.3f,0 });
-		cancelButton.SetSize({ 0.125*1.5f,0.125*0.5f,0 });
+		//cancelButton.SetSize({ 1,1,0 });
 		cancelButton.SetLayer(1);
 		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);
 
 		XMFLOAT3 imagePos = cancelButton.GetPositionAtPixel();
 		Text cancelText(this);
 		cancelText.SetText("キャンセル");
-		cancelText.SetTextSize(40);
+		cancelText.SetTextSize(50);
+		cancelText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+		cancelText.SetRect({ 0,0,220,60 });
 		cancelText.SetLayer(1);
-		cancelText.SetColor({ 0,0,0,1 });
-		cancelText.SetPosition({ imagePos.x-80,imagePos.y-30 });
+		cancelText.SetColor({ 1,1,1,1 });
+		cancelText.SetPosition({ imagePos.x-100,imagePos.y-5});
 		AddComponent<Text>(cancelText);
 	}
 	//選択されてなければ販売/破棄ボタンを表示
@@ -128,26 +130,28 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 
 		//販売ボタン
 		Image sellButton(this);
-		sellButton.Load("Assets/Image/PotionManagerUIBase1.png");
+		sellButton.Load("Assets/Image/ButtonImage02.png");
 		sellButton.SetPosition({ pos.x - 0.15f,pos.y - 0.3f,0 });
-		sellButton.SetSize({ 0.125*1,0.125*0.3f,0 });
+		sellButton.SetSize({ 0.5f,0.5f,0 });
 		sellButton.SetLayer(1);
 		sellButtonImageNum_ = AddComponent<Image>(sellButton);
 
 		XMFLOAT3 imagePos = sellButton.GetPositionAtPixel();
 		Text sellText(this);
 		sellText.SetText("売る");
-		sellText.SetTextSize(30);
+		sellText.SetTextSize(40);
+		sellText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+		sellText.SetRect({ 0,0,120,50 });
 		sellText.SetLayer(1);
-		sellText.SetColor({ 0,0,0,1 });
-		sellText.SetPosition({ imagePos.x - 30,imagePos.y - 20 });
+		sellText.SetColor({ 1,1,1,1 });
+		sellText.SetPosition({ imagePos.x - 50,imagePos.y});
 		AddComponent<Text>(sellText);
 
 		//破棄ボタン
 		Image disposeButton(this);
-		disposeButton.Load("Assets/Image/PotionManagerUIBase1.png");
+		disposeButton.Load("Assets/Image/ButtonImage02.png");
 		disposeButton.SetPosition({ pos.x + 0.15f,pos.y - 0.3f,0 });
-		disposeButton.SetSize({ 0.125*1,0.125*0.3f,0 });
+		disposeButton.SetSize({ 0.5f,0.5f,0 });
 		disposeButton.SetLayer(1);
 		disposeButtonImageNum_ = AddComponent<Image>(disposeButton);
 		
@@ -155,10 +159,12 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		imagePos = disposeButton.GetPositionAtPixel();
 		Text disposeText(this);
 		disposeText.SetText("捨てる");
-		disposeText.SetTextSize(30);
+		disposeText.SetTextSize(40);
+		disposeText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+		disposeText.SetRect({ 0,0,120,50 });
 		disposeText.SetLayer(1);
-		disposeText.SetColor({ 0,0,0,1 });
-		disposeText.SetPosition({ imagePos.x - 30,imagePos.y - 20 });
+		disposeText.SetColor({ 1,1,1,1 });
+		disposeText.SetPosition({ imagePos.x - 50,imagePos.y});
 		AddComponent<Text>(disposeText);
 
 
