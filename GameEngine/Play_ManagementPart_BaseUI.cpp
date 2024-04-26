@@ -44,6 +44,7 @@ void Play_ManagementPart_BaseUI::Update()
 	{
 		Direct3D::ShowMouseCursor(true);
 		Direct3D::SetClipCursor();
+		isAccessUI_ = true;
 		Instantiate<P_MP_MenuUI>(this);
 	}
 }

@@ -2,7 +2,8 @@
 #include"Play_ManagementPart_BaseUI.h"
 #include"Play_CollectionPart_BaseUI.h"
 Play_UIManager::Play_UIManager(Object* parent)
-	:GameObject(parent,"Play_UIManager")
+	:GameObject(parent,"Play_UIManager"),
+	accessUINum_(-1)
 {
 }
 

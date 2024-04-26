@@ -18,7 +18,10 @@ namespace
 
 P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_CraftPot"),
-	standPosition_({-0.84f,0.53f})
+	potionStatusObject_(nullptr),
+	standPosition_({-0.84f,0.53f}),
+	cost_(0),
+	costLimit_(10)
 {
 }
 
@@ -52,14 +55,20 @@ void P_MP_CraftUI_CraftPot::Initialize()
 void P_MP_CraftUI_CraftPot::Start()
 {
 	potionStatusObject_ = (GameObject*)FindObject("P_MP_CraftUI_PotionStatusUI");
+	potionStatusObject_->GetComponent<Text>().SetText(std::to_string(cost_) + "/" + std::to_string(costLimit_));
 }
 
 void P_MP_CraftUI_CraftPot::Update()
 {
 }
 
-void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName, std::string imageName)
+bool P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName, std::string imageName)
 {
+	if ((cost_+2) > costLimit_)
+		return false;
+
+	cost_ += 2;
+
 	//データマップにデータが無かったら
 	if (dataMap_.find(itemNum) == dataMap_.end())
 	{
@@ -71,8 +80,8 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		DisplayResource(itemNum);
 		
 		//素材のデータをパラメータに反映
-		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
-		return;
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(),std::to_string(cost_)+"/"+std::to_string(costLimit_));
+		return true;
 	}
 
 
@@ -87,10 +96,11 @@ void P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 		{
 			((ResourceItemSlot*)obj)->AddCount(1);
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(), std::to_string(cost_) + "/" + std::to_string(costLimit_));
 			break;
 		}
 	}
+	return true;
 }
 
 bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
@@ -98,6 +108,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 	if (dataMap_.find(itemNum) == dataMap_.end())
 		return false;
 
+	cost_ -= 2;
 	//素材の数を減らす
 	dataMap_.find(itemNum)->second.resourceCount_--;
 	
@@ -107,7 +118,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 		//該当する素材の枠をデフォルトに戻す
 		HiddenResource(itemNum);
 		//パラメータに反映
-		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
+		((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(), std::to_string(cost_) + "/" + std::to_string(costLimit_));
 		//データマップから削除
 		dataMap_.erase(itemNum);
 		return true;
@@ -121,25 +132,34 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 			((ResourceItemSlot*)obj)->SubCount(1);
 			
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(), std::to_string(cost_) + "/" + std::to_string(costLimit_));
 			break;
 		}
 	}
 	return true;
 }
 
-void P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
+bool P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 {
+	if((cost_ + 3) > costLimit_)
+		return false;
+
+	cost_ += 3;
 	//加工方法の番号を追加
 	ProcessData data;
 	data.procssNum_ = processNum;
 	processList_.push_back(data);
 	//パラメータに反映
-	((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
+	((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(), std::to_string(cost_) + "/" + std::to_string(costLimit_));
+	return true;
 }
 
-void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
+bool P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 {
+	if ((cost_ + 3) > costLimit_)
+		return false;
+
+	cost_ -= 3;
 	//加工方法の番号を削除
 	for (auto itr = processList_.begin(); itr != processList_.end(); itr++)
 	{
@@ -147,10 +167,11 @@ void P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 		{
 			itr = processList_.erase(itr);
 			//パラメータに反映
-			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus());
-			return;
+			((P_MP_CraftUI_PotionStatusUI*)potionStatusObject_)->SetStatusData(CalcPotionStatus(), std::to_string(cost_) + "/" + std::to_string(costLimit_));
+			return true;
 		}
 	}
+	return false;
 }
 
 void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
@@ -271,9 +292,9 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 
 	//ソート
 	data->SortResourceList();
-	data->potionDataList_.push_back(pData);
+	if (data->potionDataList_.size() < 30)
+		data->potionDataList_.push_back(pData);
 	((Play_ManagementPart_CraftUI*)pParent_->GetParent())->DisplayCraftProcess(itemNumList_);
-	//pParent_->KillMe();
 }
 
 std::vector<float> P_MP_CraftUI_CraftPot::CalcPotionStatus()

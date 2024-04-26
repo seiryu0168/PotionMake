@@ -14,11 +14,6 @@ P_MP_CraftUI_PotionStatusUI::~P_MP_CraftUI_PotionStatusUI()
 
 void P_MP_CraftUI_PotionStatusUI::Initialize()
 {
-	//Image uiBaseImage(this);
-	//uiBaseImage.Load("Assets/Image/UIBaseImage2.png");
-	//uiBaseImage.SetPosition({ uiPos_.x,uiPos_.y,0 });
-	//uiBaseImage.SetSize({ 16*0.7f,16*0.3f,0 });
-	//AddComponent<Image>(uiBaseImage);
 
 	CreateBase();
 
@@ -38,6 +33,14 @@ void P_MP_CraftUI_PotionStatusUI::Initialize()
 		statusObjectList_.push_back(gauge);
 	}
 
+	XMFLOAT3 pos = GetComponent<Image>().GetPositionAtPixel();
+	Text costText(this);
+	costText.SetText("0/0");
+	costText.SetTextSize(70);
+	costText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
+	costText.SetRect({ 0,0,200,200 });
+	costText.SetPosition({ pos.x+100,pos.y });
+	AddComponent<Text>(costText);
 
 }
 
@@ -113,12 +116,13 @@ void P_MP_CraftUI_PotionStatusUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
-void P_MP_CraftUI_PotionStatusUI::SetStatusData(std::vector<float> status)
+void P_MP_CraftUI_PotionStatusUI::SetStatusData(std::vector<float> status, const std::string& coststr)
 {
 	for (int i = 0; i < statusObjectList_.size(); i++)
 	{
 		statusObjectList_[i]->GetComponent<Image>().SetSize({ 1.0f*0.3f,status[i]*0.3f,0});
 	}
+	GetComponent<Text>().SetText(coststr);
 }
 
 void P_MP_CraftUI_PotionStatusUI::Release()

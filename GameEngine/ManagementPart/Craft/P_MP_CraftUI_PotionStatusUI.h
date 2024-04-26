@@ -15,7 +15,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void CreateBase();
-	void SetStatusData(std::vector<float> status);
+	void SetStatusData(std::vector<float> status,const std::string& coststr);
 	void Release() override;
 };
 

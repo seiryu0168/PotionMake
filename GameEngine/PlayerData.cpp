@@ -1,8 +1,17 @@
 #include "PlayerData.h"
 
+PlayerData::PlayerData()
+	:maxItemLimit_(999)
+
+{
+}
+
+PlayerData::~PlayerData()
+{
+}
+
 void PlayerData::SortResourceList()
 {
-	std::vector<ResourceData_> newItemDataList;
 	int minIndex = 0;
 	//ëfçﬁî‘çÜÇÇ‡Ç∆Ç…É\Å[Ég
 	for (int i = 0; i < itemDataList_.size(); i++)
@@ -35,5 +44,8 @@ void PlayerData::AddResourceItemData(const ResourceData_& resource)
 		itemDataList_.push_back(resource);
 	}
 	else
+	{
 		rData->itemCount_ += resource.itemCount_;
+		rData->itemCount_ = Clamp(rData->itemCount_, 0, maxItemLimit_);
+	}
 }

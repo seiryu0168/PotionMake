@@ -18,11 +18,24 @@ class P_MP_CraftUI_CraftPot : public GameObject
 private:
 	struct ResourceData
 	{
-		//ResourceStatus status_;
 		std::string resourceName_;
 		std::string imageName_;
 		int resourceCount_;
+		ResourceData()
+		{
+			resourceName_  = "";
+			imageName_     = "";
+			resourceCount_ = 0;
+		}
+		ResourceData(const std::string& resourceName, const std::string& imageName, int resourceCount)
+		{
+			resourceName_  = resourceName;
+			imageName_     = imageName;
+			resourceCount_ = resourceCount;
+		}
 	};
+	int cost_;
+	int costLimit_;
 	XMFLOAT2 standPosition_;
 	std::vector<GameObject*> objects_;
 	std::vector<XMFLOAT3> resourceImagePos_;
@@ -37,10 +50,10 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void AddResourceData(int itemNum,std::string resourceName,std::string imageName);
+	bool AddResourceData(int itemNum,std::string resourceName,std::string imageName);
 	bool SubResourceData(int itemNum);
-	void AddProcessData(int processNum);
-	void SubProcessData(int processNum);
+	bool AddProcessData(int processNum);
+	bool SubProcessData(int processNum);
 	void DisplayResource(int itemNum);
 	void HiddenResource(int itemNum);
 	void CreatePotion();

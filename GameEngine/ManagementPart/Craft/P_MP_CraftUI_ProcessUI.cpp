@@ -6,6 +6,7 @@
 
 P_MP_CraftUI_ProcessUI::P_MP_CraftUI_ProcessUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_ProcessUI"),
+	craftPotObject_(nullptr),
 	processNum_(-1),
 	isClicked_(false)
 
@@ -31,13 +32,15 @@ void P_MP_CraftUI_ProcessUI::Update()
 	//左クリックしたら暗くし、右クリックしたら明るくする
 	if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor()&&!isClicked_)
 	{
-		((P_MP_CraftUI_CraftPot*)craftPotObject_)->AddProcessData(processNum_);
+		if (!((P_MP_CraftUI_CraftPot*)craftPotObject_)->AddProcessData(processNum_))
+			return;
 		GetComponent<Image>().SetColor({ 1,1,1 });	
 		isClicked_ = !isClicked_;
 	}
 	else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor() && isClicked_)
 	{
-		((P_MP_CraftUI_CraftPot*)craftPotObject_)->SubProcessData(processNum_);
+		if (!((P_MP_CraftUI_CraftPot*)craftPotObject_)->SubProcessData(processNum_))
+			return;
 		GetComponent<Image>().SetColor({ 0.7f,0.7f,0.7f });
 		isClicked_ = !isClicked_;
 	}

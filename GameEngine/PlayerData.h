@@ -38,8 +38,11 @@ public:
 			potionColor_ = { 0,0,0 };
 		}
 	};
+	PlayerData();
+	~PlayerData();
 	void SortResourceList();
 	void AddResourceItemData(const ResourceData_& resource);
+	int maxItemLimit_;
 	std::string name_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;

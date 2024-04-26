@@ -45,7 +45,8 @@ void ResourceItem::Update()
 		//CraftPot‚Éƒf[ƒ^”½‰f
 		if (resourceCount_ > 0)
 		{
-			((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_, itemName_, resourceImageName_);
+			if (!((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_, itemName_, resourceImageName_))
+				return;
 			resourceCount_--;
 			GetComponent<Text>().SetText(std::to_string(resourceCount_));
 		}
