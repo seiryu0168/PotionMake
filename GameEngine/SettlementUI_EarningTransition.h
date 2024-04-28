@@ -7,6 +7,7 @@
 class SettlementUI_EarningTransition : public GameObject
 {
 	XMFLOAT3 uiPos_;
+	float gaugeSize_;
 	std::vector<int> gainList_;
 	int firstGaugeNum_;
 public:

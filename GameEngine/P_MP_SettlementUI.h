@@ -14,6 +14,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void CreateResoultUI();
+	int CalcSellCount(int newsNum,int topStatus);
 	void Release() override;
 };
 

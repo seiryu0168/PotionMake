@@ -6,6 +6,7 @@
 #include"SettlementUI_EarningTransition.h"
 #include"InterSceneData.h"
 #include"PlayerData.h"
+#include"ResourceStatusData.h"
 #include"CloseButton.h"
 P_MP_SettlementUI::P_MP_SettlementUI(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI")
@@ -25,10 +26,14 @@ void P_MP_SettlementUI::Initialize()
 	AddComponent<Image>(backImage);
 	int totalGain = 0;
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
+	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[pData.newsPaperNumber_];
 	for (PlayerData::PotionData& potionData : pData.potionDataList_)
 	{
 		if(potionData.isSale_)
-		totalGain += potionData.price_*5;
+		{
+			
+			totalGain += potionData.price_*CalcSellCount(pData.newsPaperNumber_,potionData.topStatus_);
+		}
 	}
 	pData.gainList_.erase(pData.gainList_.begin());
 	pData.gainList_.push_back(totalGain);
@@ -66,6 +71,21 @@ void P_MP_SettlementUI::CreateResoultUI()
 	//		potionPos.y -= 0.5f;
 	//	//}
 	//}
+}
+
+int P_MP_SettlementUI::CalcSellCount(int newsNum, int topStatus)
+{
+	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[newsNum];
+	int count = 5;
+	for (int i = 0; i < 5;i++)
+	{
+		int bit = 1 << i;
+		if (topStatus & bit && rData.resourceNumber_ & bit)
+		{
+			count *= 1.5f;
+		}
+	}
+	return count;
 }
 
 void P_MP_SettlementUI::Release()

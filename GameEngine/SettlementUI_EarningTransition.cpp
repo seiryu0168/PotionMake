@@ -5,7 +5,8 @@
 SettlementUI_EarningTransition::SettlementUI_EarningTransition(Object* parent)
 	:GameObject(parent,"SettlementUI_EarningTransition"),
 	uiPos_({ 0.4f,-0.4f,0 }),
-	firstGaugeNum_(-1)
+	firstGaugeNum_(-1),
+	gaugeSize_(2.0f)
 {
 }
 
@@ -115,11 +116,17 @@ void SettlementUI_EarningTransition::CreateBase()
 
 void SettlementUI_EarningTransition::SetData(const std::vector<int>& gainList)
 {
+	int maxGain = 0;
+	for (int gain : gainList)
+	{
+		if (gain > maxGain)
+			maxGain = gain;
+	}
 	//”„ã„ˆÚ‚Ìİ’è
 	gainList_ = gainList;
 	for (int i = 0; i < 5; i++)
 	{
-		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,gainList[i]*0.001f,0 });
+		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,Clamp(gaugeSize_*(gainList_[i]/maxGain),0.05f,gaugeSize_),0});
 	}
 
 }

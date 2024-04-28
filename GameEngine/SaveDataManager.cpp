@@ -253,7 +253,7 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 	{
 		ResourceStatusData::ResourceStatus statusData;
 
-		statusData.resourceNumber_ = i;
+		statusData.resourceNumber_ = reader.GetInt(i,0);
 		statusData.resourceName_ = reader.GetString(i, 1);
 		statusData.resourceImageName_ = reader.GetString(i, 2);
 		statusData.status00_ = reader.GetFloat(i, 3);
