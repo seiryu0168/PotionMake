@@ -30,6 +30,7 @@ public:
 	};
 	std::unordered_map<int, ResourceStatus> resourceDataMap_;
 	std::unordered_map<int, ResourceStatus> processDataMap_;
+	std::vector<ResourceStatus> newsPaperList_;
 	std::vector<XMFLOAT3> statusColor_;
 	//void AddResourceStatus()
 };

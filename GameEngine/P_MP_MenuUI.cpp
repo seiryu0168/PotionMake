@@ -6,6 +6,7 @@
 #include"Engine/newSceneManager.h"
 #include"Play_ManagementPart_BaseUI.h"
 #include"PlayerData.h"
+#include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
@@ -30,6 +31,9 @@ void P_MP_MenuUI::Initialize()
 	commandText.SetText("‰Æ‚É–ß‚é");
 	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	AddComponent<Text>(commandText);
+
+	Instantiate<P_MP_NewsPaper>(this);
+	
 
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });

@@ -36,17 +36,7 @@ void Play_UIManager::AccessUI(int uiNum)
 	{
 		((Play_ManagementPart_BaseUI*)FindChild("Play_ManagementPart_BaseUI"))->AccessUI(uiNum);
 	}
-	//else if (sceneName == "Play_CollectionPart")
-	//{
-	//	((Play_CollectionPart_BaseUI*)FindChild("Play_CollectionPart_BaseUI"))->
-	//}
-
 }
-
-//GameObject* Play_UIManager::GetUI(std::string name)
-//{
-//	return (GameObject*)FindChild(name);
-//}
 
 bool Play_UIManager::IsAccessUI()
 {

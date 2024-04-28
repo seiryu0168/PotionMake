@@ -49,6 +49,7 @@ void SaveDataManager::Init()
 {
 	nlohmann::json playerFile;
 	playerFile["Name"] = "player01";
+	playerFile["NewsPaperNumber"] = 0;
 	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
 	
@@ -112,6 +113,7 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 	playerFile = nlohmann::json::parse(ifs);
 	//PlayerData::SaveData data;
 	data.name_ = playerFile["Name"];
+	data.newsPaperNumber_ = playerFile["NewsPaperNumber"];
 	data.potionDataFileName_ = playerFile["PotionDataFileName"];
 	data.resourceFileName_ = playerFile["ResourceFileName"];
 
@@ -243,6 +245,24 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 		statusData.status03_		  = itr.value().at(6);
 		statusData.status04_		  = itr.value().at(7);
 		data.processDataMap_.insert({ statusData.resourceNumber_,statusData });
+	}
+
+	reader.Load("Assets/SaveData/GameData/NewsPaperData.csv");
+
+	for (int i = 0; i < reader.GetLines(); i++)
+	{
+		ResourceStatusData::ResourceStatus statusData;
+
+		statusData.resourceNumber_ = i;
+		statusData.resourceName_ = reader.GetString(i, 1);
+		statusData.resourceImageName_ = reader.GetString(i, 2);
+		statusData.status00_ = reader.GetFloat(i, 3);
+		statusData.status01_ = reader.GetFloat(i, 4);
+		statusData.status02_ = reader.GetFloat(i, 5);
+		statusData.status03_ = reader.GetFloat(i, 6);
+		statusData.status04_ = reader.GetFloat(i, 7);
+
+		data.newsPaperList_.push_back(statusData);
 	}
 
 }

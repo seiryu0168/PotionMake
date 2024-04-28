@@ -44,6 +44,7 @@ public:
 	void AddResourceItemData(const ResourceData_& resource);
 	int maxItemLimit_;
 	std::string name_;
+	int newsPaperNumber_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;
 	std::vector<ResourceData_> itemDataList_;

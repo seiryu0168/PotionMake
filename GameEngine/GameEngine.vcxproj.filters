@@ -459,6 +459,9 @@
     <ClCompile Include="P_MP_MenuUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="P_MP_NewsPaper.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -880,6 +883,9 @@
     </ClInclude>
     <ClInclude Include="P_MP_SettlementUI_TotalGain.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="P_MP_NewsPaper.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
