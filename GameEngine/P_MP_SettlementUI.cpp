@@ -40,7 +40,9 @@ void P_MP_SettlementUI::Initialize()
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"‘å·‹µ!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
 	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
+	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % 4;
 	
+
 	Instantiate<CloseButton>(this);
 }
 
