@@ -8,6 +8,7 @@
 #include"PlayerData.h"
 #include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
+#include"SaveDataManager.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
 	:GameObject(parent,"P_MP_MenuUI")
@@ -26,11 +27,22 @@ void P_MP_MenuUI::Initialize()
 	returnHome.SetRotation({ 0,0,180 });
 	//returnHome.SetSize({ 5,2,0 });
 	returnImageNum_ = AddComponent<Image>(returnHome);
-	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
+	XMFLOAT3 textPos = returnHome.GetPositionAtPixel();
 	Text commandText(this);
-	commandText.SetText("家に戻る");
+	commandText.SetText("セーブ");
 	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	AddComponent<Text>(commandText);
+
+	//Image saveImage(this);
+	//saveImage.Load("Assets/Image/SelectImage3.png");
+	//saveImage.SetPosition({ -1.2f,0.3f,0 });
+	//saveImage.SetRotation({ 0,0,180 });
+	//saveImageNum_ = AddComponent<Image>(saveImage);
+	//textPos = saveImage.GetPositionAtPixel();
+	//Text saveText(this);
+	//saveText.SetText("セーブ");
+	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	//AddComponent<Text>(saveText);
 
 	Instantiate<P_MP_NewsPaper>(this);
 	
@@ -51,13 +63,32 @@ void P_MP_MenuUI::Update()
 
 		if (Input::IsMouseButtonUp(0))
 		{
-			//SaveItemData();
-			//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
+			DataSave();
 		}
 
 	}
 	else
 		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
+
+	//if (GetComponent<Image>(saveImageNum_).IsHitCursor())
+	//{
+	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.1,0.3,0 });
+	//
+	//	if (Input::IsMouseButtonUp(0))
+	//	{
+	//		//SaveItemData();
+	//		//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
+	//	}
+	//}
+	//else
+	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.2f,0.3f,0 });
+}
+
+void P_MP_MenuUI::DataSave()
+{
+	SaveDataManager mng;
+
+	mng.Save("", *InterSceneData::GetData<PlayerData>("Data01"));
 }
 
 void P_MP_MenuUI::Release()

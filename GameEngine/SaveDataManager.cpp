@@ -164,6 +164,7 @@ void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 {
 	nlohmann::json playerFile;
 	playerFile["Name"] = data.name_;
+	playerFile["NewsPaperNumber"] = data.newsPaperNumber_;
 	playerFile["ResourceFileName"] = data.resourceFileName_;	// "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = data.potionDataFileName_;//"Assets/SaveData/PotionDataFile01";
 
@@ -196,7 +197,9 @@ void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 									 data.potionDataList_[i].potionColor_.z, };
 	}
 
-	std::ofstream of("Assets/SaveData/PlayerData02.json", std::ios::out);
+	playerFile["GainList"] = data.gainList_;
+
+	std::ofstream of("Assets/SaveData/PlayerData01.json", std::ios::out);
 	of << playerFile << std::endl;
 }
 

@@ -3,6 +3,7 @@
 class P_MP_MenuUI : public GameObject
 {
 	int returnImageNum_;
+	int saveImageNum_;
 public:
 	P_MP_MenuUI(Object* parent);
 	~P_MP_MenuUI();
@@ -10,6 +11,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void DataSave();
 	void Release() override;
 };
 
