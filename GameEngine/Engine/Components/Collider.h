@@ -20,6 +20,35 @@ struct HitSphere
 	float radius_;
 };
 
+struct HitBox_OBB
+{
+public:
+	XMFLOAT3 size_;
+
+	XMVECTOR vecX_;
+	XMVECTOR vecY_;
+	XMVECTOR vecZ_;
+
+	float prjLine(XMVECTOR* sep, XMVECTOR* e1, XMVECTOR* e2, XMVECTOR* e3 = nullptr)
+	{
+		XMVECTOR sp = XMVectorZero();
+		sp = XMVector3Normalize(*sep);
+		float r1 = abs(XMVectorGetX(XMVector3Dot(sp, *e1)));
+		float r2 = abs(XMVectorGetX(XMVector3Dot(sp, *e2)));
+		float r3 = e3 ? abs(XMVectorGetX(XMVector3Dot(sp, *e3))) : 0;
+
+		return r1 + r2 + r3;
+	}
+
+	void CalcAxisVec(XMVECTOR rotate)
+	{
+		//XMVECTOR rotateQua = XMQuaternionRotationMatrix(GetpColObject()->GetTransform().GetWorldRotateMatrix());
+		vecX_ = XMVector3Rotate(XMVectorSet(1,0,0,0), rotate);
+		vecY_ = XMVector3Rotate(XMVectorSet(0,1,0,0), rotate);
+		vecZ_ = XMVector3Rotate(XMVectorSet(0,0,1,0), rotate);
+	}
+};
+
 
 enum class ColliderType
 {

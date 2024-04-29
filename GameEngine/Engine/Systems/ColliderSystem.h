@@ -65,6 +65,8 @@ public:
 	bool IsHitBox_Sphere(Collider* firstTarget, Collider* secondTarget) const;
 	//球と球の当たり判定	
 	bool IsHitSphere_Sphere(Collider* firstTarget, Collider* secondTarget) const;
+	//OBBコライダー同士の当たり判定
+	bool IsHitOBB_OBB(Collider* firstTarget, Collider* secondTarget) const;
 
 };
 

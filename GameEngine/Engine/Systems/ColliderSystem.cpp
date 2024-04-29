@@ -184,12 +184,12 @@ void ColliderSystem::Draw(int drawLayer)
 				XMFLOAT3 pos = StoreFloat3(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->position_);
 				XMFLOAT3 colliderPos = Coordinator::GetComponent<Collider>(entity).GetCenter();
 				XMFLOAT3 colliderSize = Coordinator::GetComponent<Collider>(entity).GetCollisionShape<HitBox>().size_;
-				XMMATRIX matWVP = XMMatrixScaling(colliderSize.x,colliderSize.y,colliderSize.z)*
-								  XMMatrixTranslation(pos.x+colliderPos.x,
-													  pos.y+colliderPos.y,
-													  pos.z+colliderPos.z) *
-							      CameraManager::GetCurrentCamera().GetViewMatrix() * 
-								  CameraManager::GetCurrentCamera().GetProjectionMatrix();
+				XMMATRIX matWVP = XMMatrixScaling(colliderSize.x, colliderSize.y, colliderSize.z) *
+					XMMatrixTranslation(pos.x + colliderPos.x,
+						pos.y + colliderPos.y,
+						pos.z + colliderPos.z) *
+					CameraManager::GetCurrentCamera().GetViewMatrix() *
+					CameraManager::GetCurrentCamera().GetProjectionMatrix();
 
 
 
@@ -197,22 +197,13 @@ void ColliderSystem::Draw(int drawLayer)
 				cb.matWVP = XMMatrixTranspose(matWVP);
 				cb.matW = XMMatrixTranspose(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->GetWorldMatrix());
 				cb.matNormal = XMMatrixTranspose(Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->GetTransform()->GetNormalMatrix());
-		
+
 
 				D3D11_MAPPED_SUBRESOURCE pdata;
 				Direct3D::pContext->Map(pBoxConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
 				memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
-				
-				Direct3D::pContext->Unmap(pBoxConstantBuffer_, 0);//再開
 
-				//Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
-				//memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
-				//
-				//ID3D11SamplerState* pToonSampler = pToonTexture_->GetSampler();
-				//Direct3D::pContext->PSSetSamplers(1, 1, &pToonSampler);
-				//ID3D11ShaderResourceView* pToonSRV = pToonTexture_->GetSRV();
-				//Direct3D::pContext->PSSetShaderResources(1, 1, &pToonSRV);
-				//Direct3D::pContext->Unmap(pConstantBuffer_, 0);//再開
+				Direct3D::pContext->Unmap(pBoxConstantBuffer_, 0);//再開
 
 				//頂点バッファ
 				UINT stride = sizeof(VERTEX);
@@ -228,70 +219,11 @@ void ColliderSystem::Draw(int drawLayer)
 				Direct3D::pContext->VSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);				//頂点シェーダー用	
 				Direct3D::pContext->PSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);				//ピクセルシェーダー用
 				Direct3D::pContext->UpdateSubresource(pBoxConstantBuffer_, 0, nullptr, &cb, 0, 0);
-				
+
 				Direct3D::pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-				Direct3D::pContext->DrawIndexed(36, 0,0);
+				Direct3D::pContext->DrawIndexed(36, 0, 0);
 				Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-				//Direct3D::pContext->Draw(8, 0);
-				//Direct3D::pContext->Map(pBoxConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
-				//memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
-				//Direct3D::pContext->Unmap(pBoxConstantBuffer_, 0);//再開
-				////バーテックスバッファ
-				//Direct3D::pContext->IASetVertexBuffers(0, 1, &pBoxVertexBuffer_, &stride, &offset);
-				////コンスタントバッファ
-				//Direct3D::pContext->VSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//頂点シェーダー用	
-				//Direct3D::pContext->PSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//ピクセルシェーダー用
-				//Direct3D::pContext->UpdateSubresource(pBoxConstantBuffer_, 0, nullptr, &cb, 0, 0);
-				////頂点データの並び方を指定
-				//Direct3D::pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-				//Direct3D::pContext->Draw(sizeof(boxVertices_) / sizeof(VERTEX), 0);
-				//Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			}
-			//else if (type == ColliderType::SPHERE_COLLIDER)
-			//{
-			//	Direct3D::pContext->Map(pSphereConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
-			//	memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
-			//	Direct3D::pContext->Unmap(pSphereConstantBuffer_, 0);//再開
-			//	Direct3D::pContext->IASetVertexBuffers(0, 1, &pSphereVertexBuffer_, &stride, &offset);
-			//
-			//	//コンスタントバッファ
-			//	Direct3D::pContext->VSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//頂点シェーダー用	
-			//	Direct3D::pContext->PSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//ピクセルシェーダー用
-			//	Direct3D::pContext->UpdateSubresource(pSphereConstantBuffer_, 0, nullptr, &cb, 0, 0);
-			//	//頂点データの並び方を指定
-			//	Direct3D::pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-			//	Direct3D::pContext->Draw(sizeof(sphereVertices_) / sizeof(VERTEX), 0);
-			//	Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			//}
-
-			////頂点バッファ
-			//UINT stride = sizeof(VERTEX);
-			//UINT offset = 0;
-			//if (type == ColliderType::BOX_COLLIDER)
-			//{
-			//	Direct3D::pContext->IASetVertexBuffers(0, 1, &pBoxVertexBuffer_, &stride, &offset);
-			//	//コンスタントバッファ
-			//	Direct3D::pContext->VSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//頂点シェーダー用	
-			//	Direct3D::pContext->PSSetConstantBuffers(0, 1, &pBoxConstantBuffer_);							//ピクセルシェーダー用
-			//	Direct3D::pContext->UpdateSubresource(pBoxConstantBuffer_, 0, nullptr, &cb, 0, 0);
-			//	Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			//	Direct3D::pContext->Draw(sizeof(boxVertices_)/sizeof(VERTEX),0);
-			//}
-			//else if (type == ColliderType::SPHERE_COLLIDER)
-			//{
-			//
-			//	Direct3D::pContext->IASetVertexBuffers(0, 1, &pSphereVertexBuffer_, &stride, &offset);
-			//
-			//	//コンスタントバッファ
-			//	Direct3D::pContext->VSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//頂点シェーダー用	
-			//	Direct3D::pContext->PSSetConstantBuffers(0, 1, &pSphereConstantBuffer_);							//ピクセルシェーダー用
-			//	Direct3D::pContext->UpdateSubresource(pSphereConstantBuffer_, 0, nullptr, &cb, 0, 0);
-			//	//頂点データの並び方を指定
-			//	Direct3D::pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-			//	Direct3D::pContext->Draw(sizeof(sphereVertices_) / sizeof(VERTEX), 0);
-			//	Direct3D::pContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			//}
 		}
 	}
 }
@@ -354,37 +286,29 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 			break;
 		}
 		break;
+
+	case ColliderType::OBB_COLLIDER:
+		switch (secondTarget->GetType())
+		{
+		case ColliderType::BOX_COLLIDER:
+			isCollision = false;
+			break;
+		case ColliderType::SPHERE_COLLIDER:
+			isCollision = false;
+			break;
+		case ColliderType::OBB_COLLIDER:
+			isCollision = IsHitOBB_OBB(firstTarget, secondTarget);
+			break;
+		}
 	default:
 		break;
 	}
 
 	if (isCollision)
 	{
-		////前フレームまで当たっていなかったら
-		//if (!firstTarget->prevHit_&&!firstTarget->nowHit_)
-		//{	
-		//	firstTarget->prevHit_ = true;
-		//	firstTarget->nowHit_ = true;
-		//	firstTarget->GetAttachedObject()->OnCollisionEnter(secondTarget->GetAttachedObject());
-		//}
-		//前フレームも当たっていたら
 			firstTarget->nowHit_ = true;
 			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
 	}
-	////前フレームまで当たっていたら
-	//else
-	//{
-	//	firstTarget->nowHit_ = false;
-	//	if (firstTarget->prevHit_ && !firstTarget->nowHit_)
-	//	{
-	//		firstTarget->prevHit_ = false;
-	//		firstTarget->GetAttachedObject()->OnCollisionExit(secondTarget->GetAttachedObject());
-	//	}
-	//}
-	////当たってたらオブジェクトの関数を呼び出す
-	//if (isCollision)
-	//	firstTarget->GetAttachedObject()->OnCollision(secondTarget->GetAttachedObject());
-
 }
 
 bool ColliderSystem::IsHitBox_Box(Collider* firstTarget,Collider* secondTarget) const
@@ -442,3 +366,327 @@ bool ColliderSystem::IsHitSphere_Sphere(Collider* firstTarget, Collider* secondT
 	//firstTarget->HitEnable(false);
 	return false;
 }
+
+bool ColliderSystem::IsHitOBB_OBB(Collider* firstTarget, Collider* secondTarget) const
+{
+	XMVECTOR obbPos_first = firstTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&firstTarget->GetCenter());
+	XMVECTOR obbPos_second = secondTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&secondTarget->GetCenter());
+
+	HitBox_OBB& hitObb_first = firstTarget->GetCollisionShape<HitBox_OBB>();
+	HitBox_OBB& hitObb_second = secondTarget->GetCollisionShape<HitBox_OBB>();
+
+	XMVECTOR betweenCenterPoint = obbPos_first - obbPos_second;
+
+	hitObb_first.CalcAxisVec(XMQuaternionRotationMatrix(firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix()));
+	hitObb_second.CalcAxisVec(XMQuaternionRotationMatrix(secondTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix()));
+
+	XMVECTOR dir_firstX_  = XMVector3Normalize(hitObb_first.vecX_);
+	XMVECTOR dir_firstY_  = XMVector3Normalize(hitObb_first.vecY_);
+	XMVECTOR dir_firstZ_  = XMVector3Normalize(hitObb_first.vecZ_);
+	XMVECTOR dir_secondX_ = XMVector3Normalize(hitObb_second.vecX_);
+	XMVECTOR dir_secondY_ = XMVector3Normalize(hitObb_second.vecY_);
+	XMVECTOR dir_secondZ_ = XMVector3Normalize(hitObb_second.vecZ_);
+
+
+	//firstTargetの中心点からの長さ
+	float rA = VectorLength(hitObb_first.vecX_);	
+	float rB = hitObb_first.prjLine(&hitObb_first.vecX_, &hitObb_second.vecX_, &hitObb_second.vecY_, &hitObb_second.vecZ_);		//obbBの中心点からの長さ
+	float  L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_first.vecX_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	rA = XMVectorGetX(XMVector3Length(hitObb_first.vecY_));								    //obbAの中心点からの長さ
+	rB = hitObb_first.prjLine(&hitObb_first.vecY_, &hitObb_second.vecX_, &hitObb_second.vecY_, &hitObb_second.vecZ_);			//obbBの中心点からの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_first.vecY_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	rA = XMVectorGetX(XMVector3Length(hitObb_first.vecZ_));								    //obbAの中心点からの長さ
+	rB = hitObb_first.prjLine(&hitObb_first.vecZ_, &hitObb_second.vecX_, &hitObb_second.vecY_, &hitObb_second.vecZ_);			//obbBの中心点からの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_first.vecZ_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	rA = XMVectorGetX(XMVector3Length(hitObb_second.vecX_));								    //obbAの中心点からの長さ
+	rB = hitObb_second.prjLine(&hitObb_second.vecX_, &hitObb_first.vecX_, &hitObb_first.vecY_, &hitObb_first.vecZ_);			//obbBの中心点からの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_second.vecX_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	rA = XMVectorGetX(XMVector3Length(hitObb_second.vecY_));								    //obbAの中心点からの長さ
+	rB = hitObb_second.prjLine(&hitObb_second.vecY_, &hitObb_first.vecX_, &hitObb_first.vecY_, &hitObb_first.vecZ_);			//obbBの中心点からの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_second.vecY_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	rA = XMVectorGetX(XMVector3Length(hitObb_second.vecZ_));								    //obbAの中心点からの長さ
+	rB = hitObb_second.prjLine(&hitObb_second.vecZ_, &hitObb_first.vecX_, &hitObb_first.vecY_, &hitObb_first.vecZ_);			//obbBの中心点からの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(hitObb_second.vecZ_))));//中心点間の長さ
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	///////////////////////////////ここから外積軸による衝突判定//////////////////////////////////////
+
+	XMVECTOR cross;
+	//firstTargetのX軸とsecondTargetのX軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstX_, dir_secondX_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecY_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecY_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのX軸とsecondTargetのY軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstX_, dir_secondY_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecY_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのX軸とsecondTargetのZ軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstX_, dir_secondZ_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecY_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecY_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのY軸とsecondTargetのX軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstY_, dir_secondX_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecY_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのY軸とsecondTargetのY軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstY_, dir_secondY_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのY軸とsecondTargetのZ軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstY_, dir_secondZ_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecZ_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecY_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのZ軸とsecondTargetのX軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstZ_,dir_secondX_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecY_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのZ軸とsecondTargetのY軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstZ_, dir_secondY_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecY_);				//obbAの長さ
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecZ_);				//obbBの長さ
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//firstTargetのZ軸とsecondTargetのZ軸の外積 : この外積を分離軸として計算を行う
+	cross = XMVector3Normalize(XMVector3Cross(dir_firstZ_, dir_secondZ_));
+	rA = hitObb_first.prjLine(&cross, &hitObb_first.vecX_, &hitObb_first.vecY_);
+	rB = hitObb_second.prjLine(&cross, &hitObb_second.vecX_, &hitObb_second.vecY_);
+	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+	if (L > rA + rB)
+	{
+		return false;
+	}
+
+	//中心点間の距離が一回もrA + rB以上にならなかったので当たっている
+	return true;
+}
+
+//bool Collider::IsHitOBB_Sphere(OBBCollider* obb, SphereCollider* sphere)
+//{
+//	XMFLOAT3 obbPos = obb->pColObject_->GetTransform().position_;
+//	XMFLOAT3 spherePos = sphere->pColObject_->GetTransform().position_;
+//
+//	XMVECTOR betweenCenterPoint = XMLoadFloat3(&spherePos) - XMLoadFloat3(&obbPos);
+//
+//	obb->CalcAxisVec();
+//
+//	float L;
+//	double rA = XMVectorGetX(XMVector3Length(obb->OBB_X));								    //obbの中心点からの長さ
+//	double rB = sphere->size_.x;															//sphereの中心点からの長さ
+//	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obb->OBB_X))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	rA = XMVectorGetX(XMVector3Length(obb->OBB_Y));								    //obbAの中心点からの長さ
+//	rB = sphere->size_.x;															//obbBの中心点からの長さ
+//	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obb->OBB_Y))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	rA = XMVectorGetX(XMVector3Length(obb->OBB_Z));								    //obbAの中心点からの長さ
+//	rB = sphere->size_.x;															//obbBの中心点からの長さ
+//	L = fabsf(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obb->OBB_Z))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//#if false
+//	rA = XMVectorGetX(XMVector3Length(obbB->OBB_X));								    //obbAの中心点からの長さ
+//	rB = sphere->size_.x;														//obbBの中心点からの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obbB->OBB_X))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	rA = XMVectorGetX(XMVector3Length(obbB->OBB_Y));								    //obbAの中心点からの長さ
+//	rB = obbA->prjLine(&obbB->OBB_Y, &obbA->OBB_X, &obbA->OBB_Y, &obbA->OBB_Z);			//obbBの中心点からの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obbB->OBB_Y))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	rA = XMVectorGetX(XMVector3Length(obbB->OBB_Z));								    //obbAの中心点からの長さ
+//	rB = obbA->prjLine(&obbB->OBB_Z, &obbA->OBB_X, &obbA->OBB_Y, &obbA->OBB_Z);			//obbBの中心点からの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, XMVector3Normalize(obbB->OBB_Z))));//中心点間の長さ
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	///////////////////////////////ここから外積軸による衝突判定//////////////////////////////////////
+//
+//	XMVECTOR cross;
+//	//obbAのX軸とobbBのX軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nX, obbB->nX));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_Y, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_Y, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのX軸とobbBのY軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nX, obbB->nY));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_Y, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのX軸とobbBのZ軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nX, obbB->nZ));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_Y, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Y);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのY軸とobbBのX軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nY, obbB->nX));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_Y, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのY軸とobbBのY軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nY, obbB->nY));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのY軸とobbBのZ軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nY, obbB->nZ));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Z);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Y);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのZ軸とobbBのX軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nZ, obbB->nX));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Y);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_Y, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのZ軸とobbBのY軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nZ, obbB->nY));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Y);				//obbAの長さ
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Z);				//obbBの長さ
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));	//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//obbAのZ軸とobbBのZ軸の外積 : この外積を分離軸として計算を行う
+//	cross = XMVector3Normalize(XMVector3Cross(obbA->nZ, obbB->nZ));
+//	rA = obbA->prjLine(&cross, &obbA->OBB_X, &obbA->OBB_Y);
+//	rB = obbA->prjLine(&cross, &obbB->OBB_X, &obbB->OBB_Y);
+//	L = fabs(XMVectorGetX(XMVector3Dot(betweenCenterPoint, cross)));//分離軸に投影した中心点間の距離
+//	if (L > rA + rB)
+//	{
+//		return false;
+//	}
+//
+//	//中心点間の距離が一回もrA + rB以上にならなかったので当たっている
+//#endif
+//	return true;
+//}
