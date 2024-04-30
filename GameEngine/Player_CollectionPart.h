@@ -20,6 +20,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	void MoveControll() override;
 	void AddItem(int itemNum);
 	void SetControllFlag(bool flag) { canControl_ = flag; }
 	const std::unordered_map<int, int>& GetItem() { return itemCount_; }

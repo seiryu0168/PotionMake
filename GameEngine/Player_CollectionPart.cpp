@@ -36,7 +36,7 @@ void Player_CollectionPart::Update()
 {
 	if (canControl_)
 	{
-
+		XMVECTOR pos = transform_->position_;
 		MoveControll();
 
 		int itemNum = itemGetter_->GetItemNumber();
@@ -66,6 +66,49 @@ void Player_CollectionPart::Update()
 	}
 }
 
+void Player_CollectionPart::MoveControll()
+{
+	if (Input::IsKey(DIK_W))
+	{
+		GetMoveVec() += XMVectorSet(0, 0, GetSpeed(), 0);
+	}
+	if (Input::IsKey(DIK_A))
+	{
+		GetMoveVec() += XMVectorSet(-GetSpeed(), 0, 0, 0);
+	}
+	if (Input::IsKey(DIK_S))
+	{
+		GetMoveVec() += XMVectorSet(0, 0, -GetSpeed(), 0);
+	}
+	if (Input::IsKey(DIK_D))
+	{
+		GetMoveVec() += XMVectorSet(GetSpeed(), 0, 0, 0);
+	}
+	if (VectorLength(GetMoveVec()) >= 0.01f)
+	{
+		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
+
+		XMFLOAT3 pos = StoreFloat3(transform_->position_);
+
+		RayCastData data;
+		data.start = StoreFloat3(XMVectorSet(pos.x + moveBuff.x, 999, pos.z + moveBuff.z, 0));
+		data.dir = StoreFloat3(XMVectorSet(0, -1, 0, 0));
+
+		ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
+		moveBuff.y = 0;
+
+		if (data.hit)
+		{
+			pos = StoreFloat3(data.hitPos);
+			pos.y += 10;
+			//GetMoveVec() = XMLoadFloat3(&moveBuff);
+			transform_->position_ = XMLoadFloat3(&pos);//XMVector3Normalize(GetMoveVec()) * GetSpeed();
+			CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
+		}
+		GetMoveVec() = XMVectorSet(0, 0, 0, 0);
+	}
+}
+
 void Player_CollectionPart::AddItem(int itemNum)
 {
 	//auto itemData = itemCount_.find(itemNum);
@@ -76,18 +119,6 @@ void Player_CollectionPart::AddItem(int itemNum)
 		itemCount_[itemNum]++;
 	}
 }
-
-//void Player_CollectionPart::CameraControll()
-//{
-//	XMFLOAT3 rotate = { 0,0,0 };
-//	rotate = StoreFloat3(Input::GetMouseMove() * 0.03f);
-//	cameraRotate_.x += rotate.x;
-//	cameraRotate_.y += rotate.y;
-//	cameraRotate_.y = Clamp<float>(cameraRotate_.y, rotateDownerLimitY_, rotateUperLimitY_);
-//	transform_->RotateEular(cameraRotate_.y, cameraRotate_.x, 0);
-//
-//	CameraManager::GetCamera(0).SetTarget(transform_->position_ + transform_->GetFront());
-//}
 
 void Player_CollectionPart::Release()
 {

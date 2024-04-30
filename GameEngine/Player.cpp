@@ -115,9 +115,3 @@ void Player::SetUIManager(Object* uiManager)
 void Player::Release()
 {
 }
-
-//void Player::OnCollisionStay(GameObject* pTarget)
-//{
-//	collisionObjectName_ = ((ManagementPartObjectBase*)pTarget)->GetActionName();
-//	collisionUINum_ = ((ManagementPartObjectBase*)pTarget)->GetAccessUINumber();
-//}

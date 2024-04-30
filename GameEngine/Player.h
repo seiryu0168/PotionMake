@@ -29,14 +29,14 @@ public:
 	//void Initialize() override;
 	//void Start() override;
 	//void Update() override;
-	void MoveControll();
-	void CameraControll();
-	float GetSpeed() { return speed_; }
+	virtual void MoveControll();
+	virtual void CameraControll();
+	float& GetSpeed() { return speed_; }
+	XMVECTOR& GetMoveVec() { return moveVec_; }
+	XMVECTOR& GetCameraTargetVec() { return cameraTargetVec_; }
+	XMFLOAT2& cameraRotate() { return cameraRotate_; }
 	Object* GetUIManager() { return UIManagerObject_; }
 	void SetUIManager(Object* uiManager);
 	void Release() override;
-	//void OnCollisionStay(GameObject* pTarget) override;
-	//void OnCollisionExit(GameObject* pTarget) override;
-	//void OnCollision(Object* pTarget) override;
 };
 
