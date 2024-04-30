@@ -36,6 +36,8 @@ private:
 	};
 	int cost_;
 	int costLimit_;
+	int hAudio_Add_;
+	int hAudio_Sub_;
 	XMFLOAT2 standPosition_;
 	std::vector<GameObject*> objects_;
 	std::vector<XMFLOAT3> resourceImagePos_;

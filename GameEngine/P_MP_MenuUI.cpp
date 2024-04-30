@@ -9,6 +9,7 @@
 #include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
 #include"SaveDataManager.h"
+#include"Engine/ResourceManager/Audio.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
 	:GameObject(parent,"P_MP_MenuUI")
@@ -49,6 +50,8 @@ void P_MP_MenuUI::Initialize()
 
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
+
+	hAudio_Confirm_ = Audio::Load("Assets/Audio/Confirm51.wav");
 }
 
 void P_MP_MenuUI::Start()
@@ -63,25 +66,13 @@ void P_MP_MenuUI::Update()
 
 		if (Input::IsMouseButtonUp(0))
 		{
+			Audio::Play(hAudio_Confirm_);
 			DataSave();
 		}
 
 	}
 	else
 		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
-
-	//if (GetComponent<Image>(saveImageNum_).IsHitCursor())
-	//{
-	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.1,0.3,0 });
-	//
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		//SaveItemData();
-	//		//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
-	//	}
-	//}
-	//else
-	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.2f,0.3f,0 });
 }
 
 void P_MP_MenuUI::DataSave()

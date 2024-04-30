@@ -6,11 +6,13 @@
 #include"ManagementPart/Outing/Play_ManagementPart_OutingUI.h"
 #include"ManagementPart/Craft/Play_ManagementPart_CraftUI.h"
 #include"ManagementPart/PotionManagement/Play_ManagementPart_PotionManagerUI.h"
+#include"Engine/ResourceManager/Audio.h"
 
 Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),
 	UINum_(0),
-	isAccessUI_(false)
+	isAccessUI_(false),
+	hAudio_UIOpen_(-1)
 {
 }
 
@@ -31,6 +33,8 @@ void Play_ManagementPart_BaseUI::Initialize()
 	text.SetRect({ 0,0,500,500 });
 	text.SetPosition({ 1320,520 });
 	AddComponent<Text>(text);
+
+	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Comfirm29.wav");
 }
 
 void Play_ManagementPart_BaseUI::Start()
@@ -45,6 +49,8 @@ void Play_ManagementPart_BaseUI::Update()
 		Direct3D::ShowMouseCursor(true);
 		Direct3D::SetClipCursor();
 		isAccessUI_ = true;
+
+		Audio::Play(hAudio_UIOpen_);
 		Instantiate<P_MP_MenuUI>(this);
 	}
 }
@@ -57,6 +63,7 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 {
 	Direct3D::ShowMouseCursor(true);
 	Direct3D::SetClipCursor();
+	Audio::Play(hAudio_UIOpen_);
 	switch (uiNum)
 	{
 	case 0:

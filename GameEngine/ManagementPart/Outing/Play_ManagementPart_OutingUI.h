@@ -11,6 +11,7 @@ private:
 	float time_;
 	float countLimit_;
 	int outingNumber_;
+	
 public:
 	Play_ManagementPart_OutingUI(Object* parent);
 	~Play_ManagementPart_OutingUI();

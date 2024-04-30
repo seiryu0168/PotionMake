@@ -4,6 +4,7 @@ class P_MP_MenuUI : public GameObject
 {
 	int returnImageNum_;
 	int saveImageNum_;
+	int hAudio_Confirm_;
 public:
 	P_MP_MenuUI(Object* parent);
 	~P_MP_MenuUI();

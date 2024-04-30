@@ -4,6 +4,7 @@
 #include"../../ResourceStatusData.h"
 #include"CraftSteam2D.h"
 #include"FinishCraftUI.h"
+#include"../../Engine/ResourceManager/Audio.h"
 PotionCraftAnimationPot::PotionCraftAnimationPot(Object* parent)
 	:GameObject(parent,"PotionCraftAnimationPot"),
 	time_(0)
@@ -34,6 +35,9 @@ void PotionCraftAnimationPot::Initialize()
 	CraftSteam2D* smoke = Instantiate<CraftSteam2D>(this);
 	smoke->SetSmokeParameter(3.0f, 0, 30, 0.1f, 0.6f, {-0.2f,0.2f});
 	smoke->PlaySmoke();
+
+	hAudio_Bubble_ = Audio::Load("Assets/Audio/Bubble01.wav");
+	Audio::Play(hAudio_Bubble_);
 
 }
 

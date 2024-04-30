@@ -5,6 +5,7 @@
 /// </summary>
 class CloseButton : public GameObject
 {
+	int hAudio_Close_;
 public:
 	CloseButton(Object* parent);
 	~CloseButton();

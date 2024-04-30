@@ -1,0 +1,14 @@
+効果音ラボ様
+・キャンセル9 	          : Cancel09
+・決定ボタンを押す音29    : Confirm29
+・決定ボタンを押す音34	  : Confirm34
+・決定ボタンを押す音50    : Confirm50
+・決定ボタンを押す音51    : Confirm51
+・ドアを開ける1           : OpenDoor01
+・アスファルトの上を歩く1 : Walk01
+・水ぶくぶく1		　: Bubble01
+
+
+
+BGMer様
+角砂糖をもうひとつ : ManagementPart_BGM

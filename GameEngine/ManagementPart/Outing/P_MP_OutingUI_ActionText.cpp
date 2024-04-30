@@ -5,6 +5,7 @@
 #include"../../Engine/newSceneManager.h"
 #include"Play_ManagementPart_OutingUI.h"
 #include"../../P_MP_SettlementUI.h"
+#include"../../Engine/ResourceManager/Audio.h"
 P_MP_OutingUI_ActionText::P_MP_OutingUI_ActionText(Object* parent)
 	:GameObject(parent,"P_MP_OutingUI_ActionText")
 {
@@ -27,6 +28,7 @@ void P_MP_OutingUI_ActionText::Initialize()
 	actionText.SetText("çÃèWÇ…èoÇ©ÇØÇÈ\nîÑÇËÇ…çsÇ≠");
 	actionText.SetPosition({ 700,500 });
 	AddComponent<Text>(actionText);
+	hAudio_OpenDoor_ = Audio::Load("Assets/Audio/OpenDoor01.wav");
 }
 
 void P_MP_OutingUI_ActionText::Start()
@@ -60,6 +62,7 @@ void P_MP_OutingUI_ActionText::Update()
 	}
 	if (Input::IsMouseButtonUp(0)&& forcusNum>=0)
 	{
+		Audio::Play(hAudio_OpenDoor_);
 		((Play_ManagementPart_OutingUI*)pParent_)->SetCloseFlag(false);
 		((Play_ManagementPart_OutingUI*)pParent_)->SetOutNumber(forcusNum);
 		KillMe();

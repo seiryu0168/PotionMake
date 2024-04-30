@@ -29,12 +29,6 @@ void Player_ManagementPart::Initialize()
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 
-	//Text noticeText(this);
-	//noticeText.SetText("Name");
-	//TEXT_RECT rect = { 0,0,1000,500 };
-	//noticeText.SetRect(rect);
-	//noticeText.SetColor({ 0,0,0,1 });
-	//AddComponent<Text>(noticeText);
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0, 10, 1, 0));
