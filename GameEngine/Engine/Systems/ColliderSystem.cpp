@@ -269,6 +269,9 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 		case ColliderType::SPHERE_COLLIDER:
 			isCollision = IsHitBox_Sphere(firstTarget, secondTarget);
 			break;
+		case ColliderType::CAPSULE_COLLIDER:
+			isCollision = IsHitCapsule_Box(secondTarget, firstTarget);
+			break;
 		default:
 			break;
 		}
@@ -287,6 +290,13 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 		}
 		break;
 
+	case ColliderType::CAPSULE_COLLIDER:
+		switch (secondTarget->GetType())
+		{
+		case ColliderType::BOX_COLLIDER:
+			isCollision = IsHitCapsule_Box(firstTarget, secondTarget);
+			break;
+		}
 	case ColliderType::OBB_COLLIDER:
 		switch (secondTarget->GetType())
 		{
@@ -364,6 +374,47 @@ bool ColliderSystem::IsHitSphere_Sphere(Collider* firstTarget, Collider* secondT
 	}
 
 	//firstTarget->HitEnable(false);
+	return false;
+}
+
+bool ColliderSystem::IsHitCapsule_Box(Collider* firstTarget, Collider* secondTarget) const
+{
+	Hit_Capsule capsule = firstTarget->GetCollisionShape<Hit_Capsule>();
+	HitBox box = secondTarget->GetCollisionShape<HitBox>();
+
+	XMVECTOR dirVec = XMVector3Normalize(XMVectorSet(0,1,0,0) * firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix());
+
+	XMVECTOR pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec* capsule.length_);
+	
+	float distance = 0;
+	if (VectorDot(XMVector3Normalize(pVec), dirVec) > 0)
+	{
+		distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec * capsule.length_));
+		if (distance <= capsule.radius_)
+			return true;
+	}
+	pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_);
+
+	if (VectorDot(XMVector3Normalize(pVec), dirVec) < 0)
+	{
+		distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_));
+		if (distance <= capsule.radius_)
+			return true;
+	}
+	
+
+	XMVECTOR aVec = firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_;
+
+	XMVECTOR nearPoint = aVec + (dirVec * VectorDot(dirVec, pVec));
+	
+
+	distance = VectorLength(secondTarget->GetAttachedObject()->GetTransform()->position_ - nearPoint);
+
+	if (distance <= capsule.radius_)
+	{
+		return true;
+	}
+		
 	return false;
 }
 

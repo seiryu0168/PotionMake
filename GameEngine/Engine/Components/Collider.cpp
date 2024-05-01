@@ -39,6 +39,9 @@ void Collider::Release()
 	case ColliderType::SPHERE_COLLIDER:
 		Coordinator::RemoveComponent<HitSphere>(colliderEntity_);
 		break;
+	case ColliderType::CAPSULE_COLLIDER:
+		Coordinator::RemoveComponent<Hit_Capsule>(colliderEntity_);
+		break;
 	case ColliderType::OBB_COLLIDER:
 		Coordinator::RemoveComponent<HitBox_OBB>(colliderEntity_);
 	default:
@@ -53,6 +56,8 @@ void Collider::SetCollisionType(const std::string& name)
 		colliderType_ = ColliderType::BOX_COLLIDER;
 	else if (name == "struct HitSphere")
 		colliderType_ = ColliderType::SPHERE_COLLIDER;
+	else if (name == "struct Hit_Capsule")
+		colliderType_ = ColliderType::CAPSULE_COLLIDER;
 	else if ("struct HitBox_OBB")
 		colliderType_ = ColliderType::OBB_COLLIDER;
 }

@@ -20,6 +20,15 @@ struct HitSphere
 	float radius_;
 };
 
+struct Hit_Capsule
+{
+	float length_;
+	float radius_;
+	const XMVECTOR& GetVec() { return dirVec_; }
+private:
+	XMVECTOR dirVec_;
+};
+
 struct HitBox_OBB
 {
 public:
@@ -54,9 +63,9 @@ enum class ColliderType
 {
 	BOX_COLLIDER,
 	SPHERE_COLLIDER,
+	CAPSULE_COLLIDER,
 	OBB_COLLIDER,
 	COLLIDER_MAX
-
 };
 
 //“–‚½‚è”»’è
