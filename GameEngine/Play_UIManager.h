@@ -8,7 +8,7 @@ class Play_UIManager : public GameObject
 {
 private:
 	int accessUINum_;
-
+	float time_;
 public:
 	Play_UIManager(Object* parent);
 	~Play_UIManager();

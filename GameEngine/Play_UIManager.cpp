@@ -1,9 +1,11 @@
 #include "Play_UIManager.h"
 #include"Play_ManagementPart_BaseUI.h"
 #include"Play_CollectionPart_BaseUI.h"
+#include"Engine/Systems/ImageSystem.h"
 Play_UIManager::Play_UIManager(Object* parent)
 	:GameObject(parent,"Play_UIManager"),
-	accessUINum_(-1)
+	accessUINum_(-1),
+	time_(0)
 {
 }
 
@@ -23,10 +25,22 @@ void Play_UIManager::Initialize()
 
 		Instantiate<Play_CollectionPart_BaseUI>(this);
 	}
+
+	Image fadeImage(this);
+	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
+	fadeImage.SetColor({ 0,0,0,0 });
+	fadeImage.SetLayer(3);
+	fadeImage.SetSize({ 2,2,0 });
+	AddComponent<Image>(fadeImage);
 }
 
 void Play_UIManager::Update()
 {
+	if (time_ <= 0.5f)
+	{
+		time_ += 0.016;
+		GetComponent<Image>().SetAlpha((0.5f-time_)/0.5f);
+	}
 }
 
 void Play_UIManager::AccessUI(int uiNum)
