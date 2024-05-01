@@ -6,6 +6,7 @@
 #include"CollectionPart_Ground.h"
 #include"Play_UIManager.h"
 #include"Play_CollectionPart_BaseUI.h"
+#include"Engine/ResourceManager/Audio.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
 	canControl_(true)
@@ -23,6 +24,9 @@ void Player_CollectionPart::Initialize()
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0, 10, 1, 0));
 
 	itemGetter_ = Instantiate<P_CP_Player_ItemGetter>(pParent_);
+
+	hAudio_Move_ = Audio::Load("Assets/Audio/Walk01.wav");
+	hAudio_ItemGet_ = Audio::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 }
 
 void Player_CollectionPart::Start()
@@ -46,6 +50,7 @@ void Player_CollectionPart::Update()
 			((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
 			if (Input::IsMouseButtonDown(0))
 			{
+				Audio::Play(hAudio_ItemGet_);
 				AddItem(itemNum);
 				itemGetter_->KillHitObject();
 			}
@@ -86,6 +91,8 @@ void Player_CollectionPart::MoveControll()
 	}
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
+
+		Audio::Play(hAudio_Move_);
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
 
 		XMFLOAT3 pos = StoreFloat3(transform_->position_);

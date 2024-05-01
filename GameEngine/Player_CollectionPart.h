@@ -14,6 +14,8 @@ private:
 	Play_UIManager* uiManager_;
 	std::unordered_map<int, int> itemCount_;
 	bool canControl_;
+	int hAudio_Move_;
+	int hAudio_ItemGet_;
 public:
 	Player_CollectionPart(Object* parent);
 	~Player_CollectionPart();

@@ -7,6 +7,7 @@ class Play_CollectionPart_BaseUI : public GameObject
 	std::vector<std::string> itemName_;
 	Player_CollectionPart* player_;
 	bool isUIOpened_;
+	int hAudio_UIOpen_;
 public:
 	Play_CollectionPart_BaseUI(Object* parent);
 	~Play_CollectionPart_BaseUI();

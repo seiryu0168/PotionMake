@@ -6,6 +6,8 @@
 #include"P_MP_OutingUI_ActionText.h"
 #include"../../Engine/newSceneManager.h"
 #include"../../P_MP_SettlementUI.h"
+#include"../../Engine/ResourceManager/Audio.h"
+
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
 	:UIBase(parent,"Play_ManagementPart_OutingUI"),
 	canCloseUI_(true),
@@ -37,6 +39,8 @@ void Play_ManagementPart_OutingUI::Initialize()
 	AddComponent<Text>(collectionText);
 
 	Instantiate<P_MP_OutingUI_ActionText>(this);
+
+	hAudio_OpenDoor_ = Audio::Load("Assets/Audio/OpenDoor01.wav");
 }
 
 void Play_ManagementPart_OutingUI::Update()
@@ -80,6 +84,7 @@ void Play_ManagementPart_OutingUI::Outing(int num)
 
 void Play_ManagementPart_OutingUI::SetOutNumber(int num)
 {
+	Audio::Play(hAudio_OpenDoor_);
 	outingNumber_ = num;
 	GetComponent<Text>().isDraw_ = false;
 }

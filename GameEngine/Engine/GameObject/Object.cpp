@@ -182,9 +182,6 @@ void Object::ReleaseSub()
 		}
 		else
 			itr++;
-
-
-	
 	}
 
 	//Release();

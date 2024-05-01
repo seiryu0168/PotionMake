@@ -6,6 +6,7 @@
 #include"Engine/DirectX_11/Input.h"
 #include"P_CP_MenuUI.h"
 #include"Player_CollectionPart.h"
+#include"Engine/ResourceManager/Audio.h"
 
 namespace
 {
@@ -43,6 +44,8 @@ void Play_CollectionPart_BaseUI::Initialize()
 	itemNameText.SetRect({ 0,0,500,500 });
 	itemNameText.SetPosition({ 1320,520 });
 	AddComponent<Text>(itemNameText);
+
+	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Comfirm29.wav");
 }
 
 void Play_CollectionPart_BaseUI::Start()
@@ -55,6 +58,7 @@ void Play_CollectionPart_BaseUI::Update()
 {
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
+		Audio::Play(hAudio_UIOpen_);
 		Instantiate<P_CP_MenuUI>(this);
 		SetUIOpenFlag(true);
 	}

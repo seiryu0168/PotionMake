@@ -3,6 +3,7 @@
 class PickupedItemDetailUI : public GameObject
 {
 	XMFLOAT3 uiPos_;
+	int hAudio_OpenUI_;
 public:
 	PickupedItemDetailUI(Object* parent);
 	~PickupedItemDetailUI();

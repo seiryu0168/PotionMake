@@ -5,7 +5,7 @@
 /// </summary>
 class P_MP_OutingUI_ActionText : public GameObject
 {
-	int hAudio_OpenDoor_;
+	
 public:
 	P_MP_OutingUI_ActionText(Object* parent);
 	~P_MP_OutingUI_ActionText();

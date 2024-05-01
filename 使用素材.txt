@@ -1,4 +1,7 @@
-効果音ラボ様
+
+音楽
+
+効果音ラボ
 ・成功音		  : Success01
 ・キャンセル9 	          : Cancel09
 ・決定ボタンを押す音29    : Confirm29
@@ -11,5 +14,6 @@
 
 
 
-BGMer様
-角砂糖をもうひとつ : ManagementPart_BGM
+BGMer
+・角砂糖をもうひとつ : ManagementPart_BGM
+・スキップでいこう   : CollectionPart_BGM
