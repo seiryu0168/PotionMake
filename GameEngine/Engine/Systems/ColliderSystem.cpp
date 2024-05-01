@@ -270,7 +270,7 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 			isCollision = IsHitBox_Sphere(firstTarget, secondTarget);
 			break;
 		case ColliderType::CAPSULE_COLLIDER:
-			isCollision = IsHitCapsule_Box(secondTarget, firstTarget);
+			isCollision = false;//IsHitCapsule_Box(secondTarget, firstTarget);
 			break;
 		default:
 			break;
@@ -294,7 +294,7 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 		switch (secondTarget->GetType())
 		{
 		case ColliderType::BOX_COLLIDER:
-			isCollision = IsHitCapsule_Box(firstTarget, secondTarget);
+			isCollision = false;//IsHitCapsule_Box(firstTarget, secondTarget);
 			break;
 		}
 	case ColliderType::OBB_COLLIDER:
@@ -377,44 +377,82 @@ bool ColliderSystem::IsHitSphere_Sphere(Collider* firstTarget, Collider* secondT
 	return false;
 }
 
-bool ColliderSystem::IsHitCapsule_Box(Collider* firstTarget, Collider* secondTarget) const
+//bool ColliderSystem::IsHitCapsule_Box(Collider* firstTarget, Collider* secondTarget) const
+//{
+//	Hit_Capsule capsule = firstTarget->GetCollisionShape<Hit_Capsule>();
+//	HitBox box = secondTarget->GetCollisionShape<HitBox>();
+//	XMFLOAT3 boxPos = StoreFloat3(firstTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&firstTarget->GetCenter()));
+//
+//
+//	XMVECTOR dirVec = XMVector3Normalize(XMVectorSet(0,1,0,0) * firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix());
+//
+//	XMVECTOR pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec* capsule.length_);
+//	
+//	float distance = 0;
+//	if (VectorDot(XMVector3Normalize(pVec), dirVec) > 0)
+//	{
+//		if ((boxPos.x + box.size_.x) > (spherePos.x - radius) &&
+//			(boxPos.x - box.x) < (spherePos.x + radius) &&
+//			(boxPos.y + box.y) > (spherePos.y - radius) &&
+//			(boxPos.y - box.y) < (spherePos.y + radius) &&
+//			(boxPos.z + box.z) > (spherePos.z - radius) &&
+//			(boxPos.z - box.z) < (spherePos.z + radius))
+//		{
+//			return true;
+//		}
+//		//distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec * capsule.length_));
+//		if (distance <= capsule.radius_)
+//			return true;
+//	}
+//	pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_);
+//
+//	if (VectorDot(XMVector3Normalize(pVec), dirVec) < 0)
+//	{
+//		distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_));
+//		if (distance <= capsule.radius_)
+//			return true;
+//	}
+//	
+//
+//	XMVECTOR aVec = firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_;
+//
+//	XMVECTOR nearPoint = aVec + (dirVec * VectorDot(dirVec, pVec));
+//	
+//
+//	distance = VectorLength(secondTarget->GetAttachedObject()->GetTransform()->position_ - nearPoint);
+//
+//	if (distance <= capsule.radius_)
+//	{
+//		return true;
+//	}
+//		
+//	return false;
+//}
+
+bool ColliderSystem::IsHitCapsule_Capsule(Collider* firstTarget, Collider* secondTarget) const
 {
-	Hit_Capsule capsule = firstTarget->GetCollisionShape<Hit_Capsule>();
-	HitBox box = secondTarget->GetCollisionShape<HitBox>();
+	Hit_Capsule firstCapsule = firstTarget->GetCollisionShape<Hit_Capsule>();
+	Hit_Capsule secondCapsule = firstTarget->GetCollisionShape<Hit_Capsule>();
+	XMVECTOR first_Start = secondTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&firstTarget->GetCenter());
+	XMVECTOR firstDirVec = XMVectorSet(0, 1, 0, 0) * firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix();
+	first_Start -= firstDirVec * firstCapsule.length_*0.5f;
 
-	XMVECTOR dirVec = XMVector3Normalize(XMVectorSet(0,1,0,0) * firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix());
+	XMVECTOR second_Start = secondTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&secondTarget->GetCenter());
+	XMVECTOR secondDirVec = XMVectorSet(0, 1, 0, 0) * secondTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix();
+	second_Start -= secondDirVec * secondCapsule.length_ * 0.5f;
 
-	XMVECTOR pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec* capsule.length_);
-	
-	float distance = 0;
-	if (VectorDot(XMVector3Normalize(pVec), dirVec) > 0)
-	{
-		distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ + dirVec * capsule.length_));
-		if (distance <= capsule.radius_)
-			return true;
-	}
-	pVec = secondTarget->GetAttachedObject()->GetTransform()->position_ - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_);
+	XMVECTOR VecSecondToFirst = first_Start - second_Start;
 
-	if (VectorDot(XMVector3Normalize(pVec), dirVec) < 0)
-	{
-		distance = VectorLength(pVec - (firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_));
-		if (distance <= capsule.radius_)
-			return true;
-	}
+	float t1 = ((VectorDot(firstDirVec, secondDirVec) * VectorDot(secondDirVec, VecSecondToFirst) - (VectorDot(secondDirVec, secondDirVec) * VectorDot(firstDirVec, VecSecondToFirst))))
+			 / ((VectorDot(firstDirVec, firstDirVec) * VectorDot(secondDirVec, secondDirVec)) - (VectorDot(firstDirVec, secondDirVec) * VectorDot(firstDirVec, secondDirVec)));
+
+	XMVECTOR P_First = first_Start + (t1 * firstDirVec);
+	float t2 = VectorDot(secondDirVec, (P_First - second_Start)) / VectorDot(secondDirVec, secondDirVec);
+	XMVECTOR P_Second = first_Start + (t2 * secondDirVec);
+
 	
 
-	XMVECTOR aVec = firstTarget->GetAttachedObject()->GetTransform()->position_ - dirVec * capsule.length_;
 
-	XMVECTOR nearPoint = aVec + (dirVec * VectorDot(dirVec, pVec));
-	
-
-	distance = VectorLength(secondTarget->GetAttachedObject()->GetTransform()->position_ - nearPoint);
-
-	if (distance <= capsule.radius_)
-	{
-		return true;
-	}
-		
 	return false;
 }
 

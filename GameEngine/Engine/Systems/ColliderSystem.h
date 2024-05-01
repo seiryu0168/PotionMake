@@ -67,6 +67,8 @@ public:
 	bool IsHitSphere_Sphere(Collider* firstTarget, Collider* secondTarget) const;
 	//カプセルとボックスの当たり判定
 	bool IsHitCapsule_Box(Collider* firstTarget, Collider* secondTarget) const;
+	//カプセル同士の当たり判定
+	bool IsHitCapsule_Capsule(Collider* firstTarget, Collider* secondTarget) const;
 	//OBBコライダー同士の当たり判定
 	bool IsHitOBB_OBB(Collider* firstTarget, Collider* secondTarget) const;
 
