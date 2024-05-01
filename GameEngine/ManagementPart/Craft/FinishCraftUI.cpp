@@ -4,6 +4,7 @@
 #include"../../InterSceneData.h"
 #include"../../PlayerData.h"
 #include"../../Engine/Systems/TextSystem.h"
+#include"../../Engine/ResourceManager/Audio.h"
 FinishCraftUI::FinishCraftUI(Object* parent)
 	:GameObject(parent,"FinishCraftUI"),
 	okButtonImageNum_(-1),
@@ -66,6 +67,9 @@ void FinishCraftUI::Initialize()
 	OKText.SetLayer(2);
 	OKText.SetPosition({ 900,810 });
 	AddComponent<Text>(OKText);
+
+	hAudio_Success_ = Audio::Load("Assets/Audio/Success01.wav");
+	Audio::Play(hAudio_Success_);
 }
 
 void FinishCraftUI::Start()

@@ -4,6 +4,7 @@
 //ŠÇ—Š®—¹‚Ìƒ{ƒ^ƒ“
 class PotionManagementConfirmButton : public GameObject
 {
+	int hAudio_Confirm_;
 public:
 	PotionManagementConfirmButton(Object* parent);
 	~PotionManagementConfirmButton();

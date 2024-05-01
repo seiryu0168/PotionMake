@@ -10,6 +10,10 @@ private:
 	int sellButtonImageNum_;
 	int disposeButtonImageNum_;
 	int cancelButtonImageNum_;
+
+	int hAudio_Select_;
+	int hAudio_Cancel_;
+	int hAudio_Confirm_;
 	bool isConfirm_;
 public:
 	PotionMenu(Object* parent);

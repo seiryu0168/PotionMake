@@ -4,6 +4,7 @@
 #include"PotionStock.h"
 #include"../../Engine/Systems/TextSystem.h"
 #include"../../CloseButton.h"
+#include"../../Engine/ResourceManager/Audio.h"
 PotionMenu::PotionMenu(Object* parent)
 	:GameObject(parent,"PotionMenu"),
 	isConfirm_(false)
@@ -20,6 +21,10 @@ void PotionMenu::Initialize()
 	baseImage.SetLayer(1);
 	baseImage.Load("Assets/Image/UIBaseImage1.png");
 	AddComponent<Image>(baseImage);
+
+	hAudio_Select_= Audio::Load("Assets/Audio/Confirm34.wav");
+	hAudio_Cancel_= Audio::Load("Assets/Audio/Confirm50.wav");
+	
 }
 
 void PotionMenu::Start()
@@ -40,6 +45,7 @@ void PotionMenu::Update()
 		{
 			if (GetComponent<Image>(cancelButtonImageNum_).IsHitCursor())
 			{
+				Audio::Play(hAudio_Cancel_);
 				((PotionStock*)pParent_)->SubPotion();
 				KillMe();
 			}
@@ -48,6 +54,7 @@ void PotionMenu::Update()
 		else
 		{
 
+			Audio::Play(hAudio_Select_);
 			if (GetComponent<Image>(sellButtonImageNum_).IsHitCursor())
 			{
 				((PotionStock*)pParent_)->AddSellPotion();
