@@ -164,8 +164,6 @@ bool P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 
 bool P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 {
-	if ((cost_ + 3) > costLimit_)
-		return false;
 
 	Audio::Play(hAudio_Sub_);
 

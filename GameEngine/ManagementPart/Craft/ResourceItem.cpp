@@ -39,26 +39,32 @@ void ResourceItem::Start()
 
 void ResourceItem::Update()
 {
-	//画像をクリックしたら
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor())
+	if (GetComponent<Image>().IsHitCursor())
 	{
-		//CraftPotにデータ反映
-		if (resourceCount_ > 0)
+		GetComponent<Image>().SetColor(1.0f);
+		//画像をクリックしたら
+		if (Input::IsMouseButtonDown(0))
 		{
-			if (!((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_, itemName_, resourceImageName_))
+			//CraftPotにデータ反映
+			if (resourceCount_ > 0)
+			{
+				if (!((P_MP_CraftUI_CraftPot*)potObject_)->AddResourceData(itemNum_, itemName_, resourceImageName_))
+					return;
+				resourceCount_--;
+				GetComponent<Text>().SetText(std::to_string(resourceCount_));
+			}
+		}
+		else if (Input::IsMouseButtonDown(1))
+		{
+			//CraftPotにデータ反映
+			if (!((P_MP_CraftUI_CraftPot*)potObject_)->SubResourceData(itemNum_))
 				return;
-			resourceCount_--;
+			resourceCount_++;
 			GetComponent<Text>().SetText(std::to_string(resourceCount_));
 		}
 	}
-	else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor())
-	{
-		//CraftPotにデータ反映
-		if (!((P_MP_CraftUI_CraftPot*)potObject_)->SubResourceData(itemNum_))
-			return;
-			resourceCount_++;
-			GetComponent<Text>().SetText(std::to_string(resourceCount_));
-	}
+	else 
+		GetComponent<Image>().SetColor(0.8f);
 }
 
 void ResourceItem::LoadItem(std::string imagename, int resourceCount)
@@ -68,8 +74,10 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 	Image itemBaseImage(this);
 	itemBaseImage.SetLayer(1);
 	itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
+	itemBaseImage.SetColor(0.8f);
 	resourceImageName_ = imagename;
 	AddComponent<Image>(itemBaseImage);
+
 	//素材の数が0以下だったら
 	if (resourceCount <= 0)
 	{

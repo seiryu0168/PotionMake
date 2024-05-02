@@ -5,6 +5,7 @@
 #include"Engine/Systems/TextSystem.h"
 #include "Engine/ResourceManager/Audio.h"
 #include"TestObject.h"
+#include"Engine/ResourceManager/Audio.h"
 
 namespace
 {
@@ -17,7 +18,7 @@ Title::Title(Object* parent)
 	State_(STATE::WAIT),
 	time_(nullptr),
 	Frame_(0),
-	hAudio_(0),
+	hAudio_(-1),
 	timeF_(0)
 {
 }
@@ -34,17 +35,34 @@ void Title::Initialize()
 	image.SetPosition(pos);
 	AddComponent<Image>(image);
 
+	Image fadeImage(this);
+	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
+	fadeImage.SetSize({ 2, 2, 0 });
+	fadeImage.SetColor({ 0,0,0,0 });
+	AddComponent<Image>(fadeImage);
+
+	time_ = std::make_shared<Time::Watch>();
+
+	hAudio_ = Audio::Load("Assets/Audio/Confirm47.wav");
+
 	//Instantiate<TestObject>(this);
 
 }
 
 void Title::Update()
 {
-	timeF_ += 2.0f;
-	GetComponent<Image>().SetRotation({ 0,0,timeF_ });
-	if(Input::IsKeyDown(DIK_SPACE))
+	if (time_->GetSeconds<float>() >= 2.0f)
 	{
 		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
+	}
+	if(Input::IsKeyDown(DIK_SPACE)&&time_->IsLock())
+	{
+		Audio::Play(hAudio_);
+		time_->UnLock();
+	}
+	else if (!time_->IsLock())
+	{
+		GetComponent<Image>(1).SetAlpha(time_->GetSeconds<float>());
 	}
 }
 

@@ -40,7 +40,7 @@ void PotionStock::Initialize()
 {
 	Image potionStockImage(this);
 	potionStockImage.Load("Assets/Image/ItemBaseImage.png");
-	potionStockImage.SetColor(0.7f);
+	potionStockImage.SetColor(0.8f);
 	potionStockImage.SetLayer(0);
 	AddComponent<Image>(potionStockImage);
 
@@ -48,7 +48,7 @@ void PotionStock::Initialize()
 	Text statusText(this);
 	statusText.SetTextSize(25);
 	statusText.SetText("");
-	statusText.SetLayer(1);
+	//statusText.SetLayer(1);
 	statusText.isDraw_ = false;
 	statusText.SetRect({ 0,0,60,30 });
 	statusText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
@@ -76,16 +76,22 @@ void PotionStock::Update()
 			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(true);
 		}
 	}
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>().IsHitCursor() && isSelect_)
+	if (GetComponent<Image>().IsHitCursor())
 	{
-		GameObject* potionMenu = Instantiate<PotionMenu>(this);
-		potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
-		((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_,isConfirm_);
-		//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
-		((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
-		
-		//sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+		GetComponent<Image>().SetColor(1.0f);
+		if (Input::IsMouseButtonDown(0) && isSelect_)
+		{
+			GameObject* potionMenu = Instantiate<PotionMenu>(this);
+			potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
+			((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_, isConfirm_);
+			//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
+			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
+
+			//sellUI_->AddSellPotion(potionNum_, potionName_, potionColor_);
+		}
 	}
+	else
+		GetComponent<Image>().SetColor(0.8f);
 }
 
 void PotionStock::SetPotionColor()
@@ -137,7 +143,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	//ポーションを表示
 	Image potionBaseImage(this);
 	potionBaseImage.Load("Assets/Image/Potion_BaseImage.png");
-	potionBaseImage.SetLayer(0);
+	//potionBaseImage.SetLayer(0);
 	potionBaseImage.SetPosition(pos);
 	potionBaseImage.SetColor(potionColor);
 	potionBaseImage.SetSize({0.25f,0.25,0});
@@ -145,7 +151,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 
 	Image potionEdgeImage(this);
 	potionEdgeImage.Load("Assets/Image/Potion_EdgeImage.png");
-	potionEdgeImage.SetLayer(1);
+	//potionEdgeImage.SetLayer(1);
 	potionEdgeImage.SetPosition(pos);
 	potionEdgeImage.SetSize({0.25f,0.25,0});
 	AddComponent<Image>(potionEdgeImage);
@@ -187,7 +193,7 @@ void PotionStock::AddSellPotion()
 	//操作が確定した時の画像を入れる
 	Image confirmImage(this);
 	confirmImage.Load("Assets/Image/ItemSlotImage.png");
-	confirmImage.SetLayer(1);
+	//confirmImage.SetLayer(1);
 	confirmImage.SetPosition(pos);
 	confirmImage.SetSize({ 1,0.3f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);
@@ -219,7 +225,7 @@ void PotionStock::AddDisposePotion()
 	//操作が確定した時の画像
 	Image confirmImage(this);
 	confirmImage.Load("Assets/Image/UIBaseImage5.png");
-	confirmImage.SetLayer(1);
+	//confirmImage.SetLayer(1);
 	confirmImage.SetPosition(pos);
 	confirmImage.SetSize({ 2,0.6f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);

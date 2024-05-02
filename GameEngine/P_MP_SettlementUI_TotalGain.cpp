@@ -1,9 +1,15 @@
 #include "P_MP_SettlementUI_TotalGain.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/Systems/TextSystem.h"
+#include"Engine/ResourceManager/Audio.h"
 P_MP_SettlementUI_TotalGain::P_MP_SettlementUI_TotalGain(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI_TotalGain"),
-	uiPos_({ 0.4f,0.5f,0 })
+	uiPos_({ 0.4f,0.5f,0 }),
+	gainDiff_(0.0f),
+	showTime_(1.0f),
+	currentGain_(0),
+	hAudio_Money_(-1),
+	count_(0)
 {
 }
 
@@ -25,7 +31,7 @@ void P_MP_SettlementUI_TotalGain::Initialize()
 
 	Text totalGain(this);
 	totalGain.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
-	totalGain.SetText("100000");
+	totalGain.SetText("0");
 	totalGain.SetRect({ 0,0,630,80 });
 	totalGain.SetPosition({ txtPos.x - 450,txtPos.y-100 });
 	AddComponent<Text>(totalGain);
@@ -34,6 +40,10 @@ void P_MP_SettlementUI_TotalGain::Initialize()
 	evaluation.SetText("ëÂê∑ãµ");
 	evaluation.SetPosition({ txtPos.x - 150,txtPos.y});
 	AddComponent<Text>(evaluation);
+	time_ = std::make_shared<Time::Watch>();
+	time_->UnLock();
+
+	hAudio_Money_ = Audio::Load("Assets/Audio/ShowMoney.wav",false,0.7f,10);
 }
 
 void P_MP_SettlementUI_TotalGain::Start()
@@ -42,6 +52,21 @@ void P_MP_SettlementUI_TotalGain::Start()
 
 void P_MP_SettlementUI_TotalGain::Update()
 {
+	float nowTime = time_->GetSeconds<float>();
+	if (nowTime >= 0.7f && !time_->IsLock())
+	{
+		count_++;
+		currentGain_ += gainDiff_;
+
+		if(count_%8==0)
+		Audio::Play(hAudio_Money_);
+		GetComponent<Text>(1).SetText(std::to_string((int)currentGain_));
+		if (currentGain_ >= totalGain_)
+		{
+			time_->Lock();
+			GetComponent<Text>(1).SetText(std::to_string(totalGain_));
+		}
+	}
 }
 
 void P_MP_SettlementUI_TotalGain::CreateBase()
@@ -110,8 +135,11 @@ void P_MP_SettlementUI_TotalGain::CreateBase()
 
 void P_MP_SettlementUI_TotalGain::SetData(int totalGain, const std::string& evaluation)
 {
-	GetComponent<Text>(1).SetText(std::to_string(totalGain));
-	GetComponent<Text>(2).SetText(evaluation);
+	totalGain_ = totalGain;
+	evaluation_ = evaluation;
+	gainDiff_ = totalGain / (showTime_ * 60.0f);
+	//GetComponent<Text>(1).SetText(std::to_string(totalGain));
+	//GetComponent<Text>(2).SetText(evaluation);
 }
 
 void P_MP_SettlementUI_TotalGain::Release()

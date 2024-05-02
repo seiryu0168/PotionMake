@@ -4,8 +4,9 @@
 class P_MP_SettlementUI : public GameObject
 {
 	int mask_;
+	float time_;
 	std::vector<PlayerData::PotionData> potionDataList_;
-
+	int fadeImageNum_;
 public:
 	P_MP_SettlementUI(Object* parent);
 	~P_MP_SettlementUI();

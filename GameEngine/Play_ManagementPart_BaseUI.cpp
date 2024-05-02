@@ -34,7 +34,7 @@ void Play_ManagementPart_BaseUI::Initialize()
 	text.SetPosition({ 1320,520 });
 	AddComponent<Text>(text);
 
-	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Comfirm29.wav");
+	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Confirm29.wav");
 }
 
 void Play_ManagementPart_BaseUI::Start()

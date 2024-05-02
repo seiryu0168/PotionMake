@@ -13,7 +13,7 @@ private:
 
 	int hAudio_;
 
-	std::unique_ptr<Time::Watch> time_;
+	std::shared_ptr<Time::Watch> time_;
 	void Waiting();
 	void Pushed();
 

@@ -20,6 +20,7 @@ void PotionMenu::Initialize()
 	Image baseImage(this);
 	baseImage.SetLayer(1);
 	baseImage.Load("Assets/Image/UIBaseImage1.png");
+	baseImage.SetSize({ 1.3f,1.3f,0 });
 	AddComponent<Image>(baseImage);
 
 	hAudio_Select_= Audio::Load("Assets/Audio/Confirm34.wav");
@@ -31,7 +32,7 @@ void PotionMenu::Start()
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
 	GameObject* clsBtn = Instantiate<CloseButton>(this);
-	clsBtn->GetComponent<Image>().SetPosition({ pos.x - 0.2f,pos.y + 0.3f,0 });
+	clsBtn->GetComponent<Image>().SetPosition({ pos.x - 0.295f,pos.y + 0.51f,0 });
 	clsBtn->GetComponent<Image>().SetLayer(1);
 }
 
@@ -79,7 +80,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionBaseImage.Load("Assets/Image/ItemBaseImage.png");
 	potionBaseImage.SetLayer(1);
 	potionBaseImage.SetSize({ 2.0f,2.0f,0, });
-	potionBaseImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
+	potionBaseImage.SetPosition({ pos.x,pos.y + 0.25f,0 });
 	AddComponent<Image>(potionBaseImage);
 
 	Image potionImage(this);
@@ -87,14 +88,14 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionImage.SetColor(color);
 	potionImage.SetLayer(1);
 	potionImage.SetSize({ 0.5f,0.5f,0 });
-	potionImage.SetPosition({ pos.x,pos.y+0.2f,0 });
+	potionImage.SetPosition({ pos.x,pos.y+0.25f,0 });
 	AddComponent<Image>(potionImage);
 	
 	Image potionEdgeImage(this);
 	potionEdgeImage.Load("Assets/Image/Potion_EdgeImage.png");
 	potionEdgeImage.SetSize({ 0.5f,0.5f,0 });
 	potionEdgeImage.SetLayer(1);
-	potionEdgeImage.SetPosition({ pos.x,pos.y + 0.2f,0 });
+	potionEdgeImage.SetPosition({ pos.x,pos.y + 0.25f,0 });
 	AddComponent<Image>(potionEdgeImage);
 
 	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
@@ -114,7 +115,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		//キャンセルボタン
 		Image cancelButton(this);
 		cancelButton.Load("Assets/Image/ButtonImage02.png");
-		cancelButton.SetPosition({ pos.x,pos.y - 0.3f,0 });
+		cancelButton.SetPosition({ pos.x,pos.y - 0.4f,0 });
 		//cancelButton.SetSize({ 1,1,0 });
 		cancelButton.SetLayer(1);
 		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);
@@ -138,7 +139,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		//販売ボタン
 		Image sellButton(this);
 		sellButton.Load("Assets/Image/ButtonImage02.png");
-		sellButton.SetPosition({ pos.x - 0.15f,pos.y - 0.3f,0 });
+		sellButton.SetPosition({ pos.x - 0.15f,pos.y - 0.4f,0 });
 		sellButton.SetSize({ 0.5f,0.5f,0 });
 		sellButton.SetLayer(1);
 		sellButtonImageNum_ = AddComponent<Image>(sellButton);
@@ -157,7 +158,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		//破棄ボタン
 		Image disposeButton(this);
 		disposeButton.Load("Assets/Image/ButtonImage02.png");
-		disposeButton.SetPosition({ pos.x + 0.15f,pos.y - 0.3f,0 });
+		disposeButton.SetPosition({ pos.x + 0.15f,pos.y - 0.4f,0 });
 		disposeButton.SetSize({ 0.5f,0.5f,0 });
 		disposeButton.SetLayer(1);
 		disposeButtonImageNum_ = AddComponent<Image>(disposeButton);

@@ -2,18 +2,22 @@
 音楽
 
 効果音ラボ
-・成功音		  : Success01
+------------------------------------
+・水ぶくぶく1		　: Bubble01
 ・キャンセル9 	          : Cancel09
 ・決定ボタンを押す音29    : Confirm29
 ・決定ボタンを押す音34	  : Confirm34
+・決定ボタンを押す47	  : Confirm47
 ・決定ボタンを押す音50    : Confirm50
 ・決定ボタンを押す音51    : Confirm51
 ・ドアを開ける1           : OpenDoor01
+・金額表示		  : ShowMoney
+・成功音		  : Success01
 ・アスファルトの上を歩く1 : Walk01
-・水ぶくぶく1		　: Bubble01
-
 
 
 BGMer
-・角砂糖をもうひとつ : ManagementPart_BGM
+-------------------------------------
 ・スキップでいこう   : CollectionPart_BGM
+・角砂糖をもうひとつ : ManagementPart_BGM
+・夕暮れコスモス     : Title_BGM

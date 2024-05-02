@@ -433,10 +433,13 @@ bool ColliderSystem::IsHitCapsule_Capsule(Collider* firstTarget, Collider* secon
 {
 	Hit_Capsule firstCapsule = firstTarget->GetCollisionShape<Hit_Capsule>();
 	Hit_Capsule secondCapsule = firstTarget->GetCollisionShape<Hit_Capsule>();
+	
+	//firstTargetのベクトル
 	XMVECTOR first_Start = secondTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&firstTarget->GetCenter());
 	XMVECTOR firstDirVec = XMVectorSet(0, 1, 0, 0) * firstTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix();
 	first_Start -= firstDirVec * firstCapsule.length_*0.5f;
 
+	//secondTargetのベクトル
 	XMVECTOR second_Start = secondTarget->GetAttachedObject()->GetTransform()->position_ + XMLoadFloat3(&secondTarget->GetCenter());
 	XMVECTOR secondDirVec = XMVectorSet(0, 1, 0, 0) * secondTarget->GetAttachedObject()->GetTransform()->GetWorldRotateMatrix();
 	second_Start -= secondDirVec * secondCapsule.length_ * 0.5f;

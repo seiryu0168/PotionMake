@@ -42,16 +42,16 @@ void P_MP_OutingUI_ActionText::Update()
 	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
 	float screenH = (float)Direct3D::GetScreenHeight();
 	if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-		mousePos.y >= 500.0f && mousePos.y <= 590.0f)
+		mousePos.y >= 480.0f && mousePos.y <= 570.0f)
 	{
-		GetComponent<Image>().SetPosition({ 0,-0.02f,0 });
+		GetComponent<Image>().SetPosition({ 0,0.02,0 });
 		GetComponent<Image>().SetAlpha(1);
 		forcusNum = 0;
 	}
 	else if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-			 mousePos.y >= 600.0f && mousePos.y <= 690.0f)
+			 mousePos.y >= 571.0f && mousePos.y <= 658.0f)
 	{
-		GetComponent<Image>().SetPosition({ 0,-0.2f,0 });
+		GetComponent<Image>().SetPosition({ 0,-0.15f,0 });
 		GetComponent<Image>().SetAlpha(1);
 		forcusNum = 1;
 	}

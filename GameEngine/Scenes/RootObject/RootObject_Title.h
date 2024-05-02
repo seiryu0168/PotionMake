@@ -2,6 +2,7 @@
 #include"../../Engine/GameObject/Object.h"
 class RootObject_Title : public Object
 {
+	int hAudio_BGM_;
 public:
 	RootObject_Title();
 	~RootObject_Title();
