@@ -314,26 +314,26 @@ HRESULT FbxParts::InitVertex(fbxsdk::FbxMesh* mesh)
 			pVertices_[i].uv = XMVectorSet((float)uv.mData[0], 1.0f-(float)(uv.mData[1]), 0.0f, 0.0f);;
 		}
 	}
-	if (pUV->GetMappingMode() == FbxLayerElement::eByPolygonVertex)
-	{
-		if (((FbxLayerElement*)pUV)->GetReferenceMode() == FbxLayerElement::eIndexToDirect)
-		{
-			for (int i = 0; i < UVCount; i++)
-			{
-				int ind= pUV->GetIndexArray().GetAt(i);
-				FbxVector2  uv = pUV->GetDirectArray().GetAt(ind);
-				XMVECTOR UV = XMVectorZero();
-				UV= XMVectorSet((float)uv.mData[0], 1.0f-(float)(uv.mData[1]), 0.0f, 0.0f);
-				UV.m128_i8[0] = 0;
-				UV.m128_u8[0] = 0;
-				pVertices_[i].uv = UV;
-				if (sizeof(UV.m128_i8) > sizeof(pVertices_[i].uv.m128_i8))
-				{
-					int a = 0;
-				}
-			}
-		}
-	}
+	//if (pUV->GetMappingMode() == FbxLayerElement::eByPolygonVertex)
+	//{
+	//	if (((FbxLayerElement*)pUV)->GetReferenceMode() == FbxLayerElement::eIndexToDirect)
+	//	{
+	//		for (int i = 0; i < UVCount; i++)
+	//		{
+	//			int ind= pUV->GetIndexArray().GetAt(i);
+	//			FbxVector2  uv = pUV->GetDirectArray().GetAt(ind);
+	//			XMVECTOR UV = XMVectorZero();
+	//			UV= XMVectorSet((float)uv.mData[0], 1.0f-(float)(uv.mData[1]), 0.0f, 0.0f);
+	//			UV.m128_i8[0] = 0;
+	//			UV.m128_u8[0] = 0;
+	//			pVertices_[i].uv = UV;
+	//			if (sizeof(UV.m128_i8) > sizeof(pVertices_[i].uv.m128_i8))
+	//			{
+	//				int a = 0;
+	//			}
+	//		}
+	//	}
+	//}
 
 	D3D11_BUFFER_DESC bd_vertex;
 	bd_vertex.ByteWidth = sizeof(VERTEX) * vertexCount_;
