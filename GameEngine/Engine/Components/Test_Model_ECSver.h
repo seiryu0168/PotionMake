@@ -1,7 +1,7 @@
 #pragma once
 #include"../DirectX_11/Material.h"
 #include<vector>
-#include"../Coordinator.h"
+//#include"../Coordinator.h"
 #include"../DirectX_11/Fbx.h"
 #include"../GameObject/GameObject.h"
 
@@ -74,6 +74,8 @@ public:
 	void Draw();
 	//•`‰æƒŒƒCƒ„[‚ ‚è‚Ì•`‰æ
 	void Draw(int layerNum);
+	//Transformw’è‚Ì•`‰æ
+	void Draw(Transform transform, SHADER_TYPE type, int frame);
 
 };
 

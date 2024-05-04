@@ -58,19 +58,19 @@ public:
 	void SetViewPort(float width, float height, float minDepth, float maxDepth, float topLeftX, float topLeftY);
 
 	//視点(見える位置)を取得
-	XMFLOAT3 GetPosition();
+	const XMFLOAT3& GetPosition();
 
 	//焦点取得
-	XMVECTOR GetTarget() { return target_; }
+	const XMVECTOR& GetTarget() { return target_; }
 
 	//ビュー行列を取得
-	XMMATRIX GetViewMatrix() { return viewMatrix_; }
+	const XMMATRIX& GetViewMatrix() { return viewMatrix_; }
 
 	//ビルボード用回転行列
-	XMMATRIX GetBillBoardMatrix() { return billBoardMatrix_; }
+	const XMMATRIX& GetBillBoardMatrix() { return billBoardMatrix_; }
 
 	//プロジェクション行列を取得
-	XMMATRIX GetProjectionMatrix() { return projMatrix_; }
+	const XMMATRIX& GetProjectionMatrix() { return projMatrix_; }
 
 	D3D11_VIEWPORT GetViewPort() { return viewPort_; }
 

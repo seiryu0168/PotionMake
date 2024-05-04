@@ -23,6 +23,7 @@ namespace CameraManager
 	void UpdateCameraNum(int num);
 	int GetCurrentCameraNum();
 	void ResetCamera();
+	void DrawSkdyBox(const XMVECTOR& position);
 	UINT GetCameraCount();
 	
 	////視点（カメラの位置）を設定

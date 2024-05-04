@@ -3,6 +3,11 @@
 Test_Model_ECSver::Test_Model_ECSver()
 	:Test_Model_ECSver(nullptr)
 {
+	type_ = SHADER_TYPE::SHADER_3D;
+	animationFrame_ = 0;
+	isDraw_ = true;
+	meshEntity_ = 0;
+	layerNum_ = 0;
 }
 
 Test_Model_ECSver::Test_Model_ECSver(GameObject* object,int layerNum)
@@ -67,7 +72,7 @@ void Test_Model_ECSver::SetCustomColor(int partsNum, int materialNum, const XMFL
 
 void Test_Model_ECSver::Draw()
 {
-	if(isDraw_)
+	if(isDraw_&& attachObject_ != nullptr)
 	fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_);
 }
 
@@ -78,4 +83,10 @@ void Test_Model_ECSver::Draw(int layerNum)
 
 	if (isDraw_)
 		fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_);
+}
+
+void Test_Model_ECSver::Draw(Transform transform, SHADER_TYPE type, int frame)
+{
+	if (isDraw_)
+		fbx_->Draw(transform, type, frame);
 }

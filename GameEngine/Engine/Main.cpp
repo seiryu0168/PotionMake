@@ -190,14 +190,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 				//Coordinator::SystemsUpdate();
 				//pRootJob->DrawSub();
 				//ビューポート１
+
 				CameraManager::Update();
+				//CameraManager::DrawSkdyBox();
 				for (int i = 0; i < CameraManager::GetCameraCount(); i++)
 				{
-					CameraManager::UpdateCameraNum(i);
-					Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
-
-					newSceneManager::Draw();
+					CameraManager::DrawSkdyBox(XMLoadFloat3(&CameraManager::GetCamera(i).GetPosition()));
+					//CameraManager::UpdateCameraNum(i);
+					//Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
 				}
+					newSceneManager::Draw();
 				////ビューポート２
 				//{
 				//	Direct3D::SetViewPort(1);

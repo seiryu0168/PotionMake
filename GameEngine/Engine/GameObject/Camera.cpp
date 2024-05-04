@@ -82,7 +82,7 @@ void Camera::SetViewPort(float width, float height, float minDepth, float maxDep
 	viewPort_.TopLeftY = topLeftY;
 }
 
-XMFLOAT3 Camera::GetPosition()
+const XMFLOAT3& Camera::GetPosition()
 {
 	return StoreFloat3(position_);
 }	

@@ -1,4 +1,5 @@
 #include "CameraManager.h"
+#include"../Components/Test_Model_ECSver.h"
 #include"../DirectX_11/Direct2D.h"
 
 //ïœêî
@@ -19,8 +20,11 @@ namespace CameraManager
 	float screenWidth_;
 	float screenHeight_;
 	int currentViewPort_;
-
+	
 	Camera defaultCamera_;
+
+	Test_Model_ECSver skyBoxModel_;
+	Transform skyTransform_;
 }
 
 //èâä˙âª
@@ -46,6 +50,9 @@ void CameraManager::Initialize(float width,float height)
 	//defaultCamera_.SetAspectRadio(aspectRadio);
 	defaultCamera_.SetViewPort(width, height, 0.0f, 1.0f, 0, 0);
 	AddCamera(defaultCamera_);
+
+
+	skyBoxModel_.Load("Assets/Model/SkyBox.fbx");
 	//cameraList_.push_back(defaultCamera_);
 }
 
@@ -55,6 +62,7 @@ void CameraManager::Update()
 	for (Camera& camera : cameraList_)
 	{
 		camera.Update();
+		//DrawSkdyBox(XMLoadFloat3(&camera.GetPosition()));
 	}
 
 	////ÉrÉÖÅ[çsóÒÇÃçÏê¨
@@ -131,6 +139,14 @@ void CameraManager::ResetCamera()
 	D2D::AllRemoveRenderTarget();
 	AddCamera(defaultCamera_);
 	//cameraList_.push_back(defaultCamera_);
+}
+
+void CameraManager::DrawSkdyBox(const XMVECTOR& position)
+{
+	skyTransform_.position_ = position;
+	Direct3D::SetDepthBufferWriteEnable(false);
+	skyBoxModel_.Draw(skyTransform_, SHADER_TYPE::SHADER_3D, 0);
+	Direct3D::SetDepthBufferWriteEnable(true);
 }
 
 UINT CameraManager::GetCameraCount()
