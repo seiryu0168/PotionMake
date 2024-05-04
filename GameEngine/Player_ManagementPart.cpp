@@ -12,7 +12,7 @@
 #include"Engine/ResourceManager/Audio.h"
 Player_ManagementPart::Player_ManagementPart(Object* parent)
 	:Player(parent,"Player_ManagementPart"),
-	canMoveArea_({20,20}),
+	canMoveArea_({18,20}),
 	hAudio_Move_(-1)
 {
 }

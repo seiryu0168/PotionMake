@@ -14,9 +14,10 @@ ManagementPart_Floor::~ManagementPart_Floor()
 void ManagementPart_Floor::Initialize()
 {
 	Test_Model_ECSver floorModel(this);
-	floorModel.Load("Assets/Model/ground_grass.fbx");
+	floorModel.Load("Assets/Model/House01.fbx");
 	AddComponent<Test_Model_ECSver>(floorModel);
-	transform_->scale_ = { 10,10,10 };
+	transform_->RotateEular(0, 90, 0);
+	transform_->position_ = XMVectorSet(0, 0, 1.4f,0);
 	hAudio_BGM_ = Audio::Load("Assets/Audio/ManagementPart_BGM.wav",true);
 
 	Audio::Play(hAudio_BGM_);

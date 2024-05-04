@@ -19,12 +19,6 @@ FinishCraftUI::~FinishCraftUI()
 void FinishCraftUI::Initialize()
 {
 	CreateBase();
-	////背景の画像
-	//Image backImage(this);
-	//backImage.Load("Assets/Image/PotionManagerUIBase1.png");
-	//backImage.SetSize({ 2,2,0 });
-	//backImage.SetLayer(2);
-	//AddComponent<Image>(backImage);
 	
 	//ポーションのデータを取得
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
@@ -45,14 +39,6 @@ void FinishCraftUI::Initialize()
 	edgeImage.SetLayer(2);
 	AddComponent<Image>(edgeImage);
 
-	////OKボタンの画像
-	//Image okButtonImage(this);
-	//okButtonImage.Load("Assets/Image/ItemBaseImage.png");
-	//okButtonImage.SetSize({ 2,1,0 });
-	//okButtonImage.SetPosition(uiPos_);
-	//okButtonImage.SetLayer(2);
-	//okButtonImageNum_ = AddComponent<Image>(okButtonImage);
-
 	//ポーションの名前
 	Text potionNameText(this);
 	potionNameText.SetRect({ 0,0,1000,200 });
@@ -63,6 +49,7 @@ void FinishCraftUI::Initialize()
 	potionNameText.SetPosition({ 500,600 });
 	AddComponent<Text>(potionNameText);
 
+	//OKボタンの画像
 	Image OKImage(this);
 	OKImage.Load("Assets/Image/ButtonImage02.png");
 	OKImage.SetPosition({ 0,-0.6f,0 });

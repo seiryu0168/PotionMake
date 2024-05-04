@@ -15,8 +15,8 @@ void Play_ManagementPart_Door::Initialize()
 {
 	accessUINum_ = 0;
 	actionName_ = "äOèo";
-	HitBox collShape({ 3,7,1 });
-	Collider coll({ -2,5,0 });
+	HitBox collShape({ 1,7,3 });
+	Collider coll({ 0,5,3 });
 	coll.SetCollider(collShape);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
@@ -25,7 +25,9 @@ void Play_ManagementPart_Door::Initialize()
 	doorModel.Load("Assets/Model/doorway.fbx");
 	AddComponent<Test_Model_ECSver>(doorModel);
 
-	transform_->position_ = XMVectorSet(0, 0, -20, 0);
+	transform_->position_ = XMVectorSet(20.5f, 0, 0, 0);
+	transform_->RotateEular(0, 90, 0);
+	transform_->scale_ = { 1.3f,1.3f,1.3f };
 }
 
 void Play_ManagementPart_Door::Update()

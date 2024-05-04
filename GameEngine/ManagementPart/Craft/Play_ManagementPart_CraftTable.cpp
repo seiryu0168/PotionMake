@@ -14,8 +14,8 @@ void Play_ManagementPart_CraftTable::Initialize()
 {
 	accessUINum_ = 2;
 	actionName_ = "É|Å[ÉVÉáÉìÇçÏÇÈ";
-	HitBox tableHitBox({ 2,3,5 });
-	Collider coll({ 1,5,4 });
+	HitBox tableHitBox({ 8,3,2 });
+	Collider coll({ -8.5f,5,1 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
@@ -23,8 +23,9 @@ void Play_ManagementPart_CraftTable::Initialize()
 	Test_Model_ECSver tableModel(this);
 	tableModel.Load("Assets/Model/tableCloth.fbx");
 	AddComponent<Test_Model_ECSver>(tableModel);
-	transform_->position_ = XMVectorSet(20, 0, 0,0);
-	transform_->RotateEular(0, 90, 0);
+	transform_->position_ = XMVectorSet(10, 0, 20,0);
+	//transform_->RotateEular(0, 90, 0);
+	transform_->scale_ = { 2,2,2 };
 }
 
 void Play_ManagementPart_CraftTable::Update()

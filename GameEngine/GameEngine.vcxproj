@@ -306,6 +306,7 @@
     <ClCompile Include="TestObjectChild.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UIBase.cpp" />
+    <ClCompile Include="Wall_Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloseButton.h" />
@@ -449,6 +450,7 @@
     <ClInclude Include="TestObjectChild.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="Wall_Window.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BillBoard.hlsl">

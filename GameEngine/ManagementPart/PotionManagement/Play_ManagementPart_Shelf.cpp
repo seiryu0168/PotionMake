@@ -15,8 +15,8 @@ void Play_ManagementPart_Shelf::Initialize()
 {
 	accessUINum_ = 1;
 	actionName_ = "É|Å[ÉVÉáÉìä«óù";
-	HitBox tableHitBox({ 5,5,1 });
-	Collider coll({ -4,5,0 });
+	HitBox tableHitBox({ 1,5,4 });
+	Collider coll({ 0,5,-4 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
@@ -26,7 +26,8 @@ void Play_ManagementPart_Shelf::Initialize()
 	AddComponent<Test_Model_ECSver>(tableModel);
 
 
-	transform_->position_ = XMVectorSet(0, 0, 20, 0);
+	transform_->position_ = XMVectorSet(-19, 0, 0, 0);
+	transform_->RotateEular(0, -90, 0);
 
 }
 
