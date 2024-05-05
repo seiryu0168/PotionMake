@@ -3,6 +3,7 @@
 #include"P_CP_ResourceItem.h"
 #include"ResourceStatusData.h"
 #include"InterSceneData.h"
+#include"Engine/Systems/ColliderSystem.h"
 #include<Windows.h>
 Play_CollectionPart_StageManager::Play_CollectionPart_StageManager(Object* parent)
 	:GameObject(parent,"Play_CollectionPart_StageManager")
@@ -15,7 +16,7 @@ Play_CollectionPart_StageManager::~Play_CollectionPart_StageManager()
 
 void Play_CollectionPart_StageManager::Initialize()
 {
-	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData02.csv");
+	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData03.csv");
 
 	for (int i = 0; i < reader.GetLines(); i++)
 	{
@@ -25,6 +26,7 @@ void Play_CollectionPart_StageManager::Initialize()
 		item->SetModel(reader.GetString(i, 2));
 		item->GetTransform()->position_ = XMVectorSet(reader.GetFloat(i, 3), reader.GetFloat(i, 4), reader.GetFloat(i, 5), 0);
 		item->GetTransform()->RotateEular(reader.GetFloat(i, 6), reader.GetFloat(i, 7), reader.GetFloat(i, 8));
+		item->GetComponent<Collider>().GetCollisionShape<HitBox>().size_ = { reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11) };
 	}
 }
 

@@ -14,7 +14,7 @@ P_CP_ResourceItem::~P_CP_ResourceItem()
 void P_CP_ResourceItem::Initialize()
 {
 	HitBox box({ 1,1,1 });
-	Collider coll({ 0,1,0 });
+	Collider coll({ 0,0,0 });
 	coll.SetAttachObject(this);
 	coll.SetCollider(box);
 	AddComponent<Collider>(coll);
