@@ -19,6 +19,7 @@ PickupedItemDetailUI::~PickupedItemDetailUI()
 
 void PickupedItemDetailUI::Initialize()
 {
+	//”wŒi‰æ‘œ
 	Image backImage(this);
 	backImage.Load("Assets/Image/UIBaseImage4.png");
 	backImage.SetPosition(uiPos_);

@@ -32,13 +32,15 @@ void Play_CollectionPart_BaseUI::Initialize()
 	clipRange = { range.x,range.y,range.x+1,range.y+1 };
 	Direct3D::SetClipCursor(clipRange);
 	Direct3D::ShowMouseCursor(false);
-		
+	
+	//拾える素材を表示する背景画像
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
 	actionImage.SetSize({ 0.7,0.7f,0 });
 	AddComponent<Image>(actionImage);
 
+	//素材名
 	Text itemNameText(this);
 	itemNameText.SetText("");
 	itemNameText.SetRect({ 0,0,500,500 });
@@ -56,6 +58,7 @@ void Play_CollectionPart_BaseUI::Start()
 
 void Play_CollectionPart_BaseUI::Update()
 {
+	//UIが開かれていなければEscキーでメニューを開く
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
 		Audio::Play(hAudio_UIOpen_);

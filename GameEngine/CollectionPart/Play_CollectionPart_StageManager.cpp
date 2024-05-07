@@ -18,6 +18,7 @@ void Play_CollectionPart_StageManager::Initialize()
 {
 	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData04.csv");
 
+	//CSVÇÇ‡Ç∆Ç…ëfçﬁÇê∂ê¨
 	for (int i = 0; i < reader.GetLines(); i++)
 	{
 		P_CP_ResourceItem* item = Instantiate<P_CP_ResourceItem>(this);
@@ -38,6 +39,7 @@ std::vector<std::string> Play_CollectionPart_StageManager::GetItemNameList()
 {
 	std::vector <std::string> itemNameList;
 	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	//ëfçﬁñºÇÃï€ë∂
 	for (int i = 0; i < rData->resourceDataMap_.size(); i++)
 	{
 		itemNameList.push_back(rData->resourceDataMap_[i].resourceName_);
