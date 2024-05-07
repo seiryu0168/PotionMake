@@ -1,7 +1,7 @@
 #include "ResourceMenuChangeButton.h"
-#include"P_MP_CraftUI_ResourceStockUI.h"
-#include"../../Engine/DirectX_11/Input.h"
-#include"../../Engine/Systems/ImageSystem.h"
+#include "P_MP_CraftUI_ResourceStockUI.h"
+#include "../../Engine/DirectX_11/Input.h"
+#include "../../Engine/Systems/ImageSystem.h"
 ResourceMenuChangeButton::ResourceMenuChangeButton(Object* parent)
 	:GameObject(parent,"ResourceMenuChangeButton")
 {

@@ -1,6 +1,6 @@
 #include "SettlementUI_EarningTransition.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 
 SettlementUI_EarningTransition::SettlementUI_EarningTransition(Object* parent)
 	:GameObject(parent,"SettlementUI_EarningTransition"),

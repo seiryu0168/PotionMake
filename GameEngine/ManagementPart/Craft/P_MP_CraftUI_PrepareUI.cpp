@@ -1,7 +1,7 @@
 #include "P_MP_CraftUI_PrepareUI.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"P_MP_CraftUI_CraftPot.h"
+#include "P_MP_CraftUI_CraftPot.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 P_MP_CraftUI_PrepareUI::P_MP_CraftUI_PrepareUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_PrepareUI")
 {

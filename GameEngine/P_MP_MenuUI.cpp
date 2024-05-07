@@ -4,7 +4,7 @@
 #include"Engine/DirectX_11/Input.h"
 #include"InterSceneData.h"
 #include"Engine/newSceneManager.h"
-#include"Play_ManagementPart_BaseUI.h"
+#include"ManagementPart/Play_ManagementPart_BaseUI.h"
 #include"PlayerData.h"
 #include"P_MP_NewsPaper.h"
 #include"CloseButton.h"

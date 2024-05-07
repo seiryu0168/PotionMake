@@ -1,5 +1,5 @@
 #include "PotionStatusGauge.h"
-#include"../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/ImageSystem.h"
 PotionStatusGauge::PotionStatusGauge(Object* parent)
 	:GameObject(parent,"PotionStatusGauge")
 {

@@ -1,9 +1,9 @@
 #include "PickupedItem.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
-#include"Engine/DirectX_11/Input.h"
-#include"P_CP_CollectedItemUI.h"
-#include"PickupedItemDetailUI.h"
+#include "P_CP_CollectedItemUI.h"
+#include "PickupedItemDetailUI.h"
+#include "../Engine/Systems/ImageSystem.h"
+#include "../Engine/Systems/TextSystem.h"
+#include "../Engine/DirectX_11/Input.h"
 PickupedItem::PickupedItem(Object* parent)
 	:ItemBase(parent,"PickupedItem"),
 	itemCount_(0)

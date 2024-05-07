@@ -7,7 +7,7 @@
 #include"Engine/GameObject/CameraManager.h"
 #include"Play_UIManager.h"
 #include"ManagementPartObjectBase.h"
-#include"Play_ManagementPart_BaseUI.h"
+#include"ManagementPart/Play_ManagementPart_BaseUI.h"
 #include"UIBase.h"
 Player::Player(Object* parent, std::string name)
 	:GameObject(parent, name),

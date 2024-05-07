@@ -1,12 +1,12 @@
 #include "P_MP_CraftUI_ResourceStockUI.h"
-#include"ResourceItem.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"../../InterSceneData.h"
-#include"P_MP_CraftUI_ProcessUI.h"
-#include"ResourceMenuChangeButton.h"
-#include"../../PlayerData.h"
-#include"../../ResourceStatusData.h"
+#include "ResourceItem.h"
+#include "P_MP_CraftUI_ProcessUI.h"
+#include "ResourceMenuChangeButton.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../InterSceneData.h"
+#include "../../PlayerData.h"
+#include "../../ResourceStatusData.h"
 P_MP_CraftUI_ResourceStockUI::P_MP_CraftUI_ResourceStockUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_ResourceStockUI"),
 	uiPos_({0,0,0})

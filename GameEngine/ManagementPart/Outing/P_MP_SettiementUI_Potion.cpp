@@ -1,6 +1,6 @@
 #include "P_MP_SettiementUI_Potion.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 P_MP_SettiementUI_Potion::P_MP_SettiementUI_Potion(Object* parent)
 	:GameObject(parent,"P_MP_SettiementUI_Potion"),
 	isSetFirstPosition_(false)

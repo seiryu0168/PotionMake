@@ -7,7 +7,7 @@
 #include"Engine/GameObject/CameraManager.h"
 #include"Play_UIManager.h"
 #include"ManagementPartObjectBase.h"
-#include"Play_ManagementPart_BaseUI.h"
+#include"ManagementPart/Play_ManagementPart_BaseUI.h"
 #include"UIBase.h"
 #include"Engine/ResourceManager/Audio.h"
 Player_ManagementPart::Player_ManagementPart(Object* parent)

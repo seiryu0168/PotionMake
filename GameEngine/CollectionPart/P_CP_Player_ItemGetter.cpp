@@ -1,8 +1,8 @@
 #include "P_CP_Player_ItemGetter.h"
-#include"Engine/Systems/ColliderSystem.h"
-#include"Engine/Systems/ModelSystem.h"
-#include"Engine/DirectX_11/Input.h"
-#include"P_CP_ResourceItem.h"
+#include "P_CP_ResourceItem.h"
+#include "../Engine/Systems/ColliderSystem.h"
+#include "../Engine/Systems/ModelSystem.h"
+#include "../Engine/DirectX_11/Input.h"
 P_CP_Player_ItemGetter::P_CP_Player_ItemGetter(Object* parent)
 	:GameObject(parent,"P_CP_Player_ItemGetter"),
 	targetItemNum_(-1)

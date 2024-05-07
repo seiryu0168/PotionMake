@@ -1,5 +1,5 @@
 #pragma once
-#include"../../Engine/GameObject/GameObject.h"
+#include "../../Engine/GameObject/GameObject.h"
 
 /// <summary>
 ///選んだポーションの情報を表示するメニュー 

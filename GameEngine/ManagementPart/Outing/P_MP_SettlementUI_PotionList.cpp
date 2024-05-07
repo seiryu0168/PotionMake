@@ -1,8 +1,8 @@
 #include "P_MP_SettlementUI_PotionList.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
-#include"P_MP_SettiementUI_Potion.h"
-#include"Engine/DirectX_11/Input.h"
+#include "P_MP_SettiementUI_Potion.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/DirectX_11/Input.h"
 
 P_MP_SettlementUI_PotionList::P_MP_SettlementUI_PotionList(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI_PotionList"),

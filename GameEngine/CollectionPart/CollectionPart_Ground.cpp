@@ -1,5 +1,5 @@
 #include "CollectionPart_Ground.h"
-#include"Engine/Systems/ModelSystem.h"
+#include "../Engine/Systems/ModelSystem.h"
 CollectionPart_Ground::CollectionPart_Ground(Object* parent)
 	:GameObject(parent,"CollectionPart_Ground")
 {

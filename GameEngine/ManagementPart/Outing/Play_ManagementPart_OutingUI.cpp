@@ -1,12 +1,12 @@
 #include "Play_ManagementPart_OutingUI.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/DirectX_11/Input.h"
-#include"../../Play_ManagementPart_BaseUI.h"
-#include"P_MP_OutingUI_ActionText.h"
-#include"../../Engine/newSceneManager.h"
-#include"../../P_MP_SettlementUI.h"
-#include"../../Engine/ResourceManager/Audio.h"
+#include "P_MP_OutingUI_ActionText.h"
+#include "../Outing/P_MP_SettlementUI.h"
+#include "../Play_ManagementPart_BaseUI.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/DirectX_11/Input.h"
+#include "../../Engine/newSceneManager.h"
+#include "../../Engine/ResourceManager/Audio.h"
 
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
 	:UIBase(parent,"Play_ManagementPart_OutingUI"),

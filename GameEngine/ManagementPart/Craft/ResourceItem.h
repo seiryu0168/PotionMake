@@ -1,5 +1,5 @@
 #pragma once
-#include"../../ItemBase.h"
+#include "../../ItemBase.h"
 /// <summary>
 /// ポーション制作用の素材
 /// </summary>

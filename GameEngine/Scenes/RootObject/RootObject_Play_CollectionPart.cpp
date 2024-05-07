@@ -1,7 +1,7 @@
 #include "RootObject_Play_CollectionPart.h"
-#include "../../CollectionPart_Ground.h"
+#include "../../CollectionPart/CollectionPart_Ground.h"
 #include"../../Player_CollectionPart.h"
-#include"../../Play_CollectionPart_StageManager.h"
+#include"../../CollectionPart/Play_CollectionPart_StageManager.h"
 #include"../../Play_UIManager.h"
 #include"../../Engine/ResourceManager/Audio.h"
 RootObject_Play_CollectionPart::RootObject_Play_CollectionPart()

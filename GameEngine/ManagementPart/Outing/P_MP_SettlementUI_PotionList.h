@@ -1,6 +1,6 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-#include"PlayerData.h"
+#include "../../Engine/GameObject/GameObject.h"
+#include "../../PlayerData.h"
 
 /// <summary>
 /// ポーションを売った時のポーション情報を表示するクラス

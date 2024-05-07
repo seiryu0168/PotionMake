@@ -1,6 +1,6 @@
 #include "Play_UIManager.h"
-#include"Play_ManagementPart_BaseUI.h"
-#include"Play_CollectionPart_BaseUI.h"
+#include"ManagementPart/Play_ManagementPart_BaseUI.h"
+#include"CollectionPart/Play_CollectionPart_BaseUI.h"
 #include"Engine/Systems/ImageSystem.h"
 Play_UIManager::Play_UIManager(Object* parent)
 	:GameObject(parent,"Play_UIManager"),

@@ -1,5 +1,5 @@
 #pragma once
-#include"ItemBase.h"
+#include "../ItemBase.h"
 class P_CP_ResourceItem : public ItemBase
 {
 	bool isLoaded_;

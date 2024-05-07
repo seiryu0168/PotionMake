@@ -1,12 +1,12 @@
 #include "Play_CollectionPart_BaseUI.h"
-#include"Engine/Systems/TextSystem.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"InterSceneData.h"
-#include"Play_CollectionPart_StageManager.h"
-#include"Engine/DirectX_11/Input.h"
-#include"P_CP_MenuUI.h"
-#include"Player_CollectionPart.h"
-#include"Engine/ResourceManager/Audio.h"
+#include "Play_CollectionPart_StageManager.h"
+#include "P_CP_MenuUI.h"
+#include "../Engine/Systems/TextSystem.h"
+#include "../Engine/Systems/ImageSystem.h"
+#include "../InterSceneData.h"
+#include "../Engine/DirectX_11/Input.h"
+#include "../Player_CollectionPart.h"
+#include "../Engine/ResourceManager/Audio.h"
 
 namespace
 {
@@ -85,7 +85,6 @@ void Play_CollectionPart_BaseUI::SetUIOpenFlag(bool flag)
 	//ÉÅÉjÉÖÅ[UIÇï¬Ç∂ÇÈ
 	if (!flag)
 	{
-		//RECT clipRange = { 0,0,Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight() };
 		Direct3D::SetClipCursor(clipRange);
 		Direct3D::ShowMouseCursor(false);
 	}

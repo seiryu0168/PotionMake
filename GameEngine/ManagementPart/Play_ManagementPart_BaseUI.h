@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include"../Engine/GameObject/GameObject.h"
 /// <summary>
 /// 経営パートの基本的な動作を表示するUI
 /// ポーション制作、管理、外出等のアクションを表示

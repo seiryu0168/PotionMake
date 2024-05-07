@@ -2,10 +2,10 @@
 #include"Engine/Systems/ModelSystem.h"
 #include"Engine/GameObject/CameraManager.h"
 #include"Engine/DirectX_11/Input.h"
-#include"P_CP_Player_ItemGetter.h"
-#include"CollectionPart_Ground.h"
+#include"CollectionPart/P_CP_Player_ItemGetter.h"
+#include"CollectionPart/CollectionPart_Ground.h"
 #include"Play_UIManager.h"
-#include"Play_CollectionPart_BaseUI.h"
+#include"CollectionPart/Play_CollectionPart_BaseUI.h"
 #include"Engine/ResourceManager/Audio.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),

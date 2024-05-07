@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include "../Engine/GameObject/GameObject.h"
 class PickupedItemDetailUI : public GameObject
 {
 	XMFLOAT3 uiPos_;

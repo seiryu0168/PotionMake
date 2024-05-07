@@ -1,6 +1,6 @@
 #include "PotionCraftAnimation.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"PotionCraftAnimationPot.h"
+#include "PotionCraftAnimationPot.h"
+#include "../../Engine/Systems/ImageSystem.h"
 PotionCraftAnimation::PotionCraftAnimation(Object* parent)
 	:GameObject(parent,"PotionCraftAnimation")
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include"../../Engine/GameObject/GameObject.h"
-#include<random>
+#include <random>
+#include "../../Engine/GameObject/GameObject.h"
 
 /// <summary>
 /// ポーション制作アニメーションの湯気

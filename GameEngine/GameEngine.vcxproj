@@ -175,7 +175,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CloseButton.cpp" />
-    <ClCompile Include="CollectionPart_Ground.cpp" />
+    <ClCompile Include="CollectionPart\CollectionPart_Ground.cpp" />
+    <ClCompile Include="CollectionPart\PickupedItem.cpp" />
+    <ClCompile Include="CollectionPart\PickupedItemDetailUI.cpp" />
+    <ClCompile Include="CollectionPart\Play_CollectionPart_BaseUI.cpp" />
+    <ClCompile Include="CollectionPart\Play_CollectionPart_StageManager.cpp" />
+    <ClCompile Include="CollectionPart\P_CP_CollectedItemUI.cpp" />
+    <ClCompile Include="CollectionPart\P_CP_MenuUI.cpp" />
+    <ClCompile Include="CollectionPart\P_CP_Player_ItemGetter.cpp" />
+    <ClCompile Include="CollectionPart\P_CP_ResourceItem.cpp" />
     <ClCompile Include="Division.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="DebugUI.cpp" />
@@ -252,6 +260,11 @@
     <ClCompile Include="ManagementPart\Outing\Play_ManagementPart_Door.cpp" />
     <ClCompile Include="ManagementPart\Outing\Play_ManagementPart_OutingUI.cpp" />
     <ClCompile Include="ManagementPart\Outing\P_MP_OutingUI_ActionText.cpp" />
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettiementUI_Potion.cpp" />
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI.cpp" />
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.cpp" />
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.cpp" />
+    <ClCompile Include="ManagementPart\Outing\SettlementUI_EarningTransition.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.cpp" />
@@ -263,26 +276,12 @@
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
-    <ClCompile Include="PickupedItem.cpp" />
-    <ClCompile Include="PickupedItemDetailUI.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Player_CollectionPart.cpp" />
     <ClCompile Include="Player_ManagementPart.cpp" />
-    <ClCompile Include="Play_CollectionPart_BaseUI.cpp" />
-    <ClCompile Include="Play_CollectionPart_StageManager.cpp" />
-    <ClCompile Include="Play_ManagementPart_BaseUI.cpp" />
-    <ClCompile Include="Play_UIManager.cpp" />
-    <ClCompile Include="P_CP_CollectedItemUI.cpp" />
-    <ClCompile Include="P_CP_MenuUI.cpp" />
-    <ClCompile Include="P_CP_Player_ItemGetter.cpp" />
-    <ClCompile Include="P_CP_ResourceItem.cpp" />
     <ClCompile Include="P_MP_MenuUI.cpp" />
     <ClCompile Include="P_MP_NewsPaper.cpp" />
-    <ClCompile Include="P_MP_SettiementUI_Potion.cpp" />
-    <ClCompile Include="P_MP_SettlementUI.cpp" />
-    <ClCompile Include="P_MP_SettlementUI_PotionList.cpp" />
-    <ClCompile Include="P_MP_SettlementUI_TotalGain.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
     <ClCompile Include="SaveDataManager.cpp" />
     <ClCompile Include="Scenes\RootObject\RootObject.cpp" />
@@ -300,7 +299,6 @@
     <ClCompile Include="Scenes\Scene_Result.cpp" />
     <ClCompile Include="Scenes\Scene_Title.cpp" />
     <ClCompile Include="ObjectSetter.cpp" />
-    <ClCompile Include="SettlementUI_EarningTransition.cpp" />
     <ClCompile Include="StaticResource.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
@@ -310,7 +308,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloseButton.h" />
-    <ClInclude Include="CollectionPart_Ground.h" />
+    <ClInclude Include="CollectionPart\CollectionPart_Ground.h" />
+    <ClInclude Include="CollectionPart\PickupedItem.h" />
+    <ClInclude Include="CollectionPart\PickupedItemDetailUI.h" />
+    <ClInclude Include="CollectionPart\Play_CollectionPart_BaseUI.h" />
+    <ClInclude Include="CollectionPart\Play_CollectionPart_StageManager.h" />
+    <ClInclude Include="CollectionPart\P_CP_CollectedItemUI.h" />
+    <ClInclude Include="CollectionPart\P_CP_MenuUI.h" />
+    <ClInclude Include="CollectionPart\P_CP_Player_ItemGetter.h" />
+    <ClInclude Include="CollectionPart\P_CP_ResourceItem.h" />
     <ClInclude Include="Division.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="DebugUI.h" />
@@ -393,6 +399,11 @@
     <ClInclude Include="ManagementPart\Outing\Play_ManagementPart_Door.h" />
     <ClInclude Include="ManagementPart\Outing\Play_ManagementPart_OutingUI.h" />
     <ClInclude Include="ManagementPart\Outing\P_MP_OutingUI_ActionText.h" />
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettiementUI_Potion.h" />
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI.h" />
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.h" />
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.h" />
+    <ClInclude Include="ManagementPart\Outing\SettlementUI_EarningTransition.h" />
     <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.h" />
     <ClInclude Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.h" />
@@ -404,26 +415,13 @@
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
-    <ClInclude Include="PickupedItem.h" />
-    <ClInclude Include="PickupedItemDetailUI.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Player_CollectionPart.h" />
     <ClInclude Include="Player_ManagementPart.h" />
-    <ClInclude Include="Play_CollectionPart_BaseUI.h" />
-    <ClInclude Include="Play_CollectionPart_StageManager.h" />
-    <ClInclude Include="Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="Play_UIManager.h" />
-    <ClInclude Include="P_CP_CollectedItemUI.h" />
-    <ClInclude Include="P_CP_MenuUI.h" />
-    <ClInclude Include="P_CP_Player_ItemGetter.h" />
-    <ClInclude Include="P_CP_ResourceItem.h" />
     <ClInclude Include="P_MP_MenuUI.h" />
     <ClInclude Include="P_MP_NewsPaper.h" />
-    <ClInclude Include="P_MP_SettiementUI_Potion.h" />
-    <ClInclude Include="P_MP_SettlementUI.h" />
-    <ClInclude Include="P_MP_SettlementUI_PotionList.h" />
-    <ClInclude Include="P_MP_SettlementUI_TotalGain.h" />
     <ClInclude Include="ResourceStatusData.h" />
     <ClInclude Include="SaveDataManager.h" />
     <ClInclude Include="Scenes\RootObject\RootObject.h" />
@@ -443,7 +441,6 @@
     <ClInclude Include="ObjectSetter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="EngineTime.h" />
-    <ClInclude Include="SettlementUI_EarningTransition.h" />
     <ClInclude Include="StandData.h" />
     <ClInclude Include="StaticResource.h" />
     <ClInclude Include="TestObject.h" />

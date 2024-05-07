@@ -1,7 +1,7 @@
 #include "P_MP_SettlementUI_TotalGain.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
-#include"Engine/ResourceManager/Audio.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/ResourceManager/Audio.h"
 P_MP_SettlementUI_TotalGain::P_MP_SettlementUI_TotalGain(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI_TotalGain"),
 	uiPos_({ 0.4f,0.5f,0 }),

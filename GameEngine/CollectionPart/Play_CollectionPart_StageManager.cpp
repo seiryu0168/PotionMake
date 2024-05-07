@@ -1,10 +1,10 @@
 #include "Play_CollectionPart_StageManager.h"
-#include"Engine/ResourceManager/CsvReader.h"
-#include"P_CP_ResourceItem.h"
-#include"ResourceStatusData.h"
-#include"InterSceneData.h"
-#include"Engine/Systems/ColliderSystem.h"
-#include<Windows.h>
+#include "P_CP_ResourceItem.h"
+#include <Windows.h>
+#include "../Engine/ResourceManager/CsvReader.h"
+#include "../ResourceStatusData.h"
+#include "../InterSceneData.h"
+#include "../Engine/Systems/ColliderSystem.h"
 Play_CollectionPart_StageManager::Play_CollectionPart_StageManager(Object* parent)
 	:GameObject(parent,"Play_CollectionPart_StageManager")
 {

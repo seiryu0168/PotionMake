@@ -1,7 +1,7 @@
 #include "P_MP_CraftUI_PrepareButton.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/DirectX_11/Input.h"
-#include"P_MP_CraftUI_CraftPot.h"
+#include "P_MP_CraftUI_CraftPot.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/DirectX_11/Input.h"
 P_MP_CraftUI_PrepareButton::P_MP_CraftUI_PrepareButton(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_PrepareButton")
 {

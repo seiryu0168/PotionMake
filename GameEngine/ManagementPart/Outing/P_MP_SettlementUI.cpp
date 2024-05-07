@@ -1,13 +1,13 @@
 #include "P_MP_SettlementUI.h"
-#include"InterSceneData.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"P_MP_SettlementUI_PotionList.h"
-#include"P_MP_SettlementUI_TotalGain.h"
-#include"SettlementUI_EarningTransition.h"
-#include"InterSceneData.h"
-#include"PlayerData.h"
-#include"ResourceStatusData.h"
-#include"CloseButton.h"
+#include "P_MP_SettlementUI_PotionList.h"
+#include "P_MP_SettlementUI_TotalGain.h"
+#include "SettlementUI_EarningTransition.h"
+#include "../../InterSceneData.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../InterSceneData.h"
+#include "../../PlayerData.h"
+#include "../../ResourceStatusData.h"
+#include "../../CloseButton.h"
 P_MP_SettlementUI::P_MP_SettlementUI(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI"),
 	fadeImageNum_(-1),

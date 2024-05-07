@@ -1,10 +1,10 @@
 #include "FinishCraftUI.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/DirectX_11/Input.h"
-#include"../../InterSceneData.h"
-#include"../../PlayerData.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/DirectX_11/Input.h"
+#include "../../InterSceneData.h"
+#include "../../PlayerData.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/ResourceManager/Audio.h"
 FinishCraftUI::FinishCraftUI(Object* parent)
 	:GameObject(parent,"FinishCraftUI"),
 	okButtonImageNum_(-1),

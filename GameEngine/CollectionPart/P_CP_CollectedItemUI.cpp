@@ -1,11 +1,11 @@
 #include "P_CP_CollectedItemUI.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
-#include"PickupedItem.h"
-#include"Player_CollectionPart.h"
-#include"InterSceneData.h"
-#include"ResourceStatusData.h"
-#include"CloseButton.h"
+#include "PickupedItem.h"
+#include "../Engine/Systems/ImageSystem.h"
+#include "../Engine/Systems/TextSystem.h"
+#include "../Player_CollectionPart.h"
+#include "../InterSceneData.h"
+#include "../ResourceStatusData.h"
+#include "../CloseButton.h"
 P_CP_CollectedItemUI::P_CP_CollectedItemUI(Object* parent)
 	:GameObject(parent,"P_CP_CollectedItemUI"),
 	uiPos_({0.5,0,0})

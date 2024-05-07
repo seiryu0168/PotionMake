@@ -1,11 +1,11 @@
 #include "PickupedItemDetailUI.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/Systems/TextSystem.h"
-#include"P_CP_CollectedItemUI.h"
-#include"CloseButton.h"
-#include"InterSceneData.h"
-#include"ResourceStatusData.h"
-#include"Engine/ResourceManager/Audio.h"
+#include "P_CP_CollectedItemUI.h"
+#include "../Engine/Systems/ImageSystem.h"
+#include "../Engine/Systems/TextSystem.h"
+#include "../CloseButton.h"
+#include "../InterSceneData.h"
+#include "../ResourceStatusData.h"
+#include "../Engine/ResourceManager/Audio.h"
 PickupedItemDetailUI::PickupedItemDetailUI(Object* parent)
 	:GameObject(parent, "PickupedItemDetailUI"),
 	uiPos_({ -0.2f,0,0 }),

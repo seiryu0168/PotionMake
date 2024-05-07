@@ -1,9 +1,9 @@
 #include "P_MP_NewsPaper.h"
-#include"Engine/Systems//ImageSystem.h"
-#include"InterSceneData.h"
-#include"PlayerData.h"
-#include"ResourceStatusData.h"
-#include"CloseButton.h"
+#include "Engine/Systems//ImageSystem.h"
+#include "InterSceneData.h"
+#include "PlayerData.h"
+#include "ResourceStatusData.h"
+#include "CloseButton.h"
 P_MP_NewsPaper::P_MP_NewsPaper(Object* parent)
 	:GameObject(parent,"P_MP_NewsPaper")
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include "../../Engine/GameObject/GameObject.h"
 
 /// <summary>
 /// ポーションを売った時の売上の推移を表示するクラス

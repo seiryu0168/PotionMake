@@ -1,6 +1,6 @@
 #include "ResourceItemSlot.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 ResourceItemSlot::ResourceItemSlot(Object* parent)
 	:ItemBase(parent,"ResourceItemSlot"),
 	haveResource_(false),

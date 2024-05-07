@@ -64,6 +64,9 @@
     <Filter Include="CollectionPart">
       <UniqueIdentifier>{921bf140-2b91-48fd-83e9-30677bb9e32f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\CollectionPart">
+      <UniqueIdentifier>{a2356417-c148-486c-8d8d-5b16610be7f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -288,12 +291,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Play_UIManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_ManagementPart_BaseUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="UIBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -411,49 +408,7 @@
     <ClCompile Include="Player_CollectionPart.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CollectionPart_Ground.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player_ManagementPart.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_CP_ResourceItem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_CollectionPart_StageManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_CP_Player_ItemGetter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Play_CollectionPart_BaseUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_CP_CollectedItemUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PickupedItem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PickupedItemDetailUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_CP_MenuUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_SettlementUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_SettiementUI_Potion.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_SettlementUI_TotalGain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SettlementUI_EarningTransition.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="P_MP_SettlementUI_PotionList.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="P_MP_MenuUI.cpp">
@@ -464,6 +419,48 @@
     </ClCompile>
     <ClCompile Include="Wall_Window.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettiementUI_Potion.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Outing\SettlementUI_EarningTransition.cpp">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\CollectionPart_Ground.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\P_CP_CollectedItemUI.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\P_CP_MenuUI.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\P_CP_Player_ItemGetter.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\P_CP_ResourceItem.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\PickupedItem.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\PickupedItemDetailUI.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\Play_CollectionPart_BaseUI.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClCompile>
+    <ClCompile Include="CollectionPart\Play_CollectionPart_StageManager.cpp">
+      <Filter>ソース ファイル\CollectionPart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -707,9 +704,6 @@
     <ClInclude Include="ManagementPartObjectBase.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_ManagementPart_BaseUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\Scene_Play_CollectionPart.h">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
@@ -836,62 +830,62 @@
     <ClInclude Include="ManagementPart\PotionManagement\PotionStockDummy.h">
       <Filter>ソース ファイル\ManagementPart\PotionManagement</Filter>
     </ClInclude>
-    <ClInclude Include="CollectionPart_Ground.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_CP_ResourceItem.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Player_CollectionPart.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Player_ManagementPart.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Play_CollectionPart_StageManager.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_CP_Player_ItemGetter.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Play_CollectionPart_BaseUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_CP_CollectedItemUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="P_CP_MenuUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PickupedItem.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PickupedItemDetailUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SettlementUI_EarningTransition.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="P_MP_MenuUI.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_SettiementUI_Potion.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettiementUI_Potion.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_SettlementUI.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_SettlementUI_PotionList.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
     </ClInclude>
-    <ClInclude Include="P_MP_SettlementUI_TotalGain.h">
+    <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Outing\SettlementUI_EarningTransition.h">
+      <Filter>ソース ファイル\ManagementPart\Outing</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\CollectionPart_Ground.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\P_CP_CollectedItemUI.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\P_CP_MenuUI.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\P_CP_Player_ItemGetter.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\P_CP_ResourceItem.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\PickupedItem.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\PickupedItemDetailUI.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\Play_CollectionPart_BaseUI.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionPart\Play_CollectionPart_StageManager.h">
+      <Filter>ソース ファイル\CollectionPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall_Window.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="P_MP_NewsPaper.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall_Window.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

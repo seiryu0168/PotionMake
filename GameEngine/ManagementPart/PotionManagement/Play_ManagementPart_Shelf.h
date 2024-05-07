@@ -1,5 +1,5 @@
 #pragma once
-#include"../../ManagementPartObjectBase.h"
+#include "../../ManagementPartObjectBase.h"
 /// <summary>
 /// ポーション管理用の棚
 /// </summary>

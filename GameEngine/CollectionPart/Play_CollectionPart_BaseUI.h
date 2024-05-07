@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include "../Engine/GameObject/GameObject.h"
 
 class Player_CollectionPart;
 class Play_CollectionPart_BaseUI : public GameObject

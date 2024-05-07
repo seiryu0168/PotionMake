@@ -1,7 +1,7 @@
 #include "P_MP_PotionManagerUI_DisposeStockUI.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"PotionSlot.h"
+#include "PotionSlot.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 P_MP_PotionManagerUI_DisposeStockUI::P_MP_PotionManagerUI_DisposeStockUI(Object* parent)
 	:GameObject(parent,"P_MP_PotionManagerUI_DisposeStockUI"),
 	standPosition_({-0.88f,-0.3f}),

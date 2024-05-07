@@ -1,10 +1,10 @@
 #include "P_MP_OutingUI_ActionText.h"
-#include"../../Engine/DirectX_11/Input.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"../../Engine/newSceneManager.h"
-#include"Play_ManagementPart_OutingUI.h"
-#include"../../P_MP_SettlementUI.h"
+#include "Play_ManagementPart_OutingUI.h"
+#include "../Outing/P_MP_SettlementUI.h"
+#include "../../Engine/DirectX_11/Input.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/newSceneManager.h"
 P_MP_OutingUI_ActionText::P_MP_OutingUI_ActionText(Object* parent)
 	:GameObject(parent,"P_MP_OutingUI_ActionText")
 {

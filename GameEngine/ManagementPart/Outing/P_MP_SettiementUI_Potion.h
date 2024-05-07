@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include "../../Engine/GameObject/GameObject.h"
 class P_MP_SettiementUI_Potion : public GameObject
 {
 	int potionTier_;

@@ -1,6 +1,6 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-#include"Engine/Time.h"
+#include "../../Engine/GameObject/GameObject.h"
+#include "../../Engine/Time.h"
 
 /// <summary>
 /// ポーションを売った時の金額を表示するクラス

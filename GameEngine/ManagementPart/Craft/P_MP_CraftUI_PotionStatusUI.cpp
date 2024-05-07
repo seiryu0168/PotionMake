@@ -1,7 +1,7 @@
 #include "P_MP_CraftUI_PotionStatusUI.h"
-#include"../../Engine/Systems/ImageSystem.h"
-#include"../../Engine/Systems/TextSystem.h"
-#include"PotionStatusGauge.h"
+#include "PotionStatusGauge.h"
+#include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 P_MP_CraftUI_PotionStatusUI::P_MP_CraftUI_PotionStatusUI(Object* parent)
 	:GameObject(parent,"P_MP_CraftUI_PotionStatusUI"),
 	uiPos_({ -0.6,-0.67f })

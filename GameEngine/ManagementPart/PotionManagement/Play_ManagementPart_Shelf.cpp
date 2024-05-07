@@ -1,6 +1,6 @@
 #include "Play_ManagementPart_Shelf.h"
-#include"../../Engine/Systems/ModelSystem.h"
-#include"../../Engine/Systems/ColliderSystem.h"
+#include "../../Engine/Systems/ModelSystem.h"
+#include "../../Engine/Systems/ColliderSystem.h"
 
 Play_ManagementPart_Shelf::Play_ManagementPart_Shelf(Object* parent)
 	:ManagementPartObjectBase(parent,"Play_ManagementPart_Shelf")

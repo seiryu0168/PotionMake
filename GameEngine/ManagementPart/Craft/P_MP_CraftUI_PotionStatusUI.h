@@ -1,5 +1,5 @@
 #pragma once
-#include"../../Engine/GameObject/GameObject.h"
+#include "../../Engine/GameObject/GameObject.h"
 /// <summary>
 /// ポーションの各パラメータを表示するクラス
 /// </summary>

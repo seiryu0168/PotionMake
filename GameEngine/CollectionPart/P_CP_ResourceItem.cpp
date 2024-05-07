@@ -1,6 +1,7 @@
 #include "P_CP_ResourceItem.h"
-#include"Engine/Systems/ModelSystem.h"
-#include"Engine/Systems/ColliderSystem.h"
+#include "../Engine/Systems/ModelSystem.h"
+#include "../Engine/Systems/ColliderSystem.h"
+
 P_CP_ResourceItem::P_CP_ResourceItem(Object* parent)
 	:ItemBase(parent,"P_CP_ResourceItem"),
 	isLoaded_(false)
