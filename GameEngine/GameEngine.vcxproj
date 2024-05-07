@@ -265,6 +265,7 @@
     <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.cpp" />
     <ClCompile Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.cpp" />
     <ClCompile Include="ManagementPart\Outing\SettlementUI_EarningTransition.cpp" />
+    <ClCompile Include="ManagementPart\Play_ManagementPart_BaseUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.cpp" />
@@ -280,6 +281,7 @@
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Player_CollectionPart.cpp" />
     <ClCompile Include="Player_ManagementPart.cpp" />
+    <ClCompile Include="Play_UIManager.cpp" />
     <ClCompile Include="P_MP_MenuUI.cpp" />
     <ClCompile Include="P_MP_NewsPaper.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
@@ -404,6 +406,7 @@
     <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_PotionList.h" />
     <ClInclude Include="ManagementPart\Outing\P_MP_SettlementUI_TotalGain.h" />
     <ClInclude Include="ManagementPart\Outing\SettlementUI_EarningTransition.h" />
+    <ClInclude Include="ManagementPart\Play_ManagementPart_BaseUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_PotionManagerUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\Play_ManagementPart_Shelf.h" />
     <ClInclude Include="ManagementPart\PotionManagement\PotionManagementConfirmButton.h" />

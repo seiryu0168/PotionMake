@@ -1,12 +1,12 @@
 #include "Play_ManagementPart_BaseUI.h"
-#include"Engine/Systems/TextSystem.h"
-#include"Engine/Systems/ImageSystem.h"
-#include"Engine/DirectX_11/Input.h"
-#include"P_MP_MenuUI.h"
-#include"ManagementPart/Outing/Play_ManagementPart_OutingUI.h"
-#include"ManagementPart/Craft/Play_ManagementPart_CraftUI.h"
-#include"ManagementPart/PotionManagement/Play_ManagementPart_PotionManagerUI.h"
-#include"Engine/ResourceManager/Audio.h"
+#include"Outing/Play_ManagementPart_OutingUI.h"
+#include"Craft/Play_ManagementPart_CraftUI.h"
+#include"PotionManagement/Play_ManagementPart_PotionManagerUI.h"
+#include"../Engine/Systems/TextSystem.h"
+#include"../Engine/Systems/ImageSystem.h"
+#include"../Engine/DirectX_11/Input.h"
+#include"../P_MP_MenuUI.h"
+#include"../Engine/ResourceManager/Audio.h"
 
 Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),

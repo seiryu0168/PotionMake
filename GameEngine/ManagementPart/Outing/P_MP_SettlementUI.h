@@ -1,6 +1,6 @@
 #pragma once
-#include"../../Engine/GameObject/GameObject.h"
-#include"../../PlayerData.h"
+#include "../../Engine/GameObject/GameObject.h"
+#include "../../PlayerData.h"
 class P_MP_SettlementUI : public GameObject
 {
 	int mask_;

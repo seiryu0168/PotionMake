@@ -1,5 +1,5 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
+#include "../Engine/GameObject/GameObject.h"
 class Play_CollectionPart_StageManager : public GameObject
 {
 private:

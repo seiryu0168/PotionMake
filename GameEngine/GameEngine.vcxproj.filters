@@ -462,6 +462,12 @@
     <ClCompile Include="CollectionPart\Play_CollectionPart_StageManager.cpp">
       <Filter>ソース ファイル\CollectionPart</Filter>
     </ClCompile>
+    <ClCompile Include="Play_UIManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagementPart\Play_ManagementPart_BaseUI.cpp">
+      <Filter>ソース ファイル\ManagementPart</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -886,6 +892,9 @@
     </ClInclude>
     <ClInclude Include="P_MP_NewsPaper.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementPart\Play_ManagementPart_BaseUI.h">
+      <Filter>ソース ファイル\ManagementPart</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
