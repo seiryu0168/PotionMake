@@ -57,7 +57,7 @@ void PickupedItemDetailUI::SetItemData(int itemNum)
 	itemNameText.SetPosition({ textPos.x - 150,textPos.y+105 });
 	AddComponent<Text>(itemNameText);
 	Text itemDetailText(this);
-	itemDetailText.SetText("‚±‚±‚Éà–¾");
+	itemDetailText.SetText(rData->resourceDataMap_[itemNum].explanation_);
 	itemDetailText.SetRect({ 0,0,300,240 });
 	itemDetailText.SetTextSize(25);
 	itemDetailText.SetPosition({ textPos.x - 150,textPos.y + 170 });

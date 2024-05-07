@@ -16,6 +16,8 @@ public:
 		float status02_;
 		float status03_;
 		float status04_;
+		std::string explanation_;
+
 		ResourceStatus()
 		{
 			resourceNumber_ = -1;
@@ -26,6 +28,7 @@ public:
 			status02_=0;
 			status03_=0;
 			status04_=0;
+			explanation_ = "";
 		}
 	};
 	std::unordered_map<int, ResourceStatus> resourceDataMap_;

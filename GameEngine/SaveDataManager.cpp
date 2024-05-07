@@ -229,6 +229,7 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 		statusData.status02_			= reader.GetFloat(i,6);
 		statusData.status03_			= reader.GetFloat(i,7);
 		statusData.status04_			= reader.GetFloat(i,8);
+		statusData.explanation_			= utf8_to_SJis(reader.GetString(i,9));
 		data.resourceDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
 
