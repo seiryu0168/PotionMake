@@ -16,7 +16,7 @@ Play_CollectionPart_StageManager::~Play_CollectionPart_StageManager()
 
 void Play_CollectionPart_StageManager::Initialize()
 {
-	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData03.csv");
+	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData04.csv");
 
 	for (int i = 0; i < reader.GetLines(); i++)
 	{
