@@ -11,6 +11,7 @@ PotionStockDummy::~PotionStockDummy()
 
 void PotionStockDummy::Initialize()
 {
+	//É_É~Å[âÊëú
 	Image potionStockImage(this);
 	potionStockImage.Load("Assets/Image/ItemSlotImage.png");
 	potionStockImage.SetLayer(0);

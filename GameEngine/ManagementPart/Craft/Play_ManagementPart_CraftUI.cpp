@@ -20,6 +20,7 @@ Play_ManagementPart_CraftUI::~Play_ManagementPart_CraftUI()
 
 void Play_ManagementPart_CraftUI::Initialize()
 {
+	//ポーション制作UIの題名
 	Text craftUIText(this);
 	craftUIText.SetText("ポーションを作る");
 	craftUIText.SetPosition({ 600,30 });
@@ -36,6 +37,7 @@ void Play_ManagementPart_CraftUI::Update()
 
 void Play_ManagementPart_CraftUI::DisplayCraftProcess(const std::vector<int>& itemNumList)
 {
+	//子供を全て殺してポーション制作のアニメーションを始める
 	KillAllChildren();
 	PotionCraftAnimation* potion = Instantiate<PotionCraftAnimation>(this);
 	potion->InitAnimation(itemNumList);
@@ -43,6 +45,7 @@ void Play_ManagementPart_CraftUI::DisplayCraftProcess(const std::vector<int>& it
 
 void Play_ManagementPart_CraftUI::DisplayResult()
 {
+	//ポーション制作の結果表示
 	FinishCraftUI* result = Instantiate<FinishCraftUI>(this);
 }
 

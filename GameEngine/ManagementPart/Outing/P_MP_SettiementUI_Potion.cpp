@@ -42,17 +42,20 @@ void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& 
 	potionName_ = name;
 	price_ = price;
 
+	//ポーチションのベース画像
 	Image potionBase(this);
 	potionBase.Load("Assets/Image/Potion_BaseImage.png");
 	potionBase.SetSize({ 0.5f,0.5f,0 });
 	potionBase.SetColor(color);
 	AddComponent<Image>(potionBase);
 
+	//ポーチションの枠画像
 	Image potionEdge(this);
 	potionEdge.Load("Assets/Image/Potion_EdgeImage.png");
 	potionEdge.SetSize({ 0.5f,0.5f,0 });
 	AddComponent<Image>(potionEdge);
 
+	//ポーチション名
 	Text nameText(this);
 	nameText.SetText(name);
 	nameText.SetTextSize(40);

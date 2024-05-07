@@ -17,6 +17,7 @@ PotionMenu::~PotionMenu()
 
 void PotionMenu::Initialize()
 {
+	//UIの背景画像
 	Image baseImage(this);
 	baseImage.SetLayer(1);
 	baseImage.Load("Assets/Image/UIBaseImage1.png");
@@ -83,6 +84,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionBaseImage.SetPosition({ pos.x,pos.y + 0.25f,0 });
 	AddComponent<Image>(potionBaseImage);
 
+	//ポーションのベース画像
 	Image potionImage(this);
 	potionImage.Load("Assets/Image/Potion_BaseImage.png");
 	potionImage.SetColor(color);
@@ -91,6 +93,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionImage.SetPosition({ pos.x,pos.y+0.25f,0 });
 	AddComponent<Image>(potionImage);
 	
+	//ポーションの縁画像
 	Image potionEdgeImage(this);
 	potionEdgeImage.Load("Assets/Image/Potion_EdgeImage.png");
 	potionEdgeImage.SetSize({ 0.5f,0.5f,0 });
@@ -99,7 +102,8 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	AddComponent<Image>(potionEdgeImage);
 
 	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
-
+	
+	//ポーション名
 	Text potionNameText(this);
 	potionNameText.SetText(name);
 	potionNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);

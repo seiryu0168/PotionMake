@@ -12,6 +12,7 @@ PotionSlot::~PotionSlot()
 
 void PotionSlot::Initialize()
 {
+	//背景画像
 	Image image(this);
 	image.Load("Assets/Image/ItemSlotImage.png");
 	AddComponent<Image>(image);
@@ -20,6 +21,7 @@ void PotionSlot::Initialize()
 void PotionSlot::Start()
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	//ポーションのベース画像
 	Image potionBaseImage(this);
 	potionBaseImage.Load("Assets/Image/Potion_BaseImage.png");
 	potionBaseImage.SetLayer(0);
@@ -27,7 +29,8 @@ void PotionSlot::Start()
 	potionBaseImage.SetSize({ 0.25f,0.25,0 });
 	potionBaseImage.SetColor({ 1,1,1,0.4f });
 	potionImageNum_ = AddComponent<Image>(potionBaseImage);
-
+	
+	//ポーションの縁画像
 	Image potionEdgeImage(this);
 	potionEdgeImage.Load("Assets/Image/Potion_EdgeImage.png");
 	potionEdgeImage.SetLayer(1);

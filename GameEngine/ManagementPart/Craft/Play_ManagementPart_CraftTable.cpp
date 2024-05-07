@@ -14,12 +14,15 @@ void Play_ManagementPart_CraftTable::Initialize()
 {
 	accessUINum_ = 2;
 	actionName_ = "ポーションを作る";
+	
+	//当たり判定の設定
 	HitBox tableHitBox({ 8,3,2 });
 	Collider coll({ -8.5f,5,1 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 
+	//テーブルモデル
 	Test_Model_ECSver tableModel(this);
 	tableModel.Load("Assets/Model/tableCloth.fbx");
 	AddComponent<Test_Model_ECSver>(tableModel);

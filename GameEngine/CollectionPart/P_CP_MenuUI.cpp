@@ -27,6 +27,7 @@ P_CP_MenuUI::~P_CP_MenuUI()
 
 void P_CP_MenuUI::Initialize()
 {
+	//家に帰るボタン
 	Image returnHome(this);
 	returnHome.Load("Assets/Image/SelectImage3.png");
 	returnHome.SetPosition({ -1.2f,0.5f,0 });
@@ -34,11 +35,14 @@ void P_CP_MenuUI::Initialize()
 	//returnHome.SetSize({ 5,2,0 });
 	returnImageNum_ = AddComponent<Image>(returnHome);
 	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
+	
+	//家に帰るテキスト
 	Text commandText(this);
 	commandText.SetText("家に戻る");
 	commandText.SetPosition({ textPos.x+200,textPos.y-50 });
 	AddComponent<Text>(commandText);
 
+	//画面暗転用の画像
 	Image fadeImage(this);
 	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
 	fadeImage.SetColor({ 0,0,0,0 });
@@ -46,8 +50,10 @@ void P_CP_MenuUI::Initialize()
 	fadeImage.SetSize({ 2,2,0 });
 	AddComponent<Image>(fadeImage);
 
+	//集めた素材のUI
 	Instantiate<P_CP_CollectedItemUI>(this);
 
+	//クローズボタン
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
@@ -70,6 +76,7 @@ void P_CP_MenuUI::Update()
 			newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 		return;
 	}
+	//カーゾルが画像に当たってた場合
 	if (GetComponent<Image>(returnImageNum_).IsHitCursor())
 	{
 		GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
@@ -91,10 +98,12 @@ void P_CP_MenuUI::Update()
 
 void P_CP_MenuUI::SaveItemData()
 {
+	//保存に必要なデータ類用意
 	GameObject* itemUI = (GameObject*)FindChild("P_CP_CollectedItemUI");
 	PlayerData* pData = InterSceneData::GetData<PlayerData>("Data01");
 	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
 
+	//取得したアイテムデータを保存
 	for (auto itr = itemUI->GetChildList()->begin();itr!=itemUI->GetChildList()->end();itr++)
 	{
 		PlayerData::ResourceData_ data;

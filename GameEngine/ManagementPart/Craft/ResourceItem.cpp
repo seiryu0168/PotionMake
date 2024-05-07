@@ -20,6 +20,7 @@ ResourceItem::~ResourceItem()
 
 void ResourceItem::Initialize()
 {
+	//素材の数
 	Text countText(this);
 	countText.SetLayer(1);
 	countText.SetRect({ 0,0,50,50 });
@@ -39,6 +40,7 @@ void ResourceItem::Start()
 
 void ResourceItem::Update()
 {
+	//カーソルが画像に当たっていたら
 	if (GetComponent<Image>().IsHitCursor())
 	{
 		GetComponent<Image>().SetColor(1.0f);
@@ -71,6 +73,7 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 {
 	if (isLoadedImage_ == true)
 		return;
+	//ベースの画像
 	Image itemBaseImage(this);
 	itemBaseImage.SetLayer(1);
 	itemBaseImage.Load("Assets/Image/ItemBaseImage.png");
@@ -85,6 +88,7 @@ void ResourceItem::LoadItem(std::string imagename, int resourceCount)
 	}
 	else
 	{
+		//素材の画像
 		Image itemImage(this);
 		itemImage.SetLayer(1);
 		itemImage.Load("Assets/Image/" + imagename);

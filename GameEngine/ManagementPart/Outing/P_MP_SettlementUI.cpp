@@ -29,6 +29,8 @@ void P_MP_SettlementUI::Initialize()
 	int totalGain = 0;
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
 	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[pData.newsPaperNumber_];
+	
+	//ポーチションのデータから販売総額を計算
 	for (PlayerData::PotionData& potionData : pData.potionDataList_)
 	{
 		if(potionData.isSale_)
@@ -37,8 +39,10 @@ void P_MP_SettlementUI::Initialize()
 			totalGain += potionData.price_*CalcSellCount(pData.newsPaperNumber_,potionData.topStatus_);
 		}
 	}
+	//売り上げのデータを更新
 	pData.gainList_.erase(pData.gainList_.begin());
 	pData.gainList_.push_back(totalGain);
+	//各データのUIを作成
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"大盛況!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
 	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
@@ -46,6 +50,7 @@ void P_MP_SettlementUI::Initialize()
 	
 
 	Instantiate<CloseButton>(this);
+
 
 	Image fadeImage(this);
 	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
@@ -77,6 +82,7 @@ int P_MP_SettlementUI::CalcSellCount(int newsNum, int topStatus)
 {
 	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[newsNum];
 	int count = 5;
+	//ポーションのステータスが需要のあるステータスと一致していたら販売数1.5倍
 	for (int i = 0; i < 5;i++)
 	{
 		int bit = 1 << i;

@@ -18,18 +18,23 @@ P_CP_CollectedItemUI::~P_CP_CollectedItemUI()
 
 void P_CP_CollectedItemUI::Initialize()
 {
+	//ベース画像用意
 	CreateBase();
+	//プレイヤーの持ってる情報取得
 	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
 	XMFLOAT2 pos = { -0.32f,0.56f };
 	int stockCount = 0;
-	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	//リソースデータ取得
+	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	//持ってるデータの分だけ画像用意して、あとはただの背景画像のみ
 	for (auto& itr : player->GetItem())
 	{
+		//素材データの設定
 		PickupedItem* item = Instantiate<PickupedItem>(this);
 		item->SetItemData(itr.first,
-						  rData->resourceDataMap_[itr.first].resourceName_,
+						  rData.resourceDataMap_[itr.first].resourceName_,
 						  itr.second,
-						  rData->resourceDataMap_[itr.first].resourceImageName_,
+						  rData.resourceDataMap_[itr.first].resourceImageName_,
 						  { uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
 		itemNumList_.push_back(itr.first);
 		pos.x += 0.16f;
@@ -40,6 +45,8 @@ void P_CP_CollectedItemUI::Initialize()
 		}
 		stockCount++;
 	}
+	
+	//ただの背景画像
 	for (stockCount; stockCount < 25; stockCount++)
 	{
 		Image backImage(this);

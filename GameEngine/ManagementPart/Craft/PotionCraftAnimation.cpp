@@ -21,6 +21,7 @@ void PotionCraftAnimation::Update()
 
 void PotionCraftAnimation::InitAnimation(const std::vector<int> numList)
 {
+	//ポーション制作のアニメーション
 	PotionCraftAnimationPot* paPot = Instantiate<PotionCraftAnimationPot>(this);
 	paPot->InputResourceNumber(numList);
 }

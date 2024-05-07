@@ -49,6 +49,7 @@ void P_MP_CraftUI_ProcessUI::Update()
 void P_MP_CraftUI_ProcessUI::SetProcessImage(std::string imageName)
 {
 	XMFLOAT3 pos = GetComponent<Image>().GetPosition();
+	//加工方法の画像
 	Image processImage(this);
 	processImage.SetLayer(1);
 	processImage.Load("Assets/Image/"+imageName);
@@ -63,6 +64,8 @@ void P_MP_CraftUI_ProcessUI::SetProcessData(const std::string processName)
 {
 	name_ = processName;
 	XMFLOAT3 pos = GetComponent<Image>().GetPositionAtPixel();
+	
+	//加工方法の文字
 	Text processText(this);
 	processText.SetText(name_);
 	processText.SetColor({ 0,0,0,1 });
@@ -73,6 +76,7 @@ void P_MP_CraftUI_ProcessUI::SetProcessData(const std::string processName)
 
 void P_MP_CraftUI_ProcessUI::ActiveUI(bool isActive)
 {
+	//UIの表示/非表示
 	for (int i=0;i<GetComponentList<Image>().size();i++)
 	{
 		GetComponent<Image>(i).SetDraw(isActive);

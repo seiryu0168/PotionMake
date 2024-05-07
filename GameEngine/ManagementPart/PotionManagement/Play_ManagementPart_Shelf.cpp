@@ -15,15 +15,17 @@ void Play_ManagementPart_Shelf::Initialize()
 {
 	accessUINum_ = 1;
 	actionName_ = "ポーション管理";
+	//当たり判定の設定
 	HitBox tableHitBox({ 1,5,4 });
 	Collider coll({ 0,5,-4 });
 	coll.SetCollider(tableHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
-
-	Test_Model_ECSver tableModel(this);
-	tableModel.Load("Assets/Model/bookcaseClosedWide.fbx");
-	AddComponent<Test_Model_ECSver>(tableModel);
+	
+	//棚モデル
+	Test_Model_ECSver shelf(this);
+	shelf.Load("Assets/Model/bookcaseClosedWide.fbx");
+	AddComponent<Test_Model_ECSver>(shelf);
 
 
 	transform_->position_ = XMVectorSet(-19, 0, 0, 0);

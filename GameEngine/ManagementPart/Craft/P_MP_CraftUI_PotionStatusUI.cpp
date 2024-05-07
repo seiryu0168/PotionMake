@@ -34,6 +34,7 @@ void P_MP_CraftUI_PotionStatusUI::Initialize()
 	}
 
 	XMFLOAT3 pos = GetComponent<Image>().GetPositionAtPixel();
+	//コスト表示
 	Text costText(this);
 	costText.SetText("0/0");
 	costText.SetTextSize(70);

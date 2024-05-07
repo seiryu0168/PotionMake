@@ -14,6 +14,7 @@ P_CP_ResourceItem::~P_CP_ResourceItem()
 
 void P_CP_ResourceItem::Initialize()
 {
+	//“–‚½‚è”»’è‚Ìİ’è
 	HitBox box({ 1,1,1 });
 	Collider coll({ 0,0,0 });
 	coll.SetAttachObject(this);
@@ -33,7 +34,10 @@ void P_CP_ResourceItem::Update()
 
 void P_CP_ResourceItem::SetModel(const std::string& modelName)
 {
+	//Šù‚Éƒ[ƒh‚³‚ê‚Ä‚½‚çreturn
 	if (isLoaded_) return;
+	
+	//‘fŞ‚Ìƒ‚ƒfƒ‹
 	Test_Model_ECSver model(this);
 	model.Load("Assets/Model/" + modelName);
 	AddComponent<Test_Model_ECSver>(model);

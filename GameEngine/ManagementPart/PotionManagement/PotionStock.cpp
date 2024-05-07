@@ -38,6 +38,7 @@ PotionStock::~PotionStock()
 
 void PotionStock::Initialize()
 {
+	//背景画像
 	Image potionStockImage(this);
 	potionStockImage.Load("Assets/Image/ItemBaseImage.png");
 	potionStockImage.SetColor(0.8f);
@@ -45,6 +46,7 @@ void PotionStock::Initialize()
 	AddComponent<Image>(potionStockImage);
 
 	XMFLOAT3 imagePos = potionStockImage.GetPositionAtPixel();
+	//ステータス
 	Text statusText(this);
 	statusText.SetTextSize(25);
 	statusText.SetText("");

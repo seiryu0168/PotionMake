@@ -11,6 +11,7 @@ CollectionPart_Ground::~CollectionPart_Ground()
 
 void CollectionPart_Ground::Initialize()
 {
+	//’n–Ê‚Ìƒ‚ƒfƒ‹
 	Test_Model_ECSver groundModel(this);
 	groundModel.Load("Assets/Model/Ground01.fbx");
 	AddComponent<Test_Model_ECSver>(groundModel);

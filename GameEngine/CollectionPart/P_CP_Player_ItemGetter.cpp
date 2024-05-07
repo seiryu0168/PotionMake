@@ -15,12 +15,14 @@ P_CP_Player_ItemGetter::~P_CP_Player_ItemGetter()
 
 void P_CP_Player_ItemGetter::Initialize()
 {
+	//当たり判定の設定
 	HitSphere sphere(1);
 	Collider coll({ 0,0,0 });
 	coll.SetAttachObject(this);
 	coll.SetCollider(sphere);
 	AddComponent<Collider>(coll);
 
+	
 	Test_Model_ECSver model(this);
 	model.Load("Assets/Model/flower_red3.fbx");
 	AddComponent<Test_Model_ECSver>(model);
@@ -44,6 +46,7 @@ void P_CP_Player_ItemGetter::Release()
 
 void P_CP_Player_ItemGetter::OnCollisionStay(GameObject* pTarget)
 {
+	//当たったオブジェクトが素材なら
 	if (pTarget->GetTag() == "ResourceItem")
 	{
 		if (targetItemNum_ < 0)

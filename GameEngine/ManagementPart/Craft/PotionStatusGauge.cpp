@@ -11,6 +11,7 @@ PotionStatusGauge::~PotionStatusGauge()
 
 void PotionStatusGauge::Initialize()
 {
+	//ポーチションの各ステータスの画像
 	Image gaugeImage(this);
 	gaugeImage.Load("Assets/Image/GaugeImage01.png");
 	gaugeImage.SetSize({ 0.3f,0.3f,0 });

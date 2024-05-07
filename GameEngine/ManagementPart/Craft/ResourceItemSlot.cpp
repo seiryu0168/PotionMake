@@ -14,11 +14,13 @@ ResourceItemSlot::~ResourceItemSlot()
 
 void ResourceItemSlot::Initialize()
 {
+	//ëfçﬁï\é¶ÇÃògâÊëú
 	Image slotImage(this);
 	slotImage.Load("Assets/Image/ItemBaseImage.png");
 	slotImage.SetColor(0.7f);
 	AddComponent<Image>(slotImage);
 
+	//ëfçﬁÇÃêî
 	Text countText(this);
 	countText.SetRect({ 0,0,50,50 });
 	countText.SetTextSize(32);

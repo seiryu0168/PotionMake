@@ -24,6 +24,7 @@ void P_MP_PotionManagerUI_SellStockUI::Initialize()
 	AddComponent<Text>(uiTitleText);
 
 	XMFLOAT2 diff = { 0,0 };
+	//ポーションの位置設定
 	for (int i = 0; i < 5; i++)
 	{
 		GameObject* potion = Instantiate<PotionSlot>(this);

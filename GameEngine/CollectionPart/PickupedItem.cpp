@@ -24,8 +24,10 @@ void PickupedItem::Start()
 
 void PickupedItem::Update()
 {
+	
 	if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor()&&canSelect_)
 	{
+		//‘fŞ‚ÌÚ×
 		Instantiate<PickupedItemDetailUI>(this)->SetItemData(itemNum_);
 		((P_CP_CollectedItemUI*)pParent_)->SetSelectFlag(false);
 	}
@@ -33,11 +35,13 @@ void PickupedItem::Update()
 
 void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int itemCount, const std::string& itemImageName, XMFLOAT3 pos)
 {
+	//UI‚Ìƒx[ƒX‰æ‘œ
 	Image backImage(this);
 	backImage.Load("Assets/Image/ItemBaseImage.png");
 	backImage.SetPosition(pos);
 	AddComponent<Image>(backImage);
 
+	//‘fŞ‚Ì‰æ‘œ
 	Image itemImage(this);
 	itemImage.Load("Assets/Image/" + itemImageName);
 	itemImage.SetPosition(pos);
@@ -45,6 +49,7 @@ void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int ite
 	AddComponent<Image>(itemImage);
 
 	XMFLOAT3 textPos = backImage.GetPositionAtPixel();
+	//‘fŞ‚Ì”
 	Text countText(this);
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	countText.SetPosition({textPos.x,textPos.y});

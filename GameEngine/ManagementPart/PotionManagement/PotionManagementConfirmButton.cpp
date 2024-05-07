@@ -4,7 +4,8 @@
 #include "../../Engine/DirectX_11/Input.h"
 #include "../../Engine/ResourceManager/Audio.h"
 PotionManagementConfirmButton::PotionManagementConfirmButton(Object* parent)
-	:GameObject(parent,"PotionManagementConfirmButton")
+	:GameObject(parent,"PotionManagementConfirmButton"),
+	hAudio_Confirm_(-1)
 {
 }
 

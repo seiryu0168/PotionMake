@@ -41,7 +41,10 @@ void PickupedItemDetailUI::Update()
 
 void PickupedItemDetailUI::SetItemData(int itemNum)
 {
+	//リソースデータ取得
 	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	
+	//素材の画像
 	Image itemImage(this);
 	itemImage.Load("Assets/Image/"+rData->resourceDataMap_[itemNum].resourceImageName_);
 	itemImage.SetSize({ 0.5f,0.5f,0 });
@@ -49,6 +52,8 @@ void PickupedItemDetailUI::SetItemData(int itemNum)
 	AddComponent<Image>(itemImage);
 
 	XMFLOAT3 textPos = itemImage.GetPositionAtPixel();
+	
+	//素材名
 	Text itemNameText(this);
 	itemNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	itemNameText.SetTextSize(50);
@@ -56,6 +61,8 @@ void PickupedItemDetailUI::SetItemData(int itemNum)
 	itemNameText.SetText(rData->resourceDataMap_[itemNum].resourceName_);
 	itemNameText.SetPosition({ textPos.x - 150,textPos.y+105 });
 	AddComponent<Text>(itemNameText);
+	
+	//素材の説明
 	Text itemDetailText(this);
 	itemDetailText.SetText(rData->resourceDataMap_[itemNum].explanation_);
 	itemDetailText.SetRect({ 0,0,300,240 });
