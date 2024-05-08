@@ -4,7 +4,7 @@
 #include "../../Engine/ResourceManager/Audio.h"
 P_MP_SettlementUI_TotalGain::P_MP_SettlementUI_TotalGain(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI_TotalGain"),
-	uiPos_({ 0.4f,0.5f,0 }),
+	uiPos_({ 0.2f,0.5f,0 }),
 	gainDiff_(0.0f),
 	showTime_(1.0f),
 	currentGain_(0),

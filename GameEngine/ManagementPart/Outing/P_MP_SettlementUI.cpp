@@ -3,7 +3,10 @@
 #include "P_MP_SettlementUI_TotalGain.h"
 #include "SettlementUI_EarningTransition.h"
 #include "../../InterSceneData.h"
+#include "../../Engine/DirectX_11/Input.h"
+#include "../../Engine/ResourceManager/Audio.h"
 #include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/Systems/TextSystem.h"
 #include "../../InterSceneData.h"
 #include "../../PlayerData.h"
 #include "../../ResourceStatusData.h"
@@ -11,7 +14,8 @@
 P_MP_SettlementUI::P_MP_SettlementUI(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI"),
 	fadeImageNum_(-1),
-	time_(0)
+	time_(0),
+	isClose_(false)
 {
 }
 
@@ -49,8 +53,20 @@ void P_MP_SettlementUI::Initialize()
 	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % 4;
 	
 
-	Instantiate<CloseButton>(this);
+	//Instantiate<CloseButton>(this);
 
+	Image okImage(this);
+	okImage.Load("Assets/Image/ButtonImage01.png");
+	okImage.SetPosition({ 0.8,-0.6,0 });
+	okImage.SetLayer(2);
+	okImageNum_ = AddComponent<Image>(okImage);
+
+	XMFLOAT3 pos = okImage.GetPositionAtPixel();
+	Text okText(this);
+	okText.SetText("OK");
+	okText.SetRect({ 0,0,150,80 });
+	okText.SetPosition({ pos.x,pos.y - 20 });
+	AddComponent<Text>(okText);
 
 	Image fadeImage(this);
 	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
@@ -58,6 +74,8 @@ void P_MP_SettlementUI::Initialize()
 	fadeImage.SetLayer(2);
 	fadeImage.SetColor(0);
 	fadeImageNum_ = AddComponent<Image>(fadeImage);
+
+	hAdio_OK_ = Audio::Load("Assets/Audio/Confirm29.wav");
 }
 
 void P_MP_SettlementUI::Start()
@@ -66,10 +84,29 @@ void P_MP_SettlementUI::Start()
 
 void P_MP_SettlementUI::Update()
 {
-	if (time_ <= 0.5f)
+
+	if(isClose_)
+	{
+		if (time_ <= 0.5f)
+		{
+			time_ += 0.016f;
+			GetComponent<Image>(fadeImageNum_).SetAlpha( time_ / 0.5f);
+			if (time_ >= 0.5f)
+				KillMe();
+		}
+	}
+	if (time_ <= 0.5f&& !isClose_)
 	{
 		time_ += 0.016f;
 		GetComponent<Image>(fadeImageNum_).SetAlpha((0.5f - time_) / 0.5f);
+	}
+
+	if (GetComponent<Image>(okImageNum_).IsHitCursor() && Input::IsMouseButtonUp(0))
+	{
+		isClose_ = true;
+		time_ = 0;
+		Audio::Play(hAdio_OK_);
+		//KillMe();
 	}
 }
 

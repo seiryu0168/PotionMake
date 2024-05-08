@@ -4,7 +4,7 @@
 
 SettlementUI_EarningTransition::SettlementUI_EarningTransition(Object* parent)
 	:GameObject(parent,"SettlementUI_EarningTransition"),
-	uiPos_({ 0.4f,-0.4f,0 }),
+	uiPos_({ 0.2f,-0.4f,0 }),
 	firstGaugeNum_(-1),
 	gaugeSize_(2.0f)
 {
@@ -57,7 +57,7 @@ void SettlementUI_EarningTransition::CreateBase()
 	Image uiBaseImage(this);
 	uiBaseImage.Load("Assets/Image/UIBaseImage4.png");
 	uiBaseImage.SetPosition({ uiPos_.x,uiPos_.y,0 });
-	uiBaseImage.SetSize({ 15,7,0 });
+	uiBaseImage.SetSize({ 12,7,0 });
 	windowSize = uiBaseImage.GetSizeAtPixel();
 	imageRatio = uiBaseImage.GetSize();
 	AddComponent<Image>(uiBaseImage);
