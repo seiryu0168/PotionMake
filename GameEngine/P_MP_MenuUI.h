@@ -1,7 +1,8 @@
 #pragma once
-#include"Engine/GameObject/GameObject.h"
-class P_MP_MenuUI : public GameObject
+#include"UIBase.h"
+class P_MP_MenuUI : public UIBase
 {
+	//bool isOpenUI_;
 	int returnImageNum_;
 	int saveImageNum_;
 	int hAudio_Confirm_;
@@ -13,6 +14,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void DataSave();
+	//void SetOpenUIFlag(bool flag) { isOpenUI_ = flag; }
 	void Release() override;
 };
 

@@ -6,9 +6,12 @@
 #include "../InterSceneData.h"
 #include "../ResourceStatusData.h"
 #include "../CloseButton.h"
+#include "../UIBase.h"
 P_CP_CollectedItemUI::P_CP_CollectedItemUI(Object* parent)
 	:GameObject(parent,"P_CP_CollectedItemUI"),
-	uiPos_({0.5,0,0})
+	uiPos_({0.5,0,0}),
+	diffPos_({ -0.32f,0.56f }),
+	stockCount_(0)
 {
 }
 
@@ -21,45 +24,45 @@ void P_CP_CollectedItemUI::Initialize()
 	//ベース画像用意
 	CreateBase();
 	//プレイヤーの持ってる情報取得
-	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
-	XMFLOAT2 pos = { -0.32f,0.56f };
-	int stockCount = 0;
-	//リソースデータ取得
-	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	//持ってるデータの分だけ画像用意して、あとはただの背景画像のみ
-	for (auto& itr : player->GetItem())
-	{
-		//素材データの設定
-		PickupedItem* item = Instantiate<PickupedItem>(this);
-		item->SetItemData(itr.first,
-						  rData.resourceDataMap_[itr.first].resourceName_,
-						  itr.second,
-						  rData.resourceDataMap_[itr.first].resourceImageName_,
-						  { uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
-		itemNumList_.push_back(itr.first);
-		pos.x += 0.16f;
-		if ((stockCount+1) % 5 == 0)
-		{
-			pos.x = -0.32f;
-			pos.y -= 0.28f;
-		}
-		stockCount++;
-	}
-	
-	//ただの背景画像
-	for (stockCount; stockCount < 25; stockCount++)
-	{
-		Image backImage(this);
-		backImage.Load("Assets/Image/ItemBaseImage.png");
-		backImage.SetPosition({ uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
-		AddComponent<Image>(backImage);
-		pos.x += 0.16f;
-		if ((stockCount + 1) % 5 == 0)
-		{
-			pos.x = -0.32f;
-			pos.y -= 0.28f;
-		}
-	}
+	//Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
+	//XMFLOAT2 pos = { -0.32f,0.56f };
+	//int stockCount = 0;
+	////リソースデータ取得
+	//ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	////持ってるデータの分だけ画像用意して、あとはただの背景画像のみ
+	//for (auto& itr : player->GetItem())
+	//{
+	//	//素材データの設定
+	//	PickupedItem* item = Instantiate<PickupedItem>(this);
+	//	item->SetItemData(itr.first,
+	//					  rData.resourceDataMap_[itr.first].resourceName_,
+	//					  itr.second,
+	//					  rData.resourceDataMap_[itr.first].resourceImageName_,
+	//					  { uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
+	//	itemNumList_.push_back(itr.first);
+	//	pos.x += 0.16f;
+	//	if ((stockCount+1) % 5 == 0)
+	//	{
+	//		pos.x = -0.32f;
+	//		pos.y -= 0.28f;
+	//	}
+	//	stockCount++;
+	//}
+	//
+	////ただの背景画像
+	//for (stockCount; stockCount < 25; stockCount++)
+	//{
+	//	Image backImage(this);
+	//	backImage.Load("Assets/Image/ItemBaseImage.png");
+	//	backImage.SetPosition({ uiPos_.x + pos.x,uiPos_.y + pos.y,0 });
+	//	AddComponent<Image>(backImage);
+	//	pos.x += 0.16f;
+	//	if ((stockCount + 1) % 5 == 0)
+	//	{
+	//		pos.x = -0.32f;
+	//		pos.y -= 0.28f;
+	//	}
+	//}
 }
 
 void P_CP_CollectedItemUI::Start()
@@ -134,6 +137,43 @@ void P_CP_CollectedItemUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
+void P_CP_CollectedItemUI::SetItemData(int itemNum, const std::string& itemName, int itemCount, const std::string& itemImageName)
+{
+	PickupedItem* item = Instantiate<PickupedItem>(this);
+	item->SetItemData(itemNum,
+		itemName,
+		itemCount,
+		itemImageName,
+		{ uiPos_.x + diffPos_.x,uiPos_.y + diffPos_.y,0 });
+	itemNumList_.push_back(itemNum);
+	diffPos_.x += 0.16f;
+	if ((stockCount_ + 1) % 5 == 0)
+	{
+		diffPos_.x = -0.32f;
+		diffPos_.y -= 0.28f;
+	}
+	stockCount_++;
+}
+
+void P_CP_CollectedItemUI::SetDummy()
+{
+	for (stockCount_; stockCount_ < 25; stockCount_++)
+	{
+		Image backImage(this);
+		backImage.Load("Assets/Image/ItemBaseImage.png");
+		backImage.SetPosition({ uiPos_.x + diffPos_.x,uiPos_.y + diffPos_.y,0 });
+		AddComponent<Image>(backImage);
+		diffPos_.x += 0.16f;
+		if ((stockCount_ + 1) % 5 == 0)
+		{
+			diffPos_.x = -0.32f;
+			diffPos_.y -= 0.28f;
+		}
+	}
+	diffPos_ = { -0.32f,0.56f };
+	stockCount_ = 0;
+}
+
 void P_CP_CollectedItemUI::SetSelectFlag(bool flag)
 {
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
@@ -144,4 +184,5 @@ void P_CP_CollectedItemUI::SetSelectFlag(bool flag)
 
 void P_CP_CollectedItemUI::Release()
 {
+	((UIBase*)pParent_)->SetOpenUIFlag(false);
 }

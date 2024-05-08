@@ -1,7 +1,7 @@
 #pragma once
-#include "../Engine/GameObject/GameObject.h"
+#include"../UIBase.h"
 
-class P_CP_MenuUI : public GameObject
+class P_CP_MenuUI : public UIBase
 {
 	bool isReturnHome_;
 	int returnImageNum_;

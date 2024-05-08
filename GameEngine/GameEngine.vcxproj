@@ -277,11 +277,13 @@
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
+    <ClCompile Include="Menu_Base.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Player_CollectionPart.cpp" />
     <ClCompile Include="Player_ManagementPart.cpp" />
     <ClCompile Include="Play_UIManager.cpp" />
+    <ClCompile Include="P_MP_ItemListUI.cpp" />
     <ClCompile Include="P_MP_MenuUI.cpp" />
     <ClCompile Include="P_MP_NewsPaper.cpp" />
     <ClCompile Include="ResourceStatusData.cpp" />
@@ -417,11 +419,13 @@
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
+    <ClInclude Include="Menu_Base.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Player_CollectionPart.h" />
     <ClInclude Include="Player_ManagementPart.h" />
     <ClInclude Include="Play_UIManager.h" />
+    <ClInclude Include="P_MP_ItemListUI.h" />
     <ClInclude Include="P_MP_MenuUI.h" />
     <ClInclude Include="P_MP_NewsPaper.h" />
     <ClInclude Include="ResourceStatusData.h" />

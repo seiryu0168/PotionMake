@@ -9,10 +9,12 @@
 #include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
 #include"SaveDataManager.h"
+#include"CollectionPart/P_CP_CollectedItemUI.h"
+#include"ResourceStatusData.h"
 #include"Engine/ResourceManager/Audio.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
-	:GameObject(parent,"P_MP_MenuUI")
+	:UIBase(parent,"P_MP_MenuUI")
 {
 }
 
@@ -22,28 +24,30 @@ P_MP_MenuUI::~P_MP_MenuUI()
 
 void P_MP_MenuUI::Initialize()
 {
-	Image returnHome(this);
-	returnHome.Load("Assets/Image/SelectImage3.png");
-	returnHome.SetPosition({ -1.2f,0.5f,0 });
-	returnHome.SetRotation({ 0,0,180 });
-	//returnHome.SetSize({ 5,2,0 });
-	returnImageNum_ = AddComponent<Image>(returnHome);
-	XMFLOAT3 textPos = returnHome.GetPositionAtPixel();
+	Image save(this);
+	save.Load("Assets/Image/SelectImage3.png");
+	save.SetPosition({ -1.2f,0.5f,0 });
+	save.SetRotation({ 0,0,180 });
+	//save.SetSize({ 5,2,0 });
+	saveImageNum_ = AddComponent<Image>(save);
+	XMFLOAT3 textPos = save.GetPositionAtPixel();
 	Text commandText(this);
 	commandText.SetText("セーブ");
 	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	AddComponent<Text>(commandText);
 
-	//Image saveImage(this);
-	//saveImage.Load("Assets/Image/SelectImage3.png");
-	//saveImage.SetPosition({ -1.2f,0.3f,0 });
-	//saveImage.SetRotation({ 0,0,180 });
-	//saveImageNum_ = AddComponent<Image>(saveImage);
-	//textPos = saveImage.GetPositionAtPixel();
-	//Text saveText(this);
-	//saveText.SetText("セーブ");
-	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(saveText);
+	Image itemImage(this);
+	itemImage.Load("Assets/Image/SelectImage3.png");
+	itemImage.SetPosition({ -1.2f,0.2f,0 });
+	itemImage.SetRotation({ 0,0,180 });
+	returnImageNum_ = AddComponent<Image>(itemImage);
+	
+	textPos = itemImage.GetPositionAtPixel();
+	
+	Text saveText(this);
+	saveText.SetText("素材");
+	saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	AddComponent<Text>(saveText);
 
 	Instantiate<P_MP_NewsPaper>(this);
 	
@@ -60,9 +64,9 @@ void P_MP_MenuUI::Start()
 
 void P_MP_MenuUI::Update()
 {
-	if (GetComponent<Image>(returnImageNum_).IsHitCursor())
+	if (GetComponent<Image>(saveImageNum_).IsHitCursor())
 	{
-		GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
+		GetComponent<Image>(saveImageNum_).SetPosition({ -1.1,0.5,0 });
 
 		if (Input::IsMouseButtonUp(0))
 		{
@@ -72,7 +76,34 @@ void P_MP_MenuUI::Update()
 
 	}
 	else
-		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
+		GetComponent<Image>(saveImageNum_).SetPosition({ -1.2f,0.5f,0 });
+
+	if (GetComponent<Image>(returnImageNum_).IsHitCursor())
+	{
+		GetComponent<Image>(returnImageNum_).SetPosition({ -1.1f,0.2f,0 });
+
+		if (Input::IsMouseButtonUp(0) && !GetOpenUIFlag())
+		{
+			SetOpenUIFlag(true);
+			Audio::Play(hAudio_Confirm_);
+
+			P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
+			ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
+			//PlayerData::ResourceData_ prData = InterSceneData::GetData<PlayerData>("Data01")->itemDataList_;
+			for (auto& itr : InterSceneData::GetData<PlayerData>("Data01")->itemDataList_)
+			{
+				collectedUI.SetItemData(itr.itemNum_,
+					rData.resourceDataMap_[itr.itemNum_].resourceName_,
+					itr.itemCount_,
+					rData.resourceDataMap_[itr.itemNum_].resourceImageName_);
+			}
+
+			collectedUI.SetDummy();
+		}
+
+	}
+	else
+		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.2f,0 });
 }
 
 void P_MP_MenuUI::DataSave()

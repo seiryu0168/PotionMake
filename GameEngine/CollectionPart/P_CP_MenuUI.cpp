@@ -1,6 +1,7 @@
 #include "P_CP_MenuUI.h"
 #include "P_CP_CollectedItemUI.h"
 #include "PickupedItem.h"
+#include "../Player_CollectionPart.h"
 #include "Play_CollectionPart_BaseUI.h"
 #include "../Engine/Systems/ImageSystem.h"
 #include "../Engine/Systems/TextSystem.h"
@@ -13,7 +14,7 @@
 #include "../Engine/ResourceManager/Audio.h"
 
 P_CP_MenuUI::P_CP_MenuUI(Object* parent)
-	:GameObject(parent,"P_CP_MenuUI"),
+	:UIBase(parent,"P_CP_MenuUI"),
 	isReturnHome_(false),
 	returnImageNum_(-1),
 	hAudio_ReturnHome_(-1),
@@ -51,8 +52,19 @@ void P_CP_MenuUI::Initialize()
 	AddComponent<Image>(fadeImage);
 
 	//集めた素材のUI
-	Instantiate<P_CP_CollectedItemUI>(this);
+	P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
+	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
+	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
 
+	for (auto& itr : player->GetItem())
+	{
+		collectedUI.SetItemData(itr.first,
+			rData.resourceDataMap_[itr.first].resourceName_,
+			itr.second,
+			rData.resourceDataMap_[itr.first].resourceImageName_);
+	}
+
+	collectedUI.SetDummy();
 	//クローズボタン
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
