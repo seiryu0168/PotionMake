@@ -2,8 +2,10 @@
 #include "P_MP_CraftUI_ResourceStockUI.h"
 #include "../../Engine/DirectX_11/Input.h"
 #include "../../Engine/Systems/ImageSystem.h"
+#include "../../Engine/ResourceManager/Audio.h"
 ResourceMenuChangeButton::ResourceMenuChangeButton(Object* parent)
-	:GameObject(parent,"ResourceMenuChangeButton")
+	:GameObject(parent,"ResourceMenuChangeButton"),
+	hAudio_Change_(-1)
 {
 }
 
@@ -16,29 +18,37 @@ void ResourceMenuChangeButton::Initialize()
 	{
 
 		Image buttonImage(this);
-		buttonImage.Load("Assets/Image/SelectImage4.png");
+		buttonImage.Load("Assets/Image/Change_Resource.png");
 		buttonImage.SetSize({ 0.2f,0.2f,0 });
 		AddComponent<Image>(buttonImage);
 	}
 	{
 
 		Image buttonImage(this);
-		buttonImage.Load("Assets/Image/SelectImage4.png");
+		buttonImage.Load("Assets/Image/Change_Process.png");
 		buttonImage.SetSize({ 0.2f,0.2f,0 });
 		AddComponent<Image>(buttonImage);
 	}
+
+	hAudio_Change_ = Audio::Load("Assets/Audio/Confirm34.wav",false,1.0f,6);
 }
 
 void ResourceMenuChangeButton::Update()
 {
 	//画像をクリックしたら
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>(0).IsHitCursor())
+	if (Input::IsMouseButtonDown(0))
 	{
-		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
-	}
-	if (Input::IsMouseButtonDown(0) && GetComponent<Image>(1).IsHitCursor())
-	{
-		((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
+		//カーソルが画像に当たっていたら
+		if (GetComponent<Image>(0).IsHitCursor())
+		{
+			Audio::Play(hAudio_Change_);
+			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
+		}
+		else if (GetComponent<Image>(1).IsHitCursor())
+		{
+			Audio::Play(hAudio_Change_);
+			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
+		}
 	}
 }
 

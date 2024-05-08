@@ -4,6 +4,7 @@
 #include "ResourceMenuChangeButton.h"
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../Engine/Systems/TextSystem.h"
+#include "../../Engine/ResourceManager/Audio.h"
 #include "../../InterSceneData.h"
 #include "../../PlayerData.h"
 #include "../../ResourceStatusData.h"
@@ -93,10 +94,10 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 	}
 	//UI変更用ボタン
 	GameObject* changeButton = Instantiate<ResourceMenuChangeButton>(this);
-	changeButton->GetComponent<Image>(0).SetPosition({ uiPos_.x + 0.4f,uiPos_.y+0.5f,0 });
-	changeButton->GetComponent<Image>(1).SetPosition({ uiPos_.x + 0.4f,uiPos_.y,0 });
+	changeButton->GetComponent<Image>(0).SetPosition({ uiPos_.x + 0.423f,uiPos_.y+0.5f,0 });
+	changeButton->GetComponent<Image>(1).SetPosition({ uiPos_.x + 0.423f,uiPos_.y,0 });
+
 	ModeChange(ResourceMenuMode::ResourceSelect);
-	
 }
 
 void P_MP_CraftUI_ResourceStockUI::Start()

@@ -6,6 +6,7 @@
 /// </summary>
 class ResourceMenuChangeButton : public GameObject
 {
+	int hAudio_Change_;
 public:
 	ResourceMenuChangeButton(Object* parent);
 	~ResourceMenuChangeButton();

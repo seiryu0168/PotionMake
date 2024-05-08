@@ -18,7 +18,8 @@ namespace
 Play_CollectionPart_BaseUI::Play_CollectionPart_BaseUI(Object* parent)
 	:GameObject(parent, "Play_CollectionPart_BaseUI"),
 	isUIOpened_(false),
-	player_(nullptr)
+	player_(nullptr),
+	hAudio_UIOpen_(-1)
 {
 }
 
