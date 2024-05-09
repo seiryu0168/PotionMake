@@ -16,12 +16,12 @@ P_MP_PotionManagerUI_SellStockUI::~P_MP_PotionManagerUI_SellStockUI()
 void P_MP_PotionManagerUI_SellStockUI::Initialize()
 {
 	CreateBase();
-
-	Text uiTitleText(this);
-	uiTitleText.SetText("売るポーション");
-	uiTitleText.SetTextSize(55.0f);
-	uiTitleText.SetPosition({ 30,210 });	
-	AddComponent<Text>(uiTitleText);
+	CreateUITitle({ uiPos_.x-0.1f,uiPos_.y+0.315f }, { 10,20 }, "売るポーション");
+	//Text uiTitleText(this);
+	//uiTitleText.SetText("売るポーション");
+	//uiTitleText.SetTextSize(55.0f);
+	//uiTitleText.SetPosition({ 30,210 });	
+	//AddComponent<Text>(uiTitleText);
 
 	XMFLOAT2 diff = { 0,0 };
 	//ポーションの位置設定
@@ -105,6 +105,45 @@ void P_MP_PotionManagerUI_SellStockUI::CreateBase()
 	uiCornerImage4.SetSize({ 0.3f,0.3f,0 });
 	uiCornerImage4.SetRotation({ 0,0,90 });
 	AddComponent<Image>(uiCornerImage4);
+}
+
+void P_MP_PotionManagerUI_SellStockUI::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
+{
+	Text craftUIText(this);
+	craftUIText.SetText(str);
+	craftUIText.SetTextSize(55.0f);
+	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;
+	TEXT_RECT rect = { 0,0,rectSize + diff.x,(float)craftUIText.GetTextSize() + diff.y };
+	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	craftUIText.SetRect(rect);
+	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	craftUIText.SetRatio(ratio.x, ratio.y);
+	AddComponent<Text>(craftUIText);
+
+	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	Image base(this);
+	base.Load("Assets/Image/UIBaseImage2.png");
+	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
+	base.SetPosition({ imagePos.x,imagePos.y,0 });
+	XMFLOAT3 size = base.GetSizeAtPixel();
+	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
+
+	float distance = rect.right / Direct3D::GetScreenWidth();
+	Image start(this);
+	start.Load("Assets/Image/UILong03_Start.png");
+	start.SetSize({ size.y / 256,size.y / 256,0.0f });
+	//start.SetRotation({ 0,0,180 });
+	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
+	AddComponent<Image>(start);
+
+	Image end(this);
+	end.Load("Assets/Image/UILong03_End.png");
+	end.SetSize({ size.y / 256,size.y / 256,0.0f });
+	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
+	AddComponent<Image>(end);
+
+	AddComponent<Image>(base);
 }
 
 void P_MP_PotionManagerUI_SellStockUI::AddSellPotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor)

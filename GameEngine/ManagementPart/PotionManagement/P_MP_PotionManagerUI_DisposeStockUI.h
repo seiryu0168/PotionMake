@@ -15,6 +15,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void CreateBase();
+	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void AddDisposePotion(int potionNum, const std::string& name, const XMFLOAT3& potionColor);
 	void SubDisposePotion(int potionNum);
 	void Release() override;
