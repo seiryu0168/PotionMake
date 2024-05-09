@@ -134,6 +134,7 @@ public:
 	/// </summary>
 	/// <returns>ÉTÉCÉY</returns>
 	int GetTextSize() const;
+	XMFLOAT2 GetRatio();
 	GameObject* GetAttachedObject() const { return attachObject_; }
 	void Release();
 

@@ -34,14 +34,14 @@ void P_MP_CraftUI_ProcessUI::Update()
 	{
 		if (!((P_MP_CraftUI_CraftPot*)craftPotObject_)->AddProcessData(processNum_))
 			return;
-		GetComponent<Image>().SetColor({ 1,1,1 });	
+		GetComponent<Image>().SetColor(1);	
 		isClicked_ = !isClicked_;
 	}
 	else if (Input::IsMouseButtonDown(1) && GetComponent<Image>().IsHitCursor() && isClicked_)
 	{
 		if (!((P_MP_CraftUI_CraftPot*)craftPotObject_)->SubProcessData(processNum_))
 			return;
-		GetComponent<Image>().SetColor({ 0.7f,0.7f,0.7f });
+		GetComponent<Image>().SetColor(0.7f);
 		isClicked_ = !isClicked_;
 	}
 }

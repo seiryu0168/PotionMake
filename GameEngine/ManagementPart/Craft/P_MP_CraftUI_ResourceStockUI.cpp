@@ -25,11 +25,11 @@ void P_MP_CraftUI_ResourceStockUI::Initialize()
 
 	CreateBase();
 	//UIÇÃÉJÉeÉSÉäÇï\é¶
-	Text uiTitleText(this);
-	uiTitleText.SetText("ëfçﬁ");
-	uiTitleText.SetPosition({ 1200,30 });
-	AddComponent<Text>(uiTitleText);
-
+	//Text uiTitleText(this);
+	//uiTitleText.SetText("ëfçﬁ");
+	//uiTitleText.SetPosition({ 1200,30 });
+	//AddComponent<Text>(uiTitleText);
+	CreateUITitle({ 0.6f,0.79f }, {10,20},"ëfçﬁ");
 	//ëfçﬁÇÃâÊëúÇÉZÅ[ÉuÉfÅ[É^ÇéQè∆ÇµÇƒï\é¶
 	XMFLOAT2 itemPos = { -0.28f,0.62f };
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
@@ -181,6 +181,66 @@ void P_MP_CraftUI_ResourceStockUI::CreateBase()
 	AddComponent<Image>(uiCornerImage4);
 }
 
+void P_MP_CraftUI_ResourceStockUI::CreateUITitle(XMFLOAT2 pos,XMFLOAT2 diff, const std::string& str)
+{
+	Text craftUIText(this);
+	craftUIText.SetText(str);
+	craftUIText.SetTextSize(50);
+	float rectSize = craftUIText.GetTextSize() * str.size()*0.5f;
+	TEXT_RECT rect = { 0,0,rectSize+diff.x,(float)craftUIText.GetTextSize()+diff.y };
+	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	craftUIText.SetRect(rect);
+	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	craftUIText.SetRatio(ratio.x,ratio.y);
+	AddComponent<Text>(craftUIText);
+
+	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	Image base(this);
+	base.Load("Assets/Image/UIBaseImage2.png");
+	base.SetSize({ 0.015625f* rect.right,0.015625f*rect.bottom,0 });
+	base.SetPosition({ imagePos.x,imagePos.y,0});
+	XMFLOAT3 size = base.GetSizeAtPixel();
+	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
+	
+	float distance = rect.right / Direct3D::GetScreenWidth();
+	Image start(this);
+	start.Load("Assets/Image/UILong03_Start.png");
+	start.SetSize({ size.y/256,size.y/256,0.0f });
+	//start.SetRotation({ 0,0,180 });
+	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
+	uiImageNumArray[0] = AddComponent<Image>(start);
+	
+	Image end(this);
+	end.Load("Assets/Image/UILong03_End.png");
+	end.SetSize({ size.y / 256,size.y / 256,0.0f });
+	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
+	uiImageNumArray[2] = AddComponent<Image>(end);
+
+	uiImageNumArray[1] = AddComponent<Image>(base);
+}
+
+void P_MP_CraftUI_ResourceStockUI::ChangeTitle(XMFLOAT2 pos,XMFLOAT2 diff, const std::string& str)
+{
+	Text& txt = GetComponent<Text>();
+	txt.SetText(str);
+	float rectSize = txt.GetTextSize() * str.size()*0.5f;
+	TEXT_RECT rect = txt.GetRect();
+	rect.right = rectSize+diff.x;
+	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	txt.SetRect(rect);
+	txt.SetRatio(ratio.x, ratio.y);
+	XMFLOAT2 imagePos = { pos.x,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	float distance = rect.right / Direct3D::GetScreenWidth();
+	GetComponent<Image>(uiImageNumArray[0]).SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
+	GetComponent<Image>(uiImageNumArray[1]).SetPosition({ imagePos.x,imagePos.y,0 });
+	GetComponent<Image>(uiImageNumArray[1]).SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });;
+	GetComponent<Image>(uiImageNumArray[2]).SetPosition({  imagePos.x + distance + 0.03f,imagePos.y,0 });
+
+
+}
+
 void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 {
 	//ÉÇÅ[ÉhÇ…ÇÊÇ¡Çƒï\é¶Ç∑ÇÈÇ‡ÇÃÇêÿÇËë÷Ç¶ÇÈ
@@ -193,7 +253,7 @@ void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 
 		for(int i = 0; i < processObjects_.size(); i++)
 			((P_MP_CraftUI_ProcessUI*)processObjects_[i])->ActiveUI(false);
-		GetComponent<Text>().SetText("ëfçﬁ");
+		ChangeTitle({ 0.5f,0.791f }, { 10,10 }, "ëfçﬁ");
 		break;
 	case ResourceMenuMode::ProcessSelect:
 		for (int i = 0; i < processObjects_.size(); i++)
@@ -201,7 +261,7 @@ void P_MP_CraftUI_ResourceStockUI::ModeChange(ResourceMenuMode mode)
 
 		for (int i = 0; i < resourceObjects_.size(); i++)
 			((ResourceItem*)resourceObjects_[i])->ActiveUI(false);
-		GetComponent<Text>().SetText("â¡çHï˚ñ@");
+		ChangeTitle({ 0.5f,0.791f }, { 10,10 }, "â¡çHï˚ñ@");
 		break;
 	default:
 		break;

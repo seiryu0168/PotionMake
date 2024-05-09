@@ -106,11 +106,6 @@ Text::~Text()
 	//Release();
 }
 
-int Text::GetTextSize() const
-{
-	return (int)pLayout_->GetFontSize();
-}
-
 void Text::Release()
 {
 	SAFE_RELEASE(pTextFormat_);
@@ -407,6 +402,18 @@ HRESULT Text::SetTextSize(float size)
 	pLayout_->SetTextAlignment(textAlignment);
 	pLayout_->SetParagraphAlignment(paraAlignment);
 	return hr;
+}
+int Text::GetTextSize() const
+{
+	return (int)pLayout_->GetFontSize();
+}
+
+XMFLOAT2 Text::GetRatio()
+{
+	XMFLOAT2 ratio(0);
+	ratio.x = (transform2D.x - defaultPos_.x) / CameraManager::GetCamera(renderTargetNum_).GetViewPort().Width;
+	ratio.y = (transform2D.y - defaultPos_.y) / CameraManager::GetCamera(renderTargetNum_).GetViewPort().Height;
+	return ratio;
 }
 
 HRESULT Text::SetFontCollection(IDWriteFontCollection* collection, UINT32 startPos, UINT32 length)

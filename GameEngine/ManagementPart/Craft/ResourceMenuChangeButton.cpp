@@ -27,6 +27,7 @@ void ResourceMenuChangeButton::Initialize()
 		Image buttonImage(this);
 		buttonImage.Load("Assets/Image/Change_Process.png");
 		buttonImage.SetSize({ 0.2f,0.2f,0 });
+		buttonImage.SetColor(0.8f);
 		AddComponent<Image>(buttonImage);
 	}
 
@@ -41,11 +42,15 @@ void ResourceMenuChangeButton::Update()
 		//ƒJ[ƒ\ƒ‹‚ª‰æ‘œ‚É“–‚½‚Á‚Ä‚¢‚½‚ç
 		if (GetComponent<Image>(0).IsHitCursor())
 		{
+			GetComponent<Image>(0).SetColor(1);
+			GetComponent<Image>(1).SetColor(0.8f);
 			Audio::Play(hAudio_Change_);
 			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
 		}
 		else if (GetComponent<Image>(1).IsHitCursor())
 		{
+			GetComponent<Image>(1).SetColor(1);
+			GetComponent<Image>(0).SetColor(0.8f);
 			Audio::Play(hAudio_Change_);
 			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
 		}
