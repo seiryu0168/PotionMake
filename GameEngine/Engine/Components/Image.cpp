@@ -112,6 +112,11 @@ void Image::SetPosition(const XMFLOAT3& pos)
 	transform_.position_ = XMLoadFloat3(&pos);
 }
 
+void Image::SetPosition(float x, float y)
+{
+	transform_.position_ = XMVectorSet(x, y, 0, 0);
+}
+
 void Image::SetPositionAtPixel(const XMFLOAT3& pos)
 {
 	XMFLOAT3 p = ConvertToRatio(pos);

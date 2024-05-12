@@ -44,6 +44,7 @@ public:
 	void AddResourceItemData(const ResourceData_& resource);
 	int maxItemLimit_;
 	std::string name_;
+	int money_;
 	int newsPaperNumber_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;

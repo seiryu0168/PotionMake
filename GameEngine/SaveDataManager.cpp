@@ -49,6 +49,7 @@ void SaveDataManager::Init()
 {
 	nlohmann::json playerFile;
 	playerFile["Name"] = "player01";
+	playerFile["Money"] = 0;
 	playerFile["NewsPaperNumber"] = 0;
 	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
@@ -113,6 +114,7 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 	playerFile = nlohmann::json::parse(ifs);
 	//PlayerData::SaveData data;
 	data.name_ = playerFile["Name"];
+	data.money_ = playerFile["Money"];
 	data.newsPaperNumber_ = playerFile["NewsPaperNumber"];
 	data.potionDataFileName_ = playerFile["PotionDataFileName"];
 	data.resourceFileName_ = playerFile["ResourceFileName"];

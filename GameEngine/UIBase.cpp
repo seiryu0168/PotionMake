@@ -2,7 +2,10 @@
 
 UIBase::UIBase(Object* parent, std::string uiName)
 	:GameObject(parent,uiName),
-	isOpenUI_(false)
+	UINum_(-1),
+	uiName_(""),
+	isOpenUI_(false),
+	currentOpenUINum_(-1)
 {
 }
 

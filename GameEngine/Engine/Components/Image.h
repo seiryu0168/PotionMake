@@ -27,6 +27,7 @@ public:
 	bool StaticLoad(const std::string& name);
 	//座標設定
 	void SetPosition(const XMFLOAT3& pos);
+	void SetPosition(float x,float y);
 	//座標設定(ピクセル単位)
 	void SetPositionAtPixel(const XMFLOAT3& pos);
 	void AddPositionAtPixel(const XMFLOAT3& deltaPos);

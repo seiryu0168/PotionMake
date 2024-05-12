@@ -19,10 +19,6 @@ Play_ManagementPart_PotionManagerUI::~Play_ManagementPart_PotionManagerUI()
 void Play_ManagementPart_PotionManagerUI::Initialize()
 {
 	CreateUITitle({ 0,0.85f }, {10,30},"ポーション管理");
-	//Text uiTitleText(this);
-	//uiTitleText.SetText("ポーション管理");
-	//uiTitleText.SetPosition({ 600,30 });
-	//AddComponent<Text>(uiTitleText);
 
 	//販売/破棄するポーションのUI
 	Instantiate<P_MP_PotionManagerUI_SellStockUI>(this);
@@ -47,7 +43,7 @@ void Play_ManagementPart_PotionManagerUI::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 d
 	craftUIText.SetRect(rect);
 	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
 	craftUIText.SetRatio(ratio.x, ratio.y);
-	AddComponent<Text>(craftUIText);
+	AddComponent<Text>(craftUIText);	
 
 	XMFLOAT2 imagePos = { pos.x,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
 	Image base(this);
