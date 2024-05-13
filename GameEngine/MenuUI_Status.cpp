@@ -33,12 +33,6 @@ void MenuUI_Status::Initialize()
 	commandText.SetText("ステータス");
 	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	AddComponent<Text>(commandText);
-
-	Image closeImage(this);
-	closeImage.Load("Assets/Image/CloseButtonImage.png");
-	closeImage.SetPosition({ 0,0.5f,0 });
-	closeImage.SetSize({ 0.6f,0.6f,0 });
-	closeButtonNum_ = AddComponent<Image>(closeImage);
 }
 
 void MenuUI_Status::Start()

@@ -5,6 +5,7 @@
 #include"InterSceneData.h"
 #include"PlayerData.h"
 #include"ResourceStatusData.h"
+#include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
 MenuUI_NewsPaper::MenuUI_NewsPaper(Object* parent)
 	:UIBase(parent,"MenuUI_NewsPaper"),

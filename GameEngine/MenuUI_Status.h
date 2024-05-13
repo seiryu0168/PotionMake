@@ -3,7 +3,6 @@
 class MenuUI_Status : public UIBase
 {
 	int statusImageNum_;
-	int closeButtonNum_;
 ;	int nameTextNum_;
 	int moneyTextNum_;
 	bool isClickedButton_;

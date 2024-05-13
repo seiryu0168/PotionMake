@@ -278,6 +278,7 @@
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.cpp" />
     <ClCompile Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.cpp" />
     <ClCompile Include="ManagementPart_Floor.cpp" />
+    <ClCompile Include="MenuUI_Item.cpp" />
     <ClCompile Include="MenuUI_NewsPaper.cpp" />
     <ClCompile Include="MenuUI_ReturnHome.cpp" />
     <ClCompile Include="MenuUI_Save.cpp" />
@@ -426,6 +427,7 @@
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_PotionStockUI.h" />
     <ClInclude Include="ManagementPart\PotionManagement\P_MP_PotionManagerUI_SellStockUI.h" />
     <ClInclude Include="ManagementPart_Floor.h" />
+    <ClInclude Include="MenuUI_Item.h" />
     <ClInclude Include="MenuUI_NewsPaper.h" />
     <ClInclude Include="MenuUI_ReturnHome.h" />
     <ClInclude Include="MenuUI_Save.h" />

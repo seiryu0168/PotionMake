@@ -178,7 +178,8 @@ void P_CP_CollectedItemUI::SetSelectFlag(bool flag)
 {
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
-		((PickupedItem*)itr->get())->SetCanSelect(flag);
+		if (itr->get()->GetObjectName() != "CloseButton")
+			((PickupedItem*)itr->get())->SetCanSelect(flag);
 	}
 }
 

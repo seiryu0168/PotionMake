@@ -15,6 +15,7 @@
 #include"MenuUI_Save.h"
 #include"MenuUI_NewsPaper.h"
 #include"MenuUI_Status.h"
+#include"MenuUI_Item.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
 	:UIBase(parent,"P_MP_MenuUI")
@@ -41,6 +42,7 @@ void P_MP_MenuUI::Initialize()
 	Instantiate<MenuUI_Save>(this)->SetUINUmber(0);
 	Instantiate<MenuUI_NewsPaper>(this)->SetUINUmber(1);
 	Instantiate<MenuUI_Status>(this)->SetUINUmber(2);
+	Instantiate<MenuUI_Item>(this)->SetUINUmber(3);
 	//Image itemImage(this);
 	//itemImage.Load("Assets/Image/SelectImage3.png");
 	//itemImage.SetPosition({ -1.2f,0.2f,0 });
