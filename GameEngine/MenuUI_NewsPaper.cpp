@@ -5,6 +5,7 @@
 #include"InterSceneData.h"
 #include"PlayerData.h"
 #include"ResourceStatusData.h"
+#include"CloseButton.h"
 MenuUI_NewsPaper::MenuUI_NewsPaper(Object* parent)
 	:UIBase(parent,"MenuUI_NewsPaper"),
 	isClickedButton_(false),
@@ -92,6 +93,11 @@ void MenuUI_NewsPaper::SetDrawFlag(bool flag)
 {
 	GetComponent<Image>(1).SetDraw(flag);
 	GetComponent<Image>(closeButtonNum_).SetDraw(flag);
+}
+
+void MenuUI_NewsPaper::ChangeText()
+{
+	GetComponent<Text>().SetText("AAAA");
 }
 
 void MenuUI_NewsPaper::Release()

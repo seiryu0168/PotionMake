@@ -184,6 +184,7 @@
     <ClCompile Include="CollectionPart\P_CP_MenuUI.cpp" />
     <ClCompile Include="CollectionPart\P_CP_Player_ItemGetter.cpp" />
     <ClCompile Include="CollectionPart\P_CP_ResourceItem.cpp" />
+    <ClCompile Include="ConfirmationUI.cpp" />
     <ClCompile Include="Division.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="DebugUI.cpp" />
@@ -280,6 +281,7 @@
     <ClCompile Include="MenuUI_NewsPaper.cpp" />
     <ClCompile Include="MenuUI_ReturnHome.cpp" />
     <ClCompile Include="MenuUI_Save.cpp" />
+    <ClCompile Include="MenuUI_Status.cpp" />
     <ClCompile Include="Menu_Base.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
@@ -307,6 +309,7 @@
     <ClCompile Include="Scenes\Scene_Title.cpp" />
     <ClCompile Include="ObjectSetter.cpp" />
     <ClCompile Include="StaticResource.cpp" />
+    <ClCompile Include="Status.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -323,6 +326,7 @@
     <ClInclude Include="CollectionPart\P_CP_MenuUI.h" />
     <ClInclude Include="CollectionPart\P_CP_Player_ItemGetter.h" />
     <ClInclude Include="CollectionPart\P_CP_ResourceItem.h" />
+    <ClInclude Include="ConfirmationUI.h" />
     <ClInclude Include="Division.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="DebugUI.h" />
@@ -425,6 +429,7 @@
     <ClInclude Include="MenuUI_NewsPaper.h" />
     <ClInclude Include="MenuUI_ReturnHome.h" />
     <ClInclude Include="MenuUI_Save.h" />
+    <ClInclude Include="MenuUI_Status.h" />
     <ClInclude Include="Menu_Base.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
@@ -455,6 +460,7 @@
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="StandData.h" />
     <ClInclude Include="StaticResource.h" />
+    <ClInclude Include="Status.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestObjectChild.h" />
     <ClInclude Include="Title.h" />

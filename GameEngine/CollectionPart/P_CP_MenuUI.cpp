@@ -12,12 +12,13 @@
 #include "../PlayerData.h"
 #include "../ResourceStatusData.h"
 #include "../Engine/ResourceManager/Audio.h"
+#include "../MenuUI_ReturnHome.h"
 
 P_CP_MenuUI::P_CP_MenuUI(Object* parent)
 	:UIBase(parent,"P_CP_MenuUI"),
 	isReturnHome_(false),
 	returnImageNum_(-1),
-	hAudio_ReturnHome_(-1),
+	hAudio_Select_(-1),
 	time_(0)
 {
 }
@@ -28,20 +29,20 @@ P_CP_MenuUI::~P_CP_MenuUI()
 
 void P_CP_MenuUI::Initialize()
 {
-	//家に帰るボタン
-	Image returnHome(this);
-	returnHome.Load("Assets/Image/SelectImage3.png");
-	returnHome.SetPosition({ -1.2f,0.5f,0 });
-	returnHome.SetRotation({ 0,0,180 });
-	//returnHome.SetSize({ 5,2,0 });
-	returnImageNum_ = AddComponent<Image>(returnHome);
-	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
-	
-	//家に帰るテキスト
-	Text commandText(this);
-	commandText.SetText("家に戻る");
-	commandText.SetPosition({ textPos.x+200,textPos.y-50 });
-	AddComponent<Text>(commandText);
+	////家に帰るボタン
+	//Image returnHome(this);
+	//returnHome.Load("Assets/Image/SelectImage3.png");
+	//returnHome.SetPosition({ -1.2f,0.5f,0 });
+	//returnHome.SetRotation({ 0,0,180 });
+	////returnHome.SetSize({ 5,2,0 });
+	//returnImageNum_ = AddComponent<Image>(returnHome);
+	//XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
+	//
+	////家に帰るテキスト
+	//Text commandText(this);
+	//commandText.SetText("家に戻る");
+	//commandText.SetPosition({ textPos.x+200,textPos.y-50 });
+	//AddComponent<Text>(commandText);
 
 	//画面暗転用の画像
 	Image fadeImage(this);
@@ -51,25 +52,27 @@ void P_CP_MenuUI::Initialize()
 	fadeImage.SetSize({ 2,2,0 });
 	AddComponent<Image>(fadeImage);
 
+	Instantiate<MenuUI_ReturnHome>(this);
+
 	//集めた素材のUI
-	P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
-	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
-	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
-
-	for (auto& itr : player->GetItem())
-	{
-		collectedUI.SetItemData(itr.first,
-			rData.resourceDataMap_[itr.first].resourceName_,
-			itr.second,
-			rData.resourceDataMap_[itr.first].resourceImageName_);
-	}
-
-	collectedUI.SetDummy();
+	//P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
+	//Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
+	//ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
+	//
+	//for (auto& itr : player->GetItem())
+	//{
+	//	collectedUI.SetItemData(itr.first,
+	//		rData.resourceDataMap_[itr.first].resourceName_,
+	//		itr.second,
+	//		rData.resourceDataMap_[itr.first].resourceImageName_);
+	//}
+	//
+	//collectedUI.SetDummy();
 	//クローズボタン
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
-	hAudio_ReturnHome_= Audio::Load("Assets/Audio/Confirm51.wav");
+	hAudio_Select_= Audio::Load("Assets/Audio/Confirm51.wav");
 
 }
 
@@ -83,50 +86,62 @@ void P_CP_MenuUI::Update()
 	if (isReturnHome_)
 	{
 		time_ += 0.016;
-		GetComponent<Image>(1).SetAlpha(time_);
+		GetComponent<Image>().SetAlpha(time_);
 		if(time_>=3.0f)
 			newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 		return;
 	}
-	//カーゾルが画像に当たってた場合
-	if (GetComponent<Image>(returnImageNum_).IsHitCursor())
-	{
-		GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
-
-		if (Input::IsMouseButtonUp(0))
-		{
-			Audio::Play(hAudio_ReturnHome_);
-			SaveItemData();
-			FindChild("CloseButton")->KillMe();
-			isReturnHome_ = true;
-			//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
-		}
-
-	}
-	else
-		GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
+	////カーゾルが画像に当たってた場合
+	//if (GetComponent<Image>(returnImageNum_).IsHitCursor())
+	//{
+	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
+	//
+	//	if (Input::IsMouseButtonUp(0))
+	//	{
+	//		Audio::Play(hAudio_Select_);
+	//		SaveItemData();
+	//		FindChild("CloseButton")->KillMe();
+	//		isReturnHome_ = true;
+	//		//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
+	//	}
+	//
+	//}
+	//else
+	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
 
 }
 
 void P_CP_MenuUI::SaveItemData()
 {
 	//保存に必要なデータ類用意
-	GameObject* itemUI = (GameObject*)FindChild("P_CP_CollectedItemUI");
+	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
 	PlayerData* pData = InterSceneData::GetData<PlayerData>("Data01");
 	ResourceStatusData* rData = InterSceneData::GetData<ResourceStatusData>("ResourceData");
 
 	//取得したアイテムデータを保存
-	for (auto itr = itemUI->GetChildList()->begin();itr!=itemUI->GetChildList()->end();itr++)
+	for (auto itr = player->GetItem().begin(); itr != player->GetItem().end(); itr++)
 	{
 		PlayerData::ResourceData_ data;
-		int num= ((PickupedItem*)itr->get())->GetItemNumber();
+		int num = itr->first;
 		data.itemNum_ = num;
 		data.itemName_ = rData->resourceDataMap_[num].resourceName_;
 		data.itemImageName_ = rData->resourceDataMap_[num].resourceImageName_;
-		data.itemCount_= ((PickupedItem*)itr->get())->GetItemCount();
+		data.itemCount_= itr->second;
 		pData->AddResourceItemData(data);
 	}
 
+}
+
+void P_CP_MenuUI::PlayAudio_Select()
+{
+	Audio::Play(hAudio_Select_);
+}
+
+void P_CP_MenuUI::ReturnHome()
+{
+	SaveItemData();
+	FindChild("CloseButton")->KillMe();
+	isReturnHome_ = true;
 }
 
 void P_CP_MenuUI::Release()

@@ -6,7 +6,7 @@ class P_CP_MenuUI : public UIBase
 	bool isReturnHome_;
 	int returnImageNum_;
 	int fadeImageNum_;
-	int hAudio_ReturnHome_;
+	int hAudio_Select_;
 	float time_;
 public:
 	P_CP_MenuUI(Object* parent);
@@ -16,6 +16,8 @@ public:
 	void Start() override;
 	void Update() override;
 	void SaveItemData();
+	void PlayAudio_Select();
+	void ReturnHome();
 	void Release() override;
 };
 

@@ -3,7 +3,8 @@
 #include "Engine/DirectX_11/Input.h"
 #include "Engine/ResourceManager/Audio.h"
 CloseButton::CloseButton(Object* parent)
-	:GameObject(parent,"CloseButton")
+	:GameObject(parent,"CloseButton"),
+	isSetFunction_(false)
 {
 }
 
@@ -31,6 +32,8 @@ void CloseButton::Update()
 	if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
 	{
 		Audio::Play(hAudio_Close_);
+		if (isSetFunction_)
+			clickedFunction_();
 		pParent_->KillMe();
 	}
 }

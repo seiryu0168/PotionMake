@@ -1,18 +1,19 @@
 #pragma once
 #include"UIBase.h"
-class MenuUI_NewsPaper : public UIBase
+class Status : public UIBase
 {
-	bool isClickedButton_;
+	int statusImageNum_;
 	int closeButtonNum_;
+	int nameTextNum_;
+	int moneyTextNum_;
+	bool isClickedButton_;
 public:
-	MenuUI_NewsPaper(Object* parent);
-	~MenuUI_NewsPaper();
+	Status(Object* parent);
+	~Status();
 
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void SetDrawFlag(bool flag);
-	void ChangeText();
 	void Release() override;
 };
 

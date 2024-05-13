@@ -15,6 +15,8 @@ public:
 	void Update() override;
 	void DataSave();
 	void SetDrawFlag(bool flag);
+	void ClickOKButton();
+	void ClickCancelButton();
 	void Release() override;
 };
 
