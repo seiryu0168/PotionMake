@@ -26,6 +26,7 @@ public:
 	void Update() override;
 	void CreateBase();
 	void SetData(int totalGain,const std::string& evaluation);
+	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void Release() override;
 };
 

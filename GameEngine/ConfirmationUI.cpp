@@ -77,6 +77,7 @@ void ConfirmationUI::Start()
 
 void ConfirmationUI::Update()
 {
+	//ボタンにカーソルが触れてた場合、少し大きくなる
 	if (GetComponent<Image>(confirmImageNum_).IsHitCursor())
 	{
 		GetComponent<Image>(confirmImageNum_).SetSize({ 0.75f,0.75f,0 });

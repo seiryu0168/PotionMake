@@ -40,7 +40,7 @@ void P_MP_SettlementUI::Initialize()
 		if(potionData.isSale_)
 		{
 			
-			totalGain += potionData.price_*CalcSellCount(pData.newsPaperNumber_,potionData.topStatus_);
+			totalGain += potionData.price_ * CalcSellCount(pData.newsPaperNumber_,potionData.topStatus_);
 		}
 	}
 	//売り上げのデータを更新

@@ -9,7 +9,8 @@ P_MP_SettlementUI_TotalGain::P_MP_SettlementUI_TotalGain(Object* parent)
 	showTime_(1.0f),
 	currentGain_(0),
 	hAudio_Money_(-1),
-	count_(0)
+	count_(0),
+	totalGain_(0)
 {
 }
 
@@ -20,14 +21,15 @@ P_MP_SettlementUI_TotalGain::~P_MP_SettlementUI_TotalGain()
 void P_MP_SettlementUI_TotalGain::Initialize()
 {
 	CreateBase();
+	CreateUITitle({ uiPos_.x - 0.14f,uiPos_.y+0.4f }, { 10,20 }, "売上");
 
 	//項目名と金額と評価のテキスト準備
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
-	Text sectionText(this);
-	sectionText.SetText("売上");
-	sectionText.SetRect({ 0,0,220,70 });
-	sectionText.SetPosition({ txtPos.x - 150,txtPos.y - 150 });
-	AddComponent<Text>(sectionText);
+	//Text sectionText(this);
+	//sectionText.SetText("売上");
+	//sectionText.SetRect({ 0,0,220,70 });
+	//sectionText.SetPosition({ txtPos.x - 150,txtPos.y - 150 });
+	//AddComponent<Text>(sectionText);
 
 	Text totalGain(this);
 	totalGain.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
@@ -140,6 +142,48 @@ void P_MP_SettlementUI_TotalGain::SetData(int totalGain, const std::string& eval
 	gainDiff_ = totalGain / (showTime_ * 60.0f);
 	//GetComponent<Text>(1).SetText(std::to_string(totalGain));
 	//GetComponent<Text>(2).SetText(evaluation);
+}
+void P_MP_SettlementUI_TotalGain::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
+{
+	XMFLOAT3 color = { 102.0f / 255.0f,100.0f / 255.0f,82.0f / 255.0f };
+	Text craftUIText(this);
+	craftUIText.SetText(str);
+	craftUIText.SetTextSize(55.0f);
+	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;
+	TEXT_RECT rect = { 0,0,rectSize + diff.x,(float)craftUIText.GetTextSize() + diff.y };
+	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	craftUIText.SetRect(rect);
+	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	craftUIText.SetRatio(ratio.x, ratio.y);
+	AddComponent<Text>(craftUIText);
+
+	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	Image base(this);
+	base.Load("Assets/Image/UIBaseImage3.png");
+	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
+	base.SetPosition({ imagePos.x,imagePos.y,0 });
+	base.SetColor(color);
+	XMFLOAT3 size = base.GetSizeAtPixel();
+	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
+
+	float distance = rect.right / Direct3D::GetScreenWidth();
+	Image start(this);
+	start.Load("Assets/Image/UILong04_Start.png");
+	start.SetSize({ size.y / 256,size.y / 256,0.0f });
+	start.SetColor(color);
+	//start.SetRotation({ 0,0,180 });
+	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
+	AddComponent<Image>(start);
+
+	Image end(this);
+	end.Load("Assets/Image/UILong04_End.png");
+	end.SetSize({ size.y / 256,size.y / 256,0.0f });
+	end.SetColor(color);
+	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
+	AddComponent<Image>(end);
+
+	AddComponent<Image>(base);
 }
 
 void P_MP_SettlementUI_TotalGain::Release()

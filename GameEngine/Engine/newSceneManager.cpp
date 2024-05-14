@@ -80,7 +80,7 @@ namespace newSceneManager
 	{
 		if (isSceneChange_ && changeCount_ <= 0)
 		{
-			Division::setLoad(true);
+			//Division::setLoad(true);
 			currentScene_->AllKillObject();
 			//オーディオネームスペースの解放
 			AudioManager::Release();
@@ -103,7 +103,7 @@ namespace newSceneManager
 			//シーン名切り替え
 			currentSceneName_ = nextSceneName_;
 			isSceneChange_ = false;
-			Division::setLoad(false);
+			//Division::setLoad(false);
 		}
 		//コライダーの更新
 		pColliderSystem_.get()->Update();
@@ -253,7 +253,7 @@ namespace newSceneManager
 	void Release()
 	{
 		InterSceneData::AllDelete();
-		Division::setLoad(true);
+		//Division::setLoad(true);
 		currentScene_->AllKillObject();
 
 		Coordinator::AllRemove();
@@ -265,7 +265,7 @@ namespace newSceneManager
 		TextureManager::StaticTextureRelease();
 		//D2D::
 		CameraManager::ResetCamera();
-		Division::setLoad(false);
+		//Division::setLoad(false);
 	}
 
 	std::shared_ptr<ImageSystem> GetImageSystem()

@@ -120,7 +120,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	
 	newSceneManager::Initialize();
 
-	Division::Initialize();
+	//Division::Initialize();
 
 	//メッセージループ
 	MSG msg;
@@ -223,7 +223,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Time::Release();
 	//Brightness::Release();
-	AudioManager::Release();
+	//AudioManager::Release();
 	DebugUI::CleanUp();
 	newSceneManager::Release();
 	//ImageManager::AllRelease();
