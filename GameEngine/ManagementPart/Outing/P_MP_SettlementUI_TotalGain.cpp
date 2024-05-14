@@ -21,7 +21,7 @@ P_MP_SettlementUI_TotalGain::~P_MP_SettlementUI_TotalGain()
 void P_MP_SettlementUI_TotalGain::Initialize()
 {
 	CreateBase();
-	CreateUITitle({ uiPos_.x - 0.14f,uiPos_.y+0.4f }, { 10,20 }, "売上");
+	CreateUITitle({ uiPos_.x - 0.23f,uiPos_.y+0.4f }, { 0,20 }, "売上");
 
 	//項目名と金額と評価のテキスト準備
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
@@ -145,7 +145,7 @@ void P_MP_SettlementUI_TotalGain::SetData(int totalGain, const std::string& eval
 }
 void P_MP_SettlementUI_TotalGain::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
 {
-	XMFLOAT3 color = { 102.0f / 255.0f,100.0f / 255.0f,82.0f / 255.0f };
+	XMINT3 color = { 102,100,82 };
 	Text craftUIText(this);
 	craftUIText.SetText(str);
 	craftUIText.SetTextSize(55.0f);
@@ -163,7 +163,7 @@ void P_MP_SettlementUI_TotalGain::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, con
 	base.Load("Assets/Image/UIBaseImage3.png");
 	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
 	base.SetPosition({ imagePos.x,imagePos.y,0 });
-	base.SetColor(color);
+	base.SetColorInt(color);
 	XMFLOAT3 size = base.GetSizeAtPixel();
 	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
 
@@ -171,7 +171,7 @@ void P_MP_SettlementUI_TotalGain::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, con
 	Image start(this);
 	start.Load("Assets/Image/UILong04_Start.png");
 	start.SetSize({ size.y / 256,size.y / 256,0.0f });
-	start.SetColor(color);
+	start.SetColorInt(color);
 	//start.SetRotation({ 0,0,180 });
 	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
 	AddComponent<Image>(start);
@@ -179,7 +179,7 @@ void P_MP_SettlementUI_TotalGain::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, con
 	Image end(this);
 	end.Load("Assets/Image/UILong04_End.png");
 	end.SetSize({ size.y / 256,size.y / 256,0.0f });
-	end.SetColor(color);
+	end.SetColorInt(color);
 	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
 	AddComponent<Image>(end);
 

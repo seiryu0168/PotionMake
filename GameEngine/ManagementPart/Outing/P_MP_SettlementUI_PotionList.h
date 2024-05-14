@@ -18,6 +18,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void CreateListUI(const std::vector<PlayerData::PotionData>& potionList);
+	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void Release() override;
 };
 

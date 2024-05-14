@@ -19,5 +19,6 @@ public:
 	void Update() override;
 	void CreateBase();
 	void SetData(const std::vector<int>& gainList);
+	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void Release() override;
 };

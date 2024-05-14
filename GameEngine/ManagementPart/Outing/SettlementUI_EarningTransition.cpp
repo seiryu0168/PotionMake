@@ -23,7 +23,7 @@ void SettlementUI_EarningTransition::Initialize()
 	//AddComponent<Image>(back);
 
 	CreateBase();
-	
+	CreateUITitle({ uiPos_.x - 0.18f,uiPos_.y + 0.526f }, { 10,20 }, "îÑè„ÇÃêÑà⁄");
 	//âﬂãé5âÒï™ÇÃîÑè„Çï\é¶Ç∑ÇÈà◊ÇÃâÊëú
 	XMFLOAT2 diffPos = { -0.3f, -0.2f};
 	for (int i = 0; i < 5; i++)
@@ -130,6 +130,49 @@ void SettlementUI_EarningTransition::SetData(const std::vector<int>& gainList)
 		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,Clamp(gaugeSize_*((float)gainList_[i]/maxGain),0.05f,gaugeSize_),0});
 	}
 
+}
+
+void SettlementUI_EarningTransition::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
+{
+	XMINT3 color = { 102,100,82 };
+	Text craftUIText(this);
+	craftUIText.SetText(str);
+	craftUIText.SetTextSize(55.0f);
+	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;
+	TEXT_RECT rect = { 0,0,rectSize + diff.x,(float)craftUIText.GetTextSize() + diff.y };
+	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	craftUIText.SetRect(rect);
+	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	craftUIText.SetRatio(ratio.x, ratio.y);
+	AddComponent<Text>(craftUIText);
+
+	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	Image base(this);
+	base.Load("Assets/Image/UIBaseImage3.png");
+	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
+	base.SetPosition({ imagePos.x,imagePos.y,0 });
+	base.SetColorInt(color);
+	XMFLOAT3 size = base.GetSizeAtPixel();
+	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
+
+	float distance = rect.right / Direct3D::GetScreenWidth();
+	Image start(this);
+	start.Load("Assets/Image/UILong04_Start.png");
+	start.SetSize({ size.y / 256,size.y / 256,0.0f });
+	start.SetColorInt(color);
+	//start.SetRotation({ 0,0,180 });
+	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
+	AddComponent<Image>(start);
+
+	Image end(this);
+	end.Load("Assets/Image/UILong04_End.png");
+	end.SetSize({ size.y / 256,size.y / 256,0.0f });
+	end.SetColorInt(color);
+	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
+	AddComponent<Image>(end);
+
+	AddComponent<Image>(base);
 }
 
 void SettlementUI_EarningTransition::Release()
