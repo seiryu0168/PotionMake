@@ -1,6 +1,6 @@
 #pragma once
-#include"UIBase.h"
-class MenuUI_Status : public UIBase
+#include"MenuUI.h"
+class MenuUI_Status : public MenuUI
 {
 	int statusImageNum_;
 ;	int nameTextNum_;

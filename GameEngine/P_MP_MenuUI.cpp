@@ -17,6 +17,7 @@
 #include"Engine/Systems/AudioSystem.h"
 #include"MenuUI_Status.h"
 #include"MenuUI_Item.h"
+#include"MenuUI.h"
 
 P_MP_MenuUI::P_MP_MenuUI(Object* parent)
 	:UIBase(parent,"P_MP_MenuUI")
@@ -40,10 +41,21 @@ void P_MP_MenuUI::Initialize()
 	//commandText.SetText("セーブ");
 	//commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	//AddComponent<Text>(commandText);
-	Instantiate<MenuUI_Save>(this)->SetUINUmber(0);
-	Instantiate<MenuUI_NewsPaper>(this)->SetUINUmber(1);
-	Instantiate<MenuUI_Status>(this)->SetUINUmber(2);
-	Instantiate<MenuUI_Item>(this)->SetUINUmber(3);
+	MenuUI& status = *Instantiate<MenuUI_Status>(this);
+	status.SetButton("Assets/Image/SelectImage3.png", "ステータス", { -1.2f,0.5f,0 });
+	status.SetUINumber(0);
+
+	MenuUI& item = *Instantiate<MenuUI_Item>(this);
+	item.SetButton("Assets/Image/SelectImage3.png", "素材", { -1.2f,0.25f,0 });
+	item.SetUINumber(1);
+
+	MenuUI& newsPaper = *Instantiate<MenuUI_NewsPaper>(this);
+	newsPaper.SetButton("Assets/Image/SelectImage3.png", "新聞", { -1.2f,0.0f,0 });
+	newsPaper.SetUINumber(2);
+
+	MenuUI& save = *Instantiate<MenuUI_Save>(this);
+	save.SetButton("Assets/Image/SelectImage3.png", "セーブ", { -1.2f,-0.25f,0 });
+	save.SetUINumber(3);
 	//Image itemImage(this);
 	//itemImage.Load("Assets/Image/SelectImage3.png");
 	//itemImage.SetPosition({ -1.2f,0.2f,0 });

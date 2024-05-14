@@ -9,7 +9,7 @@
 #include"Engine/Components/Audio.h"
 
 MenuUI_Save::MenuUI_Save(Object* parent)
-	:UIBase(parent,"MenuUI_Save"),
+	:MenuUI(parent,"MenuUI_Save"),
 	confirmImageNum_(-1),
 	cancelImageNum_(-1),
 	isClickedButton_(false)
@@ -22,17 +22,17 @@ MenuUI_Save::~MenuUI_Save()
 
 void MenuUI_Save::Initialize()
 {
-	Image save(this);
-	save.Load("Assets/Image/SelectImage3.png");
-	save.SetPosition({ -1.2f,0.5f,0 });
-	save.SetRotation({ 0,0,180 });
-	//save.SetSize({ 5,2,0 });
-	AddComponent<Image>(save);
-	XMFLOAT3 textPos = save.GetPositionAtPixel();
-	Text saveText(this);
-	saveText.SetText("セーブ");
-	saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	AddComponent<Text>(saveText);
+	//Image save(this);
+	//save.Load("Assets/Image/SelectImage3.png");
+	//save.SetPosition({ -1.2f,0.5f,0 });
+	//save.SetRotation({ 0,0,180 });
+	////save.SetSize({ 5,2,0 });
+	//AddComponent<Image>(save);
+	//XMFLOAT3 textPos = save.GetPositionAtPixel();
+	//Text saveText(this);
+	//saveText.SetText("セーブ");
+	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	//AddComponent<Text>(saveText);
 	
 
 	//Image confirmation(this);
@@ -101,20 +101,20 @@ void MenuUI_Save::Update()
 	//	}
 	//}
 
-	if (!isClickedButton_)
+	if (!IsClickButton())
 	{
 			//他のUIを開いてる場合
 		if (((UIBase*)pParent_)->GetCurrentOpenUINumber() != -1)
 			return;
 		if (!GetComponent<Image>().IsHitCursor())
 		{
-			GetComponent<Image>().SetPosition({ -1.2f,0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 			return;
 		}
-		GetComponent<Image>().SetPosition({ -1.1,0.5,0 });
+		GetComponent<Image>().SetPosition({ buttonPos_.x + 0.1f,buttonPos_.y,0 });
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
-			isClickedButton_ = true;
+			SetClickFlag(true);
 			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
 			cfmUI.SetConfitmentText("セーブしますか？");
@@ -122,7 +122,7 @@ void MenuUI_Save::Update()
 			cfmUI.GetCancelFunction() = [&]() {return ClickCancelButton(); };
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			//SetDrawFlag(true);
-			GetComponent<Image>().SetPosition({ -1.2f,0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 		}
 
 	}
@@ -152,7 +152,7 @@ void MenuUI_Save::ClickOKButton()
 void MenuUI_Save::ClickCancelButton()
 {
 	((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	isClickedButton_ = false;
+	SetClickFlag(false);
 }
 
 void MenuUI_Save::Release()

@@ -1,6 +1,6 @@
 #pragma once
-#include"UIBase.h"
-class MenuUI_Item : public UIBase
+#include"MenuUI.h"
+class MenuUI_Item : public MenuUI
 {
 	bool isClickedButton_;
 public:

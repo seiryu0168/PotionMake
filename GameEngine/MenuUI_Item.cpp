@@ -9,7 +9,7 @@
 #include"CloseButton.h"
 #include"Engine/Components/Audio.h"
 MenuUI_Item::MenuUI_Item(Object* parent)
-	:UIBase(parent,"MenuUI_Item"),
+	:MenuUI(parent,"MenuUI_Item"),
 	isClickedButton_(false)
 {
 }
@@ -20,17 +20,17 @@ MenuUI_Item::~MenuUI_Item()
 
 void MenuUI_Item::Initialize()
 {
-	Image save(this);
-	save.Load("Assets/Image/SelectImage3.png");
-	save.SetPosition({ -1.2f,-0.5f,0 });
-	save.SetRotation({ 0,0,180 });
-	//save.SetSize({ 5,2,0 });
-	AddComponent<Image>(save);
-	XMFLOAT3 textPos = save.GetPositionAtPixel();
-	Text saveText(this);
-	saveText.SetText("セーブ");
-	saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	AddComponent<Text>(saveText);
+	//Image save(this);
+	//save.Load("Assets/Image/SelectImage3.png");
+	//save.SetPosition({ -1.2f,-0.5f,0 });
+	//save.SetRotation({ 0,0,180 });
+	////save.SetSize({ 5,2,0 });
+	//AddComponent<Image>(save);
+	//XMFLOAT3 textPos = save.GetPositionAtPixel();
+	//Text saveText(this);
+	//saveText.SetText("素材");
+	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	//AddComponent<Text>(saveText);
 }
 
 void MenuUI_Item::Start()
@@ -39,25 +39,25 @@ void MenuUI_Item::Start()
 
 void MenuUI_Item::Update()
 {
-	if (!isClickedButton_)
+	if (!IsClickButton())
 	{
 		//他のUIを開いてる場合
 		if (((UIBase*)pParent_)->GetCurrentOpenUINumber() != -1)
 			return;
 		if (!GetComponent<Image>().IsHitCursor())
 		{
-			GetComponent<Image>().SetPosition({ -1.2f,-0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 			return;
 		}
-		GetComponent<Image>().SetPosition({ -1.1,-0.5,0 });
+		GetComponent<Image>().SetPosition({ buttonPos_.x + 0.1f,buttonPos_.y,0 });
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
-			isClickedButton_ = true;
+			SetClickFlag(true);
 			pParent_->GetComponent<Audio>().Play();
 			CretateItemList();
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			//SetDrawFlag(true);
-			GetComponent<Image>().SetPosition({ -1.2f,-0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 		}
 
 	}
@@ -86,7 +86,7 @@ void MenuUI_Item::CretateItemList()
 void MenuUI_Item::ClickCloseButton()
 {
 	((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	isClickedButton_ = false;
+	SetClickFlag(false);
 }
 
 void MenuUI_Item::Release()

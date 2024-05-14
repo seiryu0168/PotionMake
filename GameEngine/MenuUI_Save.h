@@ -1,6 +1,6 @@
 #pragma once
-#include "UIBase.h"
-class MenuUI_Save : public UIBase
+#include "MenuUI.h"
+class MenuUI_Save : public MenuUI
 {
 private:
 	int confirmImageNum_;

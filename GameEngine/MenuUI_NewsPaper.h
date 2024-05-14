@@ -1,6 +1,6 @@
 #pragma once
-#include"UIBase.h"
-class MenuUI_NewsPaper : public UIBase
+#include"MenuUI.h"
+class MenuUI_NewsPaper : public MenuUI
 {
 	bool isClickedButton_;
 	int closeButtonNum_;
@@ -13,6 +13,7 @@ public:
 	void Update() override;
 	void SetDrawFlag(bool flag);
 	void ChangeText();
+	void ClickCloseButton();
 	void Release() override;
 };
 

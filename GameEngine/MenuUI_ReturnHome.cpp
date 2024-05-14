@@ -9,7 +9,7 @@
 #include"Engine/Components/Audio.h"
 
 MenuUI_ReturnHome::MenuUI_ReturnHome(Object* parent)
-	:UIBase(parent,"MenuUI_ReturnHome"),
+	:MenuUI(parent,"MenuUI_ReturnHome"),
 	confirmImageNum_(-1),
 	cancelImageNum_(-1),
 	isClickedButton_(false)
@@ -22,21 +22,21 @@ MenuUI_ReturnHome::~MenuUI_ReturnHome()
 
 void MenuUI_ReturnHome::Initialize()
 {
-	//家に帰るボタン
-	Image returnHome(this);
-	returnHome.Load("Assets/Image/SelectImage3.png");
-	returnHome.SetPosition({ -1.2f,0.5f,0 });
-	returnHome.SetRotation({ 0,0,180 });
-	//returnHome.SetSize({ 5,2,0 });
-	AddComponent<Image>(returnHome);
-	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
-
-	//家に帰るテキスト
-	Text commandText(this);
-	commandText.SetText("家に戻る");
-	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	AddComponent<Text>(commandText);
-	//hAudio_ReturnHome_=AudioManager::Load()
+	////家に帰るボタン
+	//Image returnHome(this);
+	//returnHome.Load("Assets/Image/SelectImage3.png");
+	//returnHome.SetPosition({ -1.2f,0.5f,0 });
+	//returnHome.SetRotation({ 0,0,180 });
+	////returnHome.SetSize({ 5,2,0 });
+	//AddComponent<Image>(returnHome);
+	//XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
+	//
+	////家に帰るテキスト
+	//Text commandText(this);
+	//commandText.SetText("家に戻る");
+	//commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	//AddComponent<Text>(commandText);
+	////hAudio_ReturnHome_=AudioManager::Load()
 
 
 	////確認の画像
@@ -106,20 +106,20 @@ void MenuUI_ReturnHome::Update()
 	//	}
 	//}
 
-	if (!isClickedButton_)
+	if (!IsClickButton())
 	{
 		//他のUIを開いてる場合
 		if (((UIBase*)pParent_)->GetCurrentOpenUINumber() != -1)
 			return;
 		if (!GetComponent<Image>().IsHitCursor())
 		{
-			GetComponent<Image>().SetPosition({ -1.2f,0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 			return;
 		}
-		GetComponent<Image>().SetPosition({ -1.1,0.5,0 });
+		GetComponent<Image>().SetPosition({ buttonPos_.x + 0.1f,buttonPos_.y,0 });
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
-			isClickedButton_ = true;
+			SetClickFlag(true);
 			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
 			cfmUI.SetConfitmentText("セーブしますか？");
@@ -127,7 +127,7 @@ void MenuUI_ReturnHome::Update()
 			cfmUI.GetCancelFunction() = [&]() {return ClickCancelButton(); };
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			//SetDrawFlag(true);
-			GetComponent<Image>().SetPosition({ -1.2f,0.5f,0 });
+			GetComponent<Image>().SetPosition(buttonPos_);
 		}
 
 	}
@@ -152,7 +152,7 @@ void MenuUI_ReturnHome::ClickOKButton()
 void MenuUI_ReturnHome::ClickCancelButton()
 {
 	((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	isClickedButton_ = false;
+	SetClickFlag(false);
 }
 
 void MenuUI_ReturnHome::Release()

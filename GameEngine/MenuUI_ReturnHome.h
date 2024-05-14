@@ -1,6 +1,6 @@
 #pragma once
-#include"UIBase.h"
-class MenuUI_ReturnHome : public UIBase
+#include"MenuUI.h"
+class MenuUI_ReturnHome : public MenuUI
 {
 	int hAudio_ReturnHome_;
 	int confirmImageNum_;

@@ -11,7 +11,7 @@ public:
 	UIBase(Object* parent,std::string uiName);
 	~UIBase();
 
-	void SetUINUmber(int num) { UINum_ = num; }
+	void SetUINumber(int num) { UINum_ = num; }
 	int GetUINumber() { return UINum_; }
 	void SetUIName(const std::string& name) { uiName_ = name; }
 	const std::string& GetUIName() { return uiName_; }

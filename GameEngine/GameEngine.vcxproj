@@ -285,7 +285,7 @@
     <ClCompile Include="MenuUI_ReturnHome.cpp" />
     <ClCompile Include="MenuUI_Save.cpp" />
     <ClCompile Include="MenuUI_Status.cpp" />
-    <ClCompile Include="Menu_Base.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Player_CollectionPart.cpp" />
@@ -436,7 +436,7 @@
     <ClInclude Include="MenuUI_ReturnHome.h" />
     <ClInclude Include="MenuUI_Save.h" />
     <ClInclude Include="MenuUI_Status.h" />
-    <ClInclude Include="Menu_Base.h" />
+    <ClInclude Include="MenuUI.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Player_CollectionPart.h" />

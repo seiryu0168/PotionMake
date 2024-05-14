@@ -468,7 +468,7 @@
     <ClCompile Include="P_MP_ItemListUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Menu_Base.cpp">
+    <ClCompile Include="MenuUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="MenuUI_Save.cpp">
@@ -935,7 +935,7 @@
     <ClInclude Include="ConfirmationUI.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Menu_Base.h">
+    <ClInclude Include="MenuUI.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="MenuUI_Item.h">
