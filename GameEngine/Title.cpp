@@ -3,9 +3,8 @@
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/newSceneManager.h"
 #include"Engine/Systems/TextSystem.h"
-#include "Engine/ResourceManager/Audio.h"
+#include "Engine/ResourceManager/AudioManager.h"
 #include"TestObject.h"
-#include"Engine/ResourceManager/Audio.h"
 
 namespace
 {
@@ -43,7 +42,7 @@ void Title::Initialize()
 
 	time_ = std::make_shared<Time::Watch>();
 
-	hAudio_ = Audio::Load("Assets/Audio/Confirm47.wav");
+	hAudio_ = AudioManager::Load("Assets/Audio/Confirm47.wav");
 
 	//Instantiate<TestObject>(this);
 
@@ -57,7 +56,7 @@ void Title::Update()
 	}
 	if(Input::IsKeyDown(DIK_SPACE)&&time_->IsLock())
 	{
-		Audio::Play(hAudio_);
+		AudioManager::Play(hAudio_);
 		time_->UnLock();
 	}
 	else if (!time_->IsLock())

@@ -7,6 +7,7 @@
 #include"ResourceStatusData.h"
 #include"CollectionPart/P_CP_CollectedItemUI.h"
 #include"CloseButton.h"
+#include"Engine/Components/Audio.h"
 MenuUI_Item::MenuUI_Item(Object* parent)
 	:UIBase(parent,"MenuUI_Item"),
 	isClickedButton_(false)
@@ -52,6 +53,7 @@ void MenuUI_Item::Update()
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
 			isClickedButton_ = true;
+			pParent_->GetComponent<Audio>().Play();
 			CretateItemList();
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			//SetDrawFlag(true);

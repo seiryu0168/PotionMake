@@ -6,7 +6,7 @@
 #include "../InterSceneData.h"
 #include "../Engine/DirectX_11/Input.h"
 #include "../Player_CollectionPart.h"
-#include "../Engine/ResourceManager/Audio.h"
+#include "../Engine/ResourceManager/AudioManager.h"
 
 namespace
 {
@@ -48,7 +48,7 @@ void Play_CollectionPart_BaseUI::Initialize()
 	itemNameText.SetPosition({ 1320,520 });
 	AddComponent<Text>(itemNameText);
 
-	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Confirm29.wav");
+	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
 }
 
 void Play_CollectionPart_BaseUI::Start()
@@ -62,7 +62,7 @@ void Play_CollectionPart_BaseUI::Update()
 	//UIが開かれていなければEscキーでメニューを開く
 	if (Input::IsKeyDown(DIK_ESCAPE)&&!isUIOpened_)
 	{
-		Audio::Play(hAudio_UIOpen_);
+		AudioManager::Play(hAudio_UIOpen_);
 		Instantiate<P_CP_MenuUI>(this);
 		SetUIOpenFlag(true);
 	}

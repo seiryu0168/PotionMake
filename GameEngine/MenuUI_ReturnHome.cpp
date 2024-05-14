@@ -4,8 +4,9 @@
 #include "Engine/DirectX_11/Input.h"
 #include "InterSceneData.h"
 #include"CollectionPart/P_CP_MenuUI.h"
-#include"Engine/ResourceManager/Audio.h"
+//#include"Engine/ResourceManager/AudioManager.h"
 #include"ConfirmationUI.h"
+#include"Engine/Components/Audio.h"
 
 MenuUI_ReturnHome::MenuUI_ReturnHome(Object* parent)
 	:UIBase(parent,"MenuUI_ReturnHome"),
@@ -35,7 +36,7 @@ void MenuUI_ReturnHome::Initialize()
 	commandText.SetText("家に戻る");
 	commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
 	AddComponent<Text>(commandText);
-	//hAudio_ReturnHome_=Audio::Load()
+	//hAudio_ReturnHome_=AudioManager::Load()
 
 
 	////確認の画像
@@ -119,6 +120,7 @@ void MenuUI_ReturnHome::Update()
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
 			isClickedButton_ = true;
+			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
 			cfmUI.SetConfitmentText("セーブしますか？");
 			cfmUI.GetConfirmFunction() = [&]() {return ClickOKButton(); };

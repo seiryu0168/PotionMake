@@ -2,7 +2,9 @@
 #include "Engine/Systems/ImageSystem.h"
 #include "Engine/Systems/TextSystem.h"
 #include "Engine/DirectX_11/Input.h"
-#include "Engine/ResourceManager/Audio.h"
+#include "Engine/ResourceManager/AudioManager.h"
+#include"Engine/Systems/AudioSystem.h"
+
 ConfirmationUI::ConfirmationUI(Object* parent)
 	:GameObject(parent,"ConfirmationUI")
 	
@@ -60,6 +62,13 @@ void ConfirmationUI::Initialize()
 		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f,imagePos.y - imageSize.y * 0.5f });
 		AddComponent<Text>(commandText);
 	}
+	Audio confirmAudio(this);
+	confirmAudio.Load("Assets/Audio/Confirm51.wav");
+	AddComponent<Audio>(confirmAudio);
+
+	Audio cancelAudio(this);
+	cancelAudio.Load("Assets/Audio/Cancel09.wav");
+	AddComponent<Audio>(cancelAudio);
 }
 
 void ConfirmationUI::Start()
@@ -75,6 +84,7 @@ void ConfirmationUI::Update()
 		{
 			if (isSetConfirmFunction_)
 				confirmFunction_();
+			GetComponent<Audio>(0).Play();
 			KillMe();
 		}
 	}
@@ -87,6 +97,7 @@ void ConfirmationUI::Update()
 		{
 			if (isSetCancelFunction_)
 				cancelFunction_();
+			GetComponent<Audio>(1).Play();
 			KillMe();
 		}
 	}

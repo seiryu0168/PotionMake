@@ -1,7 +1,7 @@
 #include "CloseButton.h"
 #include "Engine/Systems/ImageSystem.h"
 #include "Engine/DirectX_11/Input.h"
-#include "Engine/ResourceManager/Audio.h"
+#include "Engine/ResourceManager/AudioManager.h"
 CloseButton::CloseButton(Object* parent)
 	:GameObject(parent,"CloseButton"),
 	isSetFunction_(false)
@@ -20,7 +20,7 @@ void CloseButton::Initialize()
 	closeImage.SetSize({ 0.6f,0.6f,0 });
 	AddComponent<Image>(closeImage);
 
-	hAudio_Close_ = Audio::Load("Assets/Audio/Cancel09.wav");
+	hAudio_Close_ = AudioManager::Load("Assets/Audio/Cancel09.wav");
 }
 
 void CloseButton::Start()
@@ -31,7 +31,7 @@ void CloseButton::Update()
 {
 	if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
 	{
-		Audio::Play(hAudio_Close_);
+		AudioManager::Play(hAudio_Close_);
 		if (isSetFunction_)
 			clickedFunction_();
 		pParent_->KillMe();

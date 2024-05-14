@@ -7,9 +7,11 @@
 
 #include"ResourceManager/ModelManager_ECSver.h"
 #include"ResourceManager/ImageManager_ECSver.h"
-#include"ResourceManager/Audio.h"
+#include"ResourceManager/AudioManager.h"
 #include"ResourceManager/TextureManager.h"
 
+
+#include"Systems/AudioSystem.h"
 #include"Systems/PhysicsSystem.h"
 #include"Systems/TransformSystem.h"
 #include"Systems/ColliderSystem.h"
@@ -25,7 +27,6 @@
 #include"Coordinator.h"
 #include "newSceneManager.h"
 #include"../InterSceneData.h"
-#include "ResourceManager/Audio.h"
 #include "../Division.h"
 
 //変数
@@ -38,13 +39,14 @@ namespace
 	UINT changeCount_;
 	std::string sceneFile_;
 	std::unordered_map<SCENE_ID, std::shared_ptr<SceneBase>> sceneList_;
-	std::shared_ptr<SceneBase> currentScene_;
-	std::shared_ptr<ColliderSystem> pColliderSystem_;
-	std::shared_ptr<ModelSystem> pModelSyatem_;
-	std::shared_ptr<ParticleSystem> pParticleSystem_;
+	std::shared_ptr<SceneBase>			currentScene_;
+	std::shared_ptr<AudioSystem>		pAudioSystem_;
+	std::shared_ptr<ColliderSystem>		pColliderSystem_;
+	std::shared_ptr<ModelSystem>		pModelSyatem_;
+	std::shared_ptr<ParticleSystem>		pParticleSystem_;
 	std::shared_ptr<LineParticleSystem> pLineParticleSystem_;
-	std::shared_ptr<TextSystem> pTextSystem_;
-	std::shared_ptr<ImageSystem> pImageSystem_;
+	std::shared_ptr<TextSystem>			pTextSystem_;
+	std::shared_ptr<ImageSystem>		pImageSystem_;
 
 	int MAX_LAYER = 4;
 }
@@ -61,11 +63,11 @@ namespace newSceneManager
 
 	void Initialize()
 	{
-		prevSceneName_ = SCENE_ID::TITLE;
+		prevSceneName_	  = SCENE_ID::TITLE;
 		currentSceneName_ = SCENE_ID::TITLE;
-		nextSceneName_ = SCENE_ID::TITLE;
-		isSceneChange_ = false;
-		changeCount_ = 0;
+		nextSceneName_	  = SCENE_ID::TITLE;
+		isSceneChange_	  = false;
+		changeCount_	  = 0;
 		ECSInitialize();
 
 		SceneInitialize();
@@ -81,9 +83,9 @@ namespace newSceneManager
 			Division::setLoad(true);
 			currentScene_->AllKillObject();
 			//オーディオネームスペースの解放
-			Audio::Release();
+			AudioManager::Release();
 			//オーディオネームスペースの初期化
-			Audio::Initialize();
+			AudioManager::Initialize();
 			//コンポーネントの削除
 			Coordinator::AllRemove();
 			//モデルの解放
@@ -167,6 +169,7 @@ namespace newSceneManager
 		pLineParticleSystem_->CheckRemove();
 		pImageSystem_->CheckRemove();
 		pTextSystem_->CheckRemove();
+		pAudioSystem_->CheckRemove();
 		currentScene_->CheckKillObject();
 	}
 
@@ -192,12 +195,14 @@ namespace newSceneManager
 		//ECSの初期化
 		Coordinator::RegisterSystem<PhysicsSystem>();
 		Coordinator::RegisterSystem<TransformSystem>();
+		pAudioSystem_ = Coordinator::RegisterSystem<AudioSystem>();
 		pTextSystem_ = Coordinator::RegisterSystem<TextSystem>();
 		pModelSyatem_ = Coordinator::RegisterSystem<ModelSystem>();
 		pParticleSystem_ = Coordinator::RegisterSystem<ParticleSystem>();
 		pLineParticleSystem_ = Coordinator::RegisterSystem<LineParticleSystem>();
 		pColliderSystem_ = Coordinator::RegisterSystem<ColliderSystem>();
 		pImageSystem_ = Coordinator::RegisterSystem<ImageSystem>();
+		Coordinator::RegisterComponent<Audio>();
 		Coordinator::RegisterComponent<Text>();
 		Coordinator::RegisterComponent<Collider>();
 		Coordinator::RegisterComponent<Particle>();
@@ -205,6 +210,7 @@ namespace newSceneManager
 		Coordinator::RegisterComponent<Transform>();
 		Coordinator::RegisterComponent<Test_Model_ECSver>();
 		Coordinator::RegisterComponent<Image>();
+
 		Signature phy_signature;
 		phy_signature.set(Coordinator::GetComponentType<Gravity>());
 		phy_signature.set(Coordinator::GetComponentType<RigidBody>());
@@ -224,6 +230,8 @@ namespace newSceneManager
 		model_signature.set(Coordinator::GetComponentType<Test_Model_ECSver>());
 		Signature image_signature;
 		image_signature.set(Coordinator::GetComponentType<Image>());
+		Signature audio_signature;
+		audio_signature.set(Coordinator::GetComponentType<Audio>());
 
 		Coordinator::SetSystemSignature<PhysicsSystem>(phy_signature);
 		Coordinator::SetSystemSignature<TransformSystem>(trans_signature);
@@ -231,6 +239,7 @@ namespace newSceneManager
 		Coordinator::SetSystemSignature<ParticleSystem>(particle_signature);
 		Coordinator::SetSystemSignature<LineParticleSystem>(lineParticle_signature);
 
+		Coordinator::SetSystemSignature<AudioSystem>(audio_signature);
 		Coordinator::SetSystemSignature<ModelSystem>(model_signature);
 		Coordinator::SetSystemSignature<TextSystem>(text_signature);
 		Coordinator::SetSystemSignature<ImageSystem>(image_signature);
@@ -251,6 +260,7 @@ namespace newSceneManager
 		ModelManager_ECSver::Release();
 		ImageManager_ECSver::Release();
 		ImageManager_ECSver::StaticImageRelease();
+		AudioManager::Release();
 		TextureManager::Release();
 		TextureManager::StaticTextureRelease();
 		//D2D::

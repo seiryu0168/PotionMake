@@ -15,7 +15,7 @@
 #include"../ImGui/imgui.h"
 #include"../ImGui/imgui_impl_dx11.h"
 #include"../ImGui/imgui_impl_win32.h"
-#include"ResourceManager/Audio.h"
+#include"ResourceManager/AudioManager.h"
 #include"newSceneManager.h"
 #include "Time.h"
 //#include "Brightness.h"
@@ -111,7 +111,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	Input::Initialize(hWnd);
 	//ModelManager::Initialize();
 	CameraManager::Initialize(winW, winH);
-	Audio::Initialize();
+	AudioManager::Initialize();
 	Coordinator::Init();
 
 	//Brightness::Initialize();
@@ -223,7 +223,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	Time::Release();
 	//Brightness::Release();
-	Audio::Release();
+	AudioManager::Release();
 	DebugUI::CleanUp();
 	newSceneManager::Release();
 	//ImageManager::AllRelease();

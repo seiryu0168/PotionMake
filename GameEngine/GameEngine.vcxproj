@@ -188,6 +188,7 @@
     <ClCompile Include="Division.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="DebugUI.cpp" />
+    <ClCompile Include="Engine\Components\Audio.cpp" />
     <ClCompile Include="Engine\Components\Collider.cpp" />
     <ClCompile Include="Engine\Components\Image.cpp" />
     <ClCompile Include="Engine\Components\LineParticle.cpp" />
@@ -215,13 +216,14 @@
     <ClCompile Include="Engine\GameObject\Object.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
     <ClCompile Include="Engine\newSceneManager.cpp" />
-    <ClCompile Include="Engine\ResourceManager\Audio.cpp" />
+    <ClCompile Include="Engine\ResourceManager\AudioManager.cpp" />
     <ClCompile Include="Engine\ResourceManager\CsvReader.cpp" />
     <ClCompile Include="Engine\ResourceManager\ImageManager_ECSver.cpp" />
     <ClCompile Include="Engine\ResourceManager\ImageMediationer.cpp" />
     <ClCompile Include="Engine\ResourceManager\JsonOperator.cpp" />
     <ClCompile Include="Engine\ResourceManager\ModelManager_ECSver.cpp" />
     <ClCompile Include="Engine\ResourceManager\TextureManager.cpp" />
+    <ClCompile Include="Engine\Systems\AudioSystem.cpp" />
     <ClCompile Include="Engine\Systems\ColliderSystem.cpp" />
     <ClCompile Include="Engine\Systems\ImageSystem.cpp" />
     <ClCompile Include="Engine\Systems\LineParticleSystem.cpp" />
@@ -331,6 +333,7 @@
     <ClInclude Include="Division.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="DebugUI.h" />
+    <ClInclude Include="Engine\Components\Audio.h" />
     <ClInclude Include="Engine\Components\Collider.h" />
     <ClInclude Include="Engine\Components\Image.h" />
     <ClInclude Include="Engine\Components\LineParticle.h" />
@@ -361,7 +364,7 @@
     <ClInclude Include="Engine\GameObject\GameObject.h" />
     <ClInclude Include="Engine\GameObject\Object.h" />
     <ClInclude Include="Engine\newSceneManager.h" />
-    <ClInclude Include="Engine\ResourceManager\Audio.h" />
+    <ClInclude Include="Engine\ResourceManager\AudioManager.h" />
     <ClInclude Include="Engine\ResourceManager\CsvReader.h" />
     <ClInclude Include="Engine\ResourceManager\ImageManager_ECSver.h" />
     <ClInclude Include="Engine\ResourceManager\ImageMediationer.h" />
@@ -370,6 +373,7 @@
     <ClInclude Include="Engine\ResourceManager\ModelManager_ECSver.h" />
     <ClInclude Include="Engine\ResourceManager\TextureManager.h" />
     <ClInclude Include="Engine\SAFE_DELETE_RELEASE.h" />
+    <ClInclude Include="Engine\Systems\AudioSystem.h" />
     <ClInclude Include="Engine\Systems\ColliderSystem.h" />
     <ClInclude Include="Engine\Systems\ImageSystem.h" />
     <ClInclude Include="Engine\Systems\LineParticleSystem.h" />

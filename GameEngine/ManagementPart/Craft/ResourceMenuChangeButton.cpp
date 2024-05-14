@@ -2,7 +2,7 @@
 #include "P_MP_CraftUI_ResourceStockUI.h"
 #include "../../Engine/DirectX_11/Input.h"
 #include "../../Engine/Systems/ImageSystem.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 ResourceMenuChangeButton::ResourceMenuChangeButton(Object* parent)
 	:GameObject(parent,"ResourceMenuChangeButton"),
 	hAudio_Change_(-1)
@@ -31,7 +31,7 @@ void ResourceMenuChangeButton::Initialize()
 		AddComponent<Image>(buttonImage);
 	}
 
-	hAudio_Change_ = Audio::Load("Assets/Audio/Confirm34.wav",false,1.0f,6);
+	hAudio_Change_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,6);
 }
 
 void ResourceMenuChangeButton::Update()
@@ -44,14 +44,14 @@ void ResourceMenuChangeButton::Update()
 		{
 			GetComponent<Image>(0).SetColor(1);
 			GetComponent<Image>(1).SetColor(0.8f);
-			Audio::Play(hAudio_Change_);
+			AudioManager::Play(hAudio_Change_);
 			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ResourceSelect);
 		}
 		else if (GetComponent<Image>(1).IsHitCursor())
 		{
 			GetComponent<Image>(1).SetColor(1);
 			GetComponent<Image>(0).SetColor(0.8f);
-			Audio::Play(hAudio_Change_);
+			AudioManager::Play(hAudio_Change_);
 			((P_MP_CraftUI_ResourceStockUI*)pParent_)->ModeChange(ResourceMenuMode::ProcessSelect);
 		}
 	}

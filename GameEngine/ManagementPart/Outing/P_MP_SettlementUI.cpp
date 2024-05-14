@@ -4,7 +4,7 @@
 #include "SettlementUI_EarningTransition.h"
 #include "../../InterSceneData.h"
 #include "../../Engine/DirectX_11/Input.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../Engine/Systems/TextSystem.h"
 #include "../../InterSceneData.h"
@@ -46,6 +46,7 @@ void P_MP_SettlementUI::Initialize()
 	//売り上げのデータを更新
 	pData.gainList_.erase(pData.gainList_.begin());
 	pData.gainList_.push_back(totalGain);
+	pData.money_ += totalGain;
 	//各データのUIを作成
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"大盛況!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
@@ -75,7 +76,7 @@ void P_MP_SettlementUI::Initialize()
 	fadeImage.SetColor(0);
 	fadeImageNum_ = AddComponent<Image>(fadeImage);
 
-	hAdio_OK_ = Audio::Load("Assets/Audio/Confirm29.wav");
+	hAdio_OK_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
 }
 
 void P_MP_SettlementUI::Start()
@@ -105,7 +106,7 @@ void P_MP_SettlementUI::Update()
 	{
 		isClose_ = true;
 		time_ = 0;
-		Audio::Play(hAdio_OK_);
+		AudioManager::Play(hAdio_OK_);
 		//KillMe();
 	}
 }

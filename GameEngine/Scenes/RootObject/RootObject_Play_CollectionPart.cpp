@@ -3,7 +3,7 @@
 #include"../../Player_CollectionPart.h"
 #include"../../CollectionPart/Play_CollectionPart_StageManager.h"
 #include"../../Play_UIManager.h"
-#include"../../Engine/ResourceManager/Audio.h"
+#include"../../Engine/ResourceManager/AudioManager.h"
 RootObject_Play_CollectionPart::RootObject_Play_CollectionPart()
 {
 }
@@ -19,8 +19,8 @@ void RootObject_Play_CollectionPart::Initialize()
 	Instantiate<CollectionPart_Ground>(this);
 	Instantiate<Play_UIManager>(this);
 
-	hAudio_BGM_ = Audio::Load("Assets/Audio/CollectionPart_BGM.wav");
-	Audio::Play(hAudio_BGM_);
+	hAudio_BGM_ = AudioManager::Load("Assets/Audio/CollectionPart_BGM.wav");
+	AudioManager::Play(hAudio_BGM_);
 }
 
 void RootObject_Play_CollectionPart::Release()

@@ -11,9 +11,10 @@
 #include"SaveDataManager.h"
 #include"CollectionPart/P_CP_CollectedItemUI.h"
 #include"ResourceStatusData.h"
-#include"Engine/ResourceManager/Audio.h"
+#include"Engine/ResourceManager/AudioManager.h"
 #include"MenuUI_Save.h"
 #include"MenuUI_NewsPaper.h"
+#include"Engine/Systems/AudioSystem.h"
 #include"MenuUI_Status.h"
 #include"MenuUI_Item.h"
 
@@ -62,7 +63,10 @@ void P_MP_MenuUI::Initialize()
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
-	hAudio_Confirm_ = Audio::Load("Assets/Audio/Confirm51.wav");
+	Audio audio(this);
+	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 1);
+	AddComponent<Audio>(audio);
+	//hAudio_Confirm_ = AudioManager::Load("Assets/Audio/Confirm51.wav");
 }
 
 void P_MP_MenuUI::Start()
@@ -77,7 +81,7 @@ void P_MP_MenuUI::Update()
 	//
 	//	if (Input::IsMouseButtonUp(0))
 	//	{
-	//		Audio::Play(hAudio_Confirm_);
+	//		AudioManager::Play(hAudio_Confirm_);
 	//		DataSave();
 	//	}
 	//
@@ -92,7 +96,7 @@ void P_MP_MenuUI::Update()
 	//	if (Input::IsMouseButtonUp(0) && !GetOpenUIFlag())
 	//	{
 	//		SetOpenUIFlag(true);
-	//		Audio::Play(hAudio_Confirm_);
+	//		AudioManager::Play(hAudio_Confirm_);
 	//
 	//		P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
 	//		ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");

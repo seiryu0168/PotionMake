@@ -4,7 +4,7 @@
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../InterSceneData.h"
 #include "../../ResourceStatusData.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 PotionCraftAnimationPot::PotionCraftAnimationPot(Object* parent)
 	:GameObject(parent,"PotionCraftAnimationPot"),
 	time_(0)
@@ -36,8 +36,8 @@ void PotionCraftAnimationPot::Initialize()
 	smoke->SetSmokeParameter(3.0f, 0, 30, 0.1f, 0.6f, {-0.2f,0.2f});
 	smoke->PlaySmoke();
 
-	hAudio_Bubble_ = Audio::Load("Assets/Audio/Bubble01.wav");
-	Audio::Play(hAudio_Bubble_);
+	hAudio_Bubble_ = AudioManager::Load("Assets/Audio/Bubble01.wav");
+	AudioManager::Play(hAudio_Bubble_);
 
 }
 

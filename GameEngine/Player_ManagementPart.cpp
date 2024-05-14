@@ -9,7 +9,7 @@
 #include"ManagementPartObjectBase.h"
 #include"ManagementPart/Play_ManagementPart_BaseUI.h"
 #include"UIBase.h"
-#include"Engine/ResourceManager/Audio.h"
+#include"Engine/ResourceManager/AudioManager.h"
 Player_ManagementPart::Player_ManagementPart(Object* parent)
 	:Player(parent,"Player_ManagementPart"),
 	canMoveArea_({18,20}),
@@ -33,7 +33,7 @@ void Player_ManagementPart::Initialize()
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0, 10, 1, 0));
 
-	hAudio_Move_ = Audio::Load("Assets/Audio/Walk01.wav");
+	hAudio_Move_ = AudioManager::Load("Assets/Audio/Walk01.wav");
 }
 
 void Player_ManagementPart::Start()
@@ -88,7 +88,7 @@ void Player_ManagementPart::MoveControll()
 	}
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
-		Audio::Play(hAudio_Move_);
+		AudioManager::Play(hAudio_Move_);
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
 		moveBuff.y = 0;
 		GetMoveVec() = XMLoadFloat3(&moveBuff);
@@ -102,7 +102,7 @@ void Player_ManagementPart::MoveControll()
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	}
 	else
-		Audio::Stop(hAudio_Move_);
+		AudioManager::Stop(hAudio_Move_);
 }
 
 void Player_ManagementPart::Release()

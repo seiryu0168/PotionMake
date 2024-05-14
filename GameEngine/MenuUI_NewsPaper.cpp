@@ -7,6 +7,7 @@
 #include"ResourceStatusData.h"
 #include"P_MP_NewsPaper.h"
 #include"CloseButton.h"
+#include"Engine/Components/Audio.h"
 MenuUI_NewsPaper::MenuUI_NewsPaper(Object* parent)
 	:UIBase(parent,"MenuUI_NewsPaper"),
 	isClickedButton_(false),
@@ -82,6 +83,7 @@ void MenuUI_NewsPaper::Update()
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
 			isClickedButton_ = true;
+			pParent_->GetComponent<Audio>().Play();
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			SetDrawFlag(true);
 			GetComponent<Image>().SetPosition({ -1.2f,0.2f,0 });

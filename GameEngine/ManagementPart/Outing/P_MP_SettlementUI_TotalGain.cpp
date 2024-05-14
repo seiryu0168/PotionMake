@@ -1,7 +1,7 @@
 #include "P_MP_SettlementUI_TotalGain.h"
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../Engine/Systems/TextSystem.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 P_MP_SettlementUI_TotalGain::P_MP_SettlementUI_TotalGain(Object* parent)
 	:GameObject(parent,"P_MP_SettlementUI_TotalGain"),
 	uiPos_({ 0.2f,0.5f,0 }),
@@ -43,7 +43,7 @@ void P_MP_SettlementUI_TotalGain::Initialize()
 	time_ = std::make_shared<Time::Watch>();
 	time_->UnLock();
 
-	hAudio_Money_ = Audio::Load("Assets/Audio/ShowMoney.wav",false,0.7f,10);
+	hAudio_Money_ = AudioManager::Load("Assets/Audio/ShowMoney.wav",false,0.7f,10);
 }
 
 void P_MP_SettlementUI_TotalGain::Start()
@@ -59,7 +59,7 @@ void P_MP_SettlementUI_TotalGain::Update()
 		currentGain_ += gainDiff_;
 
 		if(count_%8==0)
-		Audio::Play(hAudio_Money_);
+		AudioManager::Play(hAudio_Money_);
 		GetComponent<Text>(1).SetText(std::to_string((int)currentGain_));
 		if (currentGain_ >= totalGain_)
 		{

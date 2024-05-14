@@ -5,7 +5,7 @@
 #include"../../SaveDataManager.h"
 #include"../../InterSceneData.h"
 #include"../../PlayerData.h"
-#include"../../Engine/ResourceManager/Audio.h"
+#include"../../Engine/ResourceManager/AudioManager.h"
 //#include"../../TestObject.h"
 //#include"../../SelectUI.h"
 //#include"../../Title.h"
@@ -34,8 +34,8 @@ void RootObject_Title::Initialize()
 	InterSceneData::AddData_NonOverWrite(rData);
 	InterSceneData::AddData_NonOverWrite(data);
 
-	hAudio_BGM_ = Audio::Load("Assets/Audio/Title_BGM.wav",true);
-	Audio::Play(hAudio_BGM_);
+	hAudio_BGM_ = AudioManager::Load("Assets/Audio/Title_BGM.wav",true);
+	AudioManager::Play(hAudio_BGM_);
 	//PlayerData& playerData = *InterSceneData::GetData<PlayerData>("Data01");
 	//loader.Save("", playerData);
 

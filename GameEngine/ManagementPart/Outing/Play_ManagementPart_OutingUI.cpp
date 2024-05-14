@@ -6,7 +6,7 @@
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../Engine/DirectX_11/Input.h"
 #include "../../Engine/newSceneManager.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 
 Play_ManagementPart_OutingUI::Play_ManagementPart_OutingUI(Object* parent)
 	:UIBase(parent,"Play_ManagementPart_OutingUI"),
@@ -40,7 +40,7 @@ void Play_ManagementPart_OutingUI::Initialize()
 
 	Instantiate<P_MP_OutingUI_ActionText>(this);
 
-	hAudio_OpenDoor_ = Audio::Load("Assets/Audio/OpenDoor01.wav");
+	hAudio_OpenDoor_ = AudioManager::Load("Assets/Audio/OpenDoor01.wav");
 }
 
 void Play_ManagementPart_OutingUI::Update()
@@ -84,7 +84,7 @@ void Play_ManagementPart_OutingUI::Outing(int num)
 
 void Play_ManagementPart_OutingUI::SetOutNumber(int num)
 {
-	Audio::Play(hAudio_OpenDoor_);
+	AudioManager::Play(hAudio_OpenDoor_);
 	outingNumber_ = num;
 	GetComponent<Text>().isDraw_ = false;
 }

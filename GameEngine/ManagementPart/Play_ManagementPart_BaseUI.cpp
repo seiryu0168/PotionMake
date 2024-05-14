@@ -6,7 +6,7 @@
 #include"../Engine/Systems/ImageSystem.h"
 #include"../Engine/DirectX_11/Input.h"
 #include"../P_MP_MenuUI.h"
-#include"../Engine/ResourceManager/Audio.h"
+#include"../Engine/ResourceManager/AudioManager.h"
 
 Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),
@@ -34,7 +34,7 @@ void Play_ManagementPart_BaseUI::Initialize()
 	text.SetPosition({ 1320,520 });
 	AddComponent<Text>(text);
 
-	hAudio_UIOpen_ = Audio::Load("Assets/Audio/Confirm29.wav");
+	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
 }
 
 void Play_ManagementPart_BaseUI::Start()
@@ -50,7 +50,7 @@ void Play_ManagementPart_BaseUI::Update()
 		Direct3D::SetClipCursor();
 		isAccessUI_ = true;
 
-		Audio::Play(hAudio_UIOpen_);
+		AudioManager::Play(hAudio_UIOpen_);
 		Instantiate<P_MP_MenuUI>(this);
 	}
 }
@@ -63,7 +63,7 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 {
 	Direct3D::ShowMouseCursor(true);
 	Direct3D::SetClipCursor();
-	Audio::Play(hAudio_UIOpen_);
+	AudioManager::Play(hAudio_UIOpen_);
 	switch (uiNum)
 	{
 	case 0:

@@ -11,7 +11,7 @@
 #include "../../ResourceStatusData.h"
 #include "../../InterSceneData.h"
 #include "../../ResourceStatusData.h"
-#include "../../Engine/ResourceManager/Audio.h"
+#include "../../Engine/ResourceManager/AudioManager.h"
 namespace
 {
 	std::string statusName = "筋防魔速運";
@@ -52,8 +52,8 @@ void P_MP_CraftUI_CraftPot::Initialize()
 	Instantiate<P_MP_CraftUI_PrepareButton>(this);
 	potionColorArray_ = InterSceneData::GetData<ResourceStatusData>("ResourceData")->statusColor_;
 	
-	hAudio_Add_ = Audio::Load("Assets/Audio/Confirm34.wav",false,1.0f,5);
-	hAudio_Sub_ = Audio::Load("Assets/Audio/Confirm50.wav",false,1.0f,5);
+	hAudio_Add_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,5);
+	hAudio_Sub_ = AudioManager::Load("Assets/Audio/Confirm50.wav",false,1.0f,5);
 }
 
 void P_MP_CraftUI_CraftPot::Start()
@@ -70,7 +70,7 @@ bool P_MP_CraftUI_CraftPot::AddResourceData(int itemNum,std::string resourceName
 {
 	if ((cost_+2) > costLimit_)
 		return false;
-	Audio::Play(hAudio_Add_);
+	AudioManager::Play(hAudio_Add_);
 	cost_ += 2;
 
 	//データマップにデータが無かったら
@@ -112,7 +112,7 @@ bool P_MP_CraftUI_CraftPot::SubResourceData(int itemNum)
 	if (dataMap_.find(itemNum) == dataMap_.end())
 		return false;
 
-	Audio::Play(hAudio_Sub_);
+	AudioManager::Play(hAudio_Sub_);
 
 	cost_ -= 2;
 	//素材の数を減らす
@@ -150,7 +150,7 @@ bool P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 	if((cost_ + 3) > costLimit_)
 		return false;
 
-	Audio::Play(hAudio_Add_);
+	AudioManager::Play(hAudio_Add_);
 
 	cost_ += 3;
 	//加工方法の番号を追加
@@ -165,7 +165,7 @@ bool P_MP_CraftUI_CraftPot::AddProcessData(int processNum)
 bool P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 {
 
-	Audio::Play(hAudio_Sub_);
+	AudioManager::Play(hAudio_Sub_);
 
 	cost_ -= 3;
 	//加工方法の番号を削除

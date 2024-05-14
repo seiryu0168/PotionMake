@@ -11,8 +11,9 @@
 #include "../Engine/newSceneManager.h"
 #include "../PlayerData.h"
 #include "../ResourceStatusData.h"
-#include "../Engine/ResourceManager/Audio.h"
+#include "../Engine/ResourceManager/AudioManager.h"
 #include "../MenuUI_ReturnHome.h"
+#include"../Engine/Systems/AudioSystem.h"
 
 P_CP_MenuUI::P_CP_MenuUI(Object* parent)
 	:UIBase(parent,"P_CP_MenuUI"),
@@ -72,7 +73,10 @@ void P_CP_MenuUI::Initialize()
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
-	hAudio_Select_= Audio::Load("Assets/Audio/Confirm51.wav");
+	Audio audio(this);
+	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 1);
+	AddComponent<Audio>(audio);
+	//hAudio_Select_= AudioManager::Load("Assets/Audio/Confirm51.wav");
 
 }
 
@@ -98,7 +102,7 @@ void P_CP_MenuUI::Update()
 	//
 	//	if (Input::IsMouseButtonUp(0))
 	//	{
-	//		Audio::Play(hAudio_Select_);
+	//		AudioManager::Play(hAudio_Select_);
 	//		SaveItemData();
 	//		FindChild("CloseButton")->KillMe();
 	//		isReturnHome_ = true;
@@ -134,7 +138,7 @@ void P_CP_MenuUI::SaveItemData()
 
 void P_CP_MenuUI::PlayAudio_Select()
 {
-	Audio::Play(hAudio_Select_);
+	//AudioManager::Play(hAudio_Select_);
 }
 
 void P_CP_MenuUI::ReturnHome()

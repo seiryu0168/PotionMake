@@ -1,11 +1,27 @@
 #pragma once
 #include <string>
+#include <memory>
+#include <xaudio2.h>
 
 //-----------------------------------------------------------
 //サウンドを管理する（XAudio使用）
 //-----------------------------------------------------------
-namespace Audio
+namespace AudioManager
 {
+	struct AudioData
+	{
+		//サウンド情報
+		XAUDIO2_BUFFER buf = {};
+
+		//ソースボイス
+		std::unique_ptr<IXAudio2SourceVoice* []> pSourceVoice = nullptr;
+
+		//同時再生最大数
+		int svNum;
+
+		//ファイル名
+		std::string fileName;
+	};
 	//初期化
 	void Initialize();
 
@@ -14,8 +30,8 @@ namespace Audio
 	//引数：fileName	ファイル名
 	//引数：svNum　		同時に鳴らす最大数（省略可）
 	//戻値：そのデータに割り当てられた番号
-	int Load(const std::string& fileName,bool loopFlg=false,float volume=1.0f, int svNum = 1);
-
+	int Load(const std::string& fileName,bool loopFlag=false,float volume=1.0f, int svNum = 1);
+	std::shared_ptr<AudioData> Load_Component(const std::string& fileName, bool loopFlag = false, float volume = 1.0f, int svNum = 1);
 	//再生
 	//引数：handle	鳴らしたいサウンドの番号
 	void Play(int ID);

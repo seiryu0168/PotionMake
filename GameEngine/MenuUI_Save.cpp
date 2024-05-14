@@ -6,6 +6,7 @@
 #include"PlayerData.h"
 #include"SaveDataManager.h"
 #include"ConfirmationUI.h"
+#include"Engine/Components/Audio.h"
 
 MenuUI_Save::MenuUI_Save(Object* parent)
 	:UIBase(parent,"MenuUI_Save"),
@@ -114,6 +115,7 @@ void MenuUI_Save::Update()
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
 			isClickedButton_ = true;
+			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
 			cfmUI.SetConfitmentText("セーブしますか？");
 			cfmUI.GetConfirmFunction() = [&]() {return DataSave(); };

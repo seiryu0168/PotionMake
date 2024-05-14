@@ -6,6 +6,7 @@
 #include"PlayerData.h"
 #include"Status.h"
 #include"CloseButton.h"
+#include"Engine/Components/Audio.h"
 
 MenuUI_Status::MenuUI_Status(Object* parent)
 	:UIBase(parent,"MenuUI_Status"),
@@ -69,6 +70,7 @@ void MenuUI_Status::Update()
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
 			isClickedButton_ = true;
+			pParent_->GetComponent<Audio>().Play();
 			status_ = Instantiate<Status>(this);
 			CloseButton& clsBtn = *Instantiate<CloseButton>(status_);
 			clsBtn.GetComponent<Image>().SetPosition({ -0.2f,0.5f,0 });

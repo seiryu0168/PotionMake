@@ -129,7 +129,7 @@
     <ClCompile Include="Engine\GameObject\GameObject.cpp">
       <Filter>ソース ファイル\Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\ResourceManager\Audio.cpp">
+    <ClCompile Include="Engine\ResourceManager\AudioManager.cpp">
       <Filter>ソース ファイル\Engine\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ResourceManager\TextureManager.cpp">
@@ -492,6 +492,12 @@
     <ClCompile Include="MenuUI_Item.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Systems\AudioSystem.cpp">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Components\Audio.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -551,7 +557,7 @@
     <ClInclude Include="Engine\GameObject\GameObject.h">
       <Filter>ソース ファイル\Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\ResourceManager\Audio.h">
+    <ClInclude Include="Engine\ResourceManager\AudioManager.h">
       <Filter>ソース ファイル\Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\ResourceManager\TextureManager.h">
@@ -943,6 +949,12 @@
     </ClInclude>
     <ClInclude Include="MenuUI_Item.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Systems\AudioSystem.h">
+      <Filter>ソース ファイル\Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Components\Audio.h">
+      <Filter>ソース ファイル\Engine\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

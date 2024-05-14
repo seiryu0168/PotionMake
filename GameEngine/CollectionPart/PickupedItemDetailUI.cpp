@@ -5,7 +5,7 @@
 #include "../CloseButton.h"
 #include "../InterSceneData.h"
 #include "../ResourceStatusData.h"
-#include "../Engine/ResourceManager/Audio.h"
+#include "../Engine/ResourceManager/AudioManager.h"
 PickupedItemDetailUI::PickupedItemDetailUI(Object* parent)
 	:GameObject(parent, "PickupedItemDetailUI"),
 	uiPos_({ -0.2f,0,0 }),
@@ -28,8 +28,8 @@ void PickupedItemDetailUI::Initialize()
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.4,0.55,0 });
 
-	hAudio_OpenUI_ = Audio::Load("Assets/Audio/Confirm34.wav");
-	Audio::Play(hAudio_OpenUI_);
+	hAudio_OpenUI_ = AudioManager::Load("Assets/Audio/Confirm34.wav");
+	AudioManager::Play(hAudio_OpenUI_);
 }
 
 void PickupedItemDetailUI::Start()
