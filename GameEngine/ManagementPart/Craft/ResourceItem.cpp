@@ -23,7 +23,7 @@ void ResourceItem::Initialize()
 	//‘fŞ‚Ì”
 	Text countText(this);
 	countText.SetLayer(1);
-	countText.SetRect({ 0,0,50,50 });
+	countText.SetRect({ 0,0,100,50 });
 	countText.SetTextSize(32);
 	countText.SetText("0");
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
@@ -40,6 +40,9 @@ void ResourceItem::Start()
 
 void ResourceItem::Update()
 {
+	if (!isLoadedImage_)
+		return;
+
 	//ƒJ[ƒ\ƒ‹‚ª‰æ‘œ‚É“–‚½‚Á‚Ä‚¢‚½‚ç
 	if (GetComponent<Image>().IsHitCursor())
 	{

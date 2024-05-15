@@ -215,7 +215,7 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 	CsvReader reader("Assets/SaveData/GameData/ModelNameList.csv");
 	for (auto itr = resourceStatusFile["StatusColor"].begin(); itr != resourceStatusFile["StatusColor"].end(); itr++)
 	{
-		data.statusColor_.push_back({ itr.value().at(0),itr.value().at(1),itr.value().at(2) });
+		data.statusColor_.push_back({ itr.value().at(0)/255.0f,itr.value().at(1)/255.0f,itr.value().at(2)/255.0f });
 	}
 	for (int i=0;i<reader.GetLines();i++)
 	{
@@ -252,7 +252,10 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 		statusData.status04_		  = itr.value().at(7);
 		data.processDataMap_.insert({ statusData.resourceNumber_,statusData });
 	}
-
+	for (auto itr = resourceStatusFile["StatusIcon"].begin(); itr != resourceStatusFile["StatusIcon"].end(); itr++)
+	{
+		data.statusIcon_.push_back(itr.value());
+	}
 	reader.Load("Assets/SaveData/GameData/NewsPaperData.csv");
 
 	for (int i = 0; i < reader.GetLines(); i++)
@@ -270,5 +273,4 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 
 		data.newsPaperList_.push_back(statusData);
 	}
-
 }

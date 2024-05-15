@@ -7,7 +7,13 @@
 #include "../../Engine/ResourceManager/AudioManager.h"
 PotionMenu::PotionMenu(Object* parent)
 	:GameObject(parent,"PotionMenu"),
-	isConfirm_(false)
+	isConfirm_(false),
+	sellButtonImageNum_(-1),
+	hAudio_Select_(-1),
+	hAudio_Confirm_(-1),
+	hAudio_Cancel_(-1),
+	disposeButtonImageNum_(-1),
+	cancelButtonImageNum_(-1)
 {
 }
 
@@ -24,8 +30,8 @@ void PotionMenu::Initialize()
 	baseImage.SetSize({ 1.3f,1.3f,0 });
 	AddComponent<Image>(baseImage);
 
-	hAudio_Select_= AudioManager::Load("Assets/Audio/Confirm34.wav");
-	hAudio_Cancel_= AudioManager::Load("Assets/Audio/Confirm50.wav");
+	hAudio_Select_= AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,10);
+	hAudio_Cancel_= AudioManager::Load("Assets/Audio/Confirm50.wav",false,1.0f,10);
 	
 }
 
@@ -56,16 +62,17 @@ void PotionMenu::Update()
 		else
 		{
 
-			AudioManager::Play(hAudio_Select_);
 			if (GetComponent<Image>(sellButtonImageNum_).IsHitCursor())
 			{
 				((PotionStock*)pParent_)->AddSellPotion();
+				AudioManager::Play(hAudio_Select_);
 				KillMe();
 			}
 
 			if (GetComponent<Image>(disposeButtonImageNum_).IsHitCursor())
 			{
 				((PotionStock*)pParent_)->AddDisposePotion();
+				AudioManager::Play(hAudio_Select_);
 				KillMe();
 			}
 		}

@@ -2,7 +2,8 @@
 #include "../../Engine/Systems/ImageSystem.h"
 PotionSlot::PotionSlot(Object* parent)
 	:GameObject(parent,"PotionSlot"),
-	potionNum_(-1)
+	potionNum_(-1),
+	potionImageNum_(-1)
 {
 }
 

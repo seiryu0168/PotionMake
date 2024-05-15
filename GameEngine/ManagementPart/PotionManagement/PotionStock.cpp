@@ -17,17 +17,21 @@ namespace
 }
 
 PotionStock::PotionStock(Object* parent)
-	:GameObject(parent,"PotionStock"),
+	:GameObject(parent, "PotionStock"),
 	havePotion_(false),
 	potionNum_(-1),
 	potionImageNum_(-1),
-	potionColor_({0,0,0}),
+	potionColor_({ 0,0,0 }),
 	isSelect_(false),
 	isCountDown_(false),
 	isConfirm_(false),
 	confirmImageNum_(-1),
 	selectedSlot_(SelectSlot::None),
-	time_(0)
+	time_(0),
+	topStatus_(0),
+	sellUI_(nullptr),
+	disposeUI_(nullptr),
+	price_(0)
 {
 
 }

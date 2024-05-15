@@ -161,6 +161,7 @@ void P_CP_CollectedItemUI::SetDummy()
 	{
 		Image backImage(this);
 		backImage.Load("Assets/Image/ItemBaseImage.png");
+		backImage.SetColor(0.8f);
 		backImage.SetPosition({ uiPos_.x + diffPos_.x,uiPos_.y + diffPos_.y,0 });
 		AddComponent<Image>(backImage);
 		diffPos_.x += 0.16f;

@@ -24,13 +24,19 @@ void PickupedItem::Start()
 
 void PickupedItem::Update()
 {
-	
-	if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor()&&canSelect_)
+	if (GetComponent<Image>().IsHitCursor() && canSelect_)
 	{
-		//ëfçﬁÇÃè⁄ç◊
-		Instantiate<PickupedItemDetailUI>(this)->SetItemData(itemNum_);
-		((P_CP_CollectedItemUI*)pParent_)->SetSelectFlag(false);
+
+		GetComponent<Image>().SetColor(1.0f);
+		if (Input::IsMouseButtonUp(0)&& canSelect_)
+		{
+			//ëfçﬁÇÃè⁄ç◊
+			Instantiate<PickupedItemDetailUI>(this)->SetItemData(itemNum_);
+			((P_CP_CollectedItemUI*)pParent_)->SetSelectFlag(false);
+		}
 	}
+	else
+		GetComponent<Image>().SetColor(0.8f);
 }
 
 void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int itemCount, const std::string& itemImageName, XMFLOAT3 pos)
@@ -39,6 +45,7 @@ void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int ite
 	Image backImage(this);
 	backImage.Load("Assets/Image/ItemBaseImage.png");
 	backImage.SetPosition(pos);
+	backImage.SetColor(0.8f);
 	AddComponent<Image>(backImage);
 
 	//ëfçﬁÇÃâÊëú
@@ -52,9 +59,9 @@ void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int ite
 	//ëfçﬁÇÃêî
 	Text countText(this);
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
-	countText.SetPosition({textPos.x,textPos.y});
-	countText.SetRect({ 0,0,50,50 });
-	countText.SetTextSize(40);
+	countText.SetPosition({textPos.x-40,textPos.y+30});
+	countText.SetRect({ 0,0,100,50 });
+	countText.SetTextSize(33);
 	countText.SetText(std::to_string(itemCount));
 	AddComponent<Text>(countText);
 	itemCount_ = itemCount;

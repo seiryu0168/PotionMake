@@ -26,9 +26,9 @@ void PickupedItemDetailUI::Initialize()
 	backImage.SetSize({ 6,10,0 });
 	AddComponent<Image>(backImage);
 	GameObject* button = Instantiate<CloseButton>(this);
-	button->GetComponent<Image>().SetPosition({ -0.4,0.55,0 });
+	button->GetComponent<Image>().SetPosition({ -0.4f,0.55f,0 });
 
-	hAudio_OpenUI_ = AudioManager::Load("Assets/Audio/Confirm34.wav");
+	hAudio_OpenUI_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,10);
 	AudioManager::Play(hAudio_OpenUI_);
 }
 

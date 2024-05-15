@@ -22,7 +22,9 @@ P_MP_CraftUI_CraftPot::P_MP_CraftUI_CraftPot(Object* parent)
 	potionStatusObject_(nullptr),
 	standPosition_({-0.84f,0.53f}),
 	cost_(0),
-	costLimit_(10)
+	costLimit_(10),
+	hAudio_Add_(-1),
+	hAudio_Sub_(-1)
 {
 }
 
