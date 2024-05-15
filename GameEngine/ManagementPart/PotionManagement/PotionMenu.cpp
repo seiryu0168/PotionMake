@@ -132,14 +132,15 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);
 
 		XMFLOAT3 imagePos = cancelButton.GetPositionAtPixel();
+		XMFLOAT3 size = cancelButton.GetSizeAtPixel();
 		Text cancelText(this);
 		cancelText.SetText("キャンセル");
 		cancelText.SetTextSize(50);
 		cancelText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
-		cancelText.SetRect({ 0,0,220,60 });
+		cancelText.SetRect({ 0,0,size.x,size.y });
 		cancelText.SetLayer(1);
 		cancelText.SetColor({ 1,1,1,1 });
-		cancelText.SetPosition({ imagePos.x-100,imagePos.y-5});
+		cancelText.SetPosition({ imagePos.x- size.x*0.5f,imagePos.y- size .y*0.5f});
 		AddComponent<Text>(cancelText);
 	}
 	//選択されてなければ販売/破棄ボタンを表示

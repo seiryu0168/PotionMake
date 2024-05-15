@@ -43,6 +43,7 @@ namespace Input
 		pDInput->CreateDevice(GUID_SysMouse, &pMouseDevice, nullptr);
 		pMouseDevice->SetDataFormat(&c_dfDIMouse);
 		pMouseDevice->SetCooperativeLevel(hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND);
+		
 
 		//コントローラー
 		for (int i = 0; i < PAD_MAX; i++)

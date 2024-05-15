@@ -47,44 +47,44 @@ SaveDataManager::~SaveDataManager()
 
 void SaveDataManager::Init()
 {
-	nlohmann::json playerFile;
-	playerFile["Name"] = "player01";
-	playerFile["Money"] = 0;
-	playerFile["NewsPaperNumber"] = 0;
-	playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
-	playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
-	
-	playerFile["ItemList"] = { {0,u8"パワーフラワー","ResourceImage01.png",999},
-							   {1,u8"魔力草","ResourceImage02.png",999},
-							   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
-							   {3,u8"ハーヤ草","ResourceImage03.png",999} };
-	
-	playerFile["PotionList"] = { {u8"筋・運・魔のポーション Lv.2",
-								  2,	
-								  true,
-								  17,
-								  300,
-								  2.3f,1.1f,1.5f,0.6f,2.1f,
-								  0.3f,0.3f,0.3f},
-								 {u8"防のポーション Lv.2",
-								  2,
-								  true,
-								  2,
-								  300,
-								  1.6f,2.1f,1.2f,1.6f,1.3f,
-								  0.3f,0.3f,0.3f},
-								 {u8"万能ポーション Lv.2\n筋・防・魔・運",
-								  2,
-								  true,
-								  23,
-								  300,
-								  2.1f,2.9f,2.5f,1.3f,2.0f,
-								  0.3f,0.3f,0.3f} };
-
-	playerFile["GainList"] = { 100,300,500,200,600 };
-	
-	std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
-	of << playerFile << std::endl;
+	//nlohmann::json playerFile;
+	//playerFile["Name"] = "player01";
+	//playerFile["Money"] = 0;
+	//playerFile["NewsPaperNumber"] = 0;
+	//playerFile["ResourceFileName"] = "Assets/SaveData/ResourceFile01";
+	//playerFile["PotionDataFileName"] = "Assets/SaveData/PotionDataFile01";
+	//
+	//playerFile["ItemList"] = { {0,u8"パワーフラワー","ResourceImage01.png",999},
+	//						   {1,u8"魔力草","ResourceImage02.png",999},
+	//						   {2,u8"ラッキーキノコ","ResourceImage04.png",999},
+	//						   {3,u8"ハーヤ草","ResourceImage03.png",999} };
+	//
+	//playerFile["PotionList"] = { {u8"筋・運・魔のポーション Lv.2",
+	//							  2,	
+	//							  true,
+	//							  17,
+	//							  300,
+	//							  2.3f,1.1f,1.5f,0.6f,2.1f,
+	//							  0.3f,0.3f,0.3f},
+	//							 {u8"防のポーション Lv.2",
+	//							  2,
+	//							  true,
+	//							  2,
+	//							  300,
+	//							  1.6f,2.1f,1.2f,1.6f,1.3f,
+	//							  0.3f,0.3f,0.3f},
+	//							 {u8"万能ポーション Lv.2\n筋・防・魔・運",
+	//							  2,
+	//							  true,
+	//							  23,
+	//							  300,
+	//							  2.1f,2.9f,2.5f,1.3f,2.0f,
+	//							  0.3f,0.3f,0.3f} };
+	//
+	//playerFile["GainList"] = { 100,300,500,200,600 };
+	//
+	//std::ofstream of("Assets/SaveData/PlayerData01.json",std::ios::out);
+	//of << playerFile << std::endl;
 	//
 	//nlohmann::json resourceStatusFile;
 	//resourceStatusFile["StatusColor"] = { {238.0f / 255.0f,131.0f / 255.0f,111.0f / 255.0f},//柔らかい赤系の色
@@ -166,6 +166,7 @@ void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 {
 	nlohmann::json playerFile;
 	playerFile["Name"] = data.name_;
+	playerFile["Money"] = data.money_;
 	playerFile["NewsPaperNumber"] = data.newsPaperNumber_;
 	playerFile["ResourceFileName"] = data.resourceFileName_;	// "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = data.potionDataFileName_;//"Assets/SaveData/PotionDataFile01";

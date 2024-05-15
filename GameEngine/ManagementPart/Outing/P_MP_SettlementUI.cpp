@@ -34,7 +34,7 @@ void P_MP_SettlementUI::Initialize()
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
 	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[pData.newsPaperNumber_];
 	
-	//ポーチションのデータから販売総額を計算
+	//ポーションのデータから販売総額を計算
 	for (PlayerData::PotionData& potionData : pData.potionDataList_)
 	{
 		if(potionData.isSale_)
@@ -44,7 +44,9 @@ void P_MP_SettlementUI::Initialize()
 		}
 	}
 	//売り上げのデータを更新
+	if(pData.gainList_.size()>=5)
 	pData.gainList_.erase(pData.gainList_.begin());
+	
 	pData.gainList_.push_back(totalGain);
 	pData.money_ += totalGain;
 	//各データのUIを作成

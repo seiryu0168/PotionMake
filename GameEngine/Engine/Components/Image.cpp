@@ -15,11 +15,13 @@ XMFLOAT3 Image::ConvertToRatio(XMFLOAT3 pos)
 XMFLOAT3 Image::ConvertToPixel(XMFLOAT3 pos)
 {
 	//XMINT2 halfScreen =  {Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight()};
-	XMINT2 halfScreen = {Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight()};
+	XMINT2 halfScreen = Direct3D::GetWindwSize();//{Direct3D::GetScreenWidth(),Direct3D::GetScreenHeight()};
+	int diff = (Direct3D::GetScreenHeight() - halfScreen.y);
 	//halfScreen.x = halfScreen.x * 0.5f;
 	//halfScreen.y = halfScreen.y * 0.5f;
-	pos.x = halfScreen.x*0.5f+((pos.x * halfScreen.x*0.5f));
-	pos.y = halfScreen.y*0.5f + ((-pos.y * halfScreen.y*0.5f));
+	pos.x = halfScreen.x * 0.5f + ((pos.x * halfScreen.x*0.5f));
+	pos.y = halfScreen.y * 0.5f + (-pos.y * halfScreen.y*0.5f);
+	//pos.y = (halfScreen.y*0.5f + ((-pos.y * halfScreen.y*0.5f)))-diff;
 
 	return pos;
 }
@@ -245,8 +247,10 @@ bool Image::IsHitCursor()
 	XMFLOAT3 imagePos = ConvertToPixel(transform_.position_);
     float wid = (pSprite_->GetSize().x * transform_.scale_.x*0.5f);
     float hgt = (pSprite_->GetSize().y * transform_.scale_.y*0.5f);
+	int screenHeight = Direct3D::GetScreenHeight();
+	int windowHeight = Direct3D::GetWindwSize().y;
 
-	imagePos.y -=  (Direct3D::GetScreenHeight()- Direct3D::GetWindwSize().y)*0.25f;
+	imagePos.y -= (screenHeight*0.5f-windowHeight*0.5f)*((float)mousePos.y/(float)screenHeight);
 
 	float Left = imagePos.x	  - wid;
 	float Top = imagePos.y  - hgt;

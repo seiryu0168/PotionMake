@@ -100,13 +100,19 @@ void TestObject::Initialize()
 	
 	
 	Image image(this);
-	image.Load("Assets\\Image\\ItemBaseImage.png");
+	image.Load("Assets\\Image\\GaugeImage01.png");
+	image.SetLayer(1);
 	//XMFLOAT3 pos = { -1.0f,0.001f,0 };
-	image.SetPosition({0,0.5f,0});
+	image.SetPosition({0,-1,0});
 	//image.SetDrawTarget(0);
 	image.SetSize({ 1,1,0 });
+	AddComponent<Image>(image);
 
-	AddComponent<Image>(image);	
+	Image back(this);
+	back.Load("Assets/Image/PotionManagerUIBase1.png");
+	back.SetColor(0);
+	back.SetSize({ 2,2,0 });
+	AddComponent<Image>(back);
 
 	Text txt(this);
 	txt.SetText("");
@@ -120,8 +126,11 @@ void TestObject::Initialize()
 void TestObject::Update()
 {
 	XMFLOAT3 pos = StoreFloat3(Input::GetMousePosition());
+	XMFLOAT3 imgPos = GetComponent<Image>().GetPositionAtPixel();
 	std::string msg = "x:" + std::to_string(pos.x)+"\n";
 	msg += "y:" + std::to_string(pos.y)+"\n";
+	msg += "imgX:" + std::to_string(imgPos.x)+"\n";
+	msg += "imgY:" + std::to_string(imgPos.y)+"\n";
 	if (GetComponent<Image>().IsHitCursor())
 	{
 		msg += "Hit";
