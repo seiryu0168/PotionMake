@@ -76,7 +76,7 @@ void P_MP_MenuUI::Initialize()
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
 	Audio audio(this);
-	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 1);
+	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 5);
 	AddComponent<Audio>(audio);
 	//hAudio_Confirm_ = AudioManager::Load("Assets/Audio/Confirm51.wav");
 }

@@ -149,6 +149,8 @@ void MenuUI_Save::ClickOKButton()
 {
 	pParent_->GetComponent<Audio>().Play();
 	DataSave();
+	((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
+	SetClickFlag(false);
 }
 
 void MenuUI_Save::ClickCancelButton()

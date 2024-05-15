@@ -44,7 +44,8 @@ void Title::Initialize()
 
 	hAudio_ = AudioManager::Load("Assets/Audio/Confirm47.wav");
 
-	//Instantiate<TestObject>(this);
+	Instantiate<TestObject>(this);
+	Input::SetMousePosition(1920, 1080);
 
 }
 

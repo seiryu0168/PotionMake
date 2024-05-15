@@ -28,6 +28,7 @@ namespace Input
 		DIMOUSESTATE prevMouseState;
 
 		int connectedController_;
+		//int 
 
 	void Initialize(HWND hWnd)
 	{

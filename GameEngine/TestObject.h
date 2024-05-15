@@ -5,6 +5,7 @@ class TestObject : public GameObject
 private:
 	int hModel_;
 	int time_;
+	float delta_;
 	XMVECTOR vPos_;
 	XMFLOAT3 imagePos_;
 public:

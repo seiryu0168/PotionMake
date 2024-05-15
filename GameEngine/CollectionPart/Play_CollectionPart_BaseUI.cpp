@@ -45,7 +45,7 @@ void Play_CollectionPart_BaseUI::Initialize()
 	Text itemNameText(this);
 	itemNameText.SetText("");
 	itemNameText.SetRect({ 0,0,500,500 });
-	itemNameText.SetPosition({ 1320,520 });
+	itemNameText.SetPosition({ 1320,500 });
 	AddComponent<Text>(itemNameText);
 
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");

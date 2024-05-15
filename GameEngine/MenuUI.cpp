@@ -20,7 +20,7 @@ void MenuUI::SetButton(const std::string& imageName, const std::string& msg, con
 	XMFLOAT3 textPos = btnImage.GetPositionAtPixel();
 	Text saveText(this);
 	saveText.SetText(msg);
-	saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
+	saveText.SetPosition({ textPos.x + 200,textPos.y - 45 });
 	AddComponent<Text>(saveText);
 }
 

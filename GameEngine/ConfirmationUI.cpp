@@ -43,7 +43,7 @@ void ConfirmationUI::Initialize()
 		commandText.SetRect(rect);
 		commandText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
 		commandText.SetText("OK");
-		commandText.SetPosition({ imagePos.x-imageSize.x*0.5f,imagePos.y - imageSize.y * 0.5f });
+		commandText.SetPosition({ imagePos.x-imageSize.x*0.5f,imagePos.y - imageSize.y * 0.5f});
 		AddComponent<Text>(commandText);
 	}
 	Image cancel(this);
@@ -59,7 +59,7 @@ void ConfirmationUI::Initialize()
 		commandText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
 		commandText.SetTextSize(45);
 		commandText.SetText("ƒLƒƒƒ“ƒZƒ‹");
-		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f,imagePos.y - imageSize.y * 0.5f });
+		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f + 10,imagePos.y - imageSize.y * 0.5f });
 		AddComponent<Text>(commandText);
 	}
 	Audio confirmAudio(this);

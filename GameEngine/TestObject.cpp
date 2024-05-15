@@ -16,7 +16,8 @@ TestObject::TestObject(Object* parent)
 	hModel_(-1),
 	time_(0),
 	vPos_(XMVectorSet(0,0,10.1f,0)),
-	imagePos_({0,0,0})
+	imagePos_({0,0,0}),
+	delta_(0.02f)
 {
 	//DrawComponent<Test_Model_ECSver>()
 	
@@ -131,6 +132,8 @@ void TestObject::Update()
 	msg += "y:" + std::to_string(pos.y)+"\n";
 	msg += "imgX:" + std::to_string(imgPos.x)+"\n";
 	msg += "imgY:" + std::to_string(imgPos.y)+"\n";
+	msg += "inputX:"+ std::to_string(imagePos_.x) + "\n";
+	msg += "inputY:"+ std::to_string(imagePos_.y) + "\n";
 	if (GetComponent<Image>().IsHitCursor())
 	{
 		msg += "Hit";
@@ -140,15 +143,16 @@ void TestObject::Update()
 	GetComponent<Text>().SetText(msg);
 
 	if (Input::IsKey(DIK_W))
-		imagePos_.y += 0.02f;
+		imagePos_.y += delta_;
 	if (Input::IsKey(DIK_A))
-		imagePos_.x -= 0.02f;
+		imagePos_.x -= delta_;
 	if (Input::IsKey(DIK_S))
-		imagePos_.y -= 0.02f;
+		imagePos_.y -= delta_;
 	if (Input::IsKey(DIK_D))
-		imagePos_.x += 0.02f;
-
+		imagePos_.x += delta_;
 	GetComponent<Image>().SetPosition(imagePos_);
+	//XMFLOAT3 imgpos = GetComponent<Image>().GetPositionAtPixel();
+	//	GetComponent<Text>().SetPosition({ imgpos.x,imgpos.y });
 
 	//time_++;
 	//vPos_ = XMVector3Rotate(vPos_, XMQuaternionRotationAxis(XMVectorSet(0, 1.0f, 0, 0), XMConvertToRadians(1)));
