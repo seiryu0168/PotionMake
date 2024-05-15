@@ -118,7 +118,7 @@ void MenuUI_Save::Update()
 			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
 			cfmUI.SetConfitmentText("セーブしますか？");
-			cfmUI.GetConfirmFunction() = [&]() {return DataSave(); };
+			cfmUI.GetConfirmFunction() = [&]() {return ClickOKButton(); };
 			cfmUI.GetCancelFunction() = [&]() {return ClickCancelButton(); };
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
 			//SetDrawFlag(true);
@@ -147,6 +147,8 @@ void MenuUI_Save::SetDrawFlag(bool flag)
 
 void MenuUI_Save::ClickOKButton()
 {
+	pParent_->GetComponent<Audio>().Play();
+	DataSave();
 }
 
 void MenuUI_Save::ClickCancelButton()

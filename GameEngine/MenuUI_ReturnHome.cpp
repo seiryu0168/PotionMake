@@ -122,7 +122,7 @@ void MenuUI_ReturnHome::Update()
 			SetClickFlag(true);
 			pParent_->GetComponent<Audio>().Play();
 			ConfirmationUI& cfmUI = *Instantiate<ConfirmationUI>(this);
-			cfmUI.SetConfitmentText("セーブしますか？");
+			cfmUI.SetConfitmentText("家に帰りますか？");
 			cfmUI.GetConfirmFunction() = [&]() {return ClickOKButton(); };
 			cfmUI.GetCancelFunction() = [&]() {return ClickCancelButton(); };
 			((UIBase*)pParent_)->SetCurrentOpenUINumber(GetUINumber());
@@ -152,6 +152,7 @@ void MenuUI_ReturnHome::ClickOKButton()
 void MenuUI_ReturnHome::ClickCancelButton()
 {
 	((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
+	pParent_->GetComponent<Audio>().Play();
 	SetClickFlag(false);
 }
 

@@ -16,7 +16,6 @@ public:
 	void Start() override;
 	void Update() override;
 	void SaveItemData();
-	void PlayAudio_Select();
 	void ReturnHome();
 	void Release() override;
 };

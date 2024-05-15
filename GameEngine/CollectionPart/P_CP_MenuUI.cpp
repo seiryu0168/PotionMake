@@ -13,7 +13,9 @@
 #include "../ResourceStatusData.h"
 #include "../Engine/ResourceManager/AudioManager.h"
 #include "../MenuUI_ReturnHome.h"
-#include"../Engine/Systems/AudioSystem.h"
+#include "../MenuUI_Item.h"
+#include "../MenuUI_Status.h"
+#include "../Engine/Systems/AudioSystem.h"
 
 P_CP_MenuUI::P_CP_MenuUI(Object* parent)
 	:UIBase(parent,"P_CP_MenuUI"),
@@ -53,8 +55,13 @@ void P_CP_MenuUI::Initialize()
 	fadeImage.SetSize({ 2,2,0 });
 	AddComponent<Image>(fadeImage);
 
-	Instantiate<MenuUI_ReturnHome>(this);
+	MenuUI& status = *Instantiate<MenuUI_Status>(this);
+	status.SetButton("Assets/Image/SelectImage3.png", "ステータス", { -1.2f,0.5f,0 });
+	status.SetUINumber(0);
 
+	MenuUI& rtnHome = *Instantiate<MenuUI_ReturnHome>(this);
+	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.25f,0 });
+	rtnHome.SetUINumber(1);
 	//集めた素材のUI
 	//P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
 	//Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
@@ -74,7 +81,7 @@ void P_CP_MenuUI::Initialize()
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
 	Audio audio(this);
-	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 1);
+	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 5);
 	AddComponent<Audio>(audio);
 	//hAudio_Select_= AudioManager::Load("Assets/Audio/Confirm51.wav");
 
@@ -95,23 +102,6 @@ void P_CP_MenuUI::Update()
 			newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 		return;
 	}
-	////カーゾルが画像に当たってた場合
-	//if (GetComponent<Image>(returnImageNum_).IsHitCursor())
-	//{
-	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.1,0.5,0 });
-	//
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		AudioManager::Play(hAudio_Select_);
-	//		SaveItemData();
-	//		FindChild("CloseButton")->KillMe();
-	//		isReturnHome_ = true;
-	//		//newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
-	//	}
-	//
-	//}
-	//else
-	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.5f,0 });
 
 }
 
@@ -134,11 +124,6 @@ void P_CP_MenuUI::SaveItemData()
 		pData->AddResourceItemData(data);
 	}
 
-}
-
-void P_CP_MenuUI::PlayAudio_Select()
-{
-	//AudioManager::Play(hAudio_Select_);
 }
 
 void P_CP_MenuUI::ReturnHome()

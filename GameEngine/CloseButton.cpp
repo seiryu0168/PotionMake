@@ -20,7 +20,7 @@ void CloseButton::Initialize()
 	closeImage.SetSize({ 0.6f,0.6f,0 });
 	AddComponent<Image>(closeImage);
 
-	hAudio_Close_ = AudioManager::Load("Assets/Audio/Cancel09.wav");
+	hAudio_Close_ = AudioManager::Load("Assets/Audio/Cancel09.wav",false,1.0f,5);
 }
 
 void CloseButton::Start()
