@@ -75,44 +75,44 @@ void P_MP_SettlementUI_PotionList::CreateListUI(const std::vector<PlayerData::Po
 void P_MP_SettlementUI_PotionList::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
 {
 	XMINT3 color = { 102,100,82 };
+	XMINT2 windowSize = Direct3D::GetWindwSize();
 	Text craftUIText(this);
 	craftUIText.SetText(str);
 	craftUIText.SetTextSize(55.0f);
-	craftUIText.SetLayer(1);
 	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;
 	TEXT_RECT rect = { 0,0,rectSize + diff.x,(float)craftUIText.GetTextSize() + diff.y };
-	XMFLOAT2 ratio = { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
-	ratio.x -= (rect.right / Direct3D::GetScreenWidth()) * 0.5f;
+	XMFLOAT2 txtPos = { 0,0 };
+	txtPos.x = (pos.x * windowSize.x * 0.5f) + (windowSize.x * 0.5f);//= { 0.5f + (pos.x * 0.5f), 0.5f - (pos.y * 0.5f) };
+	txtPos.y = (-pos.y * windowSize.y * 0.5f) + (windowSize.y * 0.5f);
+
+	txtPos.x -= (rect.right * 0.5f);
 	craftUIText.SetRect(rect);
 	craftUIText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
-	craftUIText.SetRatio(ratio.x, ratio.y);
+	craftUIText.SetPosition({ txtPos.x, txtPos.y });
 	AddComponent<Text>(craftUIText);
 
-	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / Direct3D::GetScreenHeight() };
+	XMFLOAT2 imagePos = { pos.x ,pos.y - rect.bottom / windowSize.y };
 	Image base(this);
-	base.Load("Assets/Image/UIBaseImage3.png");
+	base.Load("Assets/Image/UIBaseImage2.png");
+	base.SetColorInt(color);
 	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
 	base.SetPosition({ imagePos.x,imagePos.y,0 });
-	base.SetColorInt(color);
-	base.SetLayer(1);
 	XMFLOAT3 size = base.GetSizeAtPixel();
 	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
 
-	float distance = rect.right / Direct3D::GetScreenWidth();
+	float distance = rect.right / windowSize.x;
 	Image start(this);
-	start.Load("Assets/Image/UILong04_Start.png");
-	start.SetSize({ size.y / 256,size.y / 256,0.0f });
+	start.Load("Assets/Image/UILong03_Start.png");
 	start.SetColorInt(color);
-	start.SetLayer(1);
+	start.SetSize({ size.y / 256,size.y / 256,0.0f });
 	//start.SetRotation({ 0,0,180 });
 	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
 	AddComponent<Image>(start);
 
 	Image end(this);
-	end.Load("Assets/Image/UILong04_End.png");
-	end.SetSize({ size.y / 256,size.y / 256,0.0f });
+	end.Load("Assets/Image/UILong03_End.png");
 	end.SetColorInt(color);
-	end.SetLayer(1);
+	end.SetSize({ size.y / 256,size.y / 256,0.0f });
 	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
 	AddComponent<Image>(end);
 

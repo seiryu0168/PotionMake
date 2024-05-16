@@ -140,7 +140,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		cancelText.SetRect({ 0,0,size.x,size.y });
 		cancelText.SetLayer(1);
 		cancelText.SetColor({ 1,1,1,1 });
-		cancelText.SetPosition({ imagePos.x- size.x*0.5f,imagePos.y- size .y*0.5f});
+		cancelText.SetPosition({ imagePos.x- size.x*0.5f,imagePos.y- size .y*0.3f});
 		AddComponent<Text>(cancelText);
 	}
 	//選択されてなければ販売/破棄ボタンを表示
@@ -164,7 +164,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		sellText.SetRect({ 0,0,120,50 });
 		sellText.SetLayer(1);
 		sellText.SetColor({ 1,1,1,1 });
-		sellText.SetPosition({ imagePos.x - 50,imagePos.y});
+		sellText.SetPosition({ imagePos.x - 58,imagePos.y - 28});
 		AddComponent<Text>(sellText);
 
 		//破棄ボタン
@@ -184,7 +184,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		disposeText.SetRect({ 0,0,120,50 });
 		disposeText.SetLayer(1);
 		disposeText.SetColor({ 1,1,1,1 });
-		disposeText.SetPosition({ imagePos.x - 50,imagePos.y});
+		disposeText.SetPosition({ imagePos.x - 58,imagePos.y - 28});
 		AddComponent<Text>(disposeText);
 
 

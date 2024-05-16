@@ -7,8 +7,9 @@
 
 XMFLOAT3 Image::ConvertToRatio(XMFLOAT3 pos)
 {
-	pos.x = pos.x / (float)Direct3D::GetScreenWidth();
-	pos.y = pos.y / (float)Direct3D::GetScreenHeight();
+	XMINT2 window = Direct3D::GetWindwSize();
+	pos.x = pos.x / window.x;//(float)Direct3D::GetScreenWidth();
+	pos.y = pos.y / window.y;//(float)Direct3D::GetScreenHeight();
 	return pos;
 }
 

@@ -163,7 +163,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	AddComponent<Image>(potionEdgeImage);
 
 	pos = potionBaseImage.GetPositionAtPixel();
-	GetComponent<Text>().SetPosition({ pos.x - 25, pos.y-5});
+	GetComponent<Text>().SetPosition({ pos.x - 27, pos.y-15});
 
 	if (isSale)
 		selectedSlot_ = SelectSlot::Sell;

@@ -317,6 +317,7 @@
     <ClCompile Include="TestObjectChild.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UIBase.cpp" />
+    <ClCompile Include="Window_Base.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloseButton.h" />
@@ -471,6 +472,7 @@
     <ClInclude Include="TestObjectChild.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="Window_Base.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BillBoard.hlsl">

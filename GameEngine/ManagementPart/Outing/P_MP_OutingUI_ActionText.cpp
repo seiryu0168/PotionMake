@@ -16,17 +16,38 @@ P_MP_OutingUI_ActionText::~P_MP_OutingUI_ActionText()
 
 void P_MP_OutingUI_ActionText::Initialize()
 {
-	Image selectImage(this);
-	selectImage.Load("Assets/Image/SelectImage1.png");
-	selectImage.SetSize({ 1,0.18f,0 });
-	selectImage.SetAlpha(0);
-	selectImage.SetPosition({ 0,-0.02f,0 });
-	AddComponent<Image>(selectImage);
-	Text actionText(this);
-	actionText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
-	actionText.SetText("採集に出かける\n売りに行く");
-	actionText.SetPosition({ 700,500 });
-	AddComponent<Text>(actionText);
+	{
+
+		Image selectImage(this);
+		selectImage.Load("Assets/Image/SelectImage1.png");
+		selectImage.SetSize({ 1,0.18f,0 });
+		selectImage.SetAlpha(0);
+		selectImage.SetPosition({ 0,0.1f,0 });
+		AddComponent<Image>(selectImage);
+		XMFLOAT3 txtPos = selectImage.GetPositionAtPixel();
+		XMFLOAT3 txtSize = selectImage.GetSizeAtPixel();
+		Text actionText(this);
+		actionText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+		actionText.SetText("採集に出かける");
+		actionText.SetPosition({ txtPos.x - txtSize.x * 0.5f,txtPos.y - txtSize.y * 0.5f });
+		AddComponent<Text>(actionText);
+	}
+	{
+
+		Image selectImage(this);
+		selectImage.Load("Assets/Image/SelectImage1.png");
+		selectImage.SetSize({ 1,0.18f,0 });
+		selectImage.SetAlpha(0);
+		selectImage.SetPosition({ 0,-0.1f,0 });
+		AddComponent<Image>(selectImage);
+		XMFLOAT3 txtPos = selectImage.GetPositionAtPixel();
+		XMFLOAT3 txtSize = selectImage.GetSizeAtPixel();
+		Text actionText(this);
+		actionText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+		actionText.SetText("売りに行く");
+		actionText.SetPosition({ txtPos.x - txtSize.x*0.5f,txtPos.y - txtSize.y*0.5f });
+		AddComponent<Text>(actionText);
+	}
 
 	
 }
@@ -39,27 +60,55 @@ void P_MP_OutingUI_ActionText::Update()
 {
 	int forcusNum = -1;
 	//マウスの位置によって強調する
-	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
+	//XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
 	float screenH = (float)Direct3D::GetScreenHeight();
-	if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-		mousePos.y >= 480.0f && mousePos.y <= 570.0f)
+
+	if (GetComponent<Image>().IsHitCursor())
 	{
-		GetComponent<Image>().SetPosition({ 0,0.02,0 });
+		//GetComponent<Image>().SetPosition({ 0,0.02,0 });
 		GetComponent<Image>().SetAlpha(1);
 		forcusNum = 0;
-	}
-	else if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
-			 mousePos.y >= 571.0f && mousePos.y <= 658.0f)
-	{
-		GetComponent<Image>().SetPosition({ 0,-0.15f,0 });
-		GetComponent<Image>().SetAlpha(1);
-		forcusNum = 1;
 	}
 	else
 	{
 		GetComponent<Image>().SetAlpha(0);
 		forcusNum = -1;
 	}
+	if (GetComponent<Image>(1).IsHitCursor())
+	{
+		//GetComponent<Image>(1).SetPosition({ 0,0.02,0 });
+		GetComponent<Image>(1).SetAlpha(1);
+		forcusNum = 1;
+	}
+	else
+	{
+		GetComponent<Image>(1).SetAlpha(0);
+		forcusNum = -1;
+	}
+
+
+
+
+
+	//if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
+	//	mousePos.y >= 480.0f && mousePos.y <= 570.0f)
+	//{
+	//	GetComponent<Image>().SetPosition({ 0,0.02,0 });
+	//	GetComponent<Image>().SetAlpha(1);
+	//	forcusNum = 0;
+	//}
+	//else if (mousePos.x >= 700.0f && mousePos.x <= 1210.0f &&
+	//		 mousePos.y >= 571.0f && mousePos.y <= 658.0f)
+	//{
+	//	GetComponent<Image>().SetPosition({ 0,-0.15f,0 });
+	//	GetComponent<Image>().SetAlpha(1);
+	//	forcusNum = 1;
+	//}
+	//else
+	//{
+	//	GetComponent<Image>().SetAlpha(0);
+	//	forcusNum = -1;
+	//}
 	if (Input::IsMouseButtonUp(0)&& forcusNum>=0)
 	{
 		((Play_ManagementPart_OutingUI*)pParent_)->SetCloseFlag(false);

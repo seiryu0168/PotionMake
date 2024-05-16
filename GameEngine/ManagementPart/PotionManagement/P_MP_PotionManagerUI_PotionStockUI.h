@@ -1,9 +1,9 @@
 #pragma once
-#include "../../Engine/GameObject/GameObject.h"
+#include "../../Window_Base.h"
 /// <summary>
 /// É|Å[ÉVÉáÉìÇÃç›å…UI
 /// </summary>
-class P_MP_PotionManagerUI_PotionStockUI : public GameObject
+class P_MP_PotionManagerUI_PotionStockUI : public Window_Base
 {
 	std::vector<GameObject* > potionList_;
 	XMFLOAT3 uiPos_;
@@ -15,7 +15,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void InputPotionData();
-	void CreateBase();
+	//void CreateBase();
 	void CreatePotionMenu(int potionNum, const std::string& name, const XMFLOAT3& color);
 	void ConfirmPotionManagement();
 	void SetEnablePotionStock(bool isEnable);
