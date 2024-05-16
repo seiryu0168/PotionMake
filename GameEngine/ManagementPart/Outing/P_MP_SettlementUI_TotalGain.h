@@ -1,11 +1,11 @@
 #pragma once
-#include "../../Engine/GameObject/GameObject.h"
+#include "../../Window_Base.h"
 #include "../../Engine/Time.h"
 
 /// <summary>
 /// ポーションを売った時の金額を表示するクラス
 /// </summary>
-class P_MP_SettlementUI_TotalGain : public GameObject
+class P_MP_SettlementUI_TotalGain : public Window_Base
 {
 	int totalGain_;
 	float currentGain_;
@@ -24,9 +24,9 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void CreateBase();
 	void SetData(int totalGain,const std::string& evaluation);
-	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
+	//void CreateBase();
+	//void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void Release() override;
 };
 

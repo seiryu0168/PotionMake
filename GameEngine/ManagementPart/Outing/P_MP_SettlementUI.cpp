@@ -65,10 +65,14 @@ void P_MP_SettlementUI::Initialize()
 	okImageNum_ = AddComponent<Image>(okImage);
 
 	XMFLOAT3 pos = okImage.GetPositionAtPixel();
+	XMFLOAT3 size = okImage.GetSizeAtPixel();
 	Text okText(this);
 	okText.SetText("OK");
-	okText.SetRect({ 0,0,150,80 });
-	okText.SetPosition({ pos.x,pos.y - 20 });
+	okText.SetTextSize(90);
+	okText.SetRect({ 0,0,size.x,size.y });
+	okText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	okText.SetLayer(2);
+	okText.SetPosition({ pos.x - size.x*0.5f,pos.y - size.y*0.5f });
 	AddComponent<Text>(okText);
 
 	Image fadeImage(this);

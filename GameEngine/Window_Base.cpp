@@ -7,7 +7,7 @@ Window_Base::Window_Base(Object* parent, const std::string& name)
 {
 }
 
-void Window_Base::CreateBase(const std::string& backImage, const XMFLOAT3& uiPos, XMFLOAT2 windowSize,float edgeSize)
+void Window_Base::CreateBase(const std::string& backImage, const XMFLOAT3& uiPos, XMFLOAT2 windowSize,float edgeSize, int layer)
 {
 	uiPos_ = uiPos;
 	XMFLOAT3 baseImageSize;
@@ -73,12 +73,13 @@ void Window_Base::CreateBase(const std::string& backImage, const XMFLOAT3& uiPos
 	AddComponent<Image>(uiCornerImage4);
 }
 
-void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color)
+void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color, int layer)
 {
 	titlePos_ = { pos.x,pos.y,0 };
 	XMINT2 windowSize = Direct3D::GetWindwSize();
 	Text craftUIText(this);
 	craftUIText.SetText(str);
+	craftUIText.SetLayer(layer);
 	craftUIText.SetTextSize(textSize);
 	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;
 	TEXT_RECT rect = { 0,0,rectSize + diff.x,(float)craftUIText.GetTextSize() + diff.y };
@@ -96,15 +97,16 @@ void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& 
 	Image base(this);
 	base.Load("Assets/Image/UIBaseImage3.png");
 	base.SetColorInt(color);
+	base.SetLayer(layer);
 	base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
 	base.SetPosition({ imagePos.x,imagePos.y,0 });
 	XMFLOAT3 size = base.GetSizeAtPixel();
-	//XMFLOAT2 distance = { size.x / Direct3D::GetScreenWidth(),size.y / Direct3D::GetScreenHeight() };
 
 	float distance = rect.right / windowSize.x;
 	Image start(this);
 	start.Load("Assets/Image/UILong04_Start.png");
 	start.SetColorInt(color);
+	start.SetLayer(layer);
 	start.SetSize({ size.y / 256,size.y / 256,0.0f });
 	//start.SetRotation({ 0,0,180 });
 	start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
@@ -113,6 +115,7 @@ void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& 
 	Image end(this);
 	end.Load("Assets/Image/UILong04_End.png");
 	end.SetColorInt(color);
+	end.SetLayer(layer);
 	end.SetSize({ size.y / 256,size.y / 256,0.0f });
 	end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
 	titleImageNum_[2] = AddComponent<Image>(end);
@@ -120,7 +123,7 @@ void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& 
 	titleImageNum_[1] = AddComponent<Image>(base);
 }
 
-void Window_Base::ChangeTitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color)
+void Window_Base::ChangeTitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color, int layer)
 {
 	titlePos_ = { pos.x,pos.y,0 };
 	XMINT2 windowSize = Direct3D::GetWindwSize();
@@ -142,14 +145,17 @@ void Window_Base::ChangeTitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& st
 	Image& img_base = GetComponent<Image>(titleImageNum_[1]);
 	Image& img_end = GetComponent<Image>(titleImageNum_[2]);
 
+	img_base.SetLayer(layer);
 	img_base.SetColorInt(color);
 	img_base.SetPosition({ imagePos.x,imagePos.y,0 });
 	img_base.SetSize({ 0.015625f * rect.right,0.015625f * rect.bottom,0 });
 	float baseSizeY = img_base.GetSizeAtPixel().y;
 
+	img_start.SetLayer(layer);
 	img_start.SetColorInt(color);
 	img_start.SetPosition({ imagePos.x - distance - 0.03f,imagePos.y,0 });
 	img_start.SetSize({ baseSizeY / 256,baseSizeY / 256,0 });
+	img_end.SetLayer(layer);
 	img_end.SetColorInt(color);
 	img_end.SetPosition({ imagePos.x + distance + 0.03f,imagePos.y,0 });
 	img_end.SetSize({ baseSizeY / 256,baseSizeY/256,0 });

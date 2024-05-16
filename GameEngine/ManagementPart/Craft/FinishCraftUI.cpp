@@ -59,7 +59,7 @@ void FinishCraftUI::Initialize()
 	Text OKText(this);
 	OKText.SetText("OK");
 	OKText.SetLayer(2);
-	OKText.SetPosition({ 900,840 });
+	OKText.SetPosition({ 900,810 });
 	AddComponent<Text>(OKText);
 
 	hAudio_Success_ = AudioManager::Load("Assets/Audio/Success01.wav");

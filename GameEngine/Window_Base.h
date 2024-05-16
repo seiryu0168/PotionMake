@@ -20,9 +20,9 @@ public:
 	/// <param name="uiPos">ウィンドウを配置する位置</param>
 	/// <param name="windowSize">ウィンドウのサイズ。基準は1024x1024</param>
 	/// <param name="edgeSize">枠の太さ</param>
-	void CreateBase(const std::string& backImage = "Assets/Image/UIBaseImage2.png", const XMFLOAT3& uiPos = { 0,0,0 }, XMFLOAT2 windowSize = {0,0}, float edgeSize=0.3f);
-	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str,float textSize,const XMINT3& color);
-	void ChangeTitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color);
+	void CreateBase(const std::string& backImage = "Assets/Image/UIBaseImage2.png", const XMFLOAT3& uiPos = { 0,0,0 }, XMFLOAT2 windowSize = {0,0}, float edgeSize=0.3f, int layer = 0);
+	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str,float textSize,const XMINT3& color,int layer = 0);
+	void ChangeTitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str, float textSize, const XMINT3& color, int layer = 0);
 	
 };
 

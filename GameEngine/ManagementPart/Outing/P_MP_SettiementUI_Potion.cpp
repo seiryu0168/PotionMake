@@ -76,8 +76,8 @@ void P_MP_SettiementUI_Potion::SetFirstPosition(const XMFLOAT3& pos)
 	GetComponent<Image>(2).SetPosition({ pos.x - 0.2f,pos.y,0 });
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
 	XMFLOAT3 size = GetComponent<Image>().GetSizeAtPixel();
-	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x*0.5f,txtPos.y -size.y*0.5f });
-	GetComponent<Text>(1).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f + 40 });
+	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y -size.y * 0.5f });
+	GetComponent<Text>(1).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f + 30 });
 }
 
 void P_MP_SettiementUI_Potion::AddPosition(float move)

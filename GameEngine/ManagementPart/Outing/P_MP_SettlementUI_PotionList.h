@@ -1,11 +1,11 @@
 #pragma once
-#include "../../Engine/GameObject/GameObject.h"
+#include "../../Window_Base.h"
 #include "../../PlayerData.h"
 
 /// <summary>
 /// ポーションを売った時のポーション情報を表示するクラス
 /// </summary>
-class P_MP_SettlementUI_PotionList : public GameObject
+class P_MP_SettlementUI_PotionList : public Window_Base
 {
 	XMFLOAT3 uiPos_;
 	float move_;
@@ -18,7 +18,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void CreateListUI(const std::vector<PlayerData::PotionData>& potionList);
-	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
+	//void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
 	void Release() override;
 };
 
