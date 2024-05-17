@@ -53,7 +53,7 @@ void Title::Update()
 {
 	if (time_->GetSeconds<float>() >= 2.0f)
 	{
-		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
+		newSceneManager::ChangeScene(SCENE_ID::PLAY_COLLECTION);
 	}
 	if(Input::IsKeyDown(DIK_SPACE)&&time_->IsLock())
 	{

@@ -57,9 +57,9 @@ void ConfirmationUI::Initialize()
 		Text commandText(this);
 		commandText.SetRect(rect);
 		commandText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
-		commandText.SetTextSize(45);
+		commandText.SetTextSize(40);
 		commandText.SetText("ƒLƒƒƒ“ƒZƒ‹");
-		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f + 10,imagePos.y - imageSize.y * 0.5f });
+		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f + 5,imagePos.y - imageSize.y * 0.5f });
 		AddComponent<Text>(commandText);
 	}
 	Audio confirmAudio(this);

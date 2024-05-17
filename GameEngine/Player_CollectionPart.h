@@ -11,7 +11,7 @@ class Player_CollectionPart : public Player
 private:
 	P_CP_Player_ItemGetter* itemGetter_;
 	CollectionPart_Ground* ground_;
-	Play_UIManager* uiManager_;
+	//Play_UIManager* uiManager_;
 	std::unordered_map<int, int> itemCount_;
 	bool canControl_;
 	int hAudio_Move_;

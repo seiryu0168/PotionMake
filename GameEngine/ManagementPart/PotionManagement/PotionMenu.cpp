@@ -31,6 +31,7 @@ void PotionMenu::Initialize()
 	AddComponent<Image>(baseImage);
 
 	hAudio_Select_= AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,10);
+	AudioManager::Play(hAudio_Select_);
 	hAudio_Cancel_= AudioManager::Load("Assets/Audio/Confirm50.wav",false,1.0f,10);
 	
 }

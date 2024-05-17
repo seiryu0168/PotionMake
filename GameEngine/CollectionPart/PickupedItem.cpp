@@ -6,7 +6,8 @@
 #include "../Engine/DirectX_11/Input.h"
 PickupedItem::PickupedItem(Object* parent)
 	:ItemBase(parent,"PickupedItem"),
-	itemCount_(0)
+	itemCount_(0),
+	canSelect_(true)
 {
 }
 

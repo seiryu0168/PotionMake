@@ -5,6 +5,7 @@
 #include"../../Play_UIManager.h"
 #include"../../Engine/ResourceManager/AudioManager.h"
 RootObject_Play_CollectionPart::RootObject_Play_CollectionPart()
+	:hAudio_BGM_(-1)
 {
 }
 

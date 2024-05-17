@@ -9,7 +9,11 @@
 #include"Engine/ResourceManager/AudioManager.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
-	canControl_(true)
+	canControl_(true),
+	ground_(nullptr),
+	hAudio_ItemGet_(-1),
+	hAudio_Move_(-1),
+	itemGetter_(nullptr)
 {
 }
 
@@ -26,14 +30,14 @@ void Player_CollectionPart::Initialize()
 	itemGetter_ = Instantiate<P_CP_Player_ItemGetter>(pParent_);
 
 	hAudio_Move_ = AudioManager::Load("Assets/Audio/Walk01.wav");
-	hAudio_ItemGet_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 }
 
 void Player_CollectionPart::Start()
 {
+	hAudio_ItemGet_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 	SetUIManager(FindObject("Play_UIManager"));
 	ground_ = (CollectionPart_Ground*)FindObject("CollectionPart_Ground");
-	uiManager_ = (Play_UIManager*)FindObject("Play_UIManager");
+	//uiManager_ = (Play_UIManager*)FindObject("Play_UIManager");
 }
 
 void Player_CollectionPart::Update()
@@ -47,7 +51,7 @@ void Player_CollectionPart::Update()
 
 		if (itemNum >= 0)
 		{
-			((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
+			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
 			if (Input::IsMouseButtonDown(0))
 			{
 				AudioManager::Play(hAudio_ItemGet_);
@@ -56,7 +60,7 @@ void Player_CollectionPart::Update()
 			}
 		}
 		else
-			((Play_CollectionPart_BaseUI*)uiManager_->FindChild("Play_CollectionPart_BaseUI"))->HiddenItemName();
+			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->HiddenItemName();
 
 		CameraControll();
 

@@ -37,14 +37,18 @@ namespace AudioManager
 //初期化
     void AudioManager::Initialize()
     {
-        CoInitializeEx(0, COINIT_MULTITHREADED);
-
-        XAudio2Create(&pXAudio);
         HRESULT hr;
+        //hr = CoInitializeEx(0, COINIT_MULTITHREADED);
+        //if (FAILED(hr))
+        //{
+        //    MessageBox(NULL, L"AudioManager::Initialize 初期化に失敗しました", L"エラー", MB_OK);
+        //    //return hr;
+        //}
+        XAudio2Create(&pXAudio);
         hr = pXAudio->CreateMasteringVoice(&pMasteringVoice);
         if (FAILED(hr))
         {
-            MessageBox(NULL, L"マスタリングボイズの作成に失敗しました", L"エラー", MB_OK);
+            MessageBox(NULL, L"AudioManager::Initialize マスタリングボイスの作成に失敗しました", L"エラー", MB_OK);
             //return hr;
         }
     }
@@ -70,49 +74,115 @@ namespace AudioManager
         hFile = CreateFileA(fileName.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
         DWORD dwBytes = 0;
         Chunk riffChunk;
-        ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL);
-        ReadFile(hFile, &riffChunk.size, 4, &dwBytes, NULL);
+        if (ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL)==FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+       
+        if (ReadFile(hFile, &riffChunk.size, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
         char wave[4];
-        ReadFile(hFile, &wave, 4, &dwBytes, NULL);
-        Chunk formatChunk;
+        if(ReadFile(hFile, &wave, 4, &dwBytes, NULL)==FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        Chunk formatChunk = { 0 };
         while (formatChunk.id[0] != 'f') {
             if (ReadFile(hFile, &formatChunk.id, 4, &dwBytes, NULL) == FALSE)
                 return -1;
         }
-        ReadFile(hFile, &formatChunk.size, 4, &dwBytes, NULL);
+        if(ReadFile(hFile, &formatChunk.size, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
         //フォーマットを読み取る
         //https://learn.microsoft.com/ja-jp/windows/win32/api/mmeapi/ns-mmeapi-waveformatex
         WAVEFORMATEX fmt;
-        ReadFile(hFile, &fmt.wFormatTag, 2, &dwBytes, NULL);        //形式
-        ReadFile(hFile, &fmt.nChannels, 2, &dwBytes, NULL);         //チャンネル（モノラル/ステレオ）
-        ReadFile(hFile, &fmt.nSamplesPerSec, 4, &dwBytes, NULL);    //サンプリング数
-        ReadFile(hFile, &fmt.nAvgBytesPerSec, 4, &dwBytes, NULL);   //1秒あたりのバイト数
-        ReadFile(hFile, &fmt.nBlockAlign, 2, &dwBytes, NULL);       //ブロック配置
-        ReadFile(hFile, &fmt.wBitsPerSample, 2, &dwBytes, NULL);    //サンプル当たりのビット数
+        //形式
+        if (ReadFile(hFile, &fmt.wFormatTag, 2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load 形式の読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        //チャンネル（モノラル/ステレオ）
+        if(ReadFile(hFile, &fmt.nChannels,       2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load チャンネル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        //サンプリング数
+        if(ReadFile(hFile, &fmt.nSamplesPerSec,  4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load サンプリング数読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        //1秒あたりのバイト数
+        if(ReadFile(hFile, &fmt.nAvgBytesPerSec, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load バイト数読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        //ブロック配置
+        if(ReadFile(hFile, &fmt.nBlockAlign,     2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ブロック配置読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
+        //サンプル当たりのビット数
+        if(ReadFile(hFile, &fmt.wBitsPerSample,  2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ビット数読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
 
         //波形データの読み込み
         Chunk data = { 0 };
         while (data.id[0] != 'd')
         {
             if (ReadFile(hFile, &data.id, 4, &dwBytes, NULL) == FALSE)
+            {
+                MessageBox(nullptr, L"AudioManager::Load 波形データ読み込みに失敗", L"エラー", MB_OK);
                 return -1;
+            }
             if (data.id[0] == 'd' || data.id[1] == 'a')
                 break;
             else
             {
                 //サイズ調べて
-                ReadFile(hFile, &data.size, 4, &dwBytes, NULL);
+                if(ReadFile(hFile, &data.size, 4, &dwBytes, NULL)==FALSE)
+                {
+                    MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+                    return -1;
+                }
                 std::unique_ptr<char[]> pBuffer = std::make_unique<char[]>(data.size); //無駄に読み込む 
-                ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL);
+                if (ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL) == FALSE)
+                {
+                    MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+                    return -1;
+                }
             }
         }
-        ReadFile(hFile, &data.size, 4, &dwBytes, NULL);
+        if(ReadFile(hFile, &data.size, 4, &dwBytes, NULL)==FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
         char* pBuffer_ = new char[data.size];
         //std::unique_ptr<char[]> pBuffer;
         //pBuffer = std::make_unique<char[]>(data.size);
         //std::unique_ptr<char[]> pBuffer(new char[data.size]);
         //ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL);
-        ReadFile(hFile, pBuffer_, data.size, &dwBytes, NULL);
+        if (ReadFile(hFile, pBuffer_, data.size, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return -1;
+        }
         CloseHandle(hFile);
         AudioData ad;
         ad.fileName = fileName;
@@ -157,56 +227,122 @@ namespace AudioManager
         struct Chunk
         {
             char    id[5];      // ID
-            unsigned int    size;   // サイズ
+            unsigned long    size;   // サイズ
         };
         //ファイルを開く
         HANDLE hFile;
         hFile = CreateFileA(fileName.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
         DWORD dwBytes = 0;
         Chunk riffChunk;
-        ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL);
-        ReadFile(hFile, &riffChunk.size, 4, &dwBytes, NULL);
+        if (ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL)==FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+
+        if (ReadFile(hFile, &riffChunk.size, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
         char wave[4];
-        ReadFile(hFile, &wave, 4, &dwBytes, NULL);
-        Chunk formatChunk;
+        if (ReadFile(hFile, &wave, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        Chunk formatChunk = {0};
         while (formatChunk.id[0] != 'f') {
             if (ReadFile(hFile, &formatChunk.id, 4, &dwBytes, NULL) == FALSE)
                 return nullptr;
         }
-        ReadFile(hFile, &formatChunk.size, 4, &dwBytes, NULL);
+        if (ReadFile(hFile, &formatChunk.size, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
         //フォーマットを読み取る
         //https://learn.microsoft.com/ja-jp/windows/win32/api/mmeapi/ns-mmeapi-waveformatex
         WAVEFORMATEX fmt;
-        ReadFile(hFile, &fmt.wFormatTag, 2, &dwBytes, NULL);        //形式
-        ReadFile(hFile, &fmt.nChannels, 2, &dwBytes, NULL);         //チャンネル（モノラル/ステレオ）
-        ReadFile(hFile, &fmt.nSamplesPerSec, 4, &dwBytes, NULL);    //サンプリング数
-        ReadFile(hFile, &fmt.nAvgBytesPerSec, 4, &dwBytes, NULL);   //1秒あたりのバイト数
-        ReadFile(hFile, &fmt.nBlockAlign, 2, &dwBytes, NULL);       //ブロック配置
-        ReadFile(hFile, &fmt.wBitsPerSample, 2, &dwBytes, NULL);    //サンプル当たりのビット数
+        //形式
+        if (ReadFile(hFile, &fmt.wFormatTag, 2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load 形式の読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        //チャンネル（モノラル/ステレオ）
+        if (ReadFile(hFile, &fmt.nChannels, 2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load チャンネル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        //サンプリング数
+        if (ReadFile(hFile, &fmt.nSamplesPerSec, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load サンプリング数読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        //1秒あたりのバイト数
+        if (ReadFile(hFile, &fmt.nAvgBytesPerSec, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load バイト数読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        //ブロック配置
+        if (ReadFile(hFile, &fmt.nBlockAlign, 2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ブロック配置読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
+        //サンプル当たりのビット数
+        if (ReadFile(hFile, &fmt.wBitsPerSample, 2, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ビット数読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
 
         //波形データの読み込み
         Chunk data = { 0 };
         while (data.id[0] != 'd')
         {
             if (ReadFile(hFile, &data.id, 4, &dwBytes, NULL) == FALSE)
+            {
+                MessageBox(nullptr, L"AudioManager::Load 波形データ読み込みに失敗", L"エラー", MB_OK);
                 return nullptr;
+            }
             if (data.id[0] == 'd' || data.id[1] == 'a')
                 break;
             else
             {
                 //サイズ調べて
-                ReadFile(hFile, &data.size, 4, &dwBytes, NULL);
+                if (ReadFile(hFile, &data.size, 4, &dwBytes, NULL) == FALSE)
+                {
+                    MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+                    return nullptr;
+                }
                 std::unique_ptr<char[]> pBuffer = std::make_unique<char[]>(data.size); //無駄に読み込む 
-                ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL);
+                if (ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL) == FALSE)
+                {
+                    MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+                    return nullptr;
+                }
             }
         }
-        ReadFile(hFile, &data.size, 4, &dwBytes, NULL);
+        if (ReadFile(hFile, &data.size, 4, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
         char* pBuffer_ = new char[data.size];
         //std::unique_ptr<char[]> pBuffer;
         //pBuffer = std::make_unique<char[]>(data.size);
         //std::unique_ptr<char[]> pBuffer(new char[data.size]);
         //ReadFile(hFile, pBuffer.get(), data.size, &dwBytes, NULL);
-        ReadFile(hFile, pBuffer_, data.size, &dwBytes, NULL);
+        if (ReadFile(hFile, pBuffer_, data.size, &dwBytes, NULL) == FALSE)
+        {
+            MessageBox(nullptr, L"AudioManager::Load ファイル読み込みに失敗", L"エラー", MB_OK);
+            return nullptr;
+        }
         CloseHandle(hFile);
         std::shared_ptr<AudioData> ad=std::make_shared<AudioData>();
         ad->fileName = fileName;
@@ -299,7 +435,7 @@ namespace AudioManager
             itr->second.get()->buf.pAudioData = nullptr;
         }
         audioDatas_.clear();
-        CoUninitialize();
+        //CoUninitialize();
         if (pMasteringVoice)
         {
             pMasteringVoice->DestroyVoice();

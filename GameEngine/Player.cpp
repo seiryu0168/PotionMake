@@ -19,7 +19,8 @@ Player::Player(Object* parent, std::string name)
 	rotateUperLimitY_(60),
 	rotateDownerLimitY_(-60),
 	collisionObjectName_(""),
-	UIManagerObject_(nullptr)
+	UIManagerObject_(nullptr),
+	collisionUINum_(-1)
 {
 }
 
