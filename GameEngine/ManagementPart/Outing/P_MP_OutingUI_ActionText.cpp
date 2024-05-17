@@ -72,7 +72,6 @@ void P_MP_OutingUI_ActionText::Update()
 	else
 	{
 		GetComponent<Image>().SetAlpha(0);
-		forcusNum = -1;
 	}
 	if (GetComponent<Image>(1).IsHitCursor())
 	{
@@ -83,7 +82,6 @@ void P_MP_OutingUI_ActionText::Update()
 	else
 	{
 		GetComponent<Image>(1).SetAlpha(0);
-		forcusNum = -1;
 	}
 
 

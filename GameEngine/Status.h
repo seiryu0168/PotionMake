@@ -6,6 +6,8 @@ class Status : public UIBase
 	int closeButtonNum_;
 	int nameTextNum_;
 	int moneyTextNum_;
+	int craftCountTextNum_;
+	int sellCountTextNum_;
 	bool isClickedButton_;
 public:
 	Status(Object* parent);

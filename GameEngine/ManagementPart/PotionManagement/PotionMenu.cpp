@@ -79,7 +79,7 @@ void PotionMenu::Update()
 	}
 }
 
-void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOAT3& color,bool isConfirm)
+void PotionMenu::CreateMenu(int potionNum, const std::string& name, int price, const XMFLOAT3& color,bool isConfirm)
 {
 	isConfirm_ = isConfirm;
 	//ポーションの画像
@@ -116,8 +116,16 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 	potionNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	potionNameText.SetTextSize(40);
 	potionNameText.SetLayer(1);
-	potionNameText.SetPosition({ textPos.x - 250,textPos.y + 40 });
+	potionNameText.SetPosition({ textPos.x - 250,textPos.y });
 	AddComponent<Text>(potionNameText);
+
+	//Text priceText(this);
+	//priceText.SetText(std::to_string(price));
+	//priceText.SetLayer(1);
+	//priceText.SetTextSize(40);
+	//priceText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
+	//priceText.SetPosition({ textPos.x - 250,textPos.y + 60 });
+	//AddComponent<Text>(priceText);
 
 	//売るか捨てるか選択されてたらキャンセルボタンを表示
 	if (isConfirm)
@@ -126,7 +134,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, const XMFLOA
 		//キャンセルボタン
 		Image cancelButton(this);
 		cancelButton.Load("Assets/Image/ButtonImage02.png");
-		cancelButton.SetPosition({ pos.x,pos.y - 0.4f,0 });
+		cancelButton.SetPosition({ pos.x,pos.y - 0.42f,0 });
 		//cancelButton.SetSize({ 1,1,0 });
 		cancelButton.SetLayer(1);
 		cancelButtonImageNum_ = AddComponent<Image>(cancelButton);

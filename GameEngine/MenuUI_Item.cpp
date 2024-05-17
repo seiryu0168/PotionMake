@@ -6,6 +6,7 @@
 #include"PlayerData.h"
 #include"ResourceStatusData.h"
 #include"CollectionPart/P_CP_CollectedItemUI.h"
+#include"Player_CollectionPart.h"
 #include"CloseButton.h"
 #include"Engine/Components/Audio.h"
 MenuUI_Item::MenuUI_Item(Object* parent)
@@ -68,12 +69,28 @@ void MenuUI_Item::CretateItemList()
 	P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
 	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
 	//PlayerData::ResourceData_ prData = InterSceneData::GetData<PlayerData>("Data01")->itemDataList_;
-	for (auto& itr : InterSceneData::GetData<PlayerData>("Data01")->itemDataList_)
+	Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
+	if (player != nullptr)
 	{
-		collectedUI.SetItemData(itr.itemNum_,
-			rData.resourceDataMap_[itr.itemNum_].resourceName_,
-			itr.itemCount_,
-			rData.resourceDataMap_[itr.itemNum_].resourceImageName_);
+
+		for (auto& itr : player->GetItem())
+		{
+			collectedUI.SetItemData(itr.first,
+				rData.resourceDataMap_[itr.first].resourceName_,
+				itr.second,
+				rData.resourceDataMap_[itr.first].resourceImageName_);
+		}
+	}
+	else
+	{
+
+		for (auto& itr : InterSceneData::GetData<PlayerData>("Data01")->itemDataList_)
+		{
+			collectedUI.SetItemData(itr.itemNum_,
+				rData.resourceDataMap_[itr.itemNum_].resourceName_,
+				itr.itemCount_,
+				rData.resourceDataMap_[itr.itemNum_].resourceImageName_);
+		}
 	}
 
 	collectedUI.SetDummy();

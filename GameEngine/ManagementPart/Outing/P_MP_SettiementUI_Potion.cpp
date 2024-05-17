@@ -3,7 +3,12 @@
 #include "../../Engine/Systems/TextSystem.h"
 P_MP_SettiementUI_Potion::P_MP_SettiementUI_Potion(Object* parent)
 	:GameObject(parent,"P_MP_SettiementUI_Potion"),
-	isSetFirstPosition_(false)
+	isSetFirstPosition_(false),
+	potionTier_(0),
+	potionName_(""),
+	potionColor_({0,0,0}),
+	price_(0),
+	count_(0)
 {
 }
 
@@ -37,13 +42,14 @@ void P_MP_SettiementUI_Potion::Update()
 {
 }
 
-void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& name, const XMFLOAT3& color, int price)
+void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& name, const XMFLOAT3& color, int price,int count)
 {
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
 	XMFLOAT3 size = GetComponent<Image>().GetSizeAtPixel();
 	potionTier_ = potionTier;
 	potionName_ = name;
 	price_ = price;
+	count_ = count;
 
 	//ポーションのベース画像
 	Image potionBase(this);

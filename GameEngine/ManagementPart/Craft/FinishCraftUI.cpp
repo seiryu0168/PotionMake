@@ -24,10 +24,19 @@ void FinishCraftUI::Initialize()
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	PlayerData::PotionData pData = data->potionDataList_[data->potionDataList_.size() - 1];
 	
+	XMFLOAT3 potionPos = { -0.3f, 0.3f, 0 };
+	//ポーションの背景画像
+	Image backImage(this);
+	backImage.Load("Assets/Image/ItemBaseImage.png");
+	backImage.SetPosition(potionPos);
+	backImage.SetLayer(2);
+	backImage.SetSize({ 4,4,0 });
+	AddComponent<Image>(backImage);
+
 	//ポーションのボトル部分の画像
 	Image potionImage(this);
 	potionImage.Load("Assets/Image/Potion_BaseImage.png");
-	potionImage.SetPosition({ 0, 0.3f, 0 });
+	potionImage.SetPosition(potionPos);
 	potionImage.SetLayer(2);
 	potionImage.SetColor(pData.potionColor_);
 	AddComponent<Image>(potionImage);
@@ -35,18 +44,19 @@ void FinishCraftUI::Initialize()
 	//ポーションの縁の画像
 	Image edgeImage(this);
 	edgeImage.Load("Assets/Image/Potion_EdgeImage.png");
-	edgeImage.SetPosition({ 0,0.3f,0 });
+	edgeImage.SetPosition(potionPos);
 	edgeImage.SetLayer(2);
 	AddComponent<Image>(edgeImage);
-
+	
+	potionPos = edgeImage.GetPositionAtPixel();
 	//ポーションの名前
 	Text potionNameText(this);
 	potionNameText.SetRect({ 0,0,1000,200 });
 	potionNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
-	potionNameText.SetColor({ 0,0,0,1 });
+	potionNameText.SetColor({ 1,1,1,1 });
 	potionNameText.SetLayer(2);
-	potionNameText.SetText(pData.potionName_);
-	potionNameText.SetPosition({ 500,600 });
+	potionNameText.SetText(pData.potionName_+"\n\n単価:"+std::to_string(pData.price_)+"G");
+	potionNameText.SetPosition({ potionPos.x + 40,potionPos.y - 150 });
 	AddComponent<Text>(potionNameText);
 
 	//OKボタンの画像
@@ -63,6 +73,7 @@ void FinishCraftUI::Initialize()
 	AddComponent<Text>(OKText);
 
 	hAudio_Success_ = AudioManager::Load("Assets/Audio/Success01.wav");
+	hAudio_OK_ = AudioManager::Load("Assets/Audio/Confirm34.wav");
 	AudioManager::Play(hAudio_Success_);
 }
 
@@ -75,6 +86,7 @@ void FinishCraftUI::Update()
 	//OKボタンをクリックしたら
 	if (Input::IsMouseButtonDown(0) && GetComponent<Image>(okButtonImageNum_).IsHitCursor())
 	{
+		AudioManager::Play(hAudio_OK_);
 		pParent_->KillMe();
 	}
 }

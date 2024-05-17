@@ -8,7 +8,8 @@ P_MP_SettlementUI_PotionList::P_MP_SettlementUI_PotionList(Object* parent)
 	:Window_Base(parent,"P_MP_SettlementUI_PotionList"),
 	uiPos_({ -0.6f,0.0f,0 }),
 	move_(0),
-	scrollSpeed_(0.1f)
+	scrollSpeed_(0.1f),
+	potionPos_({ 0,0.3f })
 {
 }
 
@@ -65,11 +66,19 @@ void P_MP_SettlementUI_PotionList::CreateListUI(const std::vector<PlayerData::Po
 		if (data.isSale_)
 		{
 			P_MP_SettiementUI_Potion* potion = Instantiate<P_MP_SettiementUI_Potion>(this);
-			potion->SetPotionData(data.tier_, data.potionName_, data.potionColor_, data.price_);
+			potion->SetPotionData(data.tier_, data.potionName_, data.potionColor_, data.price_,0);
 			potion->SetFirstPosition({ uiPos_.x + potionPos.x,uiPos_.y + potionPos.y,0 });
 			potionPos.y -= 0.5f;
 		}
 	}
+}
+
+void P_MP_SettlementUI_PotionList::CreatePotionUI(int tier, const std::string& name, const XMFLOAT3& color, int price, int count)
+{
+	P_MP_SettiementUI_Potion* potion = Instantiate<P_MP_SettiementUI_Potion>(this);
+	potion->SetPotionData(tier, name, color, price,count);
+	potion->SetFirstPosition({ uiPos_.x + potionPos_.x,uiPos_.y + potionPos_.y,0 });
+	potionPos_.y -= 0.5f;
 }
 
 //void P_MP_SettlementUI_PotionList::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)

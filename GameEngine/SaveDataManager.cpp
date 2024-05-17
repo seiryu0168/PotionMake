@@ -115,6 +115,8 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 	//PlayerData::SaveData data;
 	data.name_ = playerFile["Name"];
 	data.money_ = playerFile["Money"];
+	data.craftCount_ = playerFile["CraftCount"];
+	data.sellCount_ = playerFile["SellCount"];
 	data.newsPaperNumber_ = playerFile["NewsPaperNumber"];
 	data.potionDataFileName_ = playerFile["PotionDataFileName"];
 	data.resourceFileName_ = playerFile["ResourceFileName"];
@@ -167,6 +169,8 @@ void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 	nlohmann::json playerFile;
 	playerFile["Name"] = data.name_;
 	playerFile["Money"] = data.money_;
+	playerFile["CraftCount"] = data.craftCount_;
+	playerFile["SellCount"] = data.sellCount_;
 	playerFile["NewsPaperNumber"] = data.newsPaperNumber_;
 	playerFile["ResourceFileName"] = data.resourceFileName_;	// "Assets/SaveData/ResourceFile01";
 	playerFile["PotionDataFileName"] = data.potionDataFileName_;//"Assets/SaveData/PotionDataFile01";

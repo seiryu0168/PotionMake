@@ -59,9 +59,13 @@ void P_CP_MenuUI::Initialize()
 	status.SetButton("Assets/Image/SelectImage3.png", "ステータス", { -1.2f,0.5f,0 });
 	status.SetUINumber(0);
 
+	MenuUI& item = *Instantiate<MenuUI_Item>(this);
+	item.SetButton("Assets/Image/SelectImage3.png", "素材", { -1.2f,0.25f,0 });
+	item.SetUINumber(1);
+
 	MenuUI& rtnHome = *Instantiate<MenuUI_ReturnHome>(this);
-	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.25f,0 });
-	rtnHome.SetUINumber(1);
+	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.0f,0 });
+	rtnHome.SetUINumber(2);
 	//集めた素材のUI
 	//P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
 	//Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");

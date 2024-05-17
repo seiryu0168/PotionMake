@@ -241,7 +241,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 				potionColor.x += potionColorArray_[j].x * colorRatio;
 				potionColor.y += potionColorArray_[j].y * colorRatio;
 				potionColor.z += potionColorArray_[j].z * colorRatio;
-				colorRatio *= 0.13f;
+				colorRatio *= 0.3f;
 				isMax_ = true;
 			}
 		}
@@ -304,6 +304,7 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	data->SortResourceList();
 	if (data->potionDataList_.size() < 30)
 		data->potionDataList_.push_back(pData);
+	data->craftCount_++;
 	((Play_ManagementPart_CraftUI*)pParent_->GetParent())->DisplayCraftProcess(itemNumList_);
 }
 

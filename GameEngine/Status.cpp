@@ -30,9 +30,20 @@ void Status::Initialize()
 	nameTextNum_ = AddComponent<Text>(name);
 
 	Text  money(this);
-	money.SetText("Š‹à:"+std::to_string(pData.money_));
-	money.SetPosition({ pos.x - size.x * 0.5f + 30,pos.y - size.y * 0.4f+100 });
+	money.SetText("Š‹à:" + std::to_string(pData.money_));
+	money.SetPosition({ pos.x - size.x * 0.5f + 30,pos.y - size.y * 0.4f + 100 });
 	moneyTextNum_ = AddComponent<Text>(money);
+	
+	Text  craftCount(this);
+	craftCount.SetText("§ì‰ñ”:"+std::to_string(pData.craftCount_));
+	craftCount.SetPosition({ pos.x - size.x * 0.5f + 30,pos.y - size.y * 0.4f+200 });
+	moneyTextNum_ = AddComponent<Text>(craftCount);
+	
+	Text  sellCount(this);
+	sellCount.SetText("”Ì”„‰ñ”:" + std::to_string(pData.sellCount_));
+	sellCount.SetPosition({ pos.x - size.x * 0.5f + 30,pos.y - size.y * 0.4f + 300 });
+	moneyTextNum_ = AddComponent<Text>(sellCount);
+
 }
 
 void Status::Start()

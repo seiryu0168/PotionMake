@@ -45,6 +45,8 @@ public:
 	int maxItemLimit_;
 	std::string name_;
 	int money_;
+	int craftCount_;
+	int sellCount_;
 	int newsPaperNumber_;
 	std::string resourceFileName_;
 	std::string potionDataFileName_;

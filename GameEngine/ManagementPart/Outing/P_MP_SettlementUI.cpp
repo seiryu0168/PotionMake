@@ -34,13 +34,16 @@ void P_MP_SettlementUI::Initialize()
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
 	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[pData.newsPaperNumber_];
 	
+	P_MP_SettlementUI_PotionList& listUI = *Instantiate<P_MP_SettlementUI_PotionList>(this);
 	//ポーションのデータから販売総額を計算
 	for (PlayerData::PotionData& potionData : pData.potionDataList_)
 	{
 		if(potionData.isSale_)
 		{
-			
-			totalGain += potionData.price_ * CalcSellCount(pData.newsPaperNumber_,potionData.topStatus_);
+			int count = CalcSellCount(pData.newsPaperNumber_, potionData.topStatus_);
+			int earnings = potionData.price_ * count;
+			totalGain += earnings;
+			listUI.CreatePotionUI(potionData.tier_, potionData.potionName_, potionData.potionColor_, earnings,count);
 		}
 	}
 	//売り上げのデータを更新
@@ -52,12 +55,9 @@ void P_MP_SettlementUI::Initialize()
 	//各データのUIを作成
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"大盛況!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
-	Instantiate<P_MP_SettlementUI_PotionList>(this)->CreateListUI(pData.potionDataList_);
+	//listUI.CreateListUI(pData.potionDataList_);
 	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % 4;
-	
-
-	//Instantiate<CloseButton>(this);
-
+	pData.sellCount_++;
 	Image okImage(this);
 	okImage.Load("Assets/Image/ButtonImage01.png");
 	okImage.SetPosition({ 0.8,-0.6,0 });
@@ -78,7 +78,7 @@ void P_MP_SettlementUI::Initialize()
 	Image fadeImage(this);
 	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
 	fadeImage.SetSize({ 2,2,0 });
-	fadeImage.SetLayer(2);
+	fadeImage.SetLayer(3);
 	fadeImage.SetColor(0);
 	fadeImageNum_ = AddComponent<Image>(fadeImage);
 

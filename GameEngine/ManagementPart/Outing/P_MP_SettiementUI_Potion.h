@@ -10,6 +10,7 @@ class P_MP_SettiementUI_Potion : public GameObject
 	bool isSetFirstPosition_;
 	int price_;
 	int totalGain_;
+	int count_;
 
 	float time_;
 public:
@@ -19,7 +20,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void SetPotionData(int potionTier, const std::string& name, const XMFLOAT3& color, int price);
+	void SetPotionData(int potionTier, const std::string& name, const XMFLOAT3& color, int price,int count);
 	void SetFirstPosition(const XMFLOAT3& pos);
 	void AddPosition(float move);
 	void Release() override;

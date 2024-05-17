@@ -89,7 +89,7 @@ void PotionStock::Update()
 		{
 			GameObject* potionMenu = Instantiate<PotionMenu>(this);
 			potionMenu->GetComponent<Image>().SetPosition({ 0.5f,0,0 });
-			((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_, potionColor_, isConfirm_);
+			((PotionMenu*)potionMenu)->CreateMenu(potionNum_, potionName_+"\n’P‰¿:"+std::to_string(price_), price_, potionColor_, isConfirm_);
 			//((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->CreatePotionMenu(potionNum_, potionName_, potionColor_);
 			((P_MP_PotionManagerUI_PotionStockUI*)pParent_)->SetEnablePotionStock(false);
 
@@ -230,7 +230,7 @@ void PotionStock::AddDisposePotion()
 	GetComponent<Text>().isDraw_ = true;
 	//‘€ì‚ªŠm’è‚µ‚½‚Ì‰æ‘œ
 	Image confirmImage(this);
-	confirmImage.Load("Assets/Image/UIBaseImage5.png");
+	confirmImage.Load("Assets/Image/ItemSlotImage.png");
 	//confirmImage.SetLayer(1);
 	confirmImage.SetPosition(pos);
 	confirmImage.SetSize({ 2,0.6f,0 });

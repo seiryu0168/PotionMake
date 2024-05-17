@@ -22,7 +22,7 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
-	void CreateMenu(int potionNum, const std::string& name, const XMFLOAT3& color,bool isConfirm);
+	void CreateMenu(int potionNum, const std::string& name,int price, const XMFLOAT3& color,bool isConfirm);
 	void Release() override;
 };
 
