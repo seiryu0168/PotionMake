@@ -72,6 +72,12 @@ namespace AudioManager
         //ファイルを開く
         HANDLE hFile;
         hFile = CreateFileA(fileName.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (hFile == INVALID_HANDLE_VALUE)
+        {
+            DWORD err = GetLastError();
+            HRESULT hr = HRESULT_FROM_WIN32(err);
+            return -1;
+        }
         DWORD dwBytes = 0;
         Chunk riffChunk;
         if (ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL)==FALSE)
@@ -232,6 +238,12 @@ namespace AudioManager
         //ファイルを開く
         HANDLE hFile;
         hFile = CreateFileA(fileName.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (hFile == INVALID_HANDLE_VALUE)
+        {
+            DWORD err = GetLastError();
+            HRESULT hr = HRESULT_FROM_WIN32(err);
+            return nullptr;
+        }
         DWORD dwBytes = 0;
         Chunk riffChunk;
         if (ReadFile(hFile, &riffChunk.id, 4, &dwBytes, NULL)==FALSE)
@@ -379,6 +391,8 @@ namespace AudioManager
     //再生
     void AudioManager::Play(int ID)
     {
+        if (ID < 0)
+            return;
         for (int i = 0; i < audioDatas[ID].svNum; i++)
         {
             XAUDIO2_VOICE_STATE state;
@@ -395,6 +409,8 @@ namespace AudioManager
 
     void AudioManager::Stop(int ID)
     {
+        if (ID < 0)
+            return;
         for (int i = 0; i < audioDatas[ID].svNum; i++)
         {
             audioDatas[ID].pSourceVoice[i]->Stop();
@@ -404,6 +420,8 @@ namespace AudioManager
 
     void AudioManager::SetVolume(int ID, float volum)
     {
+        if (ID < 0)
+            return;
         for (int i = 0; i < audioDatas[ID].svNum; i++)
         {
             audioDatas[ID].pSourceVoice[i]->SetVolume(volum);

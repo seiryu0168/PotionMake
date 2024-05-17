@@ -7,6 +7,7 @@
 #include"Play_UIManager.h"
 #include"CollectionPart/Play_CollectionPart_BaseUI.h"
 #include"Engine/ResourceManager/AudioManager.h"
+#include"Engine/Systems/AudioSystem.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
 	canControl_(true),
@@ -29,12 +30,18 @@ void Player_CollectionPart::Initialize()
 
 	itemGetter_ = Instantiate<P_CP_Player_ItemGetter>(pParent_);
 
-	hAudio_Move_ = AudioManager::Load("Assets/Audio/Walk01.wav");
+	Audio moveAudio(this);
+	moveAudio.Load("Assets/Audio/Walk01.wav");
+	hAudio_Move_ = AddComponent<Audio>(moveAudio);
+	Audio itemGetAudio(this);
+	itemGetAudio.Load("Assets/Audio/Confirm34.wav", false, 1.0f, 5);
+	hAudio_ItemGet_ = AddComponent<Audio>(itemGetAudio);
+	//hAudio_Move_ = AudioManager::Load("Assets/Audio/Walk01.wav");
+	//hAudio_ItemGet_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 }
 
 void Player_CollectionPart::Start()
 {
-	hAudio_ItemGet_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 	SetUIManager(FindObject("Play_UIManager"));
 	ground_ = (CollectionPart_Ground*)FindObject("CollectionPart_Ground");
 	//uiManager_ = (Play_UIManager*)FindObject("Play_UIManager");
@@ -54,7 +61,7 @@ void Player_CollectionPart::Update()
 			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
 			if (Input::IsMouseButtonDown(0))
 			{
-				AudioManager::Play(hAudio_ItemGet_);
+				GetComponent<Audio>(hAudio_ItemGet_).Play();
 				AddItem(itemNum);
 				itemGetter_->KillHitObject();
 			}
@@ -96,7 +103,7 @@ void Player_CollectionPart::MoveControll()
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
 
-		AudioManager::Play(hAudio_Move_);
+		GetComponent<Audio>(hAudio_Move_).Play();
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
 
 		XMFLOAT3 pos = StoreFloat3(transform_->position_);

@@ -27,6 +27,8 @@ bool Audio::Load(const std::string& fileName, bool loopFlag, float volume, int s
 
 void Audio::Play()
 {
+    if (audioData_ == nullptr)
+        return;
     for (int i = 0; i < audioData_->svNum; i++)
     {
         XAUDIO2_VOICE_STATE state;
@@ -43,6 +45,8 @@ void Audio::Play()
 
 void Audio::Stop()
 {
+    if (audioData_ == nullptr)
+        return;
     for (int i = 0; i < audioData_->svNum; i++)
     {
         audioData_->pSourceVoice[i]->Stop();
