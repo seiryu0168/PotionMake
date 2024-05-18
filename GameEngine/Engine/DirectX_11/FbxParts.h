@@ -38,6 +38,12 @@ private:
 		BOOL	 isTexture;			//テクスチャが貼ってあるかどうか
 		BOOL     isNormal;	//ノーマルマップがあるかどうか
 	};
+	//struct SHADOW_CONSTNT_BUFFER
+	//{
+	//	XMMATRIX matWVP;			//ワールド、ビュー、プロジェクション行列の合成(頂点変換に使う)
+	//	XMMATRIX matW;				//ワールド行列
+	//	XMMATRIX matNormal;			//回転行列と拡大行列の合成(法線の変形に使う)
+	//};
 
 	//頂点に格納される情報
 	//mayaだとfbx出力する時に頂点法線の設定をしないと表示がおかしくなる
@@ -102,6 +108,7 @@ public:
 	HRESULT Init(FbxNode* pNode);
 	void Draw(Transform& transform, XMFLOAT4 lineColor = { 1,1,1,1 });
 	void DrawSkinAnime(Transform& transform, FbxTime time, XMFLOAT4 lineColor = { 1,1,1,1 });
+	void DrawShadow(Transform& transform);
 	FbxSkin* GetSkinInfo() { return pSkinInfo_; }
 	bool GetBonePosition(std::string boneName, XMFLOAT3* position);
 	bool GetBonePosition(UINT num, XMFLOAT3* position);

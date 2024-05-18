@@ -78,7 +78,7 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL, f
 	tangent = normalize(tangent);
 
 	//接空間におけるライトの向きをライトベクトルと各ベクトルで求める
-	float4 light = float4(0, -1, 1, 0);
+	float4 light = g_lightDirection;
 	//outData.light.x = dot(light, tangent);
 	//outData.light.y = dot(light, biNormal);
 	//outData.light.z = dot(light, normal);

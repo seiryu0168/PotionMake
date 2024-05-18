@@ -17,6 +17,7 @@ namespace Direct3D
 	HWND hWnd_;
 	RECT* clipRect_ = nullptr;
 	bool showCursorFlag_ = true;
+	XMFLOAT4 lightDir_ = { 0,-1,0,0 };
 	XMINT2 windowSize_ = {0,0};
 
 	struct SHADER_BUNDLE
@@ -34,6 +35,18 @@ namespace Direct3D
 	XMINT2 displaySize;
 
 	D3D11_VIEWPORT vp;
+
+	ID3D11Texture2D* pDepthTexture;			//描画先
+	ID3D11RenderTargetView* pDepthRenderTargetView;	//レンダーターゲット
+	ID3D11DepthStencilView* pDepthDepthStencilView;	//ステンシルバッファ
+	ID3D11Texture2D* pDepthDepthStencil;		//深度バッファ用テクスチャ
+	ID3D11ShaderResourceView* pDepthSRV;		//深度テクスチャをシェーダーに渡すやつ
+	D3D11_VIEWPORT depthVp;
+
+	ID3D11SamplerState* pDepthSampler;
+	XMMATRIX lightViewMatrix;
+	XMMATRIX clipToUVMatrix;
+	XMMATRIX lightPrjMatrix_;
 
 	std::vector<D3D11_VIEWPORT> viewPortList_;
 	D3D11_VIEWPORT vp_01;
@@ -210,6 +223,121 @@ HRESULT Direct3D::Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowS
 	 return S_OK;
 }
 
+HRESULT Direct3D::InitDepthTexture()
+{
+	HRESULT hr;
+	//深度テクスチャの描画先作成
+	D3D11_TEXTURE2D_DESC textureDesc;
+	ZeroMemory(&textureDesc, sizeof(D3D11_TEXTURE2D_DESC));
+	textureDesc.Width = screenWidth;
+	textureDesc.Height = screenHeight;
+	textureDesc.ArraySize = 1;
+	textureDesc.MipLevels = 1;
+	textureDesc.MiscFlags = 0;
+	textureDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	textureDesc.SampleDesc.Count = 1;
+	textureDesc.SampleDesc.Quality = 0;
+	textureDesc.Usage = D3D11_USAGE_DEFAULT;
+	textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	textureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	hr = pDevice->CreateTexture2D(&textureDesc, NULL, &pDepthTexture);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture 深度テクスチャ作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//レンダーターゲットビュー作成
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc;
+	ZeroMemory(&rtvDesc, sizeof(D3D11_RENDER_TARGET_VIEW_DESC));
+	rtvDesc.Format = textureDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	rtvDesc.Texture2D.MipSlice = 0;
+
+	hr = pDevice->CreateRenderTargetView(pDepthTexture, &rtvDesc, &pDepthRenderTargetView);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture 深度テクスチャ用レンダーターゲットビュー作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	D3D11_TEXTURE2D_DESC depthDesc;
+	ZeroMemory(&depthDesc, sizeof(D3D11_TEXTURE2D_DESC));
+	depthDesc.Width = screenWidth;
+	depthDesc.Height = screenHeight;
+	depthDesc.ArraySize = 1;
+	depthDesc.MipLevels = 1;
+	depthDesc.MiscFlags = 0;
+	depthDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	depthDesc.SampleDesc.Count = 1;
+	depthDesc.SampleDesc.Quality = 0;
+	depthDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthDesc.CPUAccessFlags = 0;
+
+	hr = pDevice->CreateTexture2D(&depthDesc, NULL, &pDepthDepthStencil);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture 深度テクスチャ用デプスステンシル作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	hr = pDevice->CreateDepthStencilView(pDepthDepthStencil, NULL, &pDepthDepthStencilView);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture 深度テクスチャ用デプスステンシルビュー作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//深度テクスチャ用シェーダーリソースビュー作成
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+	ZeroMemory(&srvDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	hr = pDevice->CreateShaderResourceView(pDepthTexture, &srvDesc, &pDepthSRV);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture 深度テクスチャ用シェーダーリソースビュー作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	XMFLOAT4X4 clip = { 0.5, 0,    0, 0,
+					    0,	 -0.5, 0, 0,
+					    0,	 0,	   1, 0,
+					    0.5, 0.5,  0, 1 };
+
+	clipToUVMatrix = XMLoadFloat4x4(&clip);
+
+	depthVp.Width = (float)screenWidth;	//幅
+	depthVp.Height = (float)screenHeight;//高さ
+	depthVp.MinDepth = 0.0f;	//手前
+	depthVp.MaxDepth = 1.0f;	//奥
+	depthVp.TopLeftX = 0;	//左
+	depthVp.TopLeftY = 0;	//上
+
+	//深度テクスチャ用サンプラー作成
+	D3D11_SAMPLER_DESC  depthSmplDesc;
+	ZeroMemory(&depthSmplDesc, sizeof(D3D11_SAMPLER_DESC));
+	depthSmplDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	depthSmplDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	depthSmplDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	depthSmplDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+	lightViewMatrix = XMMatrixLookAtLH(XMVectorSet(0, 100, 0, 0),
+		XMVectorSet(0, 0, 0, 0),
+		XMVectorSet(0, 1, 0, 0));
+	lightPrjMatrix_ = XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)screenWidth / (FLOAT)screenHeight, 330, 800);
+
+	hr = Direct3D::pDevice->CreateSamplerState(&depthSmplDesc, &pDepthSampler);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"Direct3D::InitDepthTexture サンプラー作成に失敗しました", L"エラー", MB_OK);
+		return hr;
+	}
+	return TRUE;
+}
+
 //シェーダー準備
 HRESULT Direct3D::InitShader()
 {
@@ -239,6 +367,10 @@ HRESULT Direct3D::InitShader()
 		return E_FAIL;
 	}
 	if (FAILED(InitShaderSkyBox()))
+	{
+		return E_FAIL;
+	}
+	if (FAILED(InitShaderShadow()))
 	{
 		return E_FAIL;
 	}
@@ -730,6 +862,73 @@ HRESULT Direct3D::InitShaderSkyBox()
 	return S_OK;
 }
 
+HRESULT Direct3D::InitShaderShadow()
+{
+	HRESULT hr;
+	// 頂点シェーダの作成（コンパイル）
+	ID3DBlob* pCompileVS = nullptr;
+	D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+	assert(pCompileVS != nullptr);
+	hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL,
+		&shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pVertexShader);
+	if (FAILED(hr))
+	{
+		SAFE_RELEASE(pCompileVS);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//////////////////////////////////////////////////頂点インプットレイアウト///////////////////////////////////////////////
+	//HLSL(シェーダーの事)に送る情報の種類とその設定を行う
+	//1.セマンティックの名前
+	//2.セマンティックインデックス(同じセマンティックを持つ要素が複数あるときに使う)
+	//3.要素データのデータデータ型
+	//4.入力アセンブラを識別する整数値(0～15)
+	//5.頂点の先頭アドレスからのオフセット(バイト単位)
+	//6.入力スロットの入力データクラスの識別
+	//7.バッファ内で1要素進む前に、同じインスタンスごとのデータを使用して
+	//描画するインスタンスの数頂点単位のデータを含む要素の場合、0にする・・・らしい
+	D3D11_INPUT_ELEMENT_DESC layout[] = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,0,D3D11_INPUT_PER_VERTEX_DATA, 0 } }; //位置
+
+	hr = pDevice->CreateInputLayout(layout, sizeof(layout) / sizeof(D3D11_INPUT_ELEMENT_DESC), pCompileVS->GetBufferPointer(),
+		pCompileVS->GetBufferSize(), &shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pVertexLayout);
+	if (FAILED(hr))
+	{
+		SAFE_RELEASE(pCompileVS);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+	SAFE_RELEASE(pCompileVS);
+
+	// ピクセルシェーダの作成（コンパイル）
+	ID3DBlob* pCompilePS = nullptr;
+	D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+	assert(pCompilePS != nullptr);
+	hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), pCompilePS->GetBufferSize(), NULL,
+		&shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pPixelShader);
+	SAFE_RELEASE(pCompilePS);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//ラスタライザ作成
+	D3D11_RASTERIZER_DESC rdc = {};
+	rdc.CullMode = D3D11_CULL_BACK;
+	rdc.FillMode = D3D11_FILL_SOLID;
+	rdc.FrontCounterClockwise = FALSE;
+	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pRasterizerState);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:ラスタライザの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	return S_OK;
+}
+
 void Direct3D::SetShader(SHADER_TYPE type)
 {
 	//それぞれをデバイスコンテキストにセット  これらの情報を使って描画を行う
@@ -883,6 +1082,40 @@ bool Direct3D::GetShowMouseCursor()
 const XMINT2& Direct3D::GetWindwSize()
 {
 	return windowSize_;
+}
+void Direct3D::SetLightDirection(const XMFLOAT3& dir)
+{
+	lightDir_ = { dir.x,dir.y,dir.z,0 };
+}
+const XMFLOAT4& Direct3D::GetLightDirection()
+{
+	return lightDir_;
+}
+ID3D11ShaderResourceView* Direct3D::GetDepthSRV()
+{
+	return pDepthSRV;
+}
+ID3D11SamplerState* Direct3D::GetDepthSampler()
+{
+	return pDepthSampler;
+}
+const XMMATRIX& Direct3D::GetLightViewMatrix()
+{
+	return lightViewMatrix;
+}
+const XMMATRIX& Direct3D::GetLightProjectionMatrix()
+{
+	return lightPrjMatrix_;
+}
+const XMMATRIX& Direct3D::GetClipToUVMatrix()
+{
+	return clipToUVMatrix;
+}
+void Direct3D::SetLightPos(const XMFLOAT3& pos)
+{
+	lightViewMatrix = XMMatrixLookAtLH(XMVectorSet(pos.x,pos.y,pos.z, 0),
+								       XMVectorSet(0, 0, 0, 0),
+								       XMVectorSet(0, 1, 0, 0));
 }
 //描画開始
 void Direct3D::BeginDraw()

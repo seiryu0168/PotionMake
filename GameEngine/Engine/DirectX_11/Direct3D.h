@@ -19,6 +19,7 @@ enum class SHADER_TYPE
 	SHADER_TOON,
 	SHADER_COLLIDER,
 	SHADER_SKYBOX,
+	SHADER_SHADOW,
 	SHADER_MAX,
 };
 enum classTARGET
@@ -56,7 +57,7 @@ namespace Direct3D
 
 	//初期化
 	HRESULT Initialize(int screenW, int screenH, HWND hWnd, XMINT2 windowSize = {1920,1080});
-
+	HRESULT InitDepthTexture();
 	//シェーダー準備
     HRESULT InitShader();
 	HRESULT InitShader2D();
@@ -66,6 +67,8 @@ namespace Direct3D
 	HRESULT InitShaderToon();
 	HRESULT InitShaderCollider();
 	HRESULT InitShaderSkyBox();
+	HRESULT InitShaderShadow();
+
 
 
 
@@ -93,6 +96,15 @@ namespace Direct3D
 	void ShowMouseCursor(bool flag);
 	bool GetShowMouseCursor();
 	const XMINT2& GetWindwSize();
+	void SetLightDirection(const XMFLOAT3& dir);
+	const XMFLOAT4& GetLightDirection();
+	ID3D11ShaderResourceView* GetDepthSRV();
+	ID3D11SamplerState* GetDepthSampler();
+	const XMMATRIX& GetLightViewMatrix();
+	const XMMATRIX& GetLightProjectionMatrix();
+	const XMMATRIX& GetClipToUVMatrix();
+
+	void SetLightPos(const XMFLOAT3& pos);
 
 	//描画開始
 	void BeginDraw();

@@ -86,5 +86,6 @@ public:
 	void    Draw(Transform& transform, SHADER_TYPE shaderType,int frame);
 	void	DrawOutLine(Transform& transform, int frame, XMFLOAT4 lineColor = {0,0,0,1});
 	void	DrawToon(Transform& transform, bool isOutLine, int frame);
+	void	DrawShadow(Transform& transorm, int frame);
 	void    Release();
 };

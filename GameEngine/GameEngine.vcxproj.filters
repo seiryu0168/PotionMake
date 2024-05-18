@@ -972,6 +972,7 @@
     <FxCompile Include="newSimple3D.hlsl" />
     <FxCompile Include="ColliderShader.hlsl" />
     <FxCompile Include="SkyBoxShader.hlsl" />
+    <FxCompile Include="DepthShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dialog.rc">

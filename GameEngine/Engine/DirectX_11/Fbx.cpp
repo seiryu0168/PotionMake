@@ -461,6 +461,11 @@ void Fbx::DrawToon(Transform& transform, bool isOutLine, int frame)
 	}
 }
 
+void Fbx::DrawShadow(Transform& transorm, int frame)
+{
+
+}
+
 void Fbx::RayCast(RayCastData& ray, Transform& transform)
 {
 	for (auto&& itr : parts_)
