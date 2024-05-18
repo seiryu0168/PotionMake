@@ -18,6 +18,7 @@ enum class SHADER_TYPE
 	SHADER_OUTLINE,
 	SHADER_TOON,
 	SHADER_COLLIDER,
+	SHADER_SKYBOX,
 	SHADER_MAX,
 };
 enum classTARGET
@@ -64,6 +65,8 @@ namespace Direct3D
 	HRESULT InitShaderOutLine();
 	HRESULT InitShaderToon();
 	HRESULT InitShaderCollider();
+	HRESULT InitShaderSkyBox();
+
 
 
 	void SetShader(SHADER_TYPE type);

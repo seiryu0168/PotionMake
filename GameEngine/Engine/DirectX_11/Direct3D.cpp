@@ -238,6 +238,10 @@ HRESULT Direct3D::InitShader()
 	{
 		return E_FAIL;
 	}
+	if (FAILED(InitShaderSkyBox()))
+	{
+		return E_FAIL;
+	}
 	return S_OK;
 
 }
@@ -650,6 +654,76 @@ HRESULT Direct3D::InitShaderCollider()
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderCollider:ラスタライザの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	return S_OK;
+}
+
+HRESULT Direct3D::InitShaderSkyBox()
+{
+	HRESULT hr;
+	// 頂点シェーダの作成（コンパイル）
+	ID3DBlob* pCompileVS = nullptr;
+	D3DCompileFromFile(L"SkyBoxShader.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+	assert(pCompileVS != nullptr);
+	hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL,
+		&shaderBundle[(int)SHADER_TYPE::SHADER_SKYBOX].pVertexShader);
+	if (FAILED(hr))
+	{
+		SAFE_RELEASE(pCompileVS);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderSkyBox:頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//////////////////////////////////////////////////頂点インプットレイアウト///////////////////////////////////////////////
+	//HLSL(シェーダーの事)に送る情報の種類とその設定を行う
+	//1.セマンティックの名前
+	//2.セマンティックインデックス(同じセマンティックを持つ要素が複数あるときに使う)
+	//3.要素データのデータデータ型
+	//4.入力アセンブラを識別する整数値(0～15)
+	//5.頂点の先頭アドレスからのオフセット(バイト単位)
+	//6.入力スロットの入力データクラスの識別
+	//7.バッファ内で1要素進む前に、同じインスタンスごとのデータを使用して
+	//描画するインスタンスの数頂点単位のデータを含む要素の場合、0にする・・・らしい
+	D3D11_INPUT_ELEMENT_DESC layout[] = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,				0,	   D3D11_INPUT_PER_VERTEX_DATA, 0 },  //位置
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,    0, sizeof(XMVECTOR),	   D3D11_INPUT_PER_VERTEX_DATA, 0 },  //UV座標
+		{ "NORMAL",	  0, DXGI_FORMAT_R32G32B32_FLOAT, 0, sizeof(XMVECTOR) * 2, D3D11_INPUT_PER_VERTEX_DATA, 0 },  //法線
+	};
+
+	hr = pDevice->CreateInputLayout(layout, sizeof(layout) / sizeof(D3D11_INPUT_ELEMENT_DESC), pCompileVS->GetBufferPointer(),
+		pCompileVS->GetBufferSize(), &shaderBundle[(int)SHADER_TYPE::SHADER_SKYBOX].pVertexLayout);
+	if (FAILED(hr))
+	{
+		SAFE_RELEASE(pCompileVS);
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderSkyBox:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+	SAFE_RELEASE(pCompileVS);
+
+	// ピクセルシェーダの作成（コンパイル）
+	ID3DBlob* pCompilePS = nullptr;
+	D3DCompileFromFile(L"SkyBoxShader.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+	assert(pCompilePS != nullptr);
+	hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), pCompilePS->GetBufferSize(), NULL,
+		&shaderBundle[(int)SHADER_TYPE::SHADER_SKYBOX].pPixelShader);
+	SAFE_RELEASE(pCompilePS);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderSkyBox:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		return hr;
+	}
+
+	//ラスタライザ作成
+	D3D11_RASTERIZER_DESC rdc = {};
+	rdc.CullMode = D3D11_CULL_BACK;
+	rdc.FillMode = D3D11_FILL_SOLID;
+	rdc.FrontCounterClockwise = FALSE;
+	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_SKYBOX].pRasterizerState);
+	if (FAILED(hr))
+	{
+		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShader3D:ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 

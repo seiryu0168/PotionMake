@@ -53,6 +53,7 @@ void CameraManager::Initialize(float width,float height)
 
 
 	skyBoxModel_.Load("Assets/Model/SkyBox.fbx");
+	skyBoxModel_.SetShaderType(SHADER_TYPE::SHADER_SKYBOX);
 	//cameraList_.push_back(defaultCamera_);
 }
 
@@ -145,7 +146,7 @@ void CameraManager::DrawSkdyBox(const XMVECTOR& position)
 {
 	skyTransform_.position_ = position;
 	Direct3D::SetDepthBufferWriteEnable(false);
-	skyBoxModel_.Draw(skyTransform_, SHADER_TYPE::SHADER_3D, 0);
+	skyBoxModel_.Draw(skyTransform_, SHADER_TYPE::SHADER_SKYBOX, 0);
 	Direct3D::SetDepthBufferWriteEnable(true);
 }
 
