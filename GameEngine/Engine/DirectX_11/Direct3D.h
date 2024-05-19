@@ -104,6 +104,9 @@ namespace Direct3D
 	const XMMATRIX& GetLightProjectionMatrix();
 	const XMMATRIX& GetClipToUVMatrix();
 
+	void BeginDrawShadow();
+	void EndDrawShadow();
+
 	void SetLightPos(const XMFLOAT3& pos);
 
 	//•`‰æŠJŽn

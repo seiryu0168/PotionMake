@@ -6,6 +6,8 @@ cbuffer global
 	float4x4	g_matWVP;			// ワールド・ビュー・プロジェクションの合成行列
 	float4x4	g_matW;				//ワールド行列
 	float4x4    g_matNormal;		//法線変形行列(回転行列と拡大行列の逆行列)
+	float4x4	g_matWLP;			//光源からみた時のg_matWVP
+	float4x4	g_matWLPT;			//↑にテクスチャ座標行列を合成した奴
 	float4		g_diffuseColor;		// ディフューズカラー（マテリアルの色）
 	float4		g_ambient;			//アンビエント
 	float4		g_speculer;			//スペキュラー

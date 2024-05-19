@@ -365,7 +365,7 @@ HRESULT Fbx::CheckNode(FbxNode* pNode, std::vector<std::shared_ptr<FbxParts>>* p
 //	}
 //}
 
-void Fbx::Draw(Transform& transform, SHADER_TYPE shaderType,int frame)
+void Fbx::Draw(Transform& transform, SHADER_TYPE shaderType,int frame, bool useShadow)
 {
 	Direct3D::SetShader(shaderType);
 	Direct3D::SetBlendMode(BLEND_MODE::BLEND_DEFAULT);
@@ -380,7 +380,7 @@ void Fbx::Draw(Transform& transform, SHADER_TYPE shaderType,int frame)
 		}
 		else
 		{
-			itr->Draw(transform);
+			itr->Draw(transform,{1,1,1,1}, useShadow);
 		}
 	}
 }
@@ -461,9 +461,13 @@ void Fbx::DrawToon(Transform& transform, bool isOutLine, int frame)
 	}
 }
 
-void Fbx::DrawShadow(Transform& transorm, int frame)
+void Fbx::DrawShadow(Transform& transform, int frame)
 {
-
+	Direct3D::SetBlendMode(BLEND_MODE::BLEND_DEFAULT);
+	for (auto&& itr : parts_)
+	{
+		itr->DrawShadow(transform);
+	}
 }
 
 void Fbx::RayCast(RayCastData& ray, Transform& transform)

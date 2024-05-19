@@ -10,6 +10,16 @@ void ModelSystem::Draw(int layerNum)
 		Coordinator::GetComponent<Test_Model_ECSver>(entity).Draw(layerNum);
 	}
 }
+
+void ModelSystem::DrawShadow()
+{
+	for (Entity entity : entities_)
+	{
+		if (Coordinator::GetComponent<Test_Model_ECSver>(entity).IsUseShadow())
+			Coordinator::GetComponent<Test_Model_ECSver>(entity).DrawShadow();
+	}
+	
+}
 	
 void ModelSystem::Release()
 {

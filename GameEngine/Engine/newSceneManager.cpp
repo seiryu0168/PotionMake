@@ -128,6 +128,11 @@ namespace newSceneManager
 
 	void Draw()
 	{
+		Direct3D::SetShader(SHADER_TYPE::SHADER_SHADOW);
+		Direct3D::BeginDrawShadow();
+		pModelSyatem_->DrawShadow();
+		Direct3D::EndDrawShadow();
+		Direct3D::SetShader(SHADER_TYPE::SHADER_3D);
 		for (int layerCount = 0; layerCount < MAX_LAYER; layerCount++)
 		{
 			for (int i = 0; i < CameraManager::GetCameraCount(); i++)
@@ -135,7 +140,6 @@ namespace newSceneManager
 				CameraManager::UpdateCameraNum(i);
 				Direct3D::SetViewPort(CameraManager::GetCamera(i).GetViewPort());
 
-				
 				pModelSyatem_->Draw(layerCount);
 				pParticleSystem_->Draw(layerCount);
 				pLineParticleSystem_->Draw(layerCount);

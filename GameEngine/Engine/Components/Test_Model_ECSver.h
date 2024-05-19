@@ -11,6 +11,7 @@ class Test_Model_ECSver// : public Draw3DComponent
 {
 private:
 	bool isDraw_;
+	bool useShadow_;
 	SHADER_TYPE type_;
 	int animationFrame_;
 	std::shared_ptr<Fbx> fbx_;
@@ -59,8 +60,10 @@ public:
 	const UINT GetBoneCount();
 	//•`‰æ‚·‚é‚©‚Ç‚¤‚©
 	const bool IsDraw() { return isDraw_; }
+	bool IsUseShadow() { return useShadow_; }
 	//•`‰æƒtƒ‰ƒO‚Ìİ’è
 	void SetDraw(bool isDraw) { isDraw_ = isDraw; }
+	void UseShadow(bool useShadow) { useShadow_ = useShadow; }
 	/// <summary>
 	/// ƒ‚ƒfƒ‹‚ÌF‚ğ•Ï‚¦‚é
 	/// </summary>
@@ -76,6 +79,9 @@ public:
 	void Draw(int layerNum);
 	//Transformw’è‚Ì•`‰æ
 	void Draw(Transform transform, SHADER_TYPE type, int frame);
+
+	//‰e•`‰æ
+	void DrawShadow();
 
 };
 

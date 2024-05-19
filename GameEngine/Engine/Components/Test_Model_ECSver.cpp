@@ -8,6 +8,7 @@ Test_Model_ECSver::Test_Model_ECSver()
 	isDraw_ = true;
 	meshEntity_ = 0;
 	layerNum_ = 0;
+	useShadow_ = false;
 }
 
 Test_Model_ECSver::Test_Model_ECSver(GameObject* object,int layerNum)
@@ -16,7 +17,8 @@ Test_Model_ECSver::Test_Model_ECSver(GameObject* object,int layerNum)
 	animationFrame_(0),
 	isDraw_(true),
 	meshEntity_(0),
-	layerNum_(layerNum)
+	layerNum_(layerNum),
+	useShadow_(true)
 {
 }
 
@@ -82,11 +84,17 @@ void Test_Model_ECSver::Draw(int layerNum)
 		return;
 
 	if (isDraw_)
-		fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_);
+		fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_,useShadow_);
 }
 
 void Test_Model_ECSver::Draw(Transform transform, SHADER_TYPE type, int frame)
 {
 	if (isDraw_)
-		fbx_->Draw(transform, type, frame);
+		fbx_->Draw(transform, type, frame,useShadow_);
+}
+
+void Test_Model_ECSver::DrawShadow()
+{
+	if (isDraw_ && attachObject_ != nullptr)
+		fbx_->DrawShadow(*attachObject_->GetTransform(), animationFrame_);
 }

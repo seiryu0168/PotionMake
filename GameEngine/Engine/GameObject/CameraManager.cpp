@@ -53,6 +53,7 @@ void CameraManager::Initialize(float width,float height)
 
 
 	skyBoxModel_.Load("Assets/Model/SkyBox.fbx");
+	skyBoxModel_.UseShadow(false);
 	skyBoxModel_.SetShaderType(SHADER_TYPE::SHADER_SKYBOX);
 	//cameraList_.push_back(defaultCamera_);
 }

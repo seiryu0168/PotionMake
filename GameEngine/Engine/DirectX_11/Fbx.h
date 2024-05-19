@@ -83,9 +83,9 @@ public:
 	const UINT GetBoneCount();
 	std::string GetBonename(const UINT& partsNum, const UINT& num);
 	void SetColor(int partsNum, int materialNum, const XMFLOAT4& color);
-	void    Draw(Transform& transform, SHADER_TYPE shaderType,int frame);
+	void    Draw(Transform& transform, SHADER_TYPE shaderType,int frame,bool useShadow=true);
 	void	DrawOutLine(Transform& transform, int frame, XMFLOAT4 lineColor = {0,0,0,1});
 	void	DrawToon(Transform& transform, bool isOutLine, int frame);
-	void	DrawShadow(Transform& transorm, int frame);
+	void	DrawShadow(Transform& transform, int frame);
 	void    Release();
 };

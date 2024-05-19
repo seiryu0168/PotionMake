@@ -27,6 +27,8 @@ private:
 	{
 		XMMATRIX matWVP;			//ワールド、ビュー、プロジェクション行列の合成(頂点変換に使う)
 		XMMATRIX matW;				//ワールド行列
+		XMMATRIX matWLP;		    //ワールド、ライト、プロジェクション行列の合成
+		XMMATRIX matWLPT;			//↑にテクスチャ座標も合成した奴
 		XMMATRIX matNormal;			//回転行列と拡大行列の合成(法線の変形に使う)
 		XMFLOAT4 diffuseColor;		//ディフューズ(マテリアルの色)
 		XMFLOAT4 ambient;			//アンビエント
@@ -106,7 +108,7 @@ public:
 	~FbxParts();
 
 	HRESULT Init(FbxNode* pNode);
-	void Draw(Transform& transform, XMFLOAT4 lineColor = { 1,1,1,1 });
+	void Draw(Transform& transform, XMFLOAT4 lineColor = { 1,1,1,1 },bool useShadow = true);
 	void DrawSkinAnime(Transform& transform, FbxTime time, XMFLOAT4 lineColor = { 1,1,1,1 });
 	void DrawShadow(Transform& transform);
 	FbxSkin* GetSkinInfo() { return pSkinInfo_; }

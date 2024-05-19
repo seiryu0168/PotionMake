@@ -8,6 +8,7 @@ public:
 	~ModelSystem() {};
 	//void Update() override;
 	void Draw(int layerNum) override;
+	void DrawShadow();
 	void Release() override;
 	void CheckRemove() override;
 };
