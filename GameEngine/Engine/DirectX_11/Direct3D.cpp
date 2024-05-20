@@ -311,7 +311,7 @@ HRESULT Direct3D::InitDepthTexture()
 	clip = { 0.5,     0,   0,   0,
 			   0,  -0.5,   0,   0,
 			   0,     0, 1.0,   0,
-			 0.5,   0.5,   0, -1.0 };
+			 0.5,   0.5,   0, 1.0 };
 
 	clipToUVMatrix = XMLoadFloat4x4(&clip);
 
@@ -330,10 +330,10 @@ HRESULT Direct3D::InitDepthTexture()
 	depthSmplDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	depthSmplDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 
-	lightViewMatrix = XMMatrixLookAtLH(XMVectorSet(0, 25, 0, 0),
+	lightViewMatrix = XMMatrixLookAtLH(XMVectorSet(0, 500, 10, 0),
 		XMVectorSet(0, 0, 0, 0),
 		XMVectorSet(0, 1, 0, 0));
-	lightPrjMatrix_ = XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)screenWidth / (FLOAT)screenHeight, 1, 100);
+	lightPrjMatrix_ = XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)screenWidth / (FLOAT)screenHeight, 430, 600);
 
 	hr = Direct3D::pDevice->CreateSamplerState(&depthSmplDesc, &pDepthSampler);
 	if (FAILED(hr))
@@ -346,7 +346,7 @@ HRESULT Direct3D::InitDepthTexture()
 
 //シェーダー準備
 HRESULT Direct3D::InitShader()
-{
+{	
 	if (FAILED(InitShader2D()))
 	{
 		return E_FAIL;
@@ -873,19 +873,27 @@ HRESULT Direct3D::InitShaderShadow()
 	HRESULT hr;
 	// 頂点シェーダの作成（コンパイル）
 	ID3DBlob* pCompileVS = nullptr;
-	D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+	ID3DBlob* pVSError = nullptr;
+	hr = D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, &pVSError);
 	assert(pCompileVS != nullptr);
-	hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL,
-		&shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pVertexShader);
 	if (FAILED(hr))
 	{
+		if (pVSError != nullptr)
+		{
+			MessageBox(nullptr, (LPCWSTR)pVSError->GetBufferPointer(), L"エラー", MB_OK);
+		}
+
+		SAFE_RELEASE(pVSError);
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:頂点シェーダの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"頂点シェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
+	SAFE_RELEASE(pVSError);
+	hr = pDevice->CreateVertexShader(pCompileVS->GetBufferPointer(), pCompileVS->GetBufferSize(), NULL,
+		&shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pVertexShader);
 
 	//////////////////////////////////////////////////頂点インプットレイアウト///////////////////////////////////////////////
-	//HLSL(シェーダーの事)に送る情報の種類とその設定を行う
+	//HLSL(シェーダーのソースコード)に送る情報の種類とその設定を行う
 	//1.セマンティックの名前
 	//2.セマンティックインデックス(同じセマンティックを持つ要素が複数あるときに使う)
 	//3.要素データのデータデータ型
@@ -895,30 +903,40 @@ HRESULT Direct3D::InitShaderShadow()
 	//7.バッファ内で1要素進む前に、同じインスタンスごとのデータを使用して
 	//描画するインスタンスの数頂点単位のデータを含む要素の場合、0にする・・・らしい
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,0,D3D11_INPUT_PER_VERTEX_DATA, 0 } }; //位置
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },  //位置
+	};
 
 	hr = pDevice->CreateInputLayout(layout, sizeof(layout) / sizeof(D3D11_INPUT_ELEMENT_DESC), pCompileVS->GetBufferPointer(),
 		pCompileVS->GetBufferSize(), &shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pVertexLayout);
 	if (FAILED(hr))
 	{
+
 		SAFE_RELEASE(pCompileVS);
-		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"頂点インプットレイアウトの設定に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 	SAFE_RELEASE(pCompileVS);
 
 	// ピクセルシェーダの作成（コンパイル）
 	ID3DBlob* pCompilePS = nullptr;
-	hr = D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+	ID3DBlob* pPSError = nullptr;
+	D3DCompileFromFile(L"DepthShader.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, &pPSError);
 	assert(pCompilePS != nullptr);
 	hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), pCompilePS->GetBufferSize(), NULL,
 		&shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pPixelShader);
+
 	SAFE_RELEASE(pCompilePS);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
+		if (pPSError != nullptr)
+		{
+			MessageBox(nullptr, (LPCWSTR)pPSError->GetBufferPointer(), L"エラー", MB_OK);
+		}
+		SAFE_RELEASE(pPSError);
+		MessageBox(nullptr, L"ピクセルシェーダの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
+	SAFE_RELEASE(pPSError);
 
 	//ラスタライザ作成
 	D3D11_RASTERIZER_DESC rdc = {};
@@ -928,7 +946,7 @@ HRESULT Direct3D::InitShaderShadow()
 	hr = pDevice->CreateRasterizerState(&rdc, &shaderBundle[(int)SHADER_TYPE::SHADER_SHADOW].pRasterizerState);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"DirectX_11/Direct3D.cpp InitShaderShadow:ラスタライザの作成に失敗", L"エラー", MB_OK);
+		MessageBox(nullptr, L"ラスタライザの作成に失敗", L"エラー", MB_OK);
 		return hr;
 	}
 

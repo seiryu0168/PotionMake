@@ -5,6 +5,7 @@
 #include "../ResourceStatusData.h"
 #include "../InterSceneData.h"
 #include "../Engine/Systems/ColliderSystem.h"
+#include"../Engine/GameObject/CameraManager.h"
 Play_CollectionPart_StageManager::Play_CollectionPart_StageManager(Object* parent)
 	:GameObject(parent,"Play_CollectionPart_StageManager")
 {

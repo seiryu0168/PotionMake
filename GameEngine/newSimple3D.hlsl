@@ -59,8 +59,8 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL, f
 	outData.wPos = mul(pos, g_matW);
 	//float4 wCameraPos = mul(g_cameraPosition, g_matW);
 	
-	outData.lightTexture = mul(pos, g_matWLPT);
 	outData.lightViewPos = mul(pos, g_matWLP);
+	outData.lightTexture = mul(pos, g_matWLPT);
 
 
 	tangent.w = 0;
@@ -173,11 +173,22 @@ float4 PS(VS_OUT inData) : SV_Target
 	
 	//こっから影
 	inData.lightTexture /= inData.lightTexture.w;
+
+	//float ZValue= inData.lightTexture.z / inData.lightTexture.w;
 	//深度テクスチャの値がライトから見た頂点のZ値よりも小さければ影とする
+	//float2 tex;
+	//tex.x = (1.0f + inData.lightTexture.x/ inData.lightTexture.w) * 0.5f;
+	//tex.y = (1.0f - inData.lightTexture.y / inData.lightTexture.w) * 0.5f;
 	float depthTexValue = g_depthTexture.Sample(g_depthSampler, inData.lightTexture).r;
+	//inData.lightViewPos /= inData.lightViewPos.w;
 	float lightLength = inData.lightViewPos.z / inData.lightViewPos.w;
+	
 	if (depthTexValue + 1.0f/255.0f < lightLength)
 		outColor *= 0.6f;
+	//inData.lightViewPos /= inData.lightViewPos.w;
+	//outColor = lightLength;// inData.lightViewPos.z / inData.lightViewPos.w;
+	//if (depthTexValue + 0.005f < ZValue)
+	//	outColor *= 0.6f;
 	outColor.a=diffuse.a;
 	//outColor = speculer;
 	return outColor;

@@ -155,10 +155,10 @@ void FbxParts::Draw(Transform& transform,XMFLOAT4 lineColor, bool useShadow)
 			//Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
 			//memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
 
-			//ID3D11SamplerState* pToonSampler = pToonTexture_->GetSampler();
-			//Direct3D::pContext->PSSetSamplers(1, 1, &pToonSampler);
-			//ID3D11ShaderResourceView* pToonSRV = pToonTexture_->GetSRV();
-			//Direct3D::pContext->PSSetShaderResources(1, 1, &pToonSRV);
+			ID3D11SamplerState* pToonSampler = pToonTexture_->GetSampler();
+			Direct3D::pContext->PSSetSamplers(1, 1, &pToonSampler);
+			ID3D11ShaderResourceView* pToonSRV = pToonTexture_->GetSRV();
+			Direct3D::pContext->PSSetShaderResources(1, 1, &pToonSRV);
 
 			ID3D11SamplerState* depthSampler = Direct3D::GetDepthSampler();
 			ID3D11ShaderResourceView* pDepthSRV = Direct3D::GetDepthSRV();
@@ -250,52 +250,68 @@ void FbxParts::DrawShadow(Transform& transform)
 	for (int i = 0; i < materialCount_; i++)
 	{
 		CONSTANT_BUFFER cb;
-		cb.matWVP = XMMatrixTranspose(transform.GetWorldMatrix() * CameraManager::GetCurrentCamera().GetViewMatrix() * CameraManager::GetCurrentCamera().GetProjectionMatrix());
+		cb.matWVP = XMMatrixTranspose(transform.GetWorldMatrix() *
+			CameraManager::GetCurrentCamera().GetViewMatrix() *
+			CameraManager::GetCurrentCamera().GetProjectionMatrix());
+
 		cb.matW = XMMatrixTranspose(transform.GetWorldMatrix());
-		cb.matWLP= XMMatrixTranspose(transform.GetWorldMatrix() *
-								 	 Direct3D::GetLightViewMatrix() *
-								     Direct3D::GetLightProjectionMatrix());
-		cb.matWLPT = XMMatrixTranspose(transform.GetWorldMatrix() *
-									   Direct3D::GetLightViewMatrix() *
-									   Direct3D::GetLightProjectionMatrix() *
-									   Direct3D::GetClipToUVMatrix());
 		cb.matNormal = XMMatrixTranspose(transform.GetNormalMatrix());
-		//matWVPの光源バージョン
-		//XMMATRIX matWLP = XMMatrixTranspose(transform.GetWorldMatrix() *
-		//									Direct3D::GetLightViewMatrix() *
-		//	        CameraManager::GetCurrentCamera().GetProjectionMatrix());
+
+		cb.matWLP = XMMatrixTranspose(transform.GetWorldMatrix() *
+			Direct3D::GetLightViewMatrix() *
+			Direct3D::GetLightProjectionMatrix());
+
+		cb.matWLPT = XMMatrixTranspose(transform.GetWorldMatrix() *
+			Direct3D::GetLightViewMatrix() *
+			Direct3D::GetLightProjectionMatrix() *
+			Direct3D::GetClipToUVMatrix());
+
+		cb.lightDirection = Direct3D::GetLightDirection();
+		XMFLOAT3 cameraPos = CameraManager::GetCurrentCamera().GetPosition();
+		cb.cameraPosition = XMFLOAT4(cameraPos.x, cameraPos.y, cameraPos.z, 0);
+
+		cb.isTexture = materialList_[i].GetTexture() != nullptr;
+		cb.isNormal = materialList_[i].GetNormalMap() != nullptr;
+		cb.diffuseColor = materialList_[i].GetDiffuse();
+		cb.ambient = materialList_[i].GetAmbient();
+		cb.speculer = materialList_[i].GetSpeculer();
+		cb.shininess = materialList_[i].GetShininess();
+		cb.customColor = materialList_[i].GetCustomColor();
 
 		D3D11_MAPPED_SUBRESOURCE pdata;
 		Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
 		memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
-		
-		//ID3D11ShaderResourceView* depthView = Direct3D::GetDepthSRV();
-		//ID3D11SamplerState* depthSampler = Direct3D::GetDepthSampler();
-		//Direct3D::pContext->PSSetSamplers(2, 1, &depthSampler);
-		//Direct3D::pContext->PSSetShaderResources(3, 1, &depthView);
-		//if (cb.isTexture)
-		//{
-		//	ID3D11SamplerState* pSampler = ((Texture*)materialList_[i].GetTexture().get())->GetSampler();
-		//	Direct3D::pContext->PSSetSamplers(0, 1, &pSampler);
-		//	ID3D11ShaderResourceView* pSRV1 = ((Texture*)materialList_[i].GetTexture().get())->GetSRV();
-		//
-		//	Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV1);
-		//}
-		//if (cb.isNormal)
-		//{
-		//	ID3D11ShaderResourceView* pNormalSRV = ((Texture*)materialList_[i].GetNormalMap().get())->GetSRV();
-		//	Direct3D::pContext->PSSetShaderResources(2, 1, &pNormalSRV);
-		//}
+		if (cb.isTexture)
+		{
+			ID3D11SamplerState* pSampler = ((Texture*)materialList_[i].GetTexture().get())->GetSampler();
+			Direct3D::pContext->PSSetSamplers(0, 1, &pSampler);
+			ID3D11ShaderResourceView* pSRV1 = ((Texture*)materialList_[i].GetTexture().get())->GetSRV();
+
+			Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV1);
+		}
+		if (cb.isNormal)
+		{
+			ID3D11ShaderResourceView* pNormalSRV = ((Texture*)materialList_[i].GetNormalMap().get())->GetSRV();
+			Direct3D::pContext->PSSetShaderResources(2, 1, &pNormalSRV);
+		}
+		//if (useShadow)
+		{
+			//Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
+			//memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&cb), sizeof(cb));			      //データを値を送る
+
+			ID3D11SamplerState* pToonSampler = pToonTexture_->GetSampler();
+			Direct3D::pContext->PSSetSamplers(1, 1, &pToonSampler);
+			ID3D11ShaderResourceView* pToonSRV = pToonTexture_->GetSRV();
+			Direct3D::pContext->PSSetShaderResources(1, 1, &pToonSRV);
+
+			ID3D11SamplerState* depthSampler = Direct3D::GetDepthSampler();
+			ID3D11ShaderResourceView* pDepthSRV = Direct3D::GetDepthSRV();
+			Direct3D::pContext->PSSetSamplers(2, 1, &depthSampler);
+			Direct3D::pContext->PSSetShaderResources(3, 1, &pDepthSRV);
+			//Direct3D::pContext->Unmap(pConstantBuffer_, 0);//再開
+		}
 		Direct3D::pContext->Unmap(pConstantBuffer_, 0);//再開
 
-		//Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata); //GPUからのデータアクセスを止める
-		//memcpy_s(pdata.pData, pdata.RowPitch, (void*)(&matWLP), sizeof(matWLP));			      //データを値を送る
-
-		//ID3D11SamplerState* pToonSampler = pToonTexture_->GetSampler();
-		//Direct3D::pContext->PSSetSamplers(1, 1, &pToonSampler);
-		//ID3D11ShaderResourceView* pToonSRV = pToonTexture_->GetSRV();
-		//Direct3D::pContext->PSSetShaderResources(1, 1, &pToonSRV);
-		//Direct3D::pContext->Unmap(pConstantBuffer_, 0);//再開
 
 		//頂点バッファ
 		UINT stride = sizeof(VERTEX);
