@@ -30,7 +30,7 @@ void Title::Initialize()
 {
 
 	Image titleImage(this);
-	titleImage.Load("Assets/Image/TitleImage.png");
+	titleImage.Load("Assets/Image/TitleImageEnableTitle.png");
 	titleImage.SetSize({ 1.05,1.05,0 });
 	AddComponent<Image>(titleImage);
 
