@@ -253,6 +253,11 @@ void Text::SetColor(const XMFLOAT4& color)
 	D2D1_COLOR_F colorF = { color.x, color.y,color.z,color.w };
 	pColorBrush_->SetColor(colorF);
 }
+void Text::SetColorInt(const XMINT4& color)
+{
+	D2D1_COLOR_F colorF = { color.x/255.0f, color.y/255.0f,color.z/255.0f,color.w/255.0f };
+	pColorBrush_->SetColor(colorF);
+}
 void Text::SetRatio(float ratioX, float ratioY)
 {
 	//‰æ–Ê‚ÌŠ„‡‚É‰‚¶‚ÄˆÚ“®‚³‚¹Adefaultos_‚Å

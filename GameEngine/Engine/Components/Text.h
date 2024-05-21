@@ -65,6 +65,7 @@ public:
 	void SetAlignmentType(const ALIGNMENT_TYPE& type);
 	//文字の色設定
 	void SetColor(const XMFLOAT4& color);
+	void SetColorInt(const XMINT4& color);
 	//フォント設定
 	HRESULT SetFont(const FontData& data);
 	/// <summary>

@@ -28,6 +28,12 @@ Title::~Title()
 
 void Title::Initialize()
 {
+
+	Image titleImage(this);
+	titleImage.Load("Assets/Image/TitleImage.png");
+	titleImage.SetSize({ 1.05,1.05,0 });
+	AddComponent<Image>(titleImage);
+
 	Image image(this);
 	image.Load("Assets/Image/StartButtonImage.png");
 	XMFLOAT3 pos = { 0,-0.5f,0 };
@@ -44,8 +50,7 @@ void Title::Initialize()
 
 	hAudio_ = AudioManager::Load("Assets/Audio/Confirm47.wav");
 
-	Instantiate<TestObject>(this);
-	Input::SetMousePosition(1920, 1080);
+	//Instantiate<TestObject>(this);
 
 }
 
@@ -53,7 +58,7 @@ void Title::Update()
 {
 	if (time_->GetSeconds<float>() >= 2.0f)
 	{
-		newSceneManager::ChangeScene(SCENE_ID::PLAY_COLLECTION);
+		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 	}
 	if(Input::IsKeyDown(DIK_SPACE)&&time_->IsLock())
 	{
@@ -62,7 +67,7 @@ void Title::Update()
 	}
 	else if (!time_->IsLock())
 	{
-		GetComponent<Image>(1).SetAlpha(time_->GetSeconds<float>());
+		GetComponent<Image>(2).SetAlpha(time_->GetSeconds<float>());
 	}
 }
 

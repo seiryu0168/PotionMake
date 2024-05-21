@@ -107,8 +107,8 @@ namespace Direct3D
 	void BeginDrawShadow();
 	void EndDrawShadow();
 
-	void SetLightPos(const XMFLOAT3& pos);
-
+	void SetLight(const XMFLOAT3& pos,const XMFLOAT3& targetPos);
+	void SetLightClip(float nearClip, float farClip);
 	//•`‰æŠJŽn
 	void BeginDraw();
 

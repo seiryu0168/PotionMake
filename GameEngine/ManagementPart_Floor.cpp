@@ -13,6 +13,8 @@ ManagementPart_Floor::~ManagementPart_Floor()
 
 void ManagementPart_Floor::Initialize()
 {
+	Direct3D::SetLight({ 1,100,0 }, { 0,0,0 });
+	Direct3D::SetLightClip(50, 110);
 	Test_Model_ECSver floorModel(this);
 	floorModel.Load("Assets/Model/House01.fbx");
 	AddComponent<Test_Model_ECSver>(floorModel);

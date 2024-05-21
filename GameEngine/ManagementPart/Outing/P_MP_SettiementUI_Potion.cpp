@@ -19,9 +19,9 @@ P_MP_SettiementUI_Potion::~P_MP_SettiementUI_Potion()
 void P_MP_SettiementUI_Potion::Initialize()
 {
 	Image backImage(this);
-	backImage.Load("Assets/Image/ItemBaseImage.png");
+	backImage.Load("Assets/Image/PotionListBackImage.png");
 	backImage.SetPosition({ 0,0,0 });
-	backImage.SetSize({ 3.7f,1.5f,0 });
+	//backImage.SetSize({ 3.7f,1.5f,0 });
 	AddComponent<Image>(backImage);
 
 	XMFLOAT3 txtPos = backImage.GetPositionAtPixel();
@@ -29,8 +29,9 @@ void P_MP_SettiementUI_Potion::Initialize()
 	Text totalGainText(this);
 	totalGainText.SetText("0");
 	totalGainText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_BOTTOM);
+	totalGainText.SetColorInt({ 60,60,60,255 });
 	totalGainText.SetRect({ 0,0,size.x,size.y });
-	totalGainText.SetPosition({ txtPos.x -size.x*0.5f,txtPos.y - size.y*0.5f });
+	totalGainText.SetPosition({ txtPos.x -size.x*0.5f-50,txtPos.y - size.y*0.5f-30 });
 	AddComponent<Text>(totalGainText);
 }
 
@@ -68,6 +69,7 @@ void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& 
 	Text nameText(this);
 	nameText.SetText(name);
 	nameText.SetTextSize(30);
+	nameText.SetColorInt({ 60,60,60,255 });
 	nameText.SetRect({ 0,0,size.x,size.y });
 	nameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	AddComponent<Text>(nameText);
@@ -82,8 +84,8 @@ void P_MP_SettiementUI_Potion::SetFirstPosition(const XMFLOAT3& pos)
 	GetComponent<Image>(2).SetPosition({ pos.x - 0.2f,pos.y,0 });
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
 	XMFLOAT3 size = GetComponent<Image>().GetSizeAtPixel();
-	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y -size.y * 0.5f });
-	GetComponent<Text>(1).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f + 30 });
+	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x * 0.5f-50,txtPos.y -size.y * 0.5f-30 });
+	GetComponent<Text>(1).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f + 40 });
 }
 
 void P_MP_SettiementUI_Potion::AddPosition(float move)
@@ -93,7 +95,7 @@ void P_MP_SettiementUI_Potion::AddPosition(float move)
 	GetComponent<Image>(2).SetPosition({ firstPos_.x - 0.2f,firstPos_.y + move,0 });
 	XMFLOAT3 txtPos = GetComponent<Image>().GetPositionAtPixel();
 	XMFLOAT3 size = GetComponent<Image>().GetSizeAtPixel();
-	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f });
+	GetComponent<Text>(0).SetPosition({ txtPos.x - size.x * 0.5f-50,txtPos.y - size.y * 0.5f-30 });
 	GetComponent<Text>(1).SetPosition({ txtPos.x - size.x * 0.5f,txtPos.y - size.y * 0.5f + 40 });
 }
 

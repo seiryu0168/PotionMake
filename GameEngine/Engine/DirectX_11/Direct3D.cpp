@@ -1148,11 +1148,15 @@ void Direct3D::EndDrawShadow()
 {
 	pContext->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
 }
-void Direct3D::SetLightPos(const XMFLOAT3& pos)
+void Direct3D::SetLight(const XMFLOAT3& pos, const XMFLOAT3& targetPos)
 {
 	lightViewMatrix = XMMatrixLookAtLH(XMVectorSet(pos.x,pos.y,pos.z, 0),
-								       XMVectorSet(0, 0, 0, 0),
+								       XMVectorSet(targetPos.x, targetPos.y, targetPos.z, 0),
 								       XMVectorSet(0, 1, 0, 0));
+}
+void Direct3D::SetLightClip(float nearClip, float farClip)
+{
+	lightPrjMatrix_= XMMatrixPerspectiveFovLH(XM_PIDIV4, (FLOAT)screenWidth / (FLOAT)screenHeight, nearClip, farClip);
 }
 //描画開始
 void Direct3D::BeginDraw()
@@ -1205,6 +1209,12 @@ void Direct3D::Release()
 		SAFE_RELEASE(pDepthStencilState[i]);
 		SAFE_RELEASE(pBlendState[i]);				//深度ステンシル
 	}
+	SAFE_RELEASE(pDepthDepthStencilView);
+	SAFE_RELEASE(pDepthDepthStencil);
+	SAFE_RELEASE(pDepthRenderTargetView);
+	SAFE_RELEASE(pDepthSRV);
+	SAFE_RELEASE(pDepthSampler);
+
 	SAFE_RELEASE(pDepthStencilView);				//深度ステンシルビュー
 	SAFE_RELEASE(pDepthStencil);
 	SAFE_RELEASE(pRenderTargetView);
