@@ -17,6 +17,11 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	prevHit_(false),
 	isShowHitArea_(true)
 {
+#if _DEBUG
+	isShowHitArea_ = true;
+#else
+	isShowHitArea_ = false;
+#endif
 }
 
 Collider::~Collider()

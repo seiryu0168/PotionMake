@@ -32,7 +32,7 @@ void P_MP_SettlementUI::Initialize()
 	AddComponent<Image>(backImage);
 	int totalGain = 0;
 	PlayerData& pData = *InterSceneData::GetData<PlayerData>("Data01");
-	ResourceStatusData::ResourceStatus rData = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[pData.newsPaperNumber_];
+	std::vector<ResourceStatusData::ResourceStatus> rDatas = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_;// [pData.newsPaperNumber_] ;
 	
 	P_MP_SettlementUI_PotionList& listUI = *Instantiate<P_MP_SettlementUI_PotionList>(this);
 	//ポーションのデータから販売総額を計算
@@ -56,7 +56,7 @@ void P_MP_SettlementUI::Initialize()
 	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"大盛況!");
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
 	//listUI.CreateListUI(pData.potionDataList_);
-	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % 4;
+	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % rDatas.size();
 	pData.sellCount_++;
 	Image okImage(this);
 	okImage.Load("Assets/Image/ButtonImage01.png");
