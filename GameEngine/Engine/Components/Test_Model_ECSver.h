@@ -13,6 +13,7 @@ private:
 	bool isDraw_;
 	bool useShadow_;
 	SHADER_TYPE type_;
+	BLEND_MODE blendMode_;
 	int animationFrame_;
 	std::shared_ptr<Fbx> fbx_;
 	std::vector<Entity> materialList_;
@@ -32,6 +33,7 @@ public:
 
 	//シェーダータイプ設定
 	void SetShaderType(SHADER_TYPE type) { type_ = type; }
+	void SetBlendMode(BLEND_MODE mode) { blendMode_ = mode; }
 
 	/// <summary>
 	/// ボーンの位置取得
@@ -79,7 +81,6 @@ public:
 	void Draw(int layerNum);
 	//Transform指定の描画
 	void Draw(Transform transform, SHADER_TYPE type, int frame);
-
 	//影描画
 	void DrawShadow();
 

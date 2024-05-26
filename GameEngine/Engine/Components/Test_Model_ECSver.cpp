@@ -4,6 +4,7 @@ Test_Model_ECSver::Test_Model_ECSver()
 	:Test_Model_ECSver(nullptr)
 {
 	type_ = SHADER_TYPE::SHADER_3D;
+	blendMode_ = BLEND_MODE::BLEND_DEFAULT;
 	animationFrame_ = 0;
 	isDraw_ = true;
 	meshEntity_ = 0;
@@ -14,6 +15,7 @@ Test_Model_ECSver::Test_Model_ECSver()
 Test_Model_ECSver::Test_Model_ECSver(GameObject* object,int layerNum)
 	:attachObject_(object),
 	type_(SHADER_TYPE::SHADER_3D),
+	blendMode_(BLEND_MODE::BLEND_DEFAULT),
 	animationFrame_(0),
 	isDraw_(true),
 	meshEntity_(0),
@@ -84,17 +86,26 @@ void Test_Model_ECSver::Draw(int layerNum)
 		return;
 
 	if (isDraw_)
+	{
+		Direct3D::SetBlendMode(blendMode_);
 		fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_,useShadow_);
+	}
 }
 
 void Test_Model_ECSver::Draw(Transform transform, SHADER_TYPE type, int frame)
 {
 	if (isDraw_)
+	{
+		Direct3D::SetBlendMode(blendMode_);
 		fbx_->Draw(transform, type, frame,useShadow_);
+	}
 }
 
 void Test_Model_ECSver::DrawShadow()
 {
 	if (isDraw_ && attachObject_ != nullptr)
+	{
+		Direct3D::SetBlendMode(blendMode_);
 		fbx_->DrawShadow(*attachObject_->GetTransform(), animationFrame_);
+	}
 }

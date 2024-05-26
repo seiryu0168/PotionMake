@@ -102,6 +102,7 @@ void Particle::UpdateEmitter()
 		}
 		else
 		{
+			(*emitterCount)->frameCount++;
 			//パーティクルを発生させる
 			if ((*emitterCount)->data.delay == 0 || ((*emitterCount)->frameCount % (*emitterCount)->data.delay) == 0)
 			{

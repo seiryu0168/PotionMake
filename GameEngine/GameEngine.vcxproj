@@ -246,8 +246,11 @@
     <ClCompile Include="ManagementPartObjectBase.cpp" />
     <ClCompile Include="ManagementPart\Craft\CraftSteam2D.cpp" />
     <ClCompile Include="ManagementPart\Craft\FinishCraftUI.cpp" />
+    <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_CraftPotModel.cpp" />
     <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_CraftTable.cpp" />
     <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_CraftUI.cpp" />
+    <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_Manaita.cpp" />
+    <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_Mortar.cpp" />
     <ClCompile Include="ManagementPart\Craft\PotionCraftAnimation.cpp" />
     <ClCompile Include="ManagementPart\Craft\PotionCraftAnimationPot.cpp" />
     <ClCompile Include="ManagementPart\Craft\PotionStatusGauge.cpp" />
@@ -398,8 +401,11 @@
     <ClInclude Include="ManagementPartObjectBase.h" />
     <ClInclude Include="ManagementPart\Craft\CraftSteam2D.h" />
     <ClInclude Include="ManagementPart\Craft\FinishCraftUI.h" />
+    <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_CraftPotModel.h" />
     <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_CraftTable.h" />
     <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_CraftUI.h" />
+    <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_Manaita.h" />
+    <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_Mortar.h" />
     <ClInclude Include="ManagementPart\Craft\PotionCraftAnimation.h" />
     <ClInclude Include="ManagementPart\Craft\PotionCraftAnimationPot.h" />
     <ClInclude Include="ManagementPart\Craft\PotionStatusGauge.h" />
