@@ -21,17 +21,6 @@ MenuUI_Item::~MenuUI_Item()
 
 void MenuUI_Item::Initialize()
 {
-	//Image save(this);
-	//save.Load("Assets/Image/SelectImage3.png");
-	//save.SetPosition({ -1.2f,-0.5f,0 });
-	//save.SetRotation({ 0,0,180 });
-	////save.SetSize({ 5,2,0 });
-	//AddComponent<Image>(save);
-	//XMFLOAT3 textPos = save.GetPositionAtPixel();
-	//Text saveText(this);
-	//saveText.SetText("ëfçﬁ");
-	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(saveText);
 }
 
 void MenuUI_Item::Start()

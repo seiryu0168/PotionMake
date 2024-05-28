@@ -55,19 +55,6 @@ void MenuUI_NewsPaper::Start()
 
 void MenuUI_NewsPaper::Update()
 {
-	//if (isClickedButton_)
-	//{
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		if (GetComponent<Image>(closeButtonNum_).IsHitCursor())
-	//		{
-	//			((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	//			isClickedButton_ = false;
-	//			SetDrawFlag(false);
-	//		}
-	//	}
-	//}
-
 	if (!IsClickButton())
 	{
 		//‘¼‚ÌUI‚ğŠJ‚¢‚Ä‚éê‡

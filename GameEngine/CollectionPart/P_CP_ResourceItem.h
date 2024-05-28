@@ -1,5 +1,9 @@
 #pragma once
 #include "../ItemBase.h"
+
+/// <summary>
+/// フィールドに設置するアイテムのクラス
+/// </summary>
 class P_CP_ResourceItem : public ItemBase
 {
 	bool isLoaded_;

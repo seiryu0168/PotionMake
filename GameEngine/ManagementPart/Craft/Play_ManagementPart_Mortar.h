@@ -1,5 +1,9 @@
 #pragma once
 #include"../../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// すり鉢のオブジェクト
+/// </summary>
 class Play_ManagementPart_Mortar : public GameObject
 {
 public:

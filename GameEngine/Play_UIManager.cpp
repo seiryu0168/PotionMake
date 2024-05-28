@@ -15,6 +15,7 @@ Play_UIManager::~Play_UIManager()
 
 void Play_UIManager::Initialize()
 {
+	//経営パートか採集パートかによって生成するベースUIを変える
 	std::string sceneName = GetSceneName();
 	if (sceneName == "Play_ManagementPart")
 	{

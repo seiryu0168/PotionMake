@@ -1,5 +1,9 @@
 #pragma once
 #include"UIBase.h"
+
+/// <summary>
+/// ステータスを表示するクラス
+/// </summary>
 class Status : public UIBase
 {
 	int statusImageNum_;

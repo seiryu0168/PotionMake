@@ -20,20 +20,6 @@ MenuUI_Status::~MenuUI_Status()
 
 void MenuUI_Status::Initialize()
 {
-	////ステータスボタン
-	//Image returnHome(this);
-	//returnHome.Load("Assets/Image/SelectImage3.png");
-	//returnHome.SetPosition({ -1.2f,-0.1f,0 });
-	//returnHome.SetRotation({ 0,0,180 });
-	////returnHome.SetSize({ 5,2,0 });
-	//AddComponent<Image>(returnHome);
-	//XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
-	//
-	////ボタンテキスト
-	//Text commandText(this);
-	//commandText.SetText("ステータス");
-	//commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(commandText);
 }
 
 void MenuUI_Status::Start()
@@ -42,19 +28,6 @@ void MenuUI_Status::Start()
 
 void MenuUI_Status::Update()
 {
-	if (IsClickButton())
-	{
-		//if (Input::IsMouseButtonUp(0))
-		//{
-		//	if (GetComponent<Image>(closeButtonNum_).IsHitCursor())
-		//	{
-		//		status_->KillMe();
-		//		((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-		//		isClickedButton_ = false;
-		//	}
-		//}
-	}
-
 	if (!IsClickButton())
 	{
 		//他のUIを開いてる場合

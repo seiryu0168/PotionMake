@@ -22,61 +22,6 @@ MenuUI_Save::~MenuUI_Save()
 
 void MenuUI_Save::Initialize()
 {
-	//Image save(this);
-	//save.Load("Assets/Image/SelectImage3.png");
-	//save.SetPosition({ -1.2f,0.5f,0 });
-	//save.SetRotation({ 0,0,180 });
-	////save.SetSize({ 5,2,0 });
-	//AddComponent<Image>(save);
-	//XMFLOAT3 textPos = save.GetPositionAtPixel();
-	//Text saveText(this);
-	//saveText.SetText("セーブ");
-	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(saveText);
-	
-
-	//Image confirmation(this);
-	//confirmation.Load("Assets/Image/UIBaseImage1.png");
-	//confirmation.SetDraw(false);
-	//AddComponent<Image>(confirmation);
-
-	//XMFLOAT3 imagePos = confirmation.GetPositionAtPixel();
-	//Text messageText(this);
-	//messageText.SetText("セーブします");
-	//messageText.SetPosition({ imagePos.x - 20,imagePos.y - 20 });
-	//messageText.isDraw_ = false;
-	//AddComponent<Text>(messageText);
-	//
-	//
-	//Image ok(this);
-	//ok.Load("Assets/Image/ButtonImage02.png");
-	//ok.SetPosition(0.1f, -0.2f);
-	//ok.SetDraw(false);
-	//confirmImageNum_ = AddComponent<Image>(ok);
-	//imagePos = ok.GetPositionAtPixel();
-	//{
-	//	Text commandText(this);
-	//	commandText.SetText("OK");
-	//	commandText.SetPosition({ imagePos.x - 20,imagePos.y - 20 });
-	//	commandText.isDraw_ = false;
-	//	AddComponent<Text>(commandText);
-	//}
-	//Image cancel(this);
-	//cancel.Load("Assets/Image/ButtonImage02.png");
-	//cancel.SetPosition(-0.1f, -0.2f);
-	//cancel.SetDraw(false);
-	//cancelImageNum_ = AddComponent<Image>(cancel);
-	//
-	//{
-	//	imagePos = cancel.GetPositionAtPixel();
-	//	Text commandText(this);
-	//	commandText.SetText("キャンセル");
-	//	commandText.SetPosition({ imagePos.x - 20,imagePos.y - 20 });
-	//	commandText.isDraw_ = false;
-	//	AddComponent<Text>(commandText);
-	//}
-
-
 }
 
 void MenuUI_Save::Start()
@@ -85,22 +30,6 @@ void MenuUI_Save::Start()
 
 void MenuUI_Save::Update()
 {
-	
-	//if (isClickedButton_)
-	//{
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		if (GetComponent<Image>(confirmImageNum_).IsHitCursor())
-	//			DataSave();
-	//		else if (GetComponent<Image>(cancelImageNum_).IsHitCursor())
-	//		{
-	//			((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	//			isClickedButton_ = false;
-	//			SetDrawFlag(false);
-	//		}
-	//	}
-	//}
-
 	if (!IsClickButton())
 	{
 			//他のUIを開いてる場合

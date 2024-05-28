@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// 経営パートの床オブジェクト
+/// </summary>
 class ManagementPart_Floor : public GameObject
 {
 private:

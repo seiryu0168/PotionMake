@@ -1,5 +1,9 @@
 #pragma once
 #include"../../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// まな板のオブジェクト
+/// </summary>
 class Play_ManagementPart_Manaita : public GameObject
 {
 public:

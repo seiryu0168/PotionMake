@@ -1,5 +1,9 @@
 #pragma once
 #include"MenuUI.h"
+
+/// <summary>
+/// 帰宅のメニュークラス
+/// </summary>
 class MenuUI_ReturnHome : public MenuUI
 {
 	int hAudio_ReturnHome_;

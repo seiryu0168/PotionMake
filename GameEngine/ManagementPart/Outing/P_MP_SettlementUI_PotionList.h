@@ -3,7 +3,7 @@
 #include "../../PlayerData.h"
 
 /// <summary>
-/// ポーションを売った時のポーション情報を表示するクラス
+/// ポーションを売った時のポーション情報をリスト表示するクラス
 /// </summary>
 class P_MP_SettlementUI_PotionList : public Window_Base
 {

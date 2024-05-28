@@ -26,7 +26,6 @@ void P_MP_ItemListUI::Initialize()
 	int stockCount = 0;
 	//リソースデータ取得
 	ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	//InterSceneData::GetData<PlayerData>("Data01")
 	//持ってるデータの分だけ画像用意して、あとはただの背景画像のみ
 	for (auto& itr : InterSceneData::GetData<PlayerData>("Data01")->itemDataList_)
 	{

@@ -17,11 +17,6 @@ void P_MP_PotionManagerUI_DisposeStockUI::Initialize()
 {
 	CreateBase("Assets/Image/UIBaseImage2.png", uiPos_, {0.75f,0.2f},0.3f);
 	CreateUITitle({ uiPos_.x - 0.09f,uiPos_.y + 0.31f }, { 10,20 }, "捨てるポーション",55,{60,60,60});
-	//Text uiTitleText(this);
-	//uiTitleText.SetText("捨てるポーション");
-	//uiTitleText.SetTextSize(55.0f);
-	//uiTitleText.SetPosition({ 30,520 });
-	//AddComponent<Text>(uiTitleText);
 
 	XMFLOAT2 diff = { 0,0 };
 	//ポーションの位置設定

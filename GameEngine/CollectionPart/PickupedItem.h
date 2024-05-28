@@ -1,5 +1,9 @@
 #pragma once
 #include "../ItemBase.h"
+
+/// <summary>
+/// 入手したアイテムを表示するクラス
+/// </summary>
 class PickupedItem : public ItemBase
 {
 	int itemCount_;

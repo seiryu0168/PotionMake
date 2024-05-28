@@ -1,5 +1,9 @@
 #pragma once
 #include "../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// 入手したアイテムの詳細を表示するクラス
+/// </summary>
 class PickupedItemDetailUI : public GameObject
 {
 	XMFLOAT3 uiPos_;

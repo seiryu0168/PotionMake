@@ -29,6 +29,7 @@ void CloseButton::Start()
 
 void CloseButton::Update()
 {
+	//‰æ‘œ‚É“–‚½‚Á‚Ä‚éŽž‚ÉƒNƒŠƒbƒN
 	if (Input::IsMouseButtonDown(0)&&GetComponent<Image>().IsHitCursor())
 	{
 		AudioManager::Play(hAudio_Close_);

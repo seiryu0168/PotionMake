@@ -88,24 +88,6 @@ void MenuUI_ReturnHome::Start()
 
 void MenuUI_ReturnHome::Update()
 {
-	//if (isClickedButton_)
-	//{
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		if (GetComponent<Image>(confirmImageNum_).IsHitCursor())
-	//		{
-	//			((P_CP_MenuUI*)pParent_)->ReturnHome();
-	//
-	//		}
-	//		else if (GetComponent<Image>(cancelImageNum_).IsHitCursor())
-	//		{
-	//			((UIBase*)pParent_)->SetCurrentOpenUINumber(-1);
-	//			isClickedButton_ = false;
-	//			SetDrawFlag(false);
-	//		}
-	//	}
-	//}
-
 	if (!IsClickButton())
 	{
 		//‘¼‚ÌUI‚ğŠJ‚¢‚Ä‚éê‡

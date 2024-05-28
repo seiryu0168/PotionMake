@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// アイテム関係の基底クラス
+/// </summary>
 class ItemBase : public GameObject
 {
 protected:

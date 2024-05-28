@@ -1,5 +1,9 @@
 #pragma once
 #include "../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// フィールドに落ちているアイテムにアクセスするクラス
+/// </summary>
 class P_CP_Player_ItemGetter : public GameObject
 {
 	int targetItemNum_;

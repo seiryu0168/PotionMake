@@ -1,5 +1,8 @@
 #pragma once
 #include "../Engine/GameObject/GameObject.h"
+/// <summary>
+/// 地面のオブジェクト
+/// </summary>
 class CollectionPart_Ground : public GameObject
 {
 public:

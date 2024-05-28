@@ -77,6 +77,7 @@ void Play_CollectionPart_BaseUI::Update()
 
 void Play_CollectionPart_BaseUI::DisplayItemName(int itemNum)
 {	
+	//アイテム番号を使ってアイテム名を表示
 	GetComponent<Image>().SetDraw(true);
 	GetComponent<Text>().SetText(itemName_[itemNum]);
 	GetComponent<Text>().isDraw_ = true;

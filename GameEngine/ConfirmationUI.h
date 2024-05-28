@@ -1,6 +1,10 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
 #include<Functional>
+
+/// <summary>
+/// Šm”FUI
+/// </summary>
 class ConfirmationUI : public GameObject
 {
 	int confirmImageNum_;

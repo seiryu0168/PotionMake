@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// ウィンドウが必要なUIオブジェクトの基底クラス
+/// </summary>
 class Window_Base : public GameObject
 {
 	int titleImageNum_[3];

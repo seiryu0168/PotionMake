@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// 新聞を表示するクラス
+/// </summary>
 class P_MP_NewsPaper : public GameObject
 {
 public:

@@ -57,6 +57,7 @@ void Player_CollectionPart::Update()
 
 		int itemNum = itemGetter_->GetItemNumber();
 
+		//ƒAƒCƒeƒ€”Ô†‚ª0ˆÈã‚¾‚Á‚½‚ç
 		if (itemNum >= 0)
 		{
 			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);

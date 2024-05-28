@@ -30,17 +30,6 @@ P_MP_MenuUI::~P_MP_MenuUI()
 
 void P_MP_MenuUI::Initialize()
 {
-	//Image save(this);
-	//save.Load("Assets/Image/SelectImage3.png");
-	//save.SetPosition({ -1.2f,0.5f,0 });
-	//save.SetRotation({ 0,0,180 });
-	////save.SetSize({ 5,2,0 });
-	//saveImageNum_ = AddComponent<Image>(save);
-	//XMFLOAT3 textPos = save.GetPositionAtPixel();
-	//Text commandText(this);
-	//commandText.SetText("セーブ");
-	//commandText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(commandText);
 	MenuUI& status = *Instantiate<MenuUI_Status>(this);
 	status.SetButton("Assets/Image/SelectImage3.png", "ステータス", { -1.2f,0.5f,0 });
 	status.SetUINumber(0);
@@ -56,22 +45,7 @@ void P_MP_MenuUI::Initialize()
 	MenuUI& save = *Instantiate<MenuUI_Save>(this);
 	save.SetButton("Assets/Image/SelectImage3.png", "セーブ", { -1.2f,-0.25f,0 });
 	save.SetUINumber(3);
-	//Image itemImage(this);
-	//itemImage.Load("Assets/Image/SelectImage3.png");
-	//itemImage.SetPosition({ -1.2f,0.2f,0 });
-	//itemImage.SetRotation({ 0,0,180 });
-	//returnImageNum_ = AddComponent<Image>(itemImage);
-	//
-	//XMFLOAT3 textPos = itemImage.GetPositionAtPixel();
-	//
-	//Text saveText(this);
-	//saveText.SetText("素材");
-	//saveText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(saveText);
-	//
-	//Instantiate<P_MP_NewsPaper>(this);
-	//
-	//
+
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
 
@@ -87,46 +61,6 @@ void P_MP_MenuUI::Start()
 
 void P_MP_MenuUI::Update()
 {
-	//if (GetComponent<Image>(saveImageNum_).IsHitCursor())
-	//{
-	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.1,0.5,0 });
-	//
-	//	if (Input::IsMouseButtonUp(0))
-	//	{
-	//		AudioManager::Play(hAudio_Confirm_);
-	//		DataSave();
-	//	}
-	//
-	//}
-	//else
-	//	GetComponent<Image>(saveImageNum_).SetPosition({ -1.2f,0.5f,0 });
-
-	//if (GetComponent<Image>(returnImageNum_).IsHitCursor())
-	//{
-	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.1f,0.2f,0 });
-	//
-	//	if (Input::IsMouseButtonUp(0) && !GetOpenUIFlag())
-	//	{
-	//		SetOpenUIFlag(true);
-	//		AudioManager::Play(hAudio_Confirm_);
-	//
-	//		P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
-	//		ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	//		//PlayerData::ResourceData_ prData = InterSceneData::GetData<PlayerData>("Data01")->itemDataList_;
-	//		for (auto& itr : InterSceneData::GetData<PlayerData>("Data01")->itemDataList_)
-	//		{
-	//			collectedUI.SetItemData(itr.itemNum_,
-	//				rData.resourceDataMap_[itr.itemNum_].resourceName_,
-	//				itr.itemCount_,
-	//				rData.resourceDataMap_[itr.itemNum_].resourceImageName_);
-	//		}
-	//
-	//		collectedUI.SetDummy();
-	//	}
-	//
-	//}
-	//else
-	//	GetComponent<Image>(returnImageNum_).SetPosition({ -1.2f,0.2f,0 });
 }
 
 void P_MP_MenuUI::DataSave()

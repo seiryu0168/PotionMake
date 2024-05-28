@@ -1,5 +1,9 @@
 #pragma once
 #include"UIBase.h"
+
+/// <summary>
+/// 経営パートのメニューUI
+/// </summary>
 class P_MP_MenuUI : public UIBase
 {
 	//bool isOpenUI_;

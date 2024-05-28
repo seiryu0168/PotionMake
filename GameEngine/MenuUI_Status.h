@@ -1,5 +1,9 @@
 #pragma once
 #include"MenuUI.h"
+
+/// <summary>
+/// ステータスのメニュークラス
+/// </summary>
 class MenuUI_Status : public MenuUI
 {
 	int statusImageNum_;

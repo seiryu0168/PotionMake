@@ -2,6 +2,9 @@
 #include "../Engine/GameObject/GameObject.h"
 
 class Player_CollectionPart;
+/// <summary>
+/// 採集パートのベースUI 
+/// </summary>
 class Play_CollectionPart_BaseUI : public GameObject
 {
 	std::vector<std::string> itemName_;
@@ -15,8 +18,10 @@ public:
 	void Initialize() override;
 	void Start() override;
 	void Update() override;
+	//アイテム名を表示
 	void DisplayItemName(int itemNum);
 	std::vector<std::string>& GetitemNameList() { return itemName_; }
+	//アイテム名を非表示
 	void HiddenItemName();
 	void SetUIOpenFlag(bool flag);
 	void Release() override;

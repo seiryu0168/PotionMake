@@ -1,5 +1,9 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// UI‚ÌŠî’êƒNƒ‰ƒX
+/// </summary>
 class UIBase : public GameObject
 {
 private:

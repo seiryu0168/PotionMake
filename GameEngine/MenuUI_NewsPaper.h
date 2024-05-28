@@ -1,5 +1,9 @@
 #pragma once
 #include"MenuUI.h"
+
+/// <summary>
+/// 新聞のメニュークラス
+/// </summary>
 class MenuUI_NewsPaper : public MenuUI
 {
 	bool isClickedButton_;

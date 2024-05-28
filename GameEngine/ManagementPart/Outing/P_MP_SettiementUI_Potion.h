@@ -1,5 +1,9 @@
 #pragma once
 #include "../../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// ポーション販売時のポーションを表示するクラス
+/// </summary>
 class P_MP_SettiementUI_Potion : public GameObject
 {
 	int potionTier_;

@@ -1,5 +1,9 @@
 #pragma once
 #include "../Engine/GameObject/GameObject.h"
+
+/// <summary>
+/// 採集パートのアイテムを設置するクラス
+/// </summary>
 class Play_CollectionPart_StageManager : public GameObject
 {
 private:

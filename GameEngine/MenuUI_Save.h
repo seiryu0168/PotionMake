@@ -1,5 +1,9 @@
 #pragma once
 #include "MenuUI.h"
+
+/// <summary>
+/// セーブのメニュークラス
+/// </summary>
 class MenuUI_Save : public MenuUI
 {
 private:

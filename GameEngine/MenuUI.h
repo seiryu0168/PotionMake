@@ -1,5 +1,9 @@
 #pragma once
 #include"UIBase.h"
+
+/// <summary>
+/// メニューUIの基底クラス
+/// </summary>
 class MenuUI : public UIBase
 {
 	bool isClickedButton_;
