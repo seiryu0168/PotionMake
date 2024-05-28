@@ -41,6 +41,12 @@ void Play_CollectionPart_BaseUI::Initialize()
 	actionImage.SetSize({ 0.7,0.7f,0 });
 	AddComponent<Image>(actionImage);
 
+	//ポインターの画像
+	Image pointerImage(this);
+	pointerImage.Load("Assets/Image/PointerDot.png");
+	pointerImage.SetSize({ 0.1f,0.1f,0 });
+	AddComponent<Image>(pointerImage);
+
 	//素材名
 	Text itemNameText(this);
 	itemNameText.SetText("");
@@ -64,6 +70,7 @@ void Play_CollectionPart_BaseUI::Update()
 	{
 		AudioManager::Play(hAudio_UIOpen_);
 		Instantiate<P_CP_MenuUI>(this);
+		HiddenItemName();
 		SetUIOpenFlag(true);
 	}
 }

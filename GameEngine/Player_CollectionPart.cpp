@@ -24,6 +24,7 @@ Player_CollectionPart::~Player_CollectionPart()
 
 void Player_CollectionPart::Initialize()
 {
+	
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0, 10, 1, 0));
@@ -67,7 +68,7 @@ void Player_CollectionPart::Update()
 			}
 		}
 		else
-			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->HiddenItemName();
+			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->	HiddenItemName();
 
 		CameraControll();
 

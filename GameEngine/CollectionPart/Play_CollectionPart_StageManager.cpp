@@ -17,6 +17,8 @@ Play_CollectionPart_StageManager::~Play_CollectionPart_StageManager()
 
 void Play_CollectionPart_StageManager::Initialize()
 {
+	Direct3D::SetLight({ 0, 500, 10 }, { 0,0,0 });
+	Direct3D::SetLightClip(430, 600);
 	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData04.csv");
 
 	//CSV‚ğ‚à‚Æ‚É‘fŞ‚ğ¶¬

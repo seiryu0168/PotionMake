@@ -37,8 +37,8 @@
 
 
 //定数宣言
-const LPCWSTR WIN_CLASS_NAME = L"Festival";
-const LPCWSTR WIN_TITLE_NAME = L"Festival";
+const LPCWSTR WIN_CLASS_NAME = L"PotionStudio";
+const LPCWSTR WIN_TITLE_NAME = L"PotionStudio";
 
 
 const int WINDOW_WIDTH = 1920;   //ウィンドウ幅

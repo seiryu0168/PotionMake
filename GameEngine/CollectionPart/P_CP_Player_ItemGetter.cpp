@@ -23,9 +23,9 @@ void P_CP_Player_ItemGetter::Initialize()
 	AddComponent<Collider>(coll);
 
 	
-	Test_Model_ECSver model(this);
-	model.Load("Assets/Model/flower_red3.fbx");
-	AddComponent<Test_Model_ECSver>(model);
+	//Test_Model_ECSver model(this);
+	//model.Load("Assets/Model/flower_red3.fbx");
+	//AddComponent<Test_Model_ECSver>(model);
 	transform_->position_ = XMVectorSet(0, 100, 0, 0);
 }
 
