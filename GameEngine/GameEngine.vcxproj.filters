@@ -67,6 +67,9 @@
     <Filter Include="ソース ファイル\CollectionPart">
       <UniqueIdentifier>{a2356417-c148-486c-8d8d-5b16610be7f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\HLSL">
+      <UniqueIdentifier>{0a34931a-bb7a-4ec7-87ca-9f07ffdcf805}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -982,19 +985,37 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Simple3D.hlsl" />
-    <FxCompile Include="Simple2D.hlsl" />
-    <FxCompile Include="BillBoard.hlsl" />
-    <FxCompile Include="OutLine.hlsl" />
-    <FxCompile Include="ToonShader.hlsl" />
-    <FxCompile Include="newSimple3D.hlsl" />
-    <FxCompile Include="ColliderShader.hlsl" />
-    <FxCompile Include="SkyBoxShader.hlsl" />
-    <FxCompile Include="DepthShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Dialog.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Assets\HLSL\BillBoard.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\ColliderShader.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\DepthShader.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\newSimple3D.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\OutLine.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\Simple2D.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\Simple3D.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\SkyBoxShader.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\HLSL\ToonShader.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
