@@ -105,6 +105,18 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL, f
 	//まとめて出力
 	return outData;
 }
+//分散シャドウマップ
+float VSM_Filter(float2 depth, float fragDepth)
+{
+	float depth_sq = depth.x * depth.x;
+	float variance = depth.y - depth_sq;
+	float mid = fragDepth - depth.x;
+	float p = variance / (variance + (mid * mid));
+	if (depth.x+0.003f <= fragDepth)
+	return saturate(p);
+	else return 1.0f;
+	//return saturate(max(p, depth.x <= fragDepth));
+}
 //───────────────────────────────────────
 // ピクセルシェーダ
 //───────────────────────────────────────
@@ -179,12 +191,19 @@ float4 PS(VS_OUT inData) : SV_Target
 	//float2 tex;
 	//tex.x = (1.0f + inData.lightTexture.x/ inData.lightTexture.w) * 0.5f;
 	//tex.y = (1.0f - inData.lightTexture.y / inData.lightTexture.w) * 0.5f;
-	float depthTexValue = g_depthTexture.Sample(g_depthSampler, inData.lightTexture).r;
+	float2 depthTexValue = g_depthTexture.Sample(g_depthSampler, inData.lightTexture).rg;
 	//inData.lightViewPos /= inData.lightViewPos.w;
 	float lightLength = inData.lightViewPos.z / inData.lightViewPos.w;
 	
-	if (depthTexValue + 1.0f/255.0f < lightLength)
+	/////通常のシャドウマップ/////
+	if (depthTexValue.x + 0.003f < lightLength)
 		outColor *= 0.6f;
+	//////////////////////////////
+
+	/////VSM(分散シャドウマップ)/////
+	//outColor *= VSM_Filter(depthTexValue, lightLength);
+	
+	
 	//inData.lightViewPos /= inData.lightViewPos.w;
 	//outColor = lightLength;// inData.lightViewPos.z / inData.lightViewPos.w;
 	//if (depthTexValue + 0.005f < ZValue)
@@ -193,5 +212,6 @@ float4 PS(VS_OUT inData) : SV_Target
 	//outColor = speculer;
 	return outColor;
 }
+
 
 

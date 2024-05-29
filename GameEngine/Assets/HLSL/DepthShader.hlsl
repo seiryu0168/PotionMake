@@ -34,7 +34,8 @@ VS_OUT VS(float4 pos : POSITION)
 float4 PS(VS_OUT inData) : SV_Target
 {
 	float4 color = float4(0,0,0,1);
-	color = inData.depth.z / inData.depth.w;
+	color.r = inData.depth.z / inData.depth.w;
+	color.g = color.r * color.r;
 	color.a = 1;
 	return color;
 	//return float4(1,1,1,1);
