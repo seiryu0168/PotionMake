@@ -513,6 +513,12 @@
     <ClCompile Include="ManagementPart\Craft\Play_ManagementPart_Mortar.cpp">
       <Filter>ソース ファイル\ManagementPart\Craft</Filter>
     </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialButton.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imstb_truetype.h">
@@ -982,6 +988,12 @@
     </ClInclude>
     <ClInclude Include="ManagementPart\Craft\Play_ManagementPart_Mortar.h">
       <Filter>ソース ファイル\ManagementPart\Craft</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialButton.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

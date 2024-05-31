@@ -319,6 +319,8 @@
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TestObjectChild.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="TutorialButton.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="Window_Base.cpp" />
   </ItemGroup>
@@ -477,6 +479,8 @@
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TestObjectChild.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="TutorialButton.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="Window_Base.h" />
   </ItemGroup>

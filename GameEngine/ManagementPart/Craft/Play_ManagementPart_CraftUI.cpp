@@ -8,6 +8,7 @@
 #include "../../Engine/Systems/TextSystem.h"
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../CloseButton.h"
+#include"../../TutorialButton.h"
 #include "../../Engine/DirectX_11/Input.h"
 Play_ManagementPart_CraftUI::Play_ManagementPart_CraftUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_CraftUI")
@@ -33,6 +34,14 @@ void Play_ManagementPart_CraftUI::Initialize()
 	Instantiate<P_MP_CraftUI_PotionStatusUI>(this);
 	Instantiate<P_MP_CraftUI_PrepareUI>(this);
 	Instantiate<CloseButton>(this);
+	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
+	tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
+	tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
+	tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
+	//for (int i = 0; i < 3; i++)
+	//{
+	//
+	//}
 }
 
 void Play_ManagementPart_CraftUI::Update()

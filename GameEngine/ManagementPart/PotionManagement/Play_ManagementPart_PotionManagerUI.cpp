@@ -6,6 +6,7 @@
 #include "../../Engine/Systems/TextSystem.h"
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../CloseButton.h"
+#include"../../TutorialButton.h"
 
 Play_ManagementPart_PotionManagerUI::Play_ManagementPart_PotionManagerUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_PotionManagerUI")
@@ -25,6 +26,11 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 	Instantiate<P_MP_PotionManagerUI_DisposeStockUI>(this);
 	Instantiate<P_MP_PotionManagerUI_PotionStockUI>(this);
 	Instantiate<CloseButton>(this);
+
+	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
+	tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png", "foot");
+	tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png", "luck");
+	tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png", "magic");
 }
 
 void Play_ManagementPart_PotionManagerUI::Update()
