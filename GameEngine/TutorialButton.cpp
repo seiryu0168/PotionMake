@@ -5,7 +5,9 @@
 #include"CloseButton.h"
 TutorialButton::TutorialButton(Object* parent)
 	:GameObject(parent,"TutorialButton"),
-	isOpenTutorial_(false)
+	isOpenTutorial_(false),
+	isSetEnableFunc_(false),
+	isSetInvalidFunc_(false)
 {
 }
 
@@ -34,6 +36,8 @@ void TutorialButton::Update()
 		{
 			tutorial->SetTutorialData(data.first, data.second);
 		}
+		if(isSetEnableFunc_)
+		tutorialEnableFunction_();
 		//チュートリアル閉じる時に呼び出す関数
 		((CloseButton*)tutorial->FindChild("CloseButton"))->GetFunction() = [&]() {return CloseTutorial(); };
 
@@ -42,6 +46,8 @@ void TutorialButton::Update()
 
 void TutorialButton::CloseTutorial()
 {
+	if(isSetInvalidFunc_)
+	tutorialInvalidFunction_();
 	isOpenTutorial_ = false;
 }
 

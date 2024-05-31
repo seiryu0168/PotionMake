@@ -22,7 +22,8 @@ void Tutorial::Initialize()
 
 	Text explanationText(this);
 	explanationText.SetRect({ 0,0,1000,500 });
-	explanationText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
+	explanationText.SetRatio(0.24f, 0.6f);
+	explanationText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	explanationText.SetText("");
 	AddComponent<Text>(explanationText);
 

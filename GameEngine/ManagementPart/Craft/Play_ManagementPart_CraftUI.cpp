@@ -38,6 +38,8 @@ void Play_ManagementPart_CraftUI::Initialize()
 	tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
 	tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
 	tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
+	tutorialBtn->GetEnableFunction() = [&]() {return EnableUI(); };
+	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidUI(); };
 	//for (int i = 0; i < 3; i++)
 	//{
 	//
@@ -111,6 +113,20 @@ void Play_ManagementPart_CraftUI::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, con
 
 
 	AddComponent<Image>(base);
+}
+
+void Play_ManagementPart_CraftUI::EnableUI()
+{
+	FindChild("P_MP_CraftUI_ResourceStockUI")->SetUpdate(false);
+	FindChild("P_MP_CraftUI_PotionStatusUI")->SetUpdate(false);
+	FindChild("P_MP_CraftUI_PrepareUI")->SetUpdate(false);
+}
+
+void Play_ManagementPart_CraftUI::InvalidUI()
+{
+	FindChild("P_MP_CraftUI_ResourceStockUI")->SetUpdate(true);
+	FindChild("P_MP_CraftUI_PotionStatusUI")->SetUpdate(true);
+	FindChild("P_MP_CraftUI_PrepareUI")->SetUpdate(true);
 }
 
 void Play_ManagementPart_CraftUI::Release()

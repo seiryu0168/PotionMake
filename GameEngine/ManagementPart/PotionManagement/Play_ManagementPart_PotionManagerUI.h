@@ -12,6 +12,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str);
+	void EnableUI();
+	void InvalidUI();
 	void Release() override;
 };
 
