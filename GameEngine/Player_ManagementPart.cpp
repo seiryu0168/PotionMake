@@ -43,26 +43,32 @@ void Player_ManagementPart::Start()
 
 void Player_ManagementPart::Update()
 {
-	if (((Play_UIManager*)GetUIManager())->IsAccessUI())
-		return;
-	MoveControll();
-
-
-	CameraControll();
-
-
-	//机か棚かドアに当たっていたら
-	if (GetComponent<Collider>().IsHit())
+	if (CanControll())
 	{
-		((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);
 
-		//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
-		//
-		if (Input::IsKeyDown(DIK_F))
+		if (((Play_UIManager*)GetUIManager())->IsAccessUI())
+			return;
+		MoveControll();
+
+
+		CameraControll();
+
+
+		//机か棚かドアに当たっていたら
+		if (GetComponent<Collider>().IsHit())
 		{
-			((Play_UIManager*)GetUIManager())->AccessUI(collisionUINum_);
-		}
+			((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);
 
+			//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
+			//
+			if (Input::IsKeyDown(DIK_F))
+			{
+				((Play_UIManager*)GetUIManager())->AccessUI(collisionUINum_);
+			}
+
+		}
+		else
+			((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction("", false);
 	}
 	else
 		((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction("", false);

@@ -13,6 +13,7 @@ private:
 	XMVECTOR moveVec_;
 	int collisionUINum_;
 	float speed_;
+	bool canControll_;
 	XMVECTOR cameraTargetVec_;
 	XMFLOAT2 cameraRotate_;
 	float rotateUperLimitY_;
@@ -32,6 +33,8 @@ public:
 	virtual void MoveControll();
 	virtual void CameraControll();
 	float& GetSpeed() { return speed_; }
+	void SetControllFlag(bool flag) { canControll_ = flag; }
+	bool CanControll() { return canControll_; }
 	XMVECTOR& GetMoveVec() { return moveVec_; }
 	XMVECTOR& GetCameraTargetVec() { return cameraTargetVec_; }
 	XMFLOAT2& cameraRotate() { return cameraRotate_; }

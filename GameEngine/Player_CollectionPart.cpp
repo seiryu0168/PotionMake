@@ -10,7 +10,6 @@
 #include"Engine/Systems/AudioSystem.h"
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
-	canControl_(true),
 	ground_(nullptr),
 	hAudio_ItemGet_(-1),
 	hAudio_Move_(-1),
@@ -50,7 +49,7 @@ void Player_CollectionPart::Start()
 
 void Player_CollectionPart::Update()
 {
-	if (canControl_)
+	if (CanControll())
 	{
 		XMVECTOR pos = transform_->position_;
 		MoveControll();

@@ -13,6 +13,7 @@ Player::Player(Object* parent, std::string name)
 	:GameObject(parent, name),
 	moveVec_(XMVectorSet(0,0,0,0)),
 	speed_(0.3f),
+	canControll_(true),
 	cameraRotate_({0,0}),
 	cameraTargetVec_(XMVectorSet(0,0,1,0)),
 	moveTime_(0),

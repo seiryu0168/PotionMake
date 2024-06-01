@@ -13,7 +13,7 @@ private:
 	CollectionPart_Ground* ground_;
 	//Play_UIManager* uiManager_;
 	std::unordered_map<int, int> itemCount_;
-	bool canControl_;
+	//bool canControl_;
 	int hAudio_Move_;
 	int hAudio_ItemGet_;
 public:
@@ -24,7 +24,7 @@ public:
 	void Update() override;
 	void MoveControll() override;
 	void AddItem(int itemNum);
-	void SetControllFlag(bool flag) { canControl_ = flag; }
+	//void SetControllFlag(bool flag) { canControl_ = flag; }
 	const std::unordered_map<int, int>& GetItem() { return itemCount_; }
 	//void CameraControll();
 	void Release() override;
