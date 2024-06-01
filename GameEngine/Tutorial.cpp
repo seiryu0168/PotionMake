@@ -19,9 +19,12 @@ void Tutorial::Initialize()
 {
 	CloseButton* btn = Instantiate<CloseButton>(this);
 	btn->GetComponent<Image>().SetPosition({ -0.8,0.9,0 });
+	btn->GetComponent<Image>().SetLayer(2);
+	
 
 	Text explanationText(this);
 	explanationText.SetRect({ 0,0,1000,500 });
+	explanationText.SetLayer(2);
 	explanationText.SetRatio(0.24f, 0.6f);
 	explanationText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	explanationText.SetText("");
@@ -58,7 +61,8 @@ void Tutorial::Update()
 void Tutorial::SetTutorialData(const std::string& imageName, const std::string& explanation)
 {
 	Image tutorial(this);
-	tutorial.Load(imageName);
+	tutorial.Load("Assets/Image/"+imageName);
+	tutorial.SetLayer(2);
 	tutorial.SetPosition(StayPosition);
 	//AddComponent<Image>(tutorial);
 	std::pair<int, std::string> tutorialData;

@@ -36,6 +36,7 @@ public:
 	std::vector<ResourceStatus> newsPaperList_;
 	std::vector<XMFLOAT3> statusColor_;
 	std::vector<std::string> statusIcon_;
+	std::vector<std::vector<std::pair<std::string, std::string>>> tutorialData_;
 	//void AddResourceStatus()
 };
 

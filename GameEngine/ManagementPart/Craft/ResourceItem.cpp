@@ -25,7 +25,7 @@ void ResourceItem::Initialize()
 	countText.SetLayer(1);
 	countText.SetRect({ 0,0,100,50 });
 	countText.SetTextSize(32);
-	countText.SetText("0");
+	countText.SetText("");
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	AddComponent<Text>(countText);
 	//Image itemBaseImage(this);

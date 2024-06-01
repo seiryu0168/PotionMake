@@ -10,6 +10,8 @@
 #include "../../CloseButton.h"
 #include"../../TutorialButton.h"
 #include "../../Engine/DirectX_11/Input.h"
+#include"../../InterSceneData.h"
+#include"../../ResourceStatusData.h"
 Play_ManagementPart_CraftUI::Play_ManagementPart_CraftUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_CraftUI")
 {
@@ -35,9 +37,14 @@ void Play_ManagementPart_CraftUI::Initialize()
 	Instantiate<P_MP_CraftUI_PrepareUI>(this);
 	Instantiate<CloseButton>(this);
 	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
-	tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
-	tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
-	tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
+	
+	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[0])
+	{
+		tutorialBtn->SetTutorialData(data.first, data.second);
+	}
+	//tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
 	tutorialBtn->GetEnableFunction() = [&]() {return EnableUI(); };
 	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidUI(); };
 	//for (int i = 0; i < 3; i++)
