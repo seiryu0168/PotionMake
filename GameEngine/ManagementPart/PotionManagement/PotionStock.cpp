@@ -233,7 +233,7 @@ void PotionStock::AddDisposePotion()
 	confirmImage.Load("Assets/Image/ItemSlotImage.png");
 	//confirmImage.SetLayer(1);
 	confirmImage.SetPosition(pos);
-	confirmImage.SetSize({ 2,0.6f,0 });
+	confirmImage.SetSize({ 1,0.3f,0 });
 	confirmImageNum_ = AddComponent<Image>(confirmImage);
 }
 

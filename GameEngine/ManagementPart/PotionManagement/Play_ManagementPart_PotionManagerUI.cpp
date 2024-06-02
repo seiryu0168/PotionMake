@@ -7,6 +7,8 @@
 #include "../../Engine/Systems/ImageSystem.h"
 #include "../../CloseButton.h"
 #include"../../TutorialButton.h"
+#include"../../InterSceneData.h"
+#include"../../ResourceStatusData.h"
 
 Play_ManagementPart_PotionManagerUI::Play_ManagementPart_PotionManagerUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_PotionManagerUI")
@@ -28,9 +30,11 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 	Instantiate<CloseButton>(this);
 
 	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
-	//tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png", "foot");
-	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png", "luck");
-	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png", "magic");
+	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[1])
+	{
+		tutorialBtn->SetTutorialData(data.first, data.second);
+	}
+
 	tutorialBtn->GetEnableFunction() = [&]() {return EnableUI(); };
 	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidUI(); };
 }

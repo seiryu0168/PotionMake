@@ -289,4 +289,15 @@ void SaveDataManager::ResourceDataLoad(std::string fileName, ResourceStatusData&
 		datalist.push_back(tutorialdata);
 	}
 	data.tutorialData_.push_back(datalist);
+	
+	reader.Load("Assets/SaveData/GameData/Tutorial_PotionManagement.csv");
+	datalist.clear();
+	for (int i = 0; i < reader.GetLines(); i++)
+	{
+		std::pair < std::string, std::string > tutorialdata;
+		tutorialdata.first = reader.GetString(i, 0);
+		tutorialdata.second = utf8_to_SJis(reader.GetString(i, 1));
+		datalist.push_back(tutorialdata);
+	}
+	data.tutorialData_.push_back(datalist);
 }
