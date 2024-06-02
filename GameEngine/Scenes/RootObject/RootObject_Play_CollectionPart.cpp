@@ -20,7 +20,7 @@ void RootObject_Play_CollectionPart::Initialize()
 	Instantiate<CollectionPart_Ground>(this);
 	Instantiate<Play_UIManager>(this);
 
-	hAudio_BGM_ = AudioManager::Load("Assets/Audio/CollectionPart_BGM.wav");
+	hAudio_BGM_ = AudioManager::Load("Assets/Audio/CollectionPart_BGM.wav",true);
 	AudioManager::Play(hAudio_BGM_);
 }
 
