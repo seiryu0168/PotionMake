@@ -1,8 +1,9 @@
-Ex_PotionCraft_Resource.png,ポーションを作るには、任意の素材を入れる必要があります。
-Ex_PotionCraft_Process.png,"素材によって上昇するパラメーターが異なり、
+Ex_Craft_ResourceSelect.png,ポーションを作るには、任意の素材を入れる必要があります。
+Ex_Collection.png,素材は採集によって入手することができます。
+Ex_Craft_Parameter.png,"素材によって上昇するパラメーターが異なり、
 上昇しやすいパラメーターとそうでないパラメーターがあります。"
-Ex_PotionCraft_Animation.png,"また、加工方法によってパラメーターを更に上昇させたり、
+Ex_Craft_Process.png,"また、加工方法によってパラメーターを更に上昇させたり、
 上昇させたくないパラメーターを抑えることができます。"
-Ex_PotionCraft_Resource.png,"素材や加工方法を選ぶとコストがかかります。
-最大コスト以上になると素材が選べなくなります。"
-Ex_PotionCraft_Resource.png,何のポーションを作ればいいか分からないときは新聞を見ることをお勧めします。
+Ex_Craft_Cost.png,"素材や加工方法を選ぶと一定のコストがかかります。
+最大コスト以上になる素材や加工方法は選べません。"
+Ex_Newspaper.png,何のポーションを作ればいいか分からないときは新聞を見ることをお勧めします。

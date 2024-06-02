@@ -243,7 +243,6 @@ bool Image::IsHitCursor()
 {
 	if (!isDraw_)
 		return false;
-
 	XMFLOAT3 mousePos = StoreFloat3(Input::GetMousePosition());
 	XMFLOAT3 imagePos = ConvertToPixel(transform_.position_);
     float wid = (pSprite_->GetSize().x * transform_.scale_.x*0.5f);

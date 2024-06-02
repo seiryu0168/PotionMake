@@ -28,9 +28,9 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 	Instantiate<CloseButton>(this);
 
 	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
-	tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png", "foot");
-	tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png", "luck");
-	tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png", "magic");
+	//tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png", "foot");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png", "luck");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png", "magic");
 	tutorialBtn->GetEnableFunction() = [&]() {return EnableUI(); };
 	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidUI(); };
 }
@@ -91,6 +91,7 @@ void Play_ManagementPart_PotionManagerUI::EnableUI()
 	FindChild("P_MP_PotionManagerUI_SellStockUI")->SetUpdate(false);
 	FindChild("P_MP_PotionManagerUI_DisposeStockUI")->SetUpdate(false);
 	FindChild("P_MP_PotionManagerUI_PotionStockUI")->SetUpdate(false);
+	FindChild("CloseButton")->SetUpdate(false);
 }
 
 void Play_ManagementPart_PotionManagerUI::InvalidUI()
@@ -98,6 +99,7 @@ void Play_ManagementPart_PotionManagerUI::InvalidUI()
 	FindChild("P_MP_PotionManagerUI_SellStockUI")->SetUpdate(true);
 	FindChild("P_MP_PotionManagerUI_DisposeStockUI")->SetUpdate(true);
 	FindChild("P_MP_PotionManagerUI_PotionStockUI")->SetUpdate(true);
+	FindChild("CloseButton")->SetUpdate(true);
 }
 
 void Play_ManagementPart_PotionManagerUI::Release()

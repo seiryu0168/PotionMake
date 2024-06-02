@@ -127,6 +127,8 @@ void Play_ManagementPart_CraftUI::EnableUI()
 	FindChild("P_MP_CraftUI_ResourceStockUI")->SetUpdate(false);
 	FindChild("P_MP_CraftUI_PotionStatusUI")->SetUpdate(false);
 	FindChild("P_MP_CraftUI_PrepareUI")->SetUpdate(false);
+	FindChild("CloseButton")->SetUpdate(false);
+
 }
 
 void Play_ManagementPart_CraftUI::InvalidUI()
@@ -134,6 +136,7 @@ void Play_ManagementPart_CraftUI::InvalidUI()
 	FindChild("P_MP_CraftUI_ResourceStockUI")->SetUpdate(true);
 	FindChild("P_MP_CraftUI_PotionStatusUI")->SetUpdate(true);
 	FindChild("P_MP_CraftUI_PrepareUI")->SetUpdate(true);
+	FindChild("CloseButton")->SetUpdate(true);
 }
 
 void Play_ManagementPart_CraftUI::Release()

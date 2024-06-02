@@ -24,7 +24,8 @@ void ResourceItemSlot::Initialize()
 	Text countText(this);
 	countText.SetRect({ 0,0,50,50 });
 	countText.SetTextSize(32);
-	countText.SetText("0");
+	countText.SetText("");
+	countText.isDraw_ = false;
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	AddComponent<Text>(countText);
 	//haveResource_ = true;
@@ -56,6 +57,7 @@ void ResourceItemSlot::SetItem(const std::string& resourceName, const std::strin
 
 	haveResource_ = true;
 	resourceCount_++;
+	GetComponent<Text>().isDraw_ = true;
 	GetComponent<Text>().SetText(std::to_string(resourceCount_));
 	itemNum_ = itemNum;
 	itemName_ = resourceName;
@@ -71,13 +73,14 @@ void ResourceItemSlot::ItemEmpty()
 
 	haveResource_ = false;
 	resourceCount_ = 0;
-	GetComponent<Text>().SetText(std::to_string(resourceCount_));
+	GetComponent<Text>().isDraw_ = false;
 	itemNum_ = -1;
 }
 
 void ResourceItemSlot::AddCount(int increase)
 {
 	 resourceCount_ += increase;
+	 GetComponent<Text>().isDraw_ = true;
 	 GetComponent<Text>().SetText(std::to_string(resourceCount_));
 }
 
