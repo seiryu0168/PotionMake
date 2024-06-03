@@ -8,6 +8,10 @@
 #include"CollectionPart/Play_CollectionPart_BaseUI.h"
 #include"Engine/ResourceManager/AudioManager.h"
 #include"Engine/Systems/AudioSystem.h"
+namespace
+{
+	float itemGetterMaxDist = 15.0f;
+}
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
 	ground_(nullptr),
@@ -76,10 +80,11 @@ void Player_CollectionPart::Update()
 		data.start = StoreFloat3(transform_->position_);
 		data.dir = StoreFloat3(transform_->GetFront());
 		ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
-		if (data.hit && data.dist <= 15.0f)
+		if (data.hit && data.dist <= itemGetterMaxDist)
 		{
 			itemGetter_->GetTransform()->position_ = data.hitPos;
 		}
+		else itemGetter_->GetTransform()->position_ = XMVectorSet(0, 999, 0, 0);
 	}
 }
 

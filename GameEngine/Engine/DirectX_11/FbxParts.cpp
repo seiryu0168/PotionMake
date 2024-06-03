@@ -897,7 +897,7 @@ void FbxParts::RayCast(RayCastData& rayData, Transform& transform)
 			{
 				rayData.normal = normal;
 				rayData.hitPos = XMVector3TransformCoord(hitPosition, transform.GetWorldMatrix());
-				rayData.dist = dist;
+				//rayData.dist = dist;
 				rayData.angle = angle;
 				rayData.hit = true;
 			}

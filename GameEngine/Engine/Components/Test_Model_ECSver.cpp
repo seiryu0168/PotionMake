@@ -38,13 +38,14 @@ void Test_Model_ECSver::RayCast(RayCastData& rayData)
 	XMVECTOR dirVec = XMVectorSet(rayData.start.x + rayData.dir.x, rayData.start.y + rayData.dir.y, rayData.start.z + rayData.dir.z, 0);
 
 	//‹ts—ñ‚ð‚©‚¯‚é
-	startVec = XMVector3TransformCoord(startVec, invW);
+	XMVECTOR&& invStartVec = XMVector3TransformCoord(startVec, invW);
 	dirVec = XMVector3TransformCoord(dirVec, invW);
 
-	XMVECTOR rayVec = dirVec - startVec;
-	XMStoreFloat3(&rayData.start, startVec);
+	XMVECTOR rayVec = dirVec - invStartVec;
+	XMStoreFloat3(&rayData.start, invStartVec);
 	XMStoreFloat3(&rayData.dir, rayVec);
 	fbx_->RayCast(rayData, *attachObject_->GetTransform());
+	rayData.dist = VectorLength(rayData.hitPos - startVec);
 }
 
 const XMVECTOR Test_Model_ECSver::GetBone(const std::string& boneName)
