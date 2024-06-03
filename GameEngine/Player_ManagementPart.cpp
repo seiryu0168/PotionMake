@@ -59,8 +59,6 @@ void Player_ManagementPart::Update()
 		{
 			((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);
 
-			//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
-			//
 			if (Input::IsKeyDown(DIK_F))
 			{
 				((Play_UIManager*)GetUIManager())->AccessUI(collisionUINum_);
@@ -76,6 +74,7 @@ void Player_ManagementPart::Update()
 
 void Player_ManagementPart::MoveControll()
 {
+	//前後左右
 	if (Input::IsKey(DIK_W))
 	{
 		GetMoveVec() += XMVectorSet(0, 0, GetSpeed(), 0);
@@ -92,9 +91,14 @@ void Player_ManagementPart::MoveControll()
 	{
 		GetMoveVec() += XMVectorSet(GetSpeed(), 0, 0, 0);
 	}
+	
+	//動きがあったら
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
+		//足音
 		AudioManager::Play(hAudio_Move_);
+		
+		////////プレイヤーが進む処理////////
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
 		moveBuff.y = 0;
 		GetMoveVec() = XMLoadFloat3(&moveBuff);
@@ -106,6 +110,7 @@ void Player_ManagementPart::MoveControll()
 		pos.z = Clamp(pos.z, -canMoveArea_.y, canMoveArea_.y);
 		transform_->position_ = XMVectorSet(pos.x, pos.y, pos.z, 0);
 		CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
+		///////////////////////////////////
 	}
 	else
 		AudioManager::Stop(hAudio_Move_);
@@ -117,6 +122,7 @@ void Player_ManagementPart::Release()
 
 void Player_ManagementPart::OnCollisionStay(GameObject* pTarget)
 {
+	//当たってるオブジェクトの情報を取得
 	collisionObjectName_ = ((ManagementPartObjectBase*)pTarget)->GetActionName();
 	collisionUINum_ = ((ManagementPartObjectBase*)pTarget)->GetAccessUINumber();
 }

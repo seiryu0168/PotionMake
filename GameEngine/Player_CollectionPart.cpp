@@ -41,15 +41,12 @@ void Player_CollectionPart::Initialize()
 	Audio itemGetAudio(this);
 	itemGetAudio.Load("Assets/Audio/Confirm34.wav", false, 1.0f, 5);
 	hAudio_ItemGet_ = AddComponent<Audio>(itemGetAudio);
-	//hAudio_Move_ = AudioManager::Load("Assets/Audio/Walk01.wav");
-	//hAudio_ItemGet_ = AudioManager::Load("Assets/Audio/Confirm34.wav",false,1.0f,3);
 }
 
 void Player_CollectionPart::Start()
 {
 	SetUIManager(FindObject("Play_UIManager"));
 	ground_ = (CollectionPart_Ground*)FindObject("CollectionPart_Ground");
-	//uiManager_ = (Play_UIManager*)FindObject("Play_UIManager");
 }
 
 void Player_CollectionPart::Update()
@@ -74,9 +71,11 @@ void Player_CollectionPart::Update()
 		}
 		else
 			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->	HiddenItemName();
-
+		
+		//カメラの動き
 		CameraControll();
-
+		
+		//プレイヤーの位置
 		RayCastData data;
 		data.start = StoreFloat3(transform_->position_);
 		data.dir = StoreFloat3(transform_->GetFront());
@@ -91,6 +90,7 @@ void Player_CollectionPart::Update()
 
 void Player_CollectionPart::MoveControll()
 {
+	//前後左右
 	if (Input::IsKey(DIK_W))
 	{
 		GetMoveVec() += XMVectorSet(0, 0, GetSpeed(), 0);
@@ -107,37 +107,45 @@ void Player_CollectionPart::MoveControll()
 	{
 		GetMoveVec() += XMVectorSet(GetSpeed(), 0, 0, 0);
 	}
+	
+	//動きがあるなら
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
+		//ダッシュ
 		if (Input::IsKey(DIK_LSHIFT))
 			GetMoveVec() *= DashSpeedRatio;
+		
+		//足音
 		GetComponent<Audio>(hAudio_Move_).Play();
+		
+		////////プレイヤーが進む処理////////
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
-
 		XMFLOAT3 pos = StoreFloat3(transform_->position_);
 
 		RayCastData data;
 		data.start = StoreFloat3(XMVectorSet(pos.x + moveBuff.x, 999, pos.z + moveBuff.z, 0));
 		data.dir = StoreFloat3(XMVectorSet(0, -1, 0, 0));
 
+		//レイキャストで地面判定
 		ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
 		moveBuff.y = 0;
-
+		//当たってたら
 		if (data.hit)
 		{
+			//当たった場所からy方向に＋10
 			pos = StoreFloat3(data.hitPos);
 			pos.y += 10;
-			//GetMoveVec() = XMLoadFloat3(&moveBuff);
-			transform_->position_ = XMLoadFloat3(&pos);//XMVector3Normalize(GetMoveVec()) * GetSpeed();
+			
+			transform_->position_ = XMLoadFloat3(&pos);
 			CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 		}
 		GetMoveVec() = XMVectorSet(0, 0, 0, 0);
+		////////////////////////////////////
 	}
 }
 
 void Player_CollectionPart::AddItem(int itemNum)
 {
-	//auto itemData = itemCount_.find(itemNum);
 	if (itemCount_.find(itemNum) == itemCount_.end())
 		itemCount_.insert({ itemNum, 1 });
 	else
