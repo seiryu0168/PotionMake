@@ -10,7 +10,8 @@
 #include"Engine/Systems/AudioSystem.h"
 namespace
 {
-	float itemGetterMaxDist = 15.0f;
+	float ItemGetterMaxDist = 18.0f;
+	float DashSpeedRatio = 2.0f;
 }
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
@@ -80,7 +81,7 @@ void Player_CollectionPart::Update()
 		data.start = StoreFloat3(transform_->position_);
 		data.dir = StoreFloat3(transform_->GetFront());
 		ground_->GetComponent<Test_Model_ECSver>().RayCast(data);
-		if (data.hit && data.dist <= itemGetterMaxDist)
+		if (data.hit && data.dist <= ItemGetterMaxDist)
 		{
 			itemGetter_->GetTransform()->position_ = data.hitPos;
 		}
@@ -108,7 +109,8 @@ void Player_CollectionPart::MoveControll()
 	}
 	if (VectorLength(GetMoveVec()) >= 0.01f)
 	{
-
+		if (Input::IsKey(DIK_LSHIFT))
+			GetMoveVec() *= DashSpeedRatio;
 		GetComponent<Audio>(hAudio_Move_).Play();
 		XMFLOAT3 moveBuff = StoreFloat3(XMVector3Rotate(GetMoveVec(), transform_->rotate_));
 
