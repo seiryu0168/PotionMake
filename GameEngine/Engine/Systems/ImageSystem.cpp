@@ -20,8 +20,12 @@ void ImageSystem::CheckRemove()
 	std::set<Entity> subEntities = entities_;
 	for (Entity entity : subEntities)
 	{
-		if (Coordinator::GetComponent<Image>(entity).GetAttachedObject()!=nullptr&&Coordinator::GetComponent<Image>(entity).GetAttachedObject()->IsDead())
+		Image& img = Coordinator::GetComponent<Image>(entity);
+		if (img.GetAttachedObject() != nullptr && img.GetAttachedObject()->IsDead())
+		{
 			Coordinator::RemoveComponent<Image>(entity);
+			Coordinator::DestroyEntity(entity);
+		}
 	}
 }
 

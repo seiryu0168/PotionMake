@@ -5,6 +5,7 @@
 using namespace DirectX;
 class Transform
 {
+	bool isDead_;
 	XMMATRIX matTranslate_;	//ˆÚ“®s—ñ
 	XMMATRIX matRotate_;	//‰ñ“]s—ñ	
 	XMMATRIX matScale_;	//Šg‘ås—ñ
@@ -75,7 +76,8 @@ public:
 	{
 		return StoreFloat3(add1 + add2);
 	}
-
+	void Dead() { isDead_ = true; }
+	bool IsDead() { return isDead_; }
 	void RemoveChild();
 };
 

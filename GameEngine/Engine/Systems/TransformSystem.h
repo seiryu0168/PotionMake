@@ -5,6 +5,8 @@
 
 class TransformSystem : public System
 {
+public:
+	void CheckRemove() override;
 	void Release() override;
 
 };

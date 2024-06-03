@@ -44,6 +44,7 @@ XMFLOAT3 Image::GetRatio()
 	return StoreFloat3(transform_.position_);
 }
 
+
 Image::Image(int cameraNum, int layerNum)
 	:alpha_(1.0f),
 	rect_({ 0,0,1,1 }),

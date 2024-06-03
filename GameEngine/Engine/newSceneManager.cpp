@@ -47,6 +47,7 @@ namespace
 	std::shared_ptr<LineParticleSystem> pLineParticleSystem_;
 	std::shared_ptr<TextSystem>			pTextSystem_;
 	std::shared_ptr<ImageSystem>		pImageSystem_;
+	std::shared_ptr<TransformSystem>	pTransformSystem_;
 
 	int MAX_LAYER = 4;
 }
@@ -174,6 +175,7 @@ namespace newSceneManager
 		pImageSystem_->CheckRemove();
 		pTextSystem_->CheckRemove();
 		pAudioSystem_->CheckRemove();
+		pTransformSystem_->CheckRemove();
 		currentScene_->CheckKillObject();
 	}
 
@@ -198,14 +200,15 @@ namespace newSceneManager
 	{
 		//ECSÇÃèâä˙âª
 		Coordinator::RegisterSystem<PhysicsSystem>();
-		Coordinator::RegisterSystem<TransformSystem>();
-		pAudioSystem_ = Coordinator::RegisterSystem<AudioSystem>();
-		pTextSystem_ = Coordinator::RegisterSystem<TextSystem>();
-		pModelSyatem_ = Coordinator::RegisterSystem<ModelSystem>();
-		pParticleSystem_ = Coordinator::RegisterSystem<ParticleSystem>();
+		pTransformSystem_	 = Coordinator::RegisterSystem<TransformSystem>();
+		pAudioSystem_		 = Coordinator::RegisterSystem<AudioSystem>();
+		pTextSystem_		 = Coordinator::RegisterSystem<TextSystem>();
+		pModelSyatem_		 = Coordinator::RegisterSystem<ModelSystem>();
+		pParticleSystem_	 = Coordinator::RegisterSystem<ParticleSystem>();
 		pLineParticleSystem_ = Coordinator::RegisterSystem<LineParticleSystem>();
-		pColliderSystem_ = Coordinator::RegisterSystem<ColliderSystem>();
-		pImageSystem_ = Coordinator::RegisterSystem<ImageSystem>();
+		pColliderSystem_	 = Coordinator::RegisterSystem<ColliderSystem>();
+		pImageSystem_		 = Coordinator::RegisterSystem<ImageSystem>();
+
 		Coordinator::RegisterComponent<Audio>();
 		Coordinator::RegisterComponent<Text>();
 		Coordinator::RegisterComponent<Collider>();
@@ -259,7 +262,7 @@ namespace newSceneManager
 		InterSceneData::AllDelete();
 		//Division::setLoad(true);
 		currentScene_->AllKillObject();
-
+		pTextSystem_->Release();
 		Coordinator::AllRemove();
 		ModelManager_ECSver::Release();
 		ImageManager_ECSver::Release();
@@ -269,6 +272,7 @@ namespace newSceneManager
 		TextureManager::StaticTextureRelease();
 		//D2D::
 		CameraManager::ResetCamera();
+
 		//Division::setLoad(false);
 	}
 

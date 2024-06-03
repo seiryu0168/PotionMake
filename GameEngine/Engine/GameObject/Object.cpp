@@ -190,6 +190,7 @@ void Object::ReleaseSub()
 void Object::KillMe()
 {
 	this->killFlag_ = true;
+	transform_->Dead();
 	for (auto&& itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
 		(*itr)->KillMe();

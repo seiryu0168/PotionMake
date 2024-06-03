@@ -100,8 +100,8 @@ void P_CP_CollectedItemUI::CreateBase()
 void P_CP_CollectedItemUI::SetItemData(int itemNum, const std::string& itemName, int itemCount, const std::string& itemImageName)
 {
 	//表示アイテムの生成
-	PickupedItem* item = Instantiate<PickupedItem>(this);
-	item->SetItemData(itemNum,
+	PickupedItem& item = *Instantiate<PickupedItem>(this);
+	item.SetItemData(itemNum,
 		itemName,
 		itemCount,
 		itemImageName,

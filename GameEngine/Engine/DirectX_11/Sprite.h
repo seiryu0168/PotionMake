@@ -38,7 +38,6 @@ protected:
 	
 	//void ToPipeLine(const Transform& transform);
 	//void bufferSet();
-	void Release();
 
 public:
 	Sprite();
@@ -52,5 +51,6 @@ public:
 	XMFLOAT3 GetSize() const { return size_; }
 	void Draw(Transform& transform, const RECT& rect, const XMFLOAT4& changeColor = {1,1,1,1}, float alpha = 1, XMFLOAT2 scroll = { 0,0 });
 	void StaticDraw(Transform& transform, const RECT& rect, const XMFLOAT4& changeColor = {1,1,1,1}, float alpha = 1, XMFLOAT2 scroll = { 0,0 });
+	void Release();
 };
 

@@ -76,5 +76,6 @@ public:
 
 	bool IsHitCursor();
 	GameObject* GetAttachedObject() const { return attachObject_; }
+	void Release();
 };
 
