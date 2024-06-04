@@ -58,7 +58,7 @@ void PickupedItem::SetItemData(int itemNum, const std::string& itemName, int ite
 
 	XMFLOAT3 textPos = backImage.GetPositionAtPixel();
 	//ëfçﬁÇÃêî
-	Text countText(this);
+	Text countText(this, "Rounded M+ 1c");
 	countText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	countText.SetPosition({textPos.x-40,textPos.y+30});
 	countText.SetRect({ 0,0,100,50 });

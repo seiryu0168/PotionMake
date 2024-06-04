@@ -112,7 +112,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, int price, c
 	XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
 	
 	//ポーション名
-	Text potionNameText(this);
+	Text potionNameText(this, "Rounded M+ 1c");
 	potionNameText.SetText(name);
 	potionNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	potionNameText.SetTextSize(40);
@@ -142,7 +142,7 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, int price, c
 
 		XMFLOAT3 imagePos = cancelButton.GetPositionAtPixel();
 		XMFLOAT3 size = cancelButton.GetSizeAtPixel();
-		Text cancelText(this);
+		Text cancelText(this, "Rounded M+ 1c");
 		cancelText.SetText("キャンセル");
 		cancelText.SetTextSize(50);
 		cancelText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
@@ -166,14 +166,14 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, int price, c
 		sellButtonImageNum_ = AddComponent<Image>(sellButton);
 
 		XMFLOAT3 imagePos = sellButton.GetPositionAtPixel();
-		Text sellText(this);
+		Text sellText(this, "Rounded M+ 1c");
 		sellText.SetText("売る");
 		sellText.SetTextSize(40);
 		sellText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 		sellText.SetRect({ 0,0,120,50 });
 		sellText.SetLayer(1);
 		sellText.SetColor({ 1,1,1,1 });
-		sellText.SetPosition({ imagePos.x - 58,imagePos.y - 28});
+		sellText.SetPosition({ imagePos.x - 58,imagePos.y - 30});
 		AddComponent<Text>(sellText);
 
 		//破棄ボタン
@@ -186,14 +186,14 @@ void PotionMenu::CreateMenu(int potionNum, const std::string& name, int price, c
 		
 		
 		imagePos = disposeButton.GetPositionAtPixel();
-		Text disposeText(this);
+		Text disposeText(this, "Rounded M+ 1c");
 		disposeText.SetText("捨てる");
 		disposeText.SetTextSize(40);
 		disposeText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 		disposeText.SetRect({ 0,0,120,50 });
 		disposeText.SetLayer(1);
 		disposeText.SetColor({ 1,1,1,1 });
-		disposeText.SetPosition({ imagePos.x - 58,imagePos.y - 28});
+		disposeText.SetPosition({ imagePos.x - 58,imagePos.y - 30});
 		AddComponent<Text>(disposeText);
 
 

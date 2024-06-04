@@ -46,10 +46,11 @@ void Play_CollectionPart_BaseUI::Initialize()
 	AddComponent<Image>(pointerImage);
 
 	//ëfçﬁñº
-	Text itemNameText(this);
+	Text itemNameText(this, "Rounded M+ 1c");
 	itemNameText.SetText("");
 	itemNameText.SetRect({ 0,0,500,500 });
-	itemNameText.SetPosition({ 1320,500 });
+	itemNameText.SetTextSize(55);
+	itemNameText.SetPosition({ 1320,505 });
 	AddComponent<Text>(itemNameText);
 
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");

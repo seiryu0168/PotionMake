@@ -36,10 +36,11 @@ void Play_ManagementPart_BaseUI::Initialize()
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
 	actionImage.SetSize({0.7,0.7f,0});
 	AddComponent<Image>(actionImage);
-	Text text(this);
+	Text text(this, "Rounded M+ 1c");
 	text.SetText("Text");
+	text.SetTextSize(55);
 	text.SetRect({ 0,0,500,500 });
-	text.SetPosition({ 1320,500 });
+	text.SetPosition({ 1320,505 });
 	AddComponent<Text>(text);
 	player_ = (Player_ManagementPart*)FindObject("Player_ManagementPart");
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");

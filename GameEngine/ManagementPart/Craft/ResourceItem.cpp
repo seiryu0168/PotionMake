@@ -21,7 +21,7 @@ ResourceItem::~ResourceItem()
 void ResourceItem::Initialize()
 {
 	//ëfçﬁÇÃêî
-	Text countText(this);
+	Text countText(this, "Rounded M+ 1c");
 	countText.SetLayer(1);
 	countText.SetRect({ 0,0,100,50 });
 	countText.SetTextSize(32);

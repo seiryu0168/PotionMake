@@ -77,7 +77,7 @@ void Window_Base::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& 
 {
 	titlePos_ = { pos.x,pos.y,0 };
 	XMINT2 windowSize = Direct3D::GetWindwSize();
-	Text craftUIText(this);
+	Text craftUIText(this,"Rounded M+ 1c");
 	craftUIText.SetText(str);
 	craftUIText.SetLayer(layer);
 	craftUIText.SetTextSize(textSize);

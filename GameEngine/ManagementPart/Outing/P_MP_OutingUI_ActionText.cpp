@@ -26,9 +26,10 @@ void P_MP_OutingUI_ActionText::Initialize()
 		AddComponent<Image>(selectImage);
 		XMFLOAT3 txtPos = selectImage.GetPositionAtPixel();
 		XMFLOAT3 txtSize = selectImage.GetSizeAtPixel();
-		Text actionText(this);
+		Text actionText(this, "Rounded M+ 1c");
 		actionText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 		actionText.SetText("çÃèWÇ…èoÇ©ÇØÇÈ");
+		actionText.SetTextSize(60);
 		actionText.SetPosition({ txtPos.x - txtSize.x * 0.5f,txtPos.y - txtSize.y * 0.5f });
 		AddComponent<Text>(actionText);
 	}
@@ -42,7 +43,7 @@ void P_MP_OutingUI_ActionText::Initialize()
 		AddComponent<Image>(selectImage);
 		XMFLOAT3 txtPos = selectImage.GetPositionAtPixel();
 		XMFLOAT3 txtSize = selectImage.GetSizeAtPixel();
-		Text actionText(this);
+		Text actionText(this, "Rounded M+ 1c");
 		actionText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 		actionText.SetText("îÑÇËÇ…çsÇ≠");
 		actionText.SetPosition({ txtPos.x - txtSize.x*0.5f,txtPos.y - txtSize.y*0.5f });

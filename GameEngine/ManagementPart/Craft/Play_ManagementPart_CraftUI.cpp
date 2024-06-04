@@ -77,7 +77,7 @@ void Play_ManagementPart_CraftUI::BeforeDeath()
 
 void Play_ManagementPart_CraftUI::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
 {
-	Text craftUIText(this);
+	Text craftUIText(this, "Rounded M+ 1c");
 	craftUIText.SetText(str);
 	craftUIText.SetTextSize(70);
 	float rectSize = craftUIText.GetTextSize() * str.size()*0.5f;

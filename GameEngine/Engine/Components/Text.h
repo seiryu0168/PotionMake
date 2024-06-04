@@ -42,7 +42,7 @@ private:
 public:
 	bool isDraw_;
 	TEXT_POSITION				  transform2D;		//座標
-	Text(GameObject* object);
+	Text(GameObject* object,const std::string& fontName = "Arial");
 	Text(const int& renderTargetNum=0);
 	Text(const std::string& text, const std::string& fontName, const TEXT_RECT& rect, int renderTargetNum = 0 ,int layerNum = 0, const DWRITE_FONT_WEIGHT& wight = DWRITE_FONT_WEIGHT_NORMAL, const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL, const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL, const ALIGNMENT_TYPE& type = LEFT_TOP);
 	//Text(std::string text);
@@ -56,7 +56,7 @@ public:
 	/// <param name="type">アライメント設定</param>
 	/// <returns></returns>
 	int Load(const std::string& text, const std::string& fontName, const TEXT_RECT& rect, const ALIGNMENT_TYPE& type);
-	void Initialize();
+	void Initialize(const std::string& fontName);
 	//描画
 	void Draw();
 	//描画レイヤーありの描画
@@ -137,6 +137,7 @@ public:
 	int GetTextSize() const;
 	XMFLOAT2 GetRatio();
 	GameObject* GetAttachedObject() const { return attachObject_; }
+	std::vector<std::string> GetFontFamilyName();
 	void Release();
 
 };

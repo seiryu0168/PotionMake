@@ -66,7 +66,7 @@ void P_MP_CraftUI_ProcessUI::SetProcessData(const std::string processName)
 	XMFLOAT3 pos = GetComponent<Image>().GetPositionAtPixel();
 	
 	//â¡çHï˚ñ@ÇÃï∂éö
-	Text processText(this);
+	Text processText(this, "Rounded M+ 1c");
 	processText.SetText(name_);
 	processText.SetColor({ 0,0,0,1 });
 	processText.SetLayer(1);

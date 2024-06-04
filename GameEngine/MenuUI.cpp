@@ -18,10 +18,11 @@ void MenuUI::SetButton(const std::string& imageName, const std::string& msg, con
 	//save.SetSize({ 5,2,0 });
 	AddComponent<Image>(btnImage);
 	XMFLOAT3 textPos = btnImage.GetPositionAtPixel();
-	Text saveText(this);
-	saveText.SetText(msg);
-	saveText.SetPosition({ textPos.x + 200,textPos.y - 45 });
-	AddComponent<Text>(saveText);
+	Text buttonText(this, "Rounded M+ 1c");
+	buttonText.SetText(msg);
+	buttonText.SetTextSize(60);
+	buttonText.SetPosition({ textPos.x + 200,textPos.y - 45 });
+	AddComponent<Text>(buttonText);
 }
 
 void MenuUI::SetButtonPosition(const XMFLOAT3& pos)

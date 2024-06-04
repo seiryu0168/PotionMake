@@ -21,7 +21,7 @@ void ResourceItemSlot::Initialize()
 	AddComponent<Image>(slotImage);
 
 	//ëfçﬁÇÃêî
-	Text countText(this);
+	Text countText(this, "Rounded M+ 1c");
 	countText.SetRect({ 0,0,50,50 });
 	countText.SetTextSize(32);
 	countText.SetText("");

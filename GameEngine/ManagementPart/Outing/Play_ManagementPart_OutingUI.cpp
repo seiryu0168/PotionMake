@@ -33,7 +33,7 @@ void Play_ManagementPart_OutingUI::Initialize()
 	fade.SetSize({ 2,2,0 });
 	AddComponent<Image>(fade);
 
-	Text collectionText(this);
+	Text collectionText(this, "Rounded M+ 1c");
 	collectionText.SetText("äOèo");
 	collectionText.SetPosition({ 880,300 });
 	AddComponent<Text>(collectionText);
@@ -48,7 +48,7 @@ void Play_ManagementPart_OutingUI::Update()
 
 	if (!canCloseUI_)
 	{
-		time_ += 0.016;
+		time_ += 0.016f;
 		GetComponent<Image>(1).SetAlpha(time_);
 		if (time_ >= countLimit_ && !isOuting_)
 		{

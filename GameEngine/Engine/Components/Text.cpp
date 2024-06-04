@@ -3,7 +3,7 @@
 #include<filesystem>
 #include"../GameObject/CameraManager.h"
 
-Text::Text(GameObject* object)
+Text::Text(GameObject* object,const std::string& fontName)
 	:attachObject_(object)
 {
 	isDraw_ = true;
@@ -17,7 +17,7 @@ Text::Text(GameObject* object)
 	pTextFormat_ = nullptr;
 	pLayout_ = nullptr;
 	renderTargetNum_ = 0;
-	Initialize();
+	Initialize(fontName);
 }
 
 Text::Text(const int& renderTargetNum)
@@ -37,7 +37,7 @@ Text::Text(const int& renderTargetNum)
 			renderTargetNum_ = renderTargetNum;
 		else
 			renderTargetNum_ = 0;
-	Initialize();
+	Initialize("Arial");
 
 }
 
@@ -106,6 +106,47 @@ Text::~Text()
 	//Release();
 }
 
+std::vector<std::string> Text::GetFontFamilyName()
+{
+	int familyCount = D2D::GetCollection()->GetFontFamilyCount();
+	IDWriteFontFamily* pFontFamily = nullptr;
+	std::vector<std::string> names;
+	for (int i = 0; i < familyCount; i++)
+	{
+		UINT index = 0;
+		BOOL exists = false;
+		IDWriteLocalizedStrings* pFamilyNames = nullptr;
+		D2D::GetCollection()->GetFontFamily(i, &pFontFamily);
+		pFontFamily->GetFamilyNames(&pFamilyNames);
+		wchar_t localeName[LOCALE_NAME_MAX_LENGTH];
+		GetUserDefaultLocaleName(localeName, LOCALE_NAME_MAX_LENGTH);
+		if (localeName)
+		{
+			pFamilyNames->FindLocaleName(localeName, &index, &exists);
+		}
+		if (!exists)
+		{
+			pFamilyNames->FindLocaleName(L"en-us", &index, &exists);
+		}
+		if (!exists)
+			index = 0;
+
+		UINT length = 0;
+		pFamilyNames->GetStringLength(index, &length);
+		//std::wstring name;
+		wchar_t* name = new (std::nothrow) wchar_t[length + 1];
+		if (length > 0)
+		{
+			pFamilyNames->GetString(index, name, length + 1);
+			std::filesystem::path familyName = name;
+			names.push_back(familyName.string());
+		}
+
+		delete(name);
+	}
+	return names;
+}
+
 void Text::Release()
 {
 	SAFE_RELEASE(pTextFormat_);
@@ -167,16 +208,34 @@ int Text::Load(const std::string& text, const std::string& fontName, const TEXT_
 	return 0;
 }
 
-void Text::Initialize()
+void Text::Initialize(const std::string& fontName)
 {
+	bool exist = false;
+	std::vector<std::string> names = GetFontFamilyName();
+	for (int i = 0; i < names.size(); i++)
+	{
+
+		if (names[i] == fontName)
+		{
+			exist = true;
+			break;
+		}
+
+	}
 	//フォント名用の配列用意
 	//size_t ret;
 	FontData data;
-	std::wstring fontName= L"Arial";
+	std::filesystem::path font;
+	if (exist)
+		font = fontName;
+	else
+		font = "Arial";
+	pFontName_ = font.wstring();
+	//std::wstring fontName= L"Arial";
 	std::wstring&& text = L"sumple";
 	//size_t textSize;
-	pFontName_ = fontName;
-	data.fontName_ = fontName;
+	//pFontName_ = fontName;
+	data.fontName_ = pFontName_;
 	data.pCollection_ = D2D::GetCollection();
 
 	//描画するテキスト用の配列を用意する
@@ -284,8 +343,45 @@ HRESULT Text::SetText(const std::string& text)
 	
 	HRESULT hr;
 	FontData data;
-	//フォント名
-	hr = pTextFormat_->GetFontFamilyName((WCHAR*)data.fontName_.c_str(), pTextFormat_->GetFontFamilyNameLength() + 1);
+	int ffamilynamelength = pTextFormat_->GetFontFamilyNameLength();
+	////フォント名
+	//int familyCount = D2D::GetCollection()->GetFontFamilyCount();
+	//IDWriteFontFamily* pFontFamily = nullptr;
+	//
+	//for (int i = 0; i < familyCount; i++)
+	//{
+	//	UINT index = 0;
+	//	BOOL exists = false;
+	//	IDWriteLocalizedStrings* pFamilyNames = nullptr;
+	//	D2D::GetCollection()->GetFontFamily(i, &pFontFamily);
+	//	pFontFamily->GetFamilyNames(&pFamilyNames);
+	//	wchar_t localeName[LOCALE_NAME_MAX_LENGTH];
+	//	GetUserDefaultLocaleName(localeName, LOCALE_NAME_MAX_LENGTH);
+	//	if (localeName)
+	//	{
+	//		pFamilyNames->FindLocaleName(localeName, &index, &exists);
+	//	}
+	//	if (!exists)
+	//	{
+	//		pFamilyNames->FindLocaleName(L"en-us", &index, &exists);
+	//	}
+	//	if (!exists)
+	//		index = 0;
+	//
+	//	UINT length = 0;
+	//	pFamilyNames->GetStringLength(index, &length);
+	//	wchar_t* name = new (std::nothrow) wchar_t[length + 1];
+	//	if (length > 0)
+	//	{
+	//		pFamilyNames->GetString(index, name, length + 1);
+	//	}
+	//	delete(name);
+	//
+	//}
+	wchar_t* fontName = new wchar_t[pTextFormat_->GetFontFamilyNameLength() + 1];
+	hr = pTextFormat_->GetFontFamilyName(fontName/*(WCHAR*)data.fontName_.c_str()*/, pTextFormat_->GetFontFamilyNameLength() + 1);
+	data.fontName_ = fontName;
+	delete(fontName);
 	if (FAILED(hr))
 		return hr;
 	//フォントサイズ
@@ -370,7 +466,11 @@ HRESULT Text::SetTextSize(float size)
 
 	//今のテキストの書式設定をコピー
 	//フォント名
-	hr = pTextFormat_->GetFontFamilyName((WCHAR*)data.fontName_.c_str(), pTextFormat_->GetFontFamilyNameLength()+1);
+	wchar_t* fontName = new wchar_t[pTextFormat_->GetFontFamilyNameLength() + 1];
+	hr = pTextFormat_->GetFontFamilyName(fontName/*(WCHAR*)data.fontName_.c_str()*/, pTextFormat_->GetFontFamilyNameLength()+1);
+	data.fontName_ = fontName;
+	delete(fontName);
+	
 	if (FAILED(hr))
 		return hr;
 	//ロケール
@@ -415,7 +515,7 @@ int Text::GetTextSize() const
 
 XMFLOAT2 Text::GetRatio()
 {
-	XMFLOAT2 ratio(0);
+	XMFLOAT2 ratio = { 0,0 };
 	ratio.x = (transform2D.x - defaultPos_.x) / CameraManager::GetCamera(renderTargetNum_).GetViewPort().Width;
 	ratio.y = (transform2D.y - defaultPos_.y) / CameraManager::GetCamera(renderTargetNum_).GetViewPort().Height;
 	return ratio;

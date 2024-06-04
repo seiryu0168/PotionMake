@@ -51,7 +51,7 @@ void PotionStock::Initialize()
 
 	XMFLOAT3 imagePos = potionStockImage.GetPositionAtPixel();
 	//ステータス
-	Text statusText(this);
+	Text statusText(this, "Rounded M+ 1c");
 	statusText.SetTextSize(25);
 	statusText.SetText("");
 	//statusText.SetLayer(1);
@@ -163,7 +163,7 @@ void PotionStock::SetPotionStatus_(int potionNum, const std::string& name, bool 
 	AddComponent<Image>(potionEdgeImage);
 
 	pos = potionBaseImage.GetPositionAtPixel();
-	GetComponent<Text>().SetPosition({ pos.x - 27, pos.y-15});
+	GetComponent<Text>().SetPosition({ pos.x - 27, pos.y-18});
 
 	if (isSale)
 		selectedSlot_ = SelectSlot::Sell;

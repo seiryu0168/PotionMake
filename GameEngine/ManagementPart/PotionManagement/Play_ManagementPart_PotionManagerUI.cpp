@@ -45,7 +45,7 @@ void Play_ManagementPart_PotionManagerUI::Update()
 
 void Play_ManagementPart_PotionManagerUI::CreateUITitle(XMFLOAT2 pos, XMFLOAT2 diff, const std::string& str)
 {
-	Text craftUIText(this);
+	Text craftUIText(this, "Rounded M+ 1c");
 	craftUIText.SetText(str);
 	craftUIText.SetTextSize(70);
 	float rectSize = craftUIText.GetTextSize() * str.size() * 0.5f;

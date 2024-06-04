@@ -23,7 +23,7 @@ void ConfirmationUI::Initialize()
 
 	XMFLOAT3 imagePos = confirmation.GetPositionAtPixel();
 	XMFLOAT3 imageSize = confirmation.GetSizeAtPixel();
-	Text messageText(this);
+	Text messageText(this,"Rounded M+ 1c");
 	messageText.SetText("確認");
 	messageText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	messageText.SetPosition({ imagePos.x - imageSize.x*0.5f,imagePos.y - imageSize.y*0.4f });
@@ -39,7 +39,7 @@ void ConfirmationUI::Initialize()
 	TEXT_RECT rect = { 0,0,imageSize.x,imageSize.y };
 	{
 		imagePos = ok.GetPositionAtPixel();
-		Text commandText(this);
+		Text commandText(this,"Rounded M+ 1c");
 		commandText.SetRect(rect);
 		commandText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
 		commandText.SetText("OK");
@@ -54,12 +54,12 @@ void ConfirmationUI::Initialize()
 
 	{
 		imagePos = cancel.GetPositionAtPixel();
-		Text commandText(this);
+		Text commandText(this,"Rounded M+ 1c");
 		commandText.SetRect(rect);
 		commandText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_CENTER);
-		commandText.SetTextSize(40);
+		commandText.SetTextSize(33);
 		commandText.SetText("キャンセル");
-		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f + 5,imagePos.y - imageSize.y * 0.5f });
+		commandText.SetPosition({ imagePos.x - imageSize.x * 0.5f,imagePos.y - imageSize.y * 0.5f });
 		AddComponent<Text>(commandText);
 	}
 	Audio confirmAudio(this);
