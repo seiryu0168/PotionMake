@@ -381,7 +381,7 @@ HRESULT Text::SetText(const std::string& text)
 	wchar_t* fontName = new wchar_t[pTextFormat_->GetFontFamilyNameLength() + 1];
 	hr = pTextFormat_->GetFontFamilyName(fontName/*(WCHAR*)data.fontName_.c_str()*/, pTextFormat_->GetFontFamilyNameLength() + 1);
 	data.fontName_ = fontName;
-	delete(fontName);
+	delete fontName;
 	if (FAILED(hr))
 		return hr;
 	//フォントサイズ
@@ -469,7 +469,7 @@ HRESULT Text::SetTextSize(float size)
 	wchar_t* fontName = new wchar_t[pTextFormat_->GetFontFamilyNameLength() + 1];
 	hr = pTextFormat_->GetFontFamilyName(fontName/*(WCHAR*)data.fontName_.c_str()*/, pTextFormat_->GetFontFamilyNameLength()+1);
 	data.fontName_ = fontName;
-	delete(fontName);
+	delete fontName;
 	
 	if (FAILED(hr))
 		return hr;

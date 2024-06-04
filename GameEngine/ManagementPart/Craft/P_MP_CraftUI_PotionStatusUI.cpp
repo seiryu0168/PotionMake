@@ -40,12 +40,12 @@ void P_MP_CraftUI_PotionStatusUI::Initialize()
 
 	XMFLOAT3 pos = GetComponent<Image>().GetPositionAtPixel();
 	//コスト表示
-	Text costText(this);
+	Text costText(this, "Rounded M+ 1c");
 	costText.SetText("0/0");
-	costText.SetTextSize(70);
+	costText.SetTextSize(60);
 	costText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
-	costText.SetRect({ 0,0,200,200 });
-	costText.SetPosition({ pos.x+100,pos.y });
+	costText.SetRect({ 0,0,200,230 });
+	costText.SetPosition({ pos.x+130,pos.y });
 	AddComponent<Text>(costText);
 
 }

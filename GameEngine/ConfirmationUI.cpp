@@ -6,8 +6,9 @@
 #include"Engine/Systems/AudioSystem.h"
 
 ConfirmationUI::ConfirmationUI(Object* parent)
-	:GameObject(parent,"ConfirmationUI")
-	
+	:GameObject(parent,"ConfirmationUI"),
+	confirmImageNum_(-1),
+	cancelImageNum_(-1)	
 {
 }
 
