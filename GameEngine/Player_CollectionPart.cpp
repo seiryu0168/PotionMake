@@ -62,7 +62,7 @@ void Player_CollectionPart::Update()
 		if (itemNum >= 0)
 		{
 			((Play_CollectionPart_BaseUI*)GetUIManager()->FindChild("Play_CollectionPart_BaseUI"))->DisplayItemName(itemNum);
-			if (Input::IsMouseButtonDown(0))
+			if (Input::IsKeyDown(DIK_F))
 			{
 				GetComponent<Audio>(hAudio_ItemGet_).Play();
 				AddItem(itemNum);

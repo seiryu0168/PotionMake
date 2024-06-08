@@ -31,17 +31,37 @@ void Play_ManagementPart_BaseUI::Initialize()
 	Direct3D::SetClipCursor(clipRange);
 	Direct3D::ShowMouseCursor(false);
 
+	//ボタンUIの画像
 	Image actionImage(this);
 	actionImage.Load("Assets/Image/SelectImage3.png");
 	actionImage.SetPosition({ 0.7f,-0.015f,0 });
 	actionImage.SetSize({0.7,0.7f,0});
 	AddComponent<Image>(actionImage);
+
 	Text text(this, "Rounded M+ 1c");
 	text.SetText("Text");
 	text.SetTextSize(55);
 	text.SetRect({ 0,0,500,500 });
-	text.SetPosition({ 1320,505 });
+	text.SetPosition({ 1350,505 });
 	AddComponent<Text>(text);
+
+	//押すキーの画像
+	Image buttonImage(this);
+	buttonImage.Load("Assets/Image/Circle.png");
+	buttonImage.SetPosition({ 0.37f,-0.015f,0 });
+	buttonImage.SetSize({ 0.5f,0.5f,0 });
+	AddComponent<Image>(buttonImage);
+
+	XMFLOAT3 buttonTextPos = buttonImage.GetPositionAtPixel();
+	Text buttonText(this, "Rounded M+ 1c");
+	buttonText.SetText("F");
+	buttonText.SetColor({ 0,0,0,1 });
+	buttonText.SetTextSize(40);
+	buttonText.SetRect({ 0,0,40,40 });
+	buttonText.SetPosition({ buttonTextPos.x-10,buttonTextPos.y-30 });
+	AddComponent<Text>(buttonText);
+
+
 	player_ = (Player_ManagementPart*)FindObject("Player_ManagementPart");
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
 }
@@ -129,5 +149,8 @@ void Play_ManagementPart_BaseUI::DisplayAction(std::string action, bool isDispla
 	//if (!childList_.empty())
 	//	return;
 	GetComponent<Text>().SetText(action);
-	GetComponent<Image>().SetAlpha(isDisplay);
+	GetComponent<Text>(1).isDraw_=isDisplay;
+
+	GetComponent<Image>().SetDraw(isDisplay);
+	GetComponent<Image>(1).SetDraw(isDisplay);
 }

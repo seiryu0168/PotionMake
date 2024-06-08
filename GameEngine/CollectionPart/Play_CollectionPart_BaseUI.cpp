@@ -39,19 +39,36 @@ void Play_CollectionPart_BaseUI::Initialize()
 	actionImage.SetSize({ 0.7,0.7f,0 });
 	AddComponent<Image>(actionImage);
 
+	//素材名
+	Text itemNameText(this, "Rounded M+ 1c");
+	itemNameText.SetText("");
+	itemNameText.SetRect({ 0,0,500,500 });
+	itemNameText.SetTextSize(55);
+	itemNameText.SetPosition({ 1350,505 });
+	AddComponent<Text>(itemNameText);
+
+	//押すキーの画像
+	Image buttonImage(this);
+	buttonImage.Load("Assets/Image/Circle.png");
+	buttonImage.SetPosition({ 0.37f,-0.015f,0 });
+	buttonImage.SetSize({ 0.5f,0.5f,0 });
+	AddComponent<Image>(buttonImage);
+
+	XMFLOAT3 buttonTextPos = buttonImage.GetPositionAtPixel();
+	Text buttonText(this, "Rounded M+ 1c");
+	buttonText.SetText("F");
+	buttonText.SetColor({ 0,0,0,1 });
+	buttonText.SetTextSize(40);
+	buttonText.SetRect({ 0,0,40,40 });
+	buttonText.SetPosition({ buttonTextPos.x - 10,buttonTextPos.y - 30 });
+	AddComponent<Text>(buttonText);
+
 	//ポインターの画像
 	Image pointerImage(this);
 	pointerImage.Load("Assets/Image/PointerDot.png");
 	pointerImage.SetSize({ 0.1f,0.1f,0 });
 	AddComponent<Image>(pointerImage);
 
-	//素材名
-	Text itemNameText(this, "Rounded M+ 1c");
-	itemNameText.SetText("");
-	itemNameText.SetRect({ 0,0,500,500 });
-	itemNameText.SetTextSize(55);
-	itemNameText.SetPosition({ 1320,505 });
-	AddComponent<Text>(itemNameText);
 
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
 }
@@ -78,14 +95,18 @@ void Play_CollectionPart_BaseUI::DisplayItemName(int itemNum)
 {	
 	//アイテム番号を使ってアイテム名を表示
 	GetComponent<Image>().SetDraw(true);
+	GetComponent<Image>(1).SetDraw(true);
 	GetComponent<Text>().SetText(itemName_[itemNum]);
 	GetComponent<Text>().isDraw_ = true;
+	GetComponent<Text>(1).isDraw_ = true;
 }
 
 void Play_CollectionPart_BaseUI::HiddenItemName()
 {
 	GetComponent<Image>().SetDraw(false);
+	GetComponent<Image>(1).SetDraw(false);
 	GetComponent<Text>().isDraw_=false;
+	GetComponent<Text>(1).isDraw_=false;
 }
 
 void Play_CollectionPart_BaseUI::SetUIOpenFlag(bool flag)
