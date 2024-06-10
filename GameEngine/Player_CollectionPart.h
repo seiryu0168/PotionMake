@@ -23,6 +23,8 @@ public:
 	void MoveControll() override;
 	void AddItem(int itemNum);
 	const std::unordered_map<int, int>& GetItem() { return itemCount_; }
+	void OnCollisionStay(GameObject* pTarget) override;
+	void CorrectionError(const XMVECTOR& targetPos, const XMFLOAT3& targetSize);
 	void Release() override;
 };
 

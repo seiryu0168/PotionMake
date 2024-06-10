@@ -8,10 +8,12 @@
 #include"CollectionPart/Play_CollectionPart_BaseUI.h"
 #include"Engine/ResourceManager/AudioManager.h"
 #include"Engine/Systems/AudioSystem.h"
+#include"Engine/Components/Collider.h"
 namespace
 {
 	float ItemGetterMaxDist = 18.0f;
 	float DashSpeedRatio = 2.0f;
+	float CorrectionDist = 0.3f;
 }
 Player_CollectionPart::Player_CollectionPart(Object* parent)
 	:Player(parent,"Player_CollectionPart"),
@@ -28,7 +30,12 @@ Player_CollectionPart::~Player_CollectionPart()
 
 void Player_CollectionPart::Initialize()
 {
-	
+	HitBox box({ 3,3,3 });
+	Collider coll({ 0,-10,0 });
+	coll.SetCollider(box);
+	coll.SetAttachObject(this);
+	AddComponent<Collider>(coll);
+
 	transform_->position_ = XMVectorSet(0, 10, 0, 0);
 	CameraManager::GetCamera(0).SetPosition(this->transform_->position_);
 	CameraManager::GetCamera(0).SetTarget(XMVectorSet(0, 10, 1, 0));
@@ -152,6 +159,50 @@ void Player_CollectionPart::AddItem(int itemNum)
 	{
 		itemCount_[itemNum]++;
 	}
+}
+
+void Player_CollectionPart::OnCollisionStay(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "P_CP_ResourceItem")
+	{
+		Collider& coll = pTarget->GetComponent<Collider>();
+		CorrectionError(pTarget->GetTransform()->position_,coll.GetCollisionShape<HitBox>().size_);
+	}
+}
+
+void Player_CollectionPart::CorrectionError(const XMVECTOR& targetPos, const XMFLOAT3& targetSize)
+{
+	XMFLOAT3 errorDist = StoreFloat3(targetPos - (this->transform_->position_ - XMVectorSet(0,10,0,0)));
+	float distLength = VectorLength(XMLoadFloat3(&errorDist));
+	XMFLOAT3 size = this->GetComponent<Collider>().GetCollisionShape<HitBox>().size_;
+	XMFLOAT3 maxDist = { targetSize.x + size.x,targetSize.y + size.y,targetSize.z + size.z };
+
+	if (abs(targetSize.x - targetSize.z)<=0.0001f)
+	{
+		float sign = (1 - (2 * signbit(errorDist.z)));
+		//Z軸の方が長く、errorDist.zの値が許容以下だったら
+		if (abs(errorDist.x) < abs(errorDist.z)/*&&abs(errorDist.z) <= (maxDist.z - CorrectionDist)*/)
+			this->transform_->position_ += XMVectorSet(0, 0, (maxDist.z - abs(errorDist.z)) * (1-(2*signbit(errorDist.z)))*-1, 0);
+		else /*if(abs(errorDist.x) <= (maxDist.x - CorrectionDist))*/
+			this->transform_->position_ += XMVectorSet((maxDist.x - abs(errorDist.x)) * (1 - (2 * signbit(errorDist.x)))*-1, 0, 0, 0);
+
+	}
+	else if (abs(targetSize.x - targetSize.z) > 0.0001f)
+	{
+		XMFLOAT2 length = { distLength / targetSize.x,distLength / targetSize.z };
+		//X軸の方が長く、errorDist.xの値が許容量以上だったら
+		if (length.x < length.y && errorDist.z >= (maxDist.z - CorrectionDist))
+			this->transform_->position_ += XMVectorSet(0, 0, (maxDist.z * 0.5f - CorrectionDist) * (1 - (2 * signbit(errorDist.z)))*-1, 0);
+		else if (errorDist.x <= (maxDist.x - CorrectionDist))
+			this->transform_->position_ += XMVectorSet((maxDist.x * 0.5f - CorrectionDist) * (1 - (2 * signbit(errorDist.x)))*-1, 0, 0, 0);
+
+	}
+
+	//if (errorDist.x < maxDist.x)
+	//{
+	//XMFLOAT2 length = {}
+	//	this->transform_->position_+=
+	//}
 }
 
 void Player_CollectionPart::Release()
