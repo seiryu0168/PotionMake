@@ -1,5 +1,6 @@
 #include "Play_CollectionPart_StageManager.h"
 #include "P_CP_ResourceItem.h"
+#include"../ObstacleObject.h"
 #include <Windows.h>
 #include "../Engine/ResourceManager/CsvReader.h"
 #include "../ResourceStatusData.h"
@@ -19,7 +20,7 @@ void Play_CollectionPart_StageManager::Initialize()
 {
 	Direct3D::SetLight({ 0, 500, 10 }, { 0,0,0 });
 	Direct3D::SetLightClip(430, 600);
-	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData04.csv");
+	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData05.csv");
 
 	//CSVÇÇ‡Ç∆Ç…ëfçﬁÇê∂ê¨
 	for (int i = 0; i < reader.GetLines(); i++)
@@ -31,6 +32,16 @@ void Play_CollectionPart_StageManager::Initialize()
 		item->GetTransform()->position_ = XMVectorSet(reader.GetFloat(i, 3), reader.GetFloat(i, 4), reader.GetFloat(i, 5), 0);
 		item->GetTransform()->RotateEular(reader.GetFloat(i, 6), reader.GetFloat(i, 7), reader.GetFloat(i, 8));
 		item->GetComponent<Collider>().GetCollisionShape<HitBox>().size_ = { reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11) };
+	}
+
+	reader.Load("Assets/SaveData/GameData/CollectionPartObstacleData01.csv");
+	for (int i = 0; i < reader.GetLines(); i++)
+	{
+		ObstacleObject* obstacle = Instantiate<ObstacleObject>(this);
+		obstacle->SetObstacleData("Assets/Model/"+reader.GetString(i, 2), {reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11)});
+		obstacle->GetTransform()->position_ = XMVectorSet(reader.GetFloat(i, 3), reader.GetFloat(i, 4), reader.GetFloat(i, 5), 0);
+		obstacle->GetTransform()->RotateEular(reader.GetFloat(i, 6), reader.GetFloat(i, 7), reader.GetFloat(i, 8));
+		//obstacle->GetComponent<Collider>().GetCollisionShape<HitBox>().size_ = { reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11) };
 	}
 }
 

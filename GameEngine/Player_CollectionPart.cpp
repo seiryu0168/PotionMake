@@ -163,7 +163,7 @@ void Player_CollectionPart::AddItem(int itemNum)
 
 void Player_CollectionPart::OnCollisionStay(GameObject* pTarget)
 {
-	if (pTarget->GetObjectName() == "P_CP_ResourceItem")
+	if (pTarget->GetObjectName() == "ObstacleObject")
 	{
 		Collider& coll = pTarget->GetComponent<Collider>();
 		CorrectionError(pTarget->GetTransform()->position_,coll.GetCollisionShape<HitBox>().size_);

@@ -1,6 +1,6 @@
 #pragma once
 #include"Engine/GameObject/GameObject.h"
-class ObstacleObject : GameObject
+class ObstacleObject : public GameObject
 {
 public:
 	ObstacleObject(Object* parent);
