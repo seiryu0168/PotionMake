@@ -289,6 +289,7 @@
     <ClCompile Include="MenuUI_Save.cpp" />
     <ClCompile Include="MenuUI_Status.cpp" />
     <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="ObstacleObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Player_CollectionPart.cpp" />
@@ -446,6 +447,7 @@
     <ClInclude Include="MenuUI_Save.h" />
     <ClInclude Include="MenuUI_Status.h" />
     <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="ObstacleObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Player_CollectionPart.h" />
