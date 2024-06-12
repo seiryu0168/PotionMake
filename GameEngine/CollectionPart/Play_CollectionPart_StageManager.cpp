@@ -18,9 +18,9 @@ Play_CollectionPart_StageManager::~Play_CollectionPart_StageManager()
 
 void Play_CollectionPart_StageManager::Initialize()
 {
-	Direct3D::SetLight({ 0, 500, 10 }, { 0,0,0 });
-	Direct3D::SetLightClip(430, 600);
-	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData05.csv");
+	Direct3D::SetLight({ 0, 800, 10 }, { 0,0,0 });
+	Direct3D::SetLightClip(730, 900);
+	CsvReader reader("Assets/SaveData/GameData/CollectionPartItemData06.csv");
 
 	//CSVÇÇ‡Ç∆Ç…ëfçﬁÇê∂ê¨
 	for (int i = 0; i < reader.GetLines(); i++)
@@ -34,7 +34,7 @@ void Play_CollectionPart_StageManager::Initialize()
 		item->GetComponent<Collider>().GetCollisionShape<HitBox>().size_ = { reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11) };
 	}
 
-	reader.Load("Assets/SaveData/GameData/CollectionPartObstacleData01.csv");
+	reader.Load("Assets/SaveData/GameData/CollectionPartObstacleData02.csv");
 	for (int i = 0; i < reader.GetLines(); i++)
 	{
 		ObstacleObject* obstacle = Instantiate<ObstacleObject>(this);

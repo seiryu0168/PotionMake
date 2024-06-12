@@ -23,6 +23,8 @@ namespace DebugUI
 	void DebugLog(GameObject* object, const std::string& message);
 	void Log();
 	void CleanUp();
+	void PrintFPS();
+	void SetFPS(int count);
 	void PrintProcessMemory();
 	void GetProcess(DWORD processID);
 	void ObjectCount(GameObject* object);

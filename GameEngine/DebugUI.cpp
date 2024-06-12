@@ -11,7 +11,7 @@ namespace DebugUI
 		std::string message_;
 	};
 	std::vector<std::unique_ptr<debugData>> debugLogs;
-
+	int countFPS = 0;
 }
 	
 void DebugUI::Initialize(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -32,7 +32,8 @@ void DebugUI::Debug(/*GameObject* object*/)
 	//ObjectCount(*(object->GetChildList()->begin()));
 	//std::string count = std::to_string(objectCount_);
 	PrintProcessMemory();
-	
+	PrintFPS();
+	//PrintFPS();
 	//ImGui::Text(count.c_str());
 	//ImGui::Text(object->GetObjectName().c_str());
 	//objectCount_ = 0;
@@ -70,6 +71,20 @@ void DebugUI::CleanUp()
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+}
+
+void DebugUI::PrintFPS()
+{
+	ImGui::Begin("FPS");
+
+	ImGui::Text(std::to_string(countFPS).c_str());
+
+	ImGui::End();
+}
+
+void DebugUI::SetFPS(int count)
+{
+	countFPS = count;
 }
 
 void DebugUI::PrintProcessMemory()

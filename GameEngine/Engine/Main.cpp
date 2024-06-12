@@ -116,6 +116,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	//Brightness::Initialize();
 	Time::Initialize();
+	int countFPS = 0;
 	//pRootJob = new RootJob;
 	
 	newSceneManager::Initialize();
@@ -142,24 +143,24 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			//static DWORD startTime = timeGetTime();		 //起動時刻取得(ミリ秒)							//ミリ秒＝10^-3
 			DWORD nowTime = timeGetTime();				 //今の時刻取得(ミリ秒)							//1000ミリ秒＝1秒
 			static DWORD lastUpdateTime = nowTime;		 //最後に更新した時刻(ミリ秒) : Update
+			static DWORD lastFPSResetTime = nowTime;  //最後にFPSを表示した時刻(ミリ秒) : FixedUpdate
 			static DWORD lastFixedUpdateTime = nowTime;  //最後に更新した時刻(ミリ秒) : FixedUpdate
 
 			//今の時刻と起動時刻の差が1000ミリ秒超えたら
 			//countFpsとstartTimeをリセット
-			//if (nowTime - startTime >= 1000)
-			//{
-			//	/*WCHAR str[16];
-			//	wsprintf(str, L"%u", countFps);
-			//	SetWindowText(hWnd, str);*/
-			//	countFps = 0;
-			//	startTime = nowTime;//
-			//}
-
+			if (nowTime - lastFPSResetTime >= 1000)
+			{
+				/*WCHAR str[16];
+				wsprintf(str, L"%u", countFps);
+				SetWindowText(hWnd, str);*/
+				DebugUI::SetFPS(countFPS);
+				countFPS = 0;
+				lastFPSResetTime = nowTime;//
+			}
 			//今の時刻と最後に更新した時刻の差*60が1000以上であれば
 			if ((nowTime - lastUpdateTime) * 60.0f >= 1000.0f)
 			{
 				lastUpdateTime = nowTime;
-
 				//std::thread main(Division::threadMain);
 				//std::thread load(Division::threadDraw);
 				//main.join();
@@ -173,6 +174,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 				lastUpdateTime = nowTime;
 				//countFps++;
+				countFPS++;
 				newSceneManager::Update();
 				//pRootJob->UpdateSub();
 				CameraManager::Update();

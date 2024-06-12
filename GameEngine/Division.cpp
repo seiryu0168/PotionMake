@@ -87,7 +87,7 @@ namespace Division
 	{
 #ifdef _DEBUG
 		DebugUI::StartImGui();
-		DebugUI::Debug(/*(GameObject*)pRootJob->FindChild("SceneManager")*/);
+		//DebugUI::Debug(/*(GameObject*)pRootJob->FindChild("SceneManager")*/);
 		//DebugUI::Log();
 		ImGui::Render();
 #endif 

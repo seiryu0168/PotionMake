@@ -13,9 +13,9 @@ void CollectionPart_Ground::Initialize()
 {
 	//’n–Ê‚Ìƒ‚ƒfƒ‹
 	Test_Model_ECSver groundModel(this);
-	groundModel.Load("Assets/Model/Ground01.fbx");
+	groundModel.Load("Assets/Model/Ground02.fbx");
 	AddComponent<Test_Model_ECSver>(groundModel);
-	transform_->scale_ = { 10,10,10 };
+	transform_->scale_ = { 2,2,2 };
 }
 
 void CollectionPart_Ground::Start()
