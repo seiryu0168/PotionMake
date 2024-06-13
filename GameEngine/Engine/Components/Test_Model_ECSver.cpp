@@ -88,6 +88,7 @@ void Test_Model_ECSver::Draw(int layerNum)
 {
 	if (layerNum != layerNum_)
 		return;
+	//ƒJƒƒ‰‚Æƒ‚ƒfƒ‹‚Ì‹——£‚ªdrawDistance_‚æ‚è¬‚³‚©‚Á‚½‚ç•`‰æ
 	for (int i = 0; i < CameraManager::GetCameraCount(); i++)
 	{
 		XMVECTOR pos = XMLoadFloat3(&CameraManager::GetCamera(i).GetPosition());

@@ -34,6 +34,7 @@ void Play_CollectionPart_StageManager::Initialize()
 		item->GetComponent<Collider>().GetCollisionShape<HitBox>().size_ = { reader.GetFloat(i,9),reader.GetFloat(i,10), reader.GetFloat(i,11) };
 	}
 
+	//áŠQ•¨‚Ìİ’è
 	reader.Load("Assets/SaveData/GameData/CollectionPartObstacleData02.csv");
 	for (int i = 0; i < reader.GetLines(); i++)
 	{

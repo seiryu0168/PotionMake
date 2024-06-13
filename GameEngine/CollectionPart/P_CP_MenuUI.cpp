@@ -32,21 +32,6 @@ P_CP_MenuUI::~P_CP_MenuUI()
 
 void P_CP_MenuUI::Initialize()
 {
-	////家に帰るボタン
-	//Image returnHome(this);
-	//returnHome.Load("Assets/Image/SelectImage3.png");
-	//returnHome.SetPosition({ -1.2f,0.5f,0 });
-	//returnHome.SetRotation({ 0,0,180 });
-	////returnHome.SetSize({ 5,2,0 });
-	//returnImageNum_ = AddComponent<Image>(returnHome);
-	//XMFLOAT3 textPos = GetComponent<Image>().GetPositionAtPixel();
-	//
-	////家に帰るテキスト
-	//Text commandText(this);
-	//commandText.SetText("家に戻る");
-	//commandText.SetPosition({ textPos.x+200,textPos.y-50 });
-	//AddComponent<Text>(commandText);
-
 	//画面暗転用の画像
 	Image fadeImage(this);
 	fadeImage.Load("Assets/Image/PotionManagerUIBase1.png");
@@ -66,20 +51,7 @@ void P_CP_MenuUI::Initialize()
 	MenuUI& rtnHome = *Instantiate<MenuUI_ReturnHome>(this);
 	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.0f,0 });
 	rtnHome.SetUINumber(2);
-	//集めた素材のUI
-	//P_CP_CollectedItemUI& collectedUI = *Instantiate<P_CP_CollectedItemUI>(this);
-	//Player_CollectionPart* player = (Player_CollectionPart*)FindObject("Player_CollectionPart");
-	//ResourceStatusData& rData = *InterSceneData::GetData<ResourceStatusData>("ResourceData");
-	//
-	//for (auto& itr : player->GetItem())
-	//{
-	//	collectedUI.SetItemData(itr.first,
-	//		rData.resourceDataMap_[itr.first].resourceName_,
-	//		itr.second,
-	//		rData.resourceDataMap_[itr.first].resourceImageName_);
-	//}
-	//
-	//collectedUI.SetDummy();
+
 	//クローズボタン
 	GameObject* button = Instantiate<CloseButton>(this);
 	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
