@@ -40,6 +40,7 @@ void P_CP_ResourceItem::SetModel(const std::string& modelName)
 	//ëfçﬁÇÃÉÇÉfÉã
 	Test_Model_ECSver model(this);
 	model.Load("Assets/Model/" + modelName);
+	model.SetDrawDistance(300);
 	AddComponent<Test_Model_ECSver>(model);
 	isLoaded_ = true;
 }

@@ -149,6 +149,7 @@ void ColliderSystem::Update()
 			}
 			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
 
+			if(VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
 			CheckCollision(&firstCollision, &secondCollision);
 		}
 	}

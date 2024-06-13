@@ -32,7 +32,8 @@ void DebugUI::Debug(/*GameObject* object*/)
 	//ObjectCount(*(object->GetChildList()->begin()));
 	//std::string count = std::to_string(objectCount_);
 	PrintProcessMemory();
-	PrintFPS();
+	ImGui::Text(std::to_string(countFPS).c_str());
+	//PrintFPS();
 	//PrintFPS();
 	//ImGui::Text(count.c_str());
 	//ImGui::Text(object->GetObjectName().c_str());

@@ -77,6 +77,7 @@ private:
 	XMFLOAT3     center_;		//原点
 	Entity	colliderEntity_;
 	ColliderType colliderType_;
+	float collisionDistanceLimit_;
 	bool isKill_;
 	GameObject* attachObject_;
 	bool prevHit_;
@@ -117,7 +118,7 @@ public:
 	//コライダーの位置を返す
 	const XMFLOAT3& GetCenter() const { return center_; }
 	//コライダーのサイズを返す
-	
+	void SetCollisionDistance(float dist) { collisionDistanceLimit_ = dist; }
 	//今ヒットしてるかどうか設定(未完成機能)
 	void HitEnable(bool isHit) { nowHit_ = isHit; }
 	//ヒットしてるかどうか

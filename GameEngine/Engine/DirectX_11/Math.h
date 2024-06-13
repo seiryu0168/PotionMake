@@ -123,7 +123,7 @@ inline float VectorDot(const XMVECTOR& v1, const XMVECTOR& v2)
 //----------------------------------------------------------------------------------------
 inline float VectorLength(const XMVECTOR& v1)
 {
-	return XMVectorGetX(XMVector3Length(v1));
+	return abs(XMVectorGetX(XMVector3Length(v1)));
 }
 //----------------------------------------------------------------------------------------
 inline	XMFLOAT3 StoreFloat3(const XMVECTOR& v1)

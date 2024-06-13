@@ -1,5 +1,6 @@
 #include "Test_Model_ECSver.h"
 #include"../ResourceManager/ModelManager_ECSver.h"
+#include"../GameObject/CameraManager.h"
 Test_Model_ECSver::Test_Model_ECSver()
 	:Test_Model_ECSver(nullptr)
 {
@@ -10,12 +11,14 @@ Test_Model_ECSver::Test_Model_ECSver()
 	meshEntity_ = 0;
 	layerNum_ = 0;
 	useShadow_ = false;
+	drawDistance_ = 100;
 }
 
 Test_Model_ECSver::Test_Model_ECSver(GameObject* object,int layerNum)
 	:attachObject_(object),
 	type_(SHADER_TYPE::SHADER_3D),
 	blendMode_(BLEND_MODE::BLEND_DEFAULT),
+	drawDistance_(100),
 	animationFrame_(0),
 	isDraw_(true),
 	meshEntity_(0),
@@ -85,20 +88,35 @@ void Test_Model_ECSver::Draw(int layerNum)
 {
 	if (layerNum != layerNum_)
 		return;
-
-	if (isDraw_)
+	//bool canDraw = false;
+	for (int i = 0; i < CameraManager::GetCameraCount(); i++)
 	{
-		Direct3D::SetBlendMode(blendMode_);
-		fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_,useShadow_);
+		XMVECTOR pos = XMLoadFloat3(&CameraManager::GetCamera(i).GetPosition());
+		//pos = pos * attachObject_->GetWorldMatrix();
+		if (VectorLength(attachObject_->GetTransform()->position_ - pos) <= drawDistance_)
+		{
+			Direct3D::SetBlendMode(blendMode_);
+			fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_, useShadow_);
+			break;
+		}
+			//canDraw = true;
+
 	}
+	//if (isDraw_&&canDraw)
+	//{
+	//	Direct3D::SetBlendMode(blendMode_);
+	//	fbx_->Draw(*attachObject_->GetTransform(), type_, animationFrame_,useShadow_);
+	//}
 }
 
 void Test_Model_ECSver::Draw(Transform transform, SHADER_TYPE type, int frame)
 {
+	
 	if (isDraw_)
 	{
-		Direct3D::SetBlendMode(blendMode_);
-		fbx_->Draw(transform, type, frame,useShadow_);
+				Direct3D::SetBlendMode(blendMode_);
+				fbx_->Draw(transform, type, frame, useShadow_);
+		
 	}
 }
 
@@ -106,7 +124,25 @@ void Test_Model_ECSver::DrawShadow()
 {
 	if (isDraw_ && attachObject_ != nullptr)
 	{
-		Direct3D::SetBlendMode(blendMode_);
-		fbx_->DrawShadow(*attachObject_->GetTransform(), animationFrame_);
+		bool canDraw = false;
+		for (int i = 0; i < CameraManager::GetCameraCount(); i++)
+		{
+			XMVECTOR pos = XMLoadFloat3(&CameraManager::GetCamera(i).GetPosition());
+			//pos = pos * attachObject_->GetWorldMatrix();
+			if (VectorLength(attachObject_->GetTransform()->position_ - pos) <= drawDistance_)
+			{
+				Direct3D::SetBlendMode(blendMode_);
+				fbx_->DrawShadow(*attachObject_->GetTransform(), animationFrame_);
+				break;
+			}
+				//canDraw = true;
+
+		}
+		//if (canDraw)
+		//{
+		//
+		//	Direct3D::SetBlendMode(blendMode_);
+		//	fbx_->DrawShadow(*attachObject_->GetTransform(), animationFrame_);
+		//}
 	}
 }

@@ -15,6 +15,7 @@ private:
 	SHADER_TYPE type_;
 	BLEND_MODE blendMode_;
 	int animationFrame_;
+	float drawDistance_;
 	std::shared_ptr<Fbx> fbx_;
 	std::vector<Entity> materialList_;
 	Entity meshEntity_;
@@ -73,6 +74,8 @@ public:
 	/// <param name="materialNum">マテリアル番号</param>
 	/// <param name="color">色</param>
 	void SetCustomColor(int partsNum,int materialNum,const XMFLOAT4& color);
+
+	void SetDrawDistance(float dist) { drawDistance_ = dist; }
 	//アタッチされているオブジェクトを返す
 	GameObject* GetAttachedObject() { return attachObject_; }
 	//描画

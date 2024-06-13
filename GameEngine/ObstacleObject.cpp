@@ -23,6 +23,7 @@ void ObstacleObject::SetObstacleData(const std::string& modelName, const XMFLOAT
 {
 	Test_Model_ECSver model(this);
 	model.Load(modelName);
+	model.SetDrawDistance(300);
 	AddComponent<Test_Model_ECSver>(model);
 
 	HitBox box(colliderSize);

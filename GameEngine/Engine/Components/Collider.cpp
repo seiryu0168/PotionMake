@@ -15,7 +15,8 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	colliderEntity_(0),
 	nowHit_(false),
 	prevHit_(false),
-	isShowHitArea_(true)
+	isShowHitArea_(true),
+	collisionDistanceLimit_(100)
 {
 #if _DEBUG
 	isShowHitArea_ = true;
