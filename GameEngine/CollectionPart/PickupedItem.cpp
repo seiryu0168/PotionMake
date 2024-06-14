@@ -27,7 +27,6 @@ void PickupedItem::Update()
 {
 	if (GetComponent<Image>().IsHitCursor() && canSelect_)
 	{
-
 		GetComponent<Image>().SetColor(1.0f);
 		if (Input::IsMouseButtonUp(0)&& canSelect_)
 		{

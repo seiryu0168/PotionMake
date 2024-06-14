@@ -268,8 +268,8 @@ HRESULT Direct3D::InitDepthTexture()
 
 	D3D11_TEXTURE2D_DESC depthDesc;
 	ZeroMemory(&depthDesc, sizeof(D3D11_TEXTURE2D_DESC));
-	depthDesc.Width = screenWidth;
-	depthDesc.Height = screenHeight;
+	depthDesc.Width = screenWidth*2;
+	depthDesc.Height = screenHeight*2;
 	depthDesc.ArraySize = 1;
 	depthDesc.MipLevels = 1;
 	depthDesc.MiscFlags = 0;
