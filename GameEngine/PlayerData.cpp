@@ -1,7 +1,8 @@
 #include "PlayerData.h"
 
 PlayerData::PlayerData()
-	:maxItemLimit_(999)
+	:maxItemLimit_(999),
+	isFirstPlay_(true)
 
 {
 }

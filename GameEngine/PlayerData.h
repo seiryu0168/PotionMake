@@ -43,6 +43,7 @@ public:
 	void SortResourceList();
 	void AddResourceItemData(const ResourceData_& resource);
 	int maxItemLimit_;
+	bool isFirstPlay_;
 	std::string name_;
 	int money_;
 	int craftCount_;

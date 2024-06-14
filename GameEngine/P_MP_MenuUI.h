@@ -18,6 +18,8 @@ public:
 	void Start() override;
 	void Update() override;
 	void DataSave();
+	void EnableTutorialUI();
+	void InvalidTutorialUI();
 	//void SetOpenUIFlag(bool flag) { isOpenUI_ = flag; }
 	void Release() override;
 };

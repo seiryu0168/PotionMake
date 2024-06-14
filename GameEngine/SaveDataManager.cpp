@@ -48,6 +48,7 @@ SaveDataManager::~SaveDataManager()
 void SaveDataManager::Init()
 {
 	//nlohmann::json playerFile;
+	//playerFile["FirstPlay"] = false;
 	//playerFile["Name"] = "player01";
 	//playerFile["Money"] = 0;
 	//playerFile["NewsPaperNumber"] = 0;
@@ -113,6 +114,7 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 
 	playerFile = nlohmann::json::parse(ifs);
 	//PlayerData::SaveData data;
+	data.isFirstPlay_= playerFile["FirstPlay"];
 	data.name_ = playerFile["Name"];
 	data.money_ = playerFile["Money"];
 	data.craftCount_ = playerFile["CraftCount"];
@@ -167,6 +169,7 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 {
 	nlohmann::json playerFile;
+	playerFile["FirstPlay"] = true;
 	playerFile["Name"] = data.name_;
 	playerFile["Money"] = data.money_;
 	playerFile["CraftCount"] = data.craftCount_;

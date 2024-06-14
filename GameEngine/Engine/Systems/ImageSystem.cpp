@@ -10,7 +10,7 @@ void ImageSystem::Draw(int layerNum)
 	for (Entity entity : entities_)
 	{
 		Image& img = Coordinator::GetComponent<Image>(entity);
-		if (img.IsDraw())
+		if (img.IsDraw()&&img.GetAttachedObject()->IsActive())
 			img.Draw(layerNum);
 	}
 }

@@ -12,6 +12,7 @@ class Play_ManagementPart_BaseUI : public GameObject
 private:
 	int UINum_;
 	bool isAccessUI_;
+	bool isTutorial_;
 	Player_ManagementPart* player_;
 	int hAudio_UIOpen_;
 public:
@@ -25,7 +26,10 @@ public:
 	void SetUIOpenFlag(bool flag);
 	bool IsAccessUI() { return isAccessUI_; }
 	void DisplayAction(std::string action, bool isDisplay);
-	int GetUINum() { return UINum_; }
+	int  GetUINum() { return UINum_; }
+	void CloseFirstTutorialButton();
+	void EnableTutorialUI();
+	void InvalidTutorialUI();
 	void Release() override;
 };
 

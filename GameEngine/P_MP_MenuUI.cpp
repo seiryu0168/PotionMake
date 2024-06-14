@@ -10,7 +10,11 @@
 #include"CloseButton.h"
 #include"SaveDataManager.h"
 #include"CollectionPart/P_CP_CollectedItemUI.h"
+#include"InterSceneData.h"
+#include"PlayerData.h"
 #include"ResourceStatusData.h"
+#include"TutorialButton.h"
+#include"Tutorial.h"
 #include"Engine/ResourceManager/AudioManager.h"
 #include"MenuUI_Save.h"
 #include"MenuUI_NewsPaper.h"
@@ -52,6 +56,18 @@ void P_MP_MenuUI::Initialize()
 	Audio audio(this);
 	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 5);
 	AddComponent<Audio>(audio);
+
+	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
+
+	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[0])
+	{
+		tutorialBtn->SetTutorialData(data.first, data.second);
+	}
+	//tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
+	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
+	tutorialBtn->GetEnableFunction() = [&]() {return EnableTutorialUI(); };
+	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidTutorialUI(); };
 	//hAudio_Confirm_ = AudioManager::Load("Assets/Audio/Confirm51.wav");
 }
 
@@ -68,6 +84,25 @@ void P_MP_MenuUI::DataSave()
 	SaveDataManager mng;
 
 	mng.Save("", *InterSceneData::GetData<PlayerData>("Data01"));
+}
+
+void P_MP_MenuUI::EnableTutorialUI()
+{
+	for (auto& obj : childList_)
+	{
+		if (obj->GetObjectName() != "TutorialButton")
+		{
+			obj->SetUpdate(false);
+		}
+	}
+}
+
+void P_MP_MenuUI::InvalidTutorialUI()
+{
+	for (auto& obj : childList_)
+	{
+			obj->SetUpdate(true);
+	}
 }
 
 void P_MP_MenuUI::Release()

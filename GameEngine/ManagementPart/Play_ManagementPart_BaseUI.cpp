@@ -7,6 +7,12 @@
 #include"../Engine/Systems/ImageSystem.h"
 #include"../Engine/DirectX_11/Input.h"
 #include"../P_MP_MenuUI.h"
+#include"../InterSceneData.h"
+#include"../PlayerData.h"
+#include"../ResourceStatusData.h"
+#include"../TutorialButton.h"
+#include"../Tutorial.h"
+#include"../CloseButton.h"
 #include"../Engine/ResourceManager/AudioManager.h"
 namespace
 {
@@ -16,7 +22,8 @@ Play_ManagementPart_BaseUI::Play_ManagementPart_BaseUI(Object* parent)
 	:GameObject(parent,"Play_ManagementPart_BaseUI"),
 	UINum_(0),
 	isAccessUI_(false),
-	hAudio_UIOpen_(-1)
+	hAudio_UIOpen_(-1),
+	isTutorial_(false)
 {
 }
 
@@ -61,9 +68,38 @@ void Play_ManagementPart_BaseUI::Initialize()
 	buttonText.SetPosition({ buttonTextPos.x-10,buttonTextPos.y-30 });
 	AddComponent<Text>(buttonText);
 
-
 	player_ = (Player_ManagementPart*)FindObject("Player_ManagementPart");
 	hAudio_UIOpen_ = AudioManager::Load("Assets/Audio/Confirm29.wav");
+	
+	PlayerData* pData = InterSceneData::GetData<PlayerData>("Data01");
+	if (pData->isFirstPlay_)
+	{
+		Tutorial* tutorial = Instantiate<Tutorial>(this);
+		for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[0])
+		{
+			tutorial->SetTutorialData(data.first, data.second);
+		}
+		tutorial->CreatePageCount();
+		EnableTutorialUI();
+		((CloseButton*)tutorial->FindChild("CloseButton"))->GetFunction() = [&]() {return CloseFirstTutorialButton(); };
+		pData->isFirstPlay_ = false;
+
+	}
+	//else
+	//{
+	//	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
+	//
+	//	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[0])
+	//	{
+	//		tutorialBtn->SetTutorialData(data.first, data.second);
+	//	}
+	//	//tutorialBtn->SetTutorialData("Assets/Image/Ico_Foot.png","foot");
+	//	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Luck.png","luck");
+	//	//tutorialBtn->SetTutorialData("Assets/Image/Icon_Magic.png","magic");
+	//	tutorialBtn->GetEnableFunction() = [&]() {return EnableTutorialUI(); };
+	//	tutorialBtn->GetInvalidFunction() = [&]() {return InvalidTutorialUI(); };
+	//	tutorialBtn->SetActive(false);
+	//}
 }
 
 void Play_ManagementPart_BaseUI::Start()
@@ -73,7 +109,7 @@ void Play_ManagementPart_BaseUI::Start()
 
 void Play_ManagementPart_BaseUI::Update()
 {
-	if (Input::IsKeyDown(DIK_ESCAPE)&&!isAccessUI_)
+	if (Input::IsKeyDown(DIK_ESCAPE)&&!isAccessUI_&& !isTutorial_)
 	{
 		Direct3D::ShowMouseCursor(true);
 		Direct3D::SetClipCursor();
@@ -82,7 +118,55 @@ void Play_ManagementPart_BaseUI::Update()
 		AudioManager::Play(hAudio_UIOpen_);
 		Instantiate<P_MP_MenuUI>(this);
 		SetUIOpenFlag(true);
+		FindChild("TutorialButton")->SetActive(true);
 	}
+}
+
+void Play_ManagementPart_BaseUI::CloseFirstTutorialButton()
+{
+	if (isAccessUI_)
+		FindChild("P_MP_MenuUI")->SetUpdate(true);
+
+	if (!isAccessUI_)
+	{
+		player_->SetControllFlag(true);
+		Direct3D::SetClipCursor(clipRange);
+		Direct3D::ShowMouseCursor(false);
+		if (FindChild("TutorialButton"))
+			FindChild("TutorialButton")->SetActive(false);
+	}
+	DisplayAction("", true);
+	isTutorial_ = false;
+	isTutorial_ = false;
+}
+
+void Play_ManagementPart_BaseUI::EnableTutorialUI()
+{
+	isTutorial_ = true;
+	if(isAccessUI_)
+	FindChild("P_MP_MenuUI")->SetUpdate(false);
+
+	player_->SetControllFlag(false);
+	Direct3D::SetClipCursor();
+	Direct3D::ShowMouseCursor(true);
+	DisplayAction("", false);
+}
+
+void Play_ManagementPart_BaseUI::InvalidTutorialUI()
+{
+	if(isAccessUI_)
+	FindChild("P_MP_MenuUI")->SetUpdate(true);
+	
+	if (!isAccessUI_)
+	{
+		player_->SetControllFlag(true);
+		Direct3D::SetClipCursor(clipRange);
+		Direct3D::ShowMouseCursor(false);
+		if(FindChild("TutorialButton"))
+			FindChild("TutorialButton")->SetActive(false);
+	}
+	DisplayAction("", true);
+	isTutorial_ = false;
 }
 
 void Play_ManagementPart_BaseUI::Release()
@@ -115,8 +199,8 @@ void Play_ManagementPart_BaseUI::AccessUI(int uiNum)
 	case 2:
 		if (!FindChild("Play_ManagementPart_CraftUI"))
 		{
-			isAccessUI_ = true;
 			DisplayAction("", false);
+			isAccessUI_ = true;
 			Instantiate<Play_ManagementPart_CraftUI>(this);
 		}
 		break;

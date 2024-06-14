@@ -7,7 +7,9 @@ void ModelSystem::Draw(int layerNum)
 {
 	for (Entity entity : entities_)
 	{
-		Coordinator::GetComponent<Test_Model_ECSver>(entity).Draw(layerNum);
+		Test_Model_ECSver& model = Coordinator::GetComponent<Test_Model_ECSver>(entity);
+		if(model.GetAttachedObject()->IsActive())
+		model.Draw(layerNum);
 	}
 }
 
@@ -15,8 +17,9 @@ void ModelSystem::DrawShadow()
 {
 	for (Entity entity : entities_)
 	{
-		if (Coordinator::GetComponent<Test_Model_ECSver>(entity).IsUseShadow())
-			Coordinator::GetComponent<Test_Model_ECSver>(entity).DrawShadow();
+		Test_Model_ECSver& model = Coordinator::GetComponent<Test_Model_ECSver>(entity);
+		if (model.IsUseShadow()&&model.GetAttachedObject()->IsActive())
+			model.DrawShadow();
 	}
 	
 }
