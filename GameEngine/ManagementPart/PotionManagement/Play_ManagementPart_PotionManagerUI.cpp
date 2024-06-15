@@ -30,7 +30,7 @@ void Play_ManagementPart_PotionManagerUI::Initialize()
 	Instantiate<CloseButton>(this);
 
 	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
-	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[1])
+	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[2])
 	{
 		tutorialBtn->SetTutorialData(data.first, data.second);
 	}

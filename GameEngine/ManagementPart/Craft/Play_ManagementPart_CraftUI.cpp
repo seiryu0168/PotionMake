@@ -38,7 +38,7 @@ void Play_ManagementPart_CraftUI::Initialize()
 	Instantiate<CloseButton>(this);
 	TutorialButton* tutorialBtn = Instantiate<TutorialButton>(this);
 	
-	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[0])
+	for (auto& data : InterSceneData::GetData<ResourceStatusData>("ResourceData")->tutorialData_[1])
 	{
 		tutorialBtn->SetTutorialData(data.first, data.second);
 	}
