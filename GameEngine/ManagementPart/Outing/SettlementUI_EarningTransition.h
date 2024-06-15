@@ -10,6 +10,7 @@ class SettlementUI_EarningTransition : public Window_Base
 	float gaugeSize_;
 	std::vector<int> gainList_;
 	int firstGaugeNum_;
+	int firstGaugeTextNum_;
 public:
 	SettlementUI_EarningTransition(Object* parent);
 	~SettlementUI_EarningTransition();

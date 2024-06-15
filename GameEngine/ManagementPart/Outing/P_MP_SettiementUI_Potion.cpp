@@ -26,7 +26,7 @@ void P_MP_SettiementUI_Potion::Initialize()
 
 	XMFLOAT3 txtPos = backImage.GetPositionAtPixel();
 	XMFLOAT3 size = backImage.GetSizeAtPixel();
-	Text totalGainText(this);
+	Text totalGainText(this, "Rounded M+ 1c");
 	totalGainText.SetText("0");
 	totalGainText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_BOTTOM);
 	totalGainText.SetColorInt({ 60,60,60,255 });
@@ -66,7 +66,7 @@ void P_MP_SettiementUI_Potion::SetPotionData(int potionTier, const std::string& 
 	AddComponent<Image>(potionEdge);
 
 	//É|Å[ÉVÉáÉìñº
-	Text nameText(this);
+	Text nameText(this, "Rounded M+ 1c");
 	nameText.SetText(name);
 	nameText.SetTextSize(30);
 	nameText.SetColorInt({ 60,60,60,255 });

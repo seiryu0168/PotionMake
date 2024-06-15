@@ -31,15 +31,15 @@ void P_MP_SettlementUI_TotalGain::Initialize()
 	//sectionText.SetPosition({ txtPos.x - 150,txtPos.y - 150 });
 	//AddComponent<Text>(sectionText);
 
-	Text totalGain(this);
+	Text totalGain(this, "Rounded M+ 1c");
 	totalGain.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
 	totalGain.SetText("0");
 	totalGain.SetRect({ 0,0,630,80 });
 	totalGain.SetPosition({ txtPos.x - 450,txtPos.y-100 });
 	AddComponent<Text>(totalGain);
 
-	Text evaluation(this);
-	evaluation.SetText("ëÂê∑ãµ");
+	Text evaluation(this, "Rounded M+ 1c");
+	evaluation.SetText("");
 	evaluation.SetPosition({ txtPos.x - 150,txtPos.y});
 	AddComponent<Text>(evaluation);
 	time_ = std::make_shared<Time::Watch>();
@@ -66,7 +66,9 @@ void P_MP_SettlementUI_TotalGain::Update()
 		if (currentGain_ >= totalGain_)
 		{
 			time_->Lock();
+
 			GetComponent<Text>(1).SetText(std::to_string(totalGain_));
+			GetComponent<Text>(2).SetText(evaluation_);
 		}
 	}
 }

@@ -20,7 +20,7 @@ void P_MP_OutingUI_ActionText::Initialize()
 
 		Image selectImage(this);
 		selectImage.Load("Assets/Image/SelectImage1.png");
-		selectImage.SetSize({ 1,0.18f,0 });
+		selectImage.SetSize({ 1,0.2f,0 });
 		selectImage.SetAlpha(0);
 		selectImage.SetPosition({ 0,0.1f,0 });
 		AddComponent<Image>(selectImage);
@@ -37,7 +37,7 @@ void P_MP_OutingUI_ActionText::Initialize()
 
 		Image selectImage(this);
 		selectImage.Load("Assets/Image/SelectImage1.png");
-		selectImage.SetSize({ 1,0.18f,0 });
+		selectImage.SetSize({ 1,0.2f,0 });
 		selectImage.SetAlpha(0);
 		selectImage.SetPosition({ 0,-0.1f,0 });
 		AddComponent<Image>(selectImage);

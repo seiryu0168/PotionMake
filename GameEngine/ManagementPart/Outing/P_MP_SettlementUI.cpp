@@ -49,11 +49,46 @@ void P_MP_SettlementUI::Initialize()
 	//売り上げのデータを更新
 	if(pData.gainList_.size()>=5)
 	pData.gainList_.erase(pData.gainList_.begin());
-	
+	std::string evaluationMessage = "";
+	if (pData.gainList_.empty())
+	{
+		if (totalGain > 20000)
+		{
+			evaluationMessage = "大盛況!";
+		}
+		else if (totalGain > 10000)
+		{
+			evaluationMessage = "盛況";
+		}
+		else
+		{
+			evaluationMessage = "不況…";
+		}
+	}
+	else
+	{
+		int index = pData.gainList_.size() - 1;
+		if (totalGain > pData.gainList_[index]*1.5f)
+		{
+			evaluationMessage = "大盛況!";
+		}
+		else if (totalGain > pData.gainList_[index]*1.3f)
+		{
+			evaluationMessage = "盛況";
+		}
+		else if(totalGain >= pData.gainList_[index])
+		{
+			evaluationMessage = "普通";
+		}
+		else
+		{
+			evaluationMessage = "不況…";
+		}
+	}
 	pData.gainList_.push_back(totalGain);
 	pData.money_ += totalGain;
 	//各データのUIを作成
-	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,"大盛況!");
+	Instantiate<P_MP_SettlementUI_TotalGain>(this)->SetData(totalGain,evaluationMessage);
 	Instantiate<SettlementUI_EarningTransition>(this)->SetData(pData.gainList_);
 	//listUI.CreateListUI(pData.potionDataList_);
 	pData.newsPaperNumber_ = ++pData.newsPaperNumber_ % rDatas.size();
@@ -66,7 +101,7 @@ void P_MP_SettlementUI::Initialize()
 
 	XMFLOAT3 pos = okImage.GetPositionAtPixel();
 	XMFLOAT3 size = okImage.GetSizeAtPixel();
-	Text okText(this);
+	Text okText(this, "Rounded M+ 1c");
 	okText.SetText("OK");
 	okText.SetTextSize(90);
 	okText.SetRect({ 0,0,size.x,size.y });

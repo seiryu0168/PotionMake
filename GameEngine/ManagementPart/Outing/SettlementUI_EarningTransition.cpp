@@ -6,6 +6,7 @@ SettlementUI_EarningTransition::SettlementUI_EarningTransition(Object* parent)
 	:Window_Base(parent,"SettlementUI_EarningTransition"),
 	uiPos_({ 0.2f,-0.4f,0 }),
 	firstGaugeNum_(-1),
+	firstGaugeTextNum_(-1),
 	gaugeSize_(2.0f)
 {
 }
@@ -24,18 +25,36 @@ void SettlementUI_EarningTransition::Initialize()
 
 	CreateBase("Assets/Image/UIBaseImage4.png", uiPos_, {0.75f,0.4375f});
 	CreateUITitle({ uiPos_.x - 0.18f,uiPos_.y + 0.526f }, { 10,20 }, "売上の推移", 55, { 102,100,82 });
-	//過去5回分の売上を表示する為の画像
+	//過去5回分の売上を表示する為の画像と売り上げの金額テキスト
 	XMFLOAT2 diffPos = { -0.3f, -0.2f};
+	TEXT_RECT rect = { 100,100 };
 	for (int i = 0; i < 5; i++)
 	{
-		Image statusImage(this);
-		statusImage.Load("Assets/Image/GaugeImage01.png");
-		statusImage.SetSize({ 0.5f,0,0 });
-		statusImage.SetPosition({ uiPos_.x + diffPos.x,uiPos_.y + diffPos.y,0 });
+		Image gaugeImage(this);
+		gaugeImage.Load("Assets/Image/GaugeImage01.png");
+		gaugeImage.SetSize({ 0.5f,0,0 });
+		gaugeImage.SetPosition({ uiPos_.x + diffPos.x,uiPos_.y + diffPos.y,0 });
+		
+		XMFLOAT3 imageData = gaugeImage.GetSizeAtPixel();
+		rect = { 0,0,imageData.x,40 };
+		imageData = gaugeImage.GetPositionAtPixel();
+		Text gaugeText(this, "Rounded M+ 1c");
+		gaugeText.SetRect(rect);
+		gaugeText.SetAlignmentType(ALIGNMENT_TYPE::RIGHT_TOP);
+		gaugeText.SetColor({ 0, 0, 0, 1 });
+		gaugeText.SetPosition({ imageData.x-(rect.right*0.5f)-10,imageData.y - rect.bottom });
+		gaugeText.SetText("");
+		gaugeText.SetTextSize(30);
 		if (firstGaugeNum_ < 0)
-			firstGaugeNum_ = AddComponent<Image>(statusImage);
+		{
+			firstGaugeNum_ = AddComponent<Image>(gaugeImage);
+			firstGaugeTextNum_ = AddComponent<Text>(gaugeText);
+		}
 		else
-			AddComponent<Image>(statusImage);
+		{
+			AddComponent<Image>(gaugeImage);
+			AddComponent<Text>(gaugeText);
+		}
 
 		diffPos.x += 0.15f;
 	}
@@ -170,6 +189,7 @@ void SettlementUI_EarningTransition::SetData(const std::vector<int>& gainList)
 	for (int i = 0; i < gainList_.size(); i++)
 	{
 		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,Clamp(gaugeSize_*((float)gainList_[i]/maxGain),0.05f,gaugeSize_),0});
+		GetComponent<Text>(firstGaugeTextNum_ + i).SetText(std::to_string(gainList_[i]));
 	}
 
 }
