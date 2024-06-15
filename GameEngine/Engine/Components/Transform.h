@@ -3,8 +3,10 @@
 #include<memory>
 #include<List>
 using namespace DirectX;
+class Object;
 class Transform
 {
+	Object* attachObject_;
 	bool isDead_;
 	XMMATRIX matTranslate_;	//移動行列
 	XMMATRIX matRotate_;	//回転行列	
@@ -26,7 +28,7 @@ public:
 
 	//コンストラクタ
 	//Transform();
-	Transform(Transform* parent = nullptr);
+	Transform(Object* obj = nullptr,Transform* parent = nullptr);
 
 	//デストラクタ
 	~Transform();
@@ -44,6 +46,8 @@ public:
 	void RotateAxis(const XMVECTOR& axis, float angle);
 	void RotateEular(const XMFLOAT3& rotation);
 	void RotateEular(float x,float y,float z);
+
+	Object* GetAttachedObject() const { return attachObject_; }
 
 	float GetPositionX();
 	float GetPositionY();
@@ -76,7 +80,7 @@ public:
 	{
 		return StoreFloat3(add1 + add2);
 	}
-	void Dead() { isDead_ = true; }
+	void Dead() { isDead_ = true;}
 	bool IsDead() { return isDead_; }
 	void RemoveChild();
 };

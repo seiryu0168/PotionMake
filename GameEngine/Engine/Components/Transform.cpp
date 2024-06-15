@@ -1,5 +1,5 @@
 #include "Transform.h"
-
+#include"../GameObject/GameObject.h"
 //コンストラクタ
 //Transform::Transform()
 //	:matTranslate_(XMMatrixIdentity()),
@@ -14,8 +14,9 @@
 //
 //}
 
-Transform::Transform(Transform* parent)
-	:matTranslate_(XMMatrixIdentity()),
+Transform::Transform(Object* obj,Transform* parent)
+	:attachObject_((GameObject*)obj),
+	matTranslate_(XMMatrixIdentity()),
 	matRotate_(XMMatrixIdentity()),
 	matScale_(XMMatrixIdentity()),
 	position_(XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f)),
@@ -40,7 +41,7 @@ Transform::~Transform()
 void Transform::PushBackChild(Transform* child)
 {
 	assert(child != nullptr);
-	child->pParent_ = this;
+	//child->pParent_ = this;
 	childList_.push_back(child);
 }
 
@@ -75,6 +76,7 @@ void Transform::UpdateSub()
 	{
 		for (Transform* itr : childList_)
 		{
+			if(itr->GetAttachedObject()!=nullptr)
 			itr->UpdateSub();
 		}
 	}

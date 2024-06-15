@@ -19,7 +19,7 @@ Object::Object(Object* parent, const std::string& name)
 	pScene_(nullptr),
 	childList_()
 {
-	Transform transform;// = new Transform;
+	Transform transform(this,nullptr);// = new Transform;
 	if (parent != nullptr)
 		transform.pParent_ = &parent->GetComponent<Transform>();
 
@@ -42,11 +42,12 @@ Object::Object(Object* parent, const std::string& name)
 
 Object::Object(Object* parent) : Object(parent, "")
 {
-	Transform transform;// = new Transform;
+	Transform transform(this,nullptr);// = new Transform;
 	if (parent != nullptr)
 		transform.pParent_ = &parent->GetComponent<Transform>();
 
 	AddComponent<Transform>(transform);
+	transformEnt_ = entityList_.find("class Transform")->second[0];
 	transform_ = &GetComponent<Transform>();
 }
 
@@ -178,6 +179,7 @@ void Object::ReleaseSub()
 		if ((*itr)->IsDead())
 		{
 			(*itr)->Release();
+
 			itr = childList_.erase(itr);
 		}
 		else

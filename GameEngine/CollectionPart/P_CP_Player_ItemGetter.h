@@ -16,7 +16,7 @@ public:
 	void Start() override;
 	void Update() override;
 	int GetItemNumber() { return targetItemNum_; }
-	void KillHitObject() { if (hitItem_ != nullptr)hitItem_->KillMe(); hitItem_ = nullptr; }
+	void KillHitObject() { if (hitItem_ != nullptr)hitItem_->SetActive(false); hitItem_ = nullptr; }
 	void Release() override;
 
 	void OnCollisionStay(GameObject* pTarget) override;

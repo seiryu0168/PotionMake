@@ -35,6 +35,7 @@ protected:
 	Object* pScene_;
 	std::string	objectName_;			//名前
 	int objectID_;						//オブジェクト固有の番号
+	unsigned int transformEnt_;
 	std::string objectTag_;				//オブジェクトに任意でつけられる識別用の名前
 	bool killFlag_;						//キルするかどうか
 	bool activeFlag_;					//オブジェクトがアクティブ(Update呼ばれる)かどうか
@@ -82,6 +83,7 @@ public:
 	bool IsStart() const { return startFlag_; }
 	bool IsUpdate() const { return isUpdate_; }
 	void SetUpdate(bool updateFlag);
+	unsigned int GetTransformEntity() { return transformEnt_; }
 	std::string GetObjectName() const { return objectName_; }
 	std::string GetTag()const { return objectTag_; }
 	Object* GetParent() const;
