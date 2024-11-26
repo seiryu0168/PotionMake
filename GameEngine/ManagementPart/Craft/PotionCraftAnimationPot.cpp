@@ -50,7 +50,9 @@ void PotionCraftAnimationPot::Update()
 	time_ += 0.016f;
 	float diff = sinf(time_*4.0f) * 0.02f;
 	if (diff < 0) diff *= -1;
-	for (int i=0;i<imageNum_.size();i++)
+	
+	int size = imageNum_.size();
+	for (int i=0;i<size;i++)
 	{
 		GetComponent<Image>(imageNum_[i]).SetPosition({ posList_[i].x,posList_[i].y + diff,0 });
 	}

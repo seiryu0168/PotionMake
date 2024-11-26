@@ -187,7 +187,8 @@ bool P_MP_CraftUI_CraftPot::SubProcessData(int processNum)
 void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
 {
 	//追加された素材の表示
-	for (int i = 0; i < objects_.size(); i++)
+	int arraySize = objects_.size();
+	for (int i = 0; i < arraySize; i++)
 	{
 		if (!((ResourceItemSlot*)objects_[i])->HaveItem())
 		{
@@ -200,7 +201,8 @@ void P_MP_CraftUI_CraftPot::DisplayResource(int itemNum)
 void P_MP_CraftUI_CraftPot::HiddenResource(int itemNum)
 {
 	//素材が無くなったら消す
-	for (int i = 0; i < objects_.size(); i++)
+	int arraySize = objects_.size();
+	for (int i = 0; i < arraySize; i++)
 	{
 		if (((ResourceItemSlot*)objects_[i])->GetItemNumber() == itemNum)
 		{
@@ -276,18 +278,22 @@ void P_MP_CraftUI_CraftPot::CreatePotion()
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	std::vector<int> itemNumList_;
 	//素材データ更新
-	for (int i = 0; i < objects_.size(); i++)
 	{
-		int num = ((ResourceItemSlot*)objects_[i])->GetItemNumber();
-		if (num != -1)
+
+		int arraySize = objects_.size();
+		for (int i = 0; i < arraySize; i++)
 		{
+			int num = ((ResourceItemSlot*)objects_[i])->GetItemNumber();
+			if (num != -1)
+			{
 
-			//PlayerData::ResourceData_
-			auto rData = std::find_if(data->itemDataList_.begin(), data->itemDataList_.end(), [&](PlayerData::ResourceData_ value) {return value.itemNum_ == num; });
-			rData->itemCount_ = rData->itemCount_ - dataMap_[num].resourceCount_;
-			itemNumList_.push_back(num);
+				//PlayerData::ResourceData_
+				auto rData = std::find_if(data->itemDataList_.begin(), data->itemDataList_.end(), [&](PlayerData::ResourceData_ value) {return value.itemNum_ == num; });
+				rData->itemCount_ = rData->itemCount_ - dataMap_[num].resourceCount_;
+				itemNumList_.push_back(num);
+			}
+
 		}
-
 	}
 
 	//ポーションデータ更新

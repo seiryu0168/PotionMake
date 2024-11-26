@@ -186,7 +186,9 @@ void SettlementUI_EarningTransition::SetData(const std::vector<int>& gainList)
 	}
 	//”„ã„ˆÚ‚Ìİ’è
 	gainList_ = gainList;
-	for (int i = 0; i < gainList_.size(); i++)
+	int size = gainList_.size();
+	
+	for (int i = 0; i < size; i++)
 	{
 		GetComponent<Image>(firstGaugeNum_ + i).SetSize({ 0.5f,Clamp(gaugeSize_*((float)gainList_[i]/maxGain),0.05f,gaugeSize_),0});
 		GetComponent<Text>(firstGaugeTextNum_ + i).SetText(std::to_string(gainList_[i]));

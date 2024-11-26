@@ -16,7 +16,6 @@ ResourceMenuChangeButton::~ResourceMenuChangeButton()
 void ResourceMenuChangeButton::Initialize()
 {
 	{
-
 		Image buttonImage(this);
 		buttonImage.Load("Assets/Image/Change_Resource.png");
 		buttonImage.SetSize({ 0.2f,0.2f,0 });

@@ -108,20 +108,22 @@ void SaveDataManager::Init()
 
 void SaveDataManager::Load(std::string fileName, PlayerData& data)
 {
+	//jsonファイル読み込み
 	nlohmann::json playerFile;
 	std::ifstream ifs(fileName+".json", std::ios::in);
 	if (!ifs.good()) return;
-
+	
+	//データ取り出す
 	playerFile = nlohmann::json::parse(ifs);
 	//PlayerData::SaveData data;
-	data.isFirstPlay_= playerFile["FirstPlay"];
-	data.name_ = playerFile["Name"];
-	data.money_ = playerFile["Money"];
-	data.craftCount_ = playerFile["CraftCount"];
-	data.sellCount_ = playerFile["SellCount"];
-	data.newsPaperNumber_ = playerFile["NewsPaperNumber"];
+	data.isFirstPlay_		 = playerFile["FirstPlay"];
+	data.name_				 = playerFile["Name"];
+	data.money_				 = playerFile["Money"];
+	data.craftCount_		 = playerFile["CraftCount"];
+	data.sellCount_			 = playerFile["SellCount"];
+	data.newsPaperNumber_	 = playerFile["NewsPaperNumber"];
 	data.potionDataFileName_ = playerFile["PotionDataFileName"];
-	data.resourceFileName_ = playerFile["ResourceFileName"];
+	data.resourceFileName_	 = playerFile["ResourceFileName"];
 
 	for (auto itr = playerFile["ItemList"].begin(); itr != playerFile["ItemList"].end(); itr++)
 	{
@@ -169,7 +171,7 @@ void SaveDataManager::Load(std::string fileName, PlayerData& data)
 void SaveDataManager::Save(const std::string& fileName, PlayerData& data)
 {
 	nlohmann::json playerFile;
-	playerFile["FirstPlay"] = true;
+	playerFile["FirstPlay"] = data.isFirstPlay_;
 	playerFile["Name"] = data.name_;
 	playerFile["Money"] = data.money_;
 	playerFile["CraftCount"] = data.craftCount_;

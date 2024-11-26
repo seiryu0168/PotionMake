@@ -15,7 +15,8 @@ void PlayerData::SortResourceList()
 {
 	int minIndex = 0;
 	//‘fŞ”Ô†‚ğ‚à‚Æ‚Éƒ\[ƒg
-	for (int i = 0; i < itemDataList_.size(); i++)
+	int size= itemDataList_.size();
+	for (int i = 0; i < size; i++)
 	{
 		minIndex = i;
 		for (int j = i + 1; j < itemDataList_.size(); j++)

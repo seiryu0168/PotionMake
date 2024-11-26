@@ -77,7 +77,8 @@ void P_MP_CraftUI_ProcessUI::SetProcessData(const std::string processName)
 void P_MP_CraftUI_ProcessUI::ActiveUI(bool isActive)
 {
 	//UI‚Ì•\Ž¦/”ñ•\Ž¦
-	for (int i=0;i<GetComponentList<Image>().size();i++)
+	int size = GetComponentList<Image>().size();
+	for (int i=0;i<size;i++)
 	{
 		GetComponent<Image>(i).SetDraw(isActive);
 	}

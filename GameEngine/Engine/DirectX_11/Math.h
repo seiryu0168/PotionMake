@@ -78,55 +78,55 @@ inline T Clamp(const T& in, const T& low, const T& high)
 //	return false;
 //}
 //----------------------------------------------------------------------------------------
-inline XMVECTOR operator*=(XMVECTOR& f1, const XMMATRIX& m1)
+inline XMVECTOR operator*=(XMVECTOR& f1, const XMMATRIX& m1) noexcept
 {
 	//f1‚ðm1‚Å•ÏŒ`‚³‚¹‚é
 	f1 = XMVector3TransformCoord(f1, m1);
 	return f1;
 }
 //----------------------------------------------------------------------------------------
-inline XMVECTOR operator*(XMVECTOR f1, XMMATRIX m1)
+inline XMVECTOR operator*(XMVECTOR f1, XMMATRIX m1) noexcept
 {
 	//f1‚ðm1‚Å•ÏŒ`
 	return XMVector3TransformCoord(f1, m1);
 }
 //----------------------------------------------------------------------------------------
-inline XMVECTOR operator-(const XMFLOAT3& f1, const XMFLOAT3& f2)
+inline XMVECTOR operator-(const XMFLOAT3& f1, const XMFLOAT3& f2) noexcept
 {
 	return XMLoadFloat3(&f1) - XMLoadFloat3(&f2);
 }
 //----------------------------------------------------------------------------------------
-inline XMVECTOR operator+(const XMFLOAT3& f1, const XMFLOAT3& f2)
+inline XMVECTOR operator+(const XMFLOAT3& f1, const XMFLOAT3& f2) noexcept
 {
 	return XMLoadFloat3(&f1) + XMLoadFloat3(&f2);
 }
 //----------------------------------------------------------------------------------------
-inline XMFLOAT3 operator*(const XMFLOAT3& f1, const float f)
+inline XMFLOAT3 operator*(const XMFLOAT3& f1, const float f) noexcept
 {
 	return XMFLOAT3(f1.x * f, f1.y * f, f1.z * f);
 }
 //----------------------------------------------------------------------------------------
-inline XMFLOAT3 operator*(const float f, const XMFLOAT3& f1)
+inline XMFLOAT3 operator*(const float f, const XMFLOAT3& f1) noexcept
 {
 	return XMFLOAT3(f1.x * f, f1.y * f, f1.z * f);
 }
 //----------------------------------------------------------------------------------------
-inline XMFLOAT3 operator/(const XMFLOAT3& f1, const float f)
+inline XMFLOAT3 operator/(const XMFLOAT3& f1, const float f) noexcept
 {
 	return XMFLOAT3(f1.x / f, f1.y / f, f1.z / f);
 }
 //----------------------------------------------------------------------------------------
-inline float VectorDot(const XMVECTOR& v1, const XMVECTOR& v2)
+inline float VectorDot(const XMVECTOR& v1, const XMVECTOR& v2) noexcept
 {
 	return XMVectorGetX(XMVector3Dot(v1, v2));
 }
 //----------------------------------------------------------------------------------------
-inline float VectorLength(const XMVECTOR& v1)
+inline float VectorLength(const XMVECTOR& v1) noexcept
 {
 	return abs(XMVectorGetX(XMVector3Length(v1)));
 }
 //----------------------------------------------------------------------------------------
-inline	XMFLOAT3 StoreFloat3(const XMVECTOR& v1)
+inline	XMFLOAT3 StoreFloat3(const XMVECTOR& v1) noexcept
 {
 	XMFLOAT3 ret;
 	XMStoreFloat3(&ret, v1);

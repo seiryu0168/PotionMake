@@ -124,7 +124,8 @@ void P_MP_CraftUI_PotionStatusUI::Update()
 
 void P_MP_CraftUI_PotionStatusUI::SetStatusData(std::vector<float> status, const std::string& coststr)
 {
-	for (int i = 0; i < statusObjectList_.size(); i++)
+	int listSize = statusObjectList_.size();
+	for (int i = 0; i <listSize ; i++)
 	{
 		statusObjectList_[i]->GetComponent<Image>().SetSize({ 1.0f*0.3f,status[i]*0.3f,0});
 	}

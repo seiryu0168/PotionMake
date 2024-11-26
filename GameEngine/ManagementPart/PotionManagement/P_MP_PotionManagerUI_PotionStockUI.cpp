@@ -164,18 +164,21 @@ void P_MP_PotionManagerUI_PotionStockUI::ConfirmPotionManagement()
 {
 	//ポーションリストのデータを更新
 	std::vector<PlayerData::PotionData> newPotionDataList;
-	for (int i = 0; i < potionList_.size(); i++)
+
+	int size= potionList_.size();
+	for (int i = 0; i < size; i++)
 	{
 		if (((PotionStock*)potionList_[i])->GetPotionNumber() != -1 && ((PotionStock*)potionList_[i])->GetSelectedSlot() != PotionStock::SelectSlot::Dispose)
 		{
 			PlayerData::PotionData pData;
-			pData.potionName_ = ((PotionStock*)potionList_[i])->GetPotionName();
-			pData.potionColor_ = ((PotionStock*)potionList_[i])->GetPotionColor();
-			pData.topStatus_ = ((PotionStock*)potionList_[i])->GetTopStatus();
-			pData.price_ = ((PotionStock*)potionList_[i])->GetPrice();
+			pData.potionName_   = ((PotionStock*)potionList_[i])->GetPotionName();
+			pData.potionColor_  = ((PotionStock*)potionList_[i])->GetPotionColor();
+			pData.topStatus_    = ((PotionStock*)potionList_[i])->GetTopStatus();
+			pData.price_	    = ((PotionStock*)potionList_[i])->GetPrice();
 			pData.potionStatus_ = ((PotionStock*)potionList_[i])->GetPotionStatus();
+			
 			if (((PotionStock*)potionList_[i])->GetSelectedSlot() == PotionStock::SelectSlot::Sell)
-				pData.isSale_ = true;
+				pData.isSale_   = true;
 			newPotionDataList.push_back(pData);
 		}
 	}
