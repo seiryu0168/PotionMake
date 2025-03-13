@@ -29,46 +29,6 @@ Player::~Player()
 {
 }
 
-//void Player::Initialize()
-//{
-//	//Test_Model_ECSver floorModel(this);
-//	//floorModel.Load("Assets/Model/ground_grass.fbx");
-//	//AddComponent<Test_Model_ECSver>(floorModel);
-//	
-//	
-//}
-//
-//void Player::Start()
-//{
-//	//UIManagerObject_ = FindObject("Play_UIManager");
-//}
-//
-//void Player::Update()
-//{
-//	//if (((Play_UIManager*)UIManagerObject_)->IsAccessUI())
-//	//	return;
-//	//MoveControll();
-//	//
-//	//
-//	//CameraControll();
-//	//
-//	//
-//	////Š÷‚©’I‚©ƒhƒA‚É“–‚½‚Á‚Ä‚¢‚½‚ç
-//	//if (GetComponent<Collider>().IsHit())
-//	//{
-//	//	((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);
-//	//
-//	//	//((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->SetUINum()
-//	//	//
-//	//	if(Input::IsKeyDown(DIK_F))
-//	//	{
-//	//		((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->AccessUI(collisionUINum_);
-//	//	}
-//	//	
-//	//}
-//	//else
-//	//	((Play_ManagementPart_BaseUI*)UIManagerObject_->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction("", false);
-//}
 void Player::MoveControll()
 {
 	if (Input::IsKey(DIK_W))

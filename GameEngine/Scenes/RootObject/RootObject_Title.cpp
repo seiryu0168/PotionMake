@@ -6,14 +6,10 @@
 #include"../../InterSceneData.h"
 #include"../../PlayerData.h"
 #include"../../Engine/ResourceManager/AudioManager.h"
-//#include"../../TestObject.h"
-//#include"../../SelectUI.h"
-//#include"../../Title.h"
 RootObject_Title::RootObject_Title()
 	:hAudio_BGM_(-1)
 {
-	//Transform transform;
-	//AddComponent<Transform>(transform);
+	
 }
 
 RootObject_Title::~RootObject_Title()
@@ -36,8 +32,6 @@ void RootObject_Title::Initialize()
 
 	hAudio_BGM_ = AudioManager::Load("Assets/Audio/Title_BGM.wav",true);
 	AudioManager::Play(hAudio_BGM_);
-	//PlayerData& playerData = *InterSceneData::GetData<PlayerData>("Data01");
-	//loader.Save("", playerData);
 
 	Instantiate<Title>(this);
 }

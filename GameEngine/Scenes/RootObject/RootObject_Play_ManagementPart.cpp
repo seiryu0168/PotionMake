@@ -16,7 +16,6 @@ RootObject_Play_ManagementPart::~RootObject_Play_ManagementPart()
 
 void RootObject_Play_ManagementPart::Initialize()
 {
-	//Instantiate<Player>(this);
 	Instantiate<Player_ManagementPart>(this);
 	Instantiate<ManagementPart_Floor>(this);
 	Instantiate<Play_ManagementPart_Shelf>(this);

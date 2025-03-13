@@ -18,6 +18,8 @@ private:
 	void Pushed();
 
 	float timeF_;
+	int imageNum_;
+	int textNum_;
 public:
 	Title(Object* parent);
 	~Title();
