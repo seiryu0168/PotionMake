@@ -72,8 +72,12 @@ void Title::Initialize()
 
 void Title::Update()
 {
-	GetComponent<Image>(imageNum_).SetAlpha(0.3f+Easing::EaseInOutSine(0.5f + sinf(timeF_) * 0.5f));
-	GetComponent<Text>(textNum_).SetColor({ 0,0,0,0.3f+Easing::EaseInOutSine(0.5f+sinf(timeF_)*0.5f)});
+	//É{É^ÉìÇÃì_ñ≈ä‘äuÇêßå‰
+	{
+		float alpha = 0.3f + (sinf(timeF_ * 0.5f) * 0.5f + 0.3f);
+		GetComponent<Image>(imageNum_).SetAlpha(alpha);
+		GetComponent<Text>(textNum_).SetColor({ 0,0,0,0.3f + alpha });
+	}
 	timeF_+=0.05f;
 	if (time_->GetSeconds<float>() >= 2.0f)
 	{
