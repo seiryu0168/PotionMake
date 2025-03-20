@@ -54,7 +54,7 @@ void Title::Initialize()
 	startButtonText.SetRect({ 0,0,512,256 });
 	startButtonText.SetTextSize(50);
 	startButtonText.SetColor({ 0,0,0,1 });
-	//////////画像位置をテキスト位置に変換///////////////////
+	//画像位置をテキスト位置に変換
 	float w = Direct3D::GetScreenWidth() * 0.5f;
 	float h = Direct3D::GetScreenHeight() * 0.5f;
 	TEXT_RECT rect = startButtonText.GetRect();
@@ -65,9 +65,6 @@ void Title::Initialize()
 	time_ = std::make_shared<Time::Watch>();
 
 	hAudio_ = AudioManager::Load("Assets/Audio/Confirm47.wav");
-
-	//Instantiate<TestObject>(this);
-
 }
 
 void Title::Update()
@@ -79,10 +76,13 @@ void Title::Update()
 		GetComponent<Text>(textNum_).SetColor({ 0,0,0,0.3f + alpha });
 	}
 	timeF_+=0.05f;
+	
+	//シーン切り替え
 	if (time_->GetSeconds<float>() >= 2.0f)
 	{
 		newSceneManager::ChangeScene(SCENE_ID::PLAY_MANAGEMENT);
 	}
+	//スペースキーが押されたら
 	if(Input::IsKeyDown(DIK_SPACE)&&time_->IsLock())
 	{
 		AudioManager::Play(hAudio_);

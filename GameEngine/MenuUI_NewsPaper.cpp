@@ -21,32 +21,7 @@ MenuUI_NewsPaper::~MenuUI_NewsPaper()
 
 void MenuUI_NewsPaper::Initialize()
 {
-	//Image buttonImage(this);
-	//buttonImage.Load("Assets/Image/SelectImage3.png");
-	//buttonImage.SetPosition({ -1.2f,0.2f,0 });
-	//buttonImage.SetRotation({ 0,0,180 });
-	//AddComponent<Image>(buttonImage);
-	//
-	//XMFLOAT3 textPos = buttonImage.GetPositionAtPixel();
-	//Text buttonText(this);
-	//buttonText.SetText("新聞");
-	//buttonText.SetPosition({ textPos.x + 200,textPos.y - 50 });
-	//AddComponent<Text>(buttonText);
-	//
-	//int num = InterSceneData::GetData<PlayerData>("Data01")->newsPaperNumber_;
-	//std::string imageName = InterSceneData::GetData<ResourceStatusData>("ResourceData")->newsPaperList_[num].resourceImageName_;
-	//Image newsPaperImage(this);
-	//newsPaperImage.Load("Assets/Image/" + imageName);
-	//newsPaperImage.SetPosition({ 0.4f,0,0 });
-	//newsPaperImage.SetDraw(false);
-	//AddComponent<Image>(newsPaperImage);
 
-	//Image closeImage(this);
-	//closeImage.Load("Assets/Image/CloseButtonImage.png");
-	//closeImage.SetPosition({ 0,0.5f,0 });
-	//closeImage.SetSize({ 0.6f,0.6f,0 });
-	//closeImage.SetDraw(false);
-	//closeButtonNum_ = AddComponent<Image>(closeImage);
 }
 
 void MenuUI_NewsPaper::Start()
@@ -60,7 +35,7 @@ void MenuUI_NewsPaper::Update()
 		//他のUIを開いてる場合
 		if (((UIBase*)pParent_)->GetCurrentOpenUINumber() != -1)
 			return;
-
+		//画像にカーソルが当っていない時
 		if (!GetComponent<Image>().IsHitCursor())
 		{
 			GetComponent<Image>().SetPosition(buttonPos_);
@@ -69,6 +44,7 @@ void MenuUI_NewsPaper::Update()
 		GetComponent<Image>().SetPosition({ buttonPos_.x + 0.1f,buttonPos_.y,0 });
 		if (Input::IsMouseButtonUp(0) && GetComponent<Image>().IsHitCursor() && !isClickedButton_)
 		{
+			//クリックフラグをtrueに設定
 			SetClickFlag(true);
 			pParent_->GetComponent<Audio>().Play();
 			GameObject* paper = Instantiate<P_MP_NewsPaper>(this);
