@@ -75,6 +75,8 @@ private:
 	friend class ColliderSystem;
 	//friend class Test_BoxCollider_ECSver;
 	XMFLOAT3     center_;		//原点
+	XMFLOAT3	 leftUpBack_;	//当たり判定の左上奧
+	XMFLOAT3	 rightDownFront;//当たり判定の右下手前
 	Entity	colliderEntity_;
 	ColliderType colliderType_;
 	float collisionDistanceLimit_;
@@ -159,6 +161,10 @@ public:
 	}
 	//コライダーの型を設定
 	void SetCollisionType(const std::string& name);
+	void MortonOrderSolver();
+	int GetAccessNumber();
+	int GetMortonOrderNumber(XMFLOAT3 pos);
+	int BitSeparate(int n);
 
 	//template <typename T>
 	//T& GetCollider() const

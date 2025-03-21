@@ -53,6 +53,7 @@ public:
 	void Draw(int drawLayer = 0) override;
 	void Release() override;
 	void CheckRemove() override;
+	void 
 	/// <summary>
 	/// どれとどれが当たってるかチェック
 	/// </summary>
