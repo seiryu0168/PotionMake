@@ -97,7 +97,15 @@ void Collider::MortonOrderSolver()
 {
 	//最初のprevAccessNumberを取得
 	prevAccessNumber_ = GetAccessNumber();
-	//
+	//アクセスする空間番号を取得
+	int accessNum = GetAccessNumber();
+	//accessNumが以前と違ったら
+	if (accessNum != prevAccessNumber_)
+	{
+		//以前まで所属していた空間から削除、
+		//取得した番号の空間番号の空間に登録する
+
+	}
 }
 
 int Collider::GetAccessNumber()
