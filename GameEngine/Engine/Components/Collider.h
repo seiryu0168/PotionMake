@@ -74,9 +74,14 @@ class Collider
 private:
 	friend class ColliderSystem;
 	//friend class Test_BoxCollider_ECSver;
-	XMFLOAT3     center_;		//原点
-	XMFLOAT3	 leftUpBack_;	//当たり判定の左上奧
-	XMFLOAT3	 rightDownFront;//当たり判定の右下手前
+	XMFLOAT3     center_;			//原点
+	XMFLOAT3	 leftUpBack_;		//当たり判定の左上奧
+	XMFLOAT3	 rightDownFront_;	//当たり判定の右下手前
+	UINT		 prevAccessNumber_; //前フレームのアクセス番号
+	USHORT		 cellLevel_;	    //空間レベル
+	XMFLOAT3     fieldSize_;		//空間分割する範囲
+	int			 maxDivisionCount_; //最大分割数
+
 	Entity	colliderEntity_;
 	ColliderType colliderType_;
 	float collisionDistanceLimit_;
@@ -106,6 +111,7 @@ public:
 		SetCollisionType(typeName);
 		colliderEntity_ = Coordinator::CreateEntity();
 		Coordinator::AddComponent<T>(colliderEntity_, colliderShape);
+		SetCollisionPoint();
 	}
 	~Collider();
 
@@ -147,6 +153,7 @@ public:
 		SetCollisionType(typeName);
 		colliderEntity_ = Coordinator::CreateEntity();
 		Coordinator::AddComponent<T>(colliderEntity_,colliderShape);
+		SetCollisionPoint();
 	}
 
 	/// <summary>
@@ -161,6 +168,7 @@ public:
 	}
 	//コライダーの型を設定
 	void SetCollisionType(const std::string& name);
+	void SetCollisionPoint();
 	void MortonOrderSolver();
 	int GetAccessNumber();
 	int GetMortonOrderNumber(XMFLOAT3 pos);
