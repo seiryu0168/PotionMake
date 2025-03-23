@@ -40,5 +40,6 @@ namespace newSceneManager
 	void Release();
 
 	std::shared_ptr<ImageSystem> GetImageSystem();
+	std::shared_ptr<ColliderSystem> GetColliderSystem();
 };
 

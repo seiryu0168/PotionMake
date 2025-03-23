@@ -281,6 +281,11 @@ namespace newSceneManager
 		return pImageSystem_;
 	}
 
+	std::shared_ptr<ColliderSystem> GetColliderSystem()
+	{
+		return pColliderSystem_;
+	}
+
 	void SceneInitialize()
 	{
 		sceneList_.insert({ SCENE_ID::TITLE, std::make_unique<Scene_Title>("Title") });

@@ -104,11 +104,15 @@ void ColliderSystem::CreateCB()
 		assert(hr == S_OK);
 	}
 }
-ColliderSystem::ColliderSystem() : System()
+
+ColliderSystem::ColliderSystem()
+	: System(),
+	maxDivision_(3)
 {
 	Coordinator::RegisterComponent<HitBox>();
 	Coordinator::RegisterComponent<HitSphere>();
 
+	cellAllay_.resize(pow(8, maxDivision_));
 	int vCount_ = 0;
 	XMFLOAT3 vPos = {0,0,0};
 	for (int i = 0; i < 6; i++)
@@ -319,6 +323,31 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 	{
 			firstTarget->nowHit_ = true;
 			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
+	}
+}
+
+void ColliderSystem::CheckCollision_Octree()
+{
+	for (auto const& firstEntity : entities_)
+	{
+		auto& collider = Coordinator::GetComponent<Collider>(firstEntity);
+		UINT  accessNum = collider.GetAccessNumber();
+		UINT  prevAccessNum = collider.GetPrevAccessNumber();
+		//‘OƒtƒŒ[ƒ€‚Ì‹óŠÔ”Ô†‚Æ¡‚Ì‹óŠÔ”Ô†‚ªˆá‚Á‚½‚ç
+		if (accessNum != prevAccessNum)
+		{
+			if (prevAccessNum == -1)
+			{
+				cellAllay_[accessNum].push_back(firstEntity);
+				collider.SetItr(std::prev(cellAllay_[accessNum].end()));
+			}
+			else
+			{
+				auto itr = collider.GetItr();
+				itr = cellAllay_[prevAccessNum].erase(itr);
+				cellAllay_[accessNum].push_back(firstEntity);
+			}
+		}
 	}
 }
 

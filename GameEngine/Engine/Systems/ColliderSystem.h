@@ -13,6 +13,11 @@ private:
 	ID3D11Buffer* pSphereIndexBuffer_;	//インデックスバッファ
 	ID3D11Buffer* pSphereConstantBuffer_;	//コンスタントバッファ
 
+	//分割した空間の配列
+	std::vector<std::list<Entity>> cellAllay_;
+	//最大分割数
+	USHORT maxDivision_;
+
 	struct CONSTANT_BUFFER
 	{
 		XMMATRIX matWVP;			//ワールド、ビュー、プロジェクション行列の合成(頂点変換に使う)
@@ -51,8 +56,12 @@ public:
 	~ColliderSystem() {};
 	void Update() override;
 	void Draw(int drawLayer = 0) override;
+	std::vector<std::list<Entity>>& GetCellList() { return cellAllay_; }
 	void Release() override;
 	void CheckRemove() override;
+	//8分木空間分割を利用した当たり判定チェック
+	void CheckCollision_Octree();
+
 
 	/// <summary>
 	/// どれとどれが当たってるかチェック

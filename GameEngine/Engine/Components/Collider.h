@@ -81,6 +81,7 @@ private:
 	USHORT		 cellLevel_;	    //空間レベル
 	XMFLOAT3     fieldSize_;		//空間分割する範囲
 	int			 maxDivisionCount_; //最大分割数
+	std::list<Entity>::iterator currentItr_; //所属空間のリスト中で自身を指すイテレータ
 
 	Entity	colliderEntity_;
 	ColliderType colliderType_;
@@ -168,6 +169,9 @@ public:
 	}
 	//コライダーの型を設定
 	void SetCollisionType(const std::string& name);
+	void SetItr(const std::list<Entity>::iterator itr) { currentItr_ = itr; }
+	std::list<Entity>::iterator GetItr() { return currentItr_; }
+	UINT GetPrevAccessNumber() { return prevAccessNumber_; }
 	void SetCollisionPoint();
 	void MortonOrderSolver();
 	int GetAccessNumber();

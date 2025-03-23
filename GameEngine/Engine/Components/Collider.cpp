@@ -2,6 +2,7 @@
 #include"../../DebugUI.h"
 #include "Collider.h"
 #include"../GameObject/GameObject.h"
+#include"../newSceneManager.h"
 
 
 Collider::Collider() : Collider({0,0,0})
@@ -19,7 +20,8 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	isShowHitArea_(true),
 	collisionDistanceLimit_(100),
 	fieldSize_({200,200,200}),
-	maxDivisionCount_(3)
+	maxDivisionCount_(3),
+	prevAccessNumber_(-1)
 {
 #if _DEBUG
 	isShowHitArea_ = true;
@@ -104,14 +106,14 @@ void Collider::MortonOrderSolver()
 	{
 		//以前まで所属していた空間から削除、
 		//取得した番号の空間番号の空間に登録する
-
+		
 	}
 }
 
 int Collider::GetAccessNumber()
 {
-	int luNum = GetMortonOrderNumber(StoreFloat3(StoreFloat3(attachObject_->GetTransform()->position_) + leftUpBack_));
-	int rdNum = GetMortonOrderNumber(StoreFloat3(StoreFloat3(attachObject_->GetTransform()->position_) + rightDownFront_));
+	int luNum = GetMortonOrderNumber(StoreFloat3(attachObject_->GetTransform()->position_ + (center_ + leftUpBack_)));
+	int rdNum = GetMortonOrderNumber(StoreFloat3(attachObject_->GetTransform()->position_ + (center_ + rightDownFront_)));
 
 	////////////////所属空間を算出/////////////////
 	//排他的論理和をとる
