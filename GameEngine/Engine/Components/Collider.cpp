@@ -110,7 +110,7 @@ void Collider::MortonOrderSolver()
 	}
 }
 
-int Collider::GetAccessNumber()
+void Collider::CalcAccessNumber()
 {
 	int luNum = GetMortonOrderNumber(StoreFloat3(attachObject_->GetTransform()->position_ + (center_ + leftUpBack_)));
 	int rdNum = GetMortonOrderNumber(StoreFloat3(attachObject_->GetTransform()->position_ + (center_ + rightDownFront_)));
@@ -134,16 +134,11 @@ int Collider::GetAccessNumber()
 
 	//アクセスする空間の配列番号を算出
 	//シフトした数だけ分割レベルは下がる(0=ルート空間)
-	int accessNum = affiliationNum + ((int)(pow(8, (3 - shiftCount)) - 1) / 7);
+	currentAccessNumber_ = affiliationNum + ((int)(pow(8, (3 - shiftCount)) - 1) / 7);
 	//Debug.Log("所属空間分割レベル" + (3 - shiftCount));
 	//Debug.Log("所属空間" + (luNum >> shiftCount * 2));
 	//Debug.Log("アクセス番号" + accessNum);
 	cellLevel_ = 3 - shiftCount;
-	if (cellLevel_ == 0)
-	{
-		int a = 0;
-	}
-	return accessNum;
 }
 
 int Collider::GetMortonOrderNumber(XMFLOAT3 pos)

@@ -74,13 +74,14 @@ class Collider
 private:
 	friend class ColliderSystem;
 	//friend class Test_BoxCollider_ECSver;
-	XMFLOAT3     center_;			//原点
-	XMFLOAT3	 leftUpBack_;		//当たり判定の左上奧
-	XMFLOAT3	 rightDownFront_;	//当たり判定の右下手前
-	UINT		 prevAccessNumber_; //前フレームのアクセス番号
-	USHORT		 cellLevel_;	    //空間レベル
-	XMFLOAT3     fieldSize_;		//空間分割する範囲
-	int			 maxDivisionCount_; //最大分割数
+	XMFLOAT3     center_;			   //原点
+	XMFLOAT3	 leftUpBack_;		   //当たり判定の左上奧
+	XMFLOAT3	 rightDownFront_;	   //当たり判定の右下手前
+	UINT		 currentAccessNumber_; //今フレームのアクセス番号
+	UINT		 prevAccessNumber_;	   //前フレームのアクセス番号
+	USHORT		 cellLevel_;		   //空間レベル
+	XMFLOAT3     fieldSize_;		   //空間分割する範囲
+	int			 maxDivisionCount_;	   //最大分割数
 	std::list<Entity>::iterator currentItr_; //所属空間のリスト中で自身を指すイテレータ
 
 	Entity	colliderEntity_;
@@ -171,10 +172,11 @@ public:
 	void SetCollisionType(const std::string& name);
 	void SetItr(const std::list<Entity>::iterator itr) { currentItr_ = itr; }
 	std::list<Entity>::iterator GetItr() { return currentItr_; }
+	UINT GetCurrentAccessNumber() { return currentAccessNumber_; }
 	UINT GetPrevAccessNumber() { return prevAccessNumber_; }
 	void SetCollisionPoint();
 	void MortonOrderSolver();
-	int GetAccessNumber();
+	void CalcAccessNumber();
 	int GetMortonOrderNumber(XMFLOAT3 pos);
 	int BitSeparate(int n);
 

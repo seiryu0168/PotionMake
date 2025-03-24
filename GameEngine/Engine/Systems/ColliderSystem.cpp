@@ -328,10 +328,12 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 
 void ColliderSystem::CheckCollision_Octree()
 {
+	//所属空間の算出、登録を行う
 	for (auto const& firstEntity : entities_)
 	{
 		auto& collider = Coordinator::GetComponent<Collider>(firstEntity);
-		UINT  accessNum = collider.GetAccessNumber();
+		collider.CalcAccessNumber();
+		UINT  accessNum = collider.GetCurrentAccessNumber();
 		UINT  prevAccessNum = collider.GetPrevAccessNumber();
 		//前フレームの空間番号と今の空間番号が違ったら
 		if (accessNum != prevAccessNum)
@@ -349,6 +351,11 @@ void ColliderSystem::CheckCollision_Octree()
 			}
 		}
 	}
+
+	//空間を巡って衝突判定をチェックする
+	//再帰関数使う予定
+
+
 }
 
 bool ColliderSystem::IsHitBox_Box(Collider* firstTarget,Collider* secondTarget) const
