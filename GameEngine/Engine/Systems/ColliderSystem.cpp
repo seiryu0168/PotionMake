@@ -358,6 +358,44 @@ void ColliderSystem::CheckCollision_Octree()
 
 }
 
+void ColliderSystem::CreateCollisionList(UINT accessNum)
+{
+	//所属空間中の当たり判定チェック
+	for (auto firstEntity : cellAllay_[accessNum])
+	{
+		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+		firstCollision.nowHit_ = false;
+		for (auto const& secondEntity : cellAllay_[accessNum])
+		{
+			if (firstEntity == secondEntity)
+			{
+				continue;
+			}
+			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
+
+			//if (firstCollision.attachObject_->IsActive() && secondCollision.attachObject_->IsActive() && VectorLength(firstCollision.attachObject_->GetTransform()->position_ - secondCollision.attachObject_->GetTransform()->position_) <= firstCollision.collisionDistanceLimit_)
+			//CheckCollision(&firstCollision, &secondCollision);
+		}
+	}
+	//衝突対応リストと所属空間との衝突判定
+	for (auto firstEntity : collisionList_)
+	{
+		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+		firstCollision.nowHit_ = false;
+		for (auto const& secondEntity : cellAllay_[accessNum])
+		{
+			if (firstEntity == secondEntity)
+			{
+				continue;
+			}
+			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
+
+			//if (firstCollision.attachObject_->IsActive() && secondCollision.attachObject_->IsActive() && VectorLength(firstCollision.attachObject_->GetTransform()->position_ - secondCollision.attachObject_->GetTransform()->position_) <= firstCollision.collisionDistanceLimit_)
+			//CheckCollision(&firstCollision, &secondCollision);
+		}
+	}
+}
+
 bool ColliderSystem::IsHitBox_Box(Collider* firstTarget,Collider* secondTarget) const
 {
 	XMFLOAT3 boxPos1 = StoreFloat3(firstTarget->GetAttachedObject()->GetComponent<Transform>().position_ + XMLoadFloat3(&firstTarget->GetCenter()));

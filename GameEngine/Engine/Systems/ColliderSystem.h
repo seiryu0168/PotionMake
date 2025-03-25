@@ -15,6 +15,8 @@ private:
 
 	//分割した空間の配列
 	std::vector<std::list<Entity>> cellAllay_;
+	//衝突対応リスト
+	std::vector<Entity> collisionList_;
 	//最大分割数
 	USHORT maxDivision_;
 
@@ -61,7 +63,8 @@ public:
 	void CheckRemove() override;
 	//8分木空間分割を利用した当たり判定チェック
 	void CheckCollision_Octree();
-
+	//衝突対応リスト作成
+	void CreateCollisionList(UINT accessNum);
 
 	/// <summary>
 	/// どれとどれが当たってるかチェック
