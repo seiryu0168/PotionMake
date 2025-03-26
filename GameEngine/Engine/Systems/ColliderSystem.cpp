@@ -107,7 +107,7 @@ void ColliderSystem::CreateCB()
 
 ColliderSystem::ColliderSystem()
 	: System(),
-	maxDivision_(3)
+	maxDivision_(1)
 {
 	Coordinator::RegisterComponent<HitBox>();
 	Coordinator::RegisterComponent<HitSphere>();
@@ -140,23 +140,23 @@ ColliderSystem::ColliderSystem()
 
 void ColliderSystem::Update()
 {
-	
-	for (auto const& firstEntity : entities_)
-	{
-		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
-		firstCollision.nowHit_ = false;
-		for (auto const& secondEntity : entities_)
-		{
-			if (firstEntity == secondEntity)
-			{
-				continue;
-			}
-			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
-
-			if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
-			CheckCollision(&firstCollision, &secondCollision);
-		}
-	}
+	CheckCollision_Octree();
+	//for (auto const& firstEntity : entities_)
+	//{
+	//	auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+	//	firstCollision.nowHit_ = false;
+	//	for (auto const& secondEntity : entities_)
+	//	{
+	//		if (firstEntity == secondEntity)
+	//		{
+	//			continue;
+	//		}
+	//		auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
+	//
+	//		if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
+	//		CheckCollision(&firstCollision, &secondCollision);
+	//	}
+	//}
 }
 
 void ColliderSystem::Draw(int drawLayer)
@@ -243,6 +243,7 @@ void ColliderSystem::Release()
 		Coordinator::RemoveComponent<Collider>(entity);
 		Coordinator::DestroyEntity(entity);
 	}
+	cellAllay_.clear();
 }
 
 void ColliderSystem::CheckRemove()
@@ -253,6 +254,7 @@ void ColliderSystem::CheckRemove()
 	{
 		if (Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->IsDead())
 		{
+
 			Coordinator::GetComponent<Collider>(entity).Release();
 			Coordinator::RemoveComponent<Collider>(entity);
 		}
@@ -329,12 +331,12 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 void ColliderSystem::CheckCollision_Octree()
 {
 	//所属空間の算出、登録を行う
-	for (auto const& firstEntity : entities_)
+	for (auto const firstEntity : entities_)
 	{
 		auto& collider = Coordinator::GetComponent<Collider>(firstEntity);
 		collider.CalcAccessNumber();
 		UINT  accessNum = collider.GetCurrentAccessNumber();
-		UINT  prevAccessNum = collider.GetPrevAccessNumber();
+		int  prevAccessNum = collider.GetPrevAccessNumber();
 		//前フレームの空間番号と今の空間番号が違ったら
 		if (accessNum != prevAccessNum)
 		{
@@ -349,12 +351,13 @@ void ColliderSystem::CheckCollision_Octree()
 				itr = cellAllay_[prevAccessNum].erase(itr);
 				cellAllay_[accessNum].push_back(firstEntity);
 			}
+			collider.SetPrevAccessNumber(accessNum);
 		}
 	}
 
 	//空間を巡って衝突判定をチェックする
 	//再帰関数使う予定
-
+	CreateCollisionList(0);
 
 }
 
@@ -374,7 +377,7 @@ void ColliderSystem::CreateCollisionList(UINT accessNum)
 			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
 
 			//if (firstCollision.attachObject_->IsActive() && secondCollision.attachObject_->IsActive() && VectorLength(firstCollision.attachObject_->GetTransform()->position_ - secondCollision.attachObject_->GetTransform()->position_) <= firstCollision.collisionDistanceLimit_)
-			//CheckCollision(&firstCollision, &secondCollision);
+			CheckCollision(&firstCollision, &secondCollision);
 		}
 	}
 	//衝突対応リストと所属空間との衝突判定
@@ -391,7 +394,31 @@ void ColliderSystem::CreateCollisionList(UINT accessNum)
 			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
 
 			//if (firstCollision.attachObject_->IsActive() && secondCollision.attachObject_->IsActive() && VectorLength(firstCollision.attachObject_->GetTransform()->position_ - secondCollision.attachObject_->GetTransform()->position_) <= firstCollision.collisionDistanceLimit_)
-			//CheckCollision(&firstCollision, &secondCollision);
+			CheckCollision(&firstCollision, &secondCollision);
+		}
+	}
+
+	//子空間のアクセス番号を計算
+	UINT childCellNum = (accessNum << 3) + 1;
+	size_t size = cellAllay_.size();
+	//子空間を持っている場合
+	if (size > childCellNum)
+	{
+		//衝突対応リストに今の空間内のコリジョンを追加
+		for (auto firstEntity : cellAllay_[accessNum])
+		{
+			collisionList_.push_back(firstEntity);
+		}
+		//次の空間の当たり判定
+		for (int i = 0; i < 8; i++)
+		{
+			if (size > childCellNum + i)
+				CreateCollisionList(childCellNum + i);
+		}
+		//衝突対応リストから今の空間にあるコリジョンを外す
+		for (int i = 0; i < cellAllay_[accessNum].size(); i++)
+		{
+			collisionList_.pop_back();
 		}
 	}
 }

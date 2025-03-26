@@ -83,6 +83,7 @@ namespace newSceneManager
 		{
 			//Division::setLoad(true);
 			currentScene_->AllKillObject();
+			pColliderSystem_->Release();
 			//オーディオネームスペースの解放
 			AudioManager::Release();
 			//オーディオネームスペースの初期化

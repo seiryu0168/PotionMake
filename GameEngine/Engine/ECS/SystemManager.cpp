@@ -17,7 +17,7 @@ void SystemManager::EntitySignatureChanged(Entity entity, const Signature entity
 	for (auto const& pair : systems_)
 	{
 		auto const& type = pair.first;
-		auto const& system = pair.second;
+			auto const& system = pair.second;
 		auto const& systemSignature = signatures_.at(type);
 		//エンティティのシグネチャがシステムのシグネチャと一致するなら
 		if ((entitySignature & systemSignature) == systemSignature)

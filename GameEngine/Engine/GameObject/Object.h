@@ -106,6 +106,10 @@ public:
 	{
 		std::string typeName = typeid(T).name();
 			Entity entity = Coordinator::CreateEntity();
+			if(entity==9)
+			{
+				int a = 0;
+			}
 			//今まで入れたことがないコンポーネントだったら
 			//配列を作ってエンティティを格納
 			if (entityList_.find(typeName) == entityList_.end())

@@ -19,8 +19,8 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	prevHit_(false),
 	isShowHitArea_(true),
 	collisionDistanceLimit_(100),
-	fieldSize_({200,200,200}),
-	maxDivisionCount_(3),
+	fieldSize_({2000,2000,2000}),
+	maxDivisionCount_(1),
 	prevAccessNumber_(-1)
 {
 #if _DEBUG
@@ -97,17 +97,17 @@ void Collider::SetCollisionPoint()
 
 void Collider::MortonOrderSolver()
 {
-	//最初のprevAccessNumberを取得
-	prevAccessNumber_ = GetAccessNumber();
-	//アクセスする空間番号を取得
-	int accessNum = GetAccessNumber();
-	//accessNumが以前と違ったら
-	if (accessNum != prevAccessNumber_)
-	{
-		//以前まで所属していた空間から削除、
-		//取得した番号の空間番号の空間に登録する
-		
-	}
+	////最初のprevAccessNumberを取得
+	//prevAccessNumber_ = GetAccessNumber();
+	////アクセスする空間番号を取得
+	//int accessNum = GetAccessNumber();
+	////accessNumが以前と違ったら
+	//if (accessNum != prevAccessNumber_)
+	//{
+	//	//以前まで所属していた空間から削除、
+	//	//取得した番号の空間番号の空間に登録する
+	//	
+	//}
 }
 
 void Collider::CalcAccessNumber()
@@ -134,7 +134,7 @@ void Collider::CalcAccessNumber()
 
 	//アクセスする空間の配列番号を算出
 	//シフトした数だけ分割レベルは下がる(0=ルート空間)
-	currentAccessNumber_ = affiliationNum + ((int)(pow(8, (3 - shiftCount)) - 1) / 7);
+	currentAccessNumber_ = affiliationNum + ((int)(pow(8, (maxDivisionCount_ - shiftCount)) - 1) / 7);
 	//Debug.Log("所属空間分割レベル" + (3 - shiftCount));
 	//Debug.Log("所属空間" + (luNum >> shiftCount * 2));
 	//Debug.Log("アクセス番号" + accessNum);
