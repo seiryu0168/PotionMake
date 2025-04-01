@@ -55,6 +55,9 @@ void Player_ManagementPart::Update()
 
 
 		//Š÷‚©’I‚©ƒhƒA‚É“–‚½‚Á‚Ä‚¢‚½‚ç
+		{
+			//Collider colll= GetComponent<Collider>();
+		}
 		if (GetComponent<Collider>().IsHit())
 		{
 			((Play_ManagementPart_BaseUI*)GetUIManager()->FindChild("Play_ManagementPart_BaseUI"))->DisplayAction(collisionObjectName_, true);//->GetComponent<Text>().SetText(collisionObjectName_);

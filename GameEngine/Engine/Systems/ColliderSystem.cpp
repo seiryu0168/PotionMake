@@ -107,7 +107,7 @@ void ColliderSystem::CreateCB()
 
 ColliderSystem::ColliderSystem()
 	: System(),
-	maxDivision_(1)
+	maxDivision_(2)
 {
 	Coordinator::RegisterComponent<HitBox>();
 	Coordinator::RegisterComponent<HitSphere>();
@@ -140,23 +140,23 @@ ColliderSystem::ColliderSystem()
 
 void ColliderSystem::Update()
 {
-	//CheckCollision_Octree();
-	for (auto const& firstEntity : entities_)
-	{
-		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
-		firstCollision.nowHit_ = false;
-		for (auto const& secondEntity : entities_)
-		{
-			if (firstEntity == secondEntity)
-			{
-				continue;
-			}
-			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
-	
-			if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
-			CheckCollision(&firstCollision, &secondCollision);
-		}
-	}
+	CheckCollision_Octree();
+	//for (auto const& firstEntity : entities_)
+	//{
+	//	auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+	//	firstCollision.nowHit_ = false;
+	//	for (auto const& secondEntity : entities_)
+	//	{
+	//		if (firstEntity == secondEntity)
+	//		{
+	//			continue;
+	//		}
+	//		auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
+	//
+	//		if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
+	//		CheckCollision(&firstCollision, &secondCollision);
+	//	}
+	//}
 }
 
 void ColliderSystem::Draw(int drawLayer)
@@ -243,10 +243,10 @@ void ColliderSystem::Release()
 		Coordinator::RemoveComponent<Collider>(entity);
 		Coordinator::DestroyEntity(entity);
 	}
-	//for (int i = 0; i < cellAllay_.size(); i++)
-	//{
-	//	cellAllay_[i].clear();
-	//}
+	for (int i = 0; i < cellAllay_.size(); i++)
+	{
+		cellAllay_[i].clear();
+	}
 }
 
 void ColliderSystem::CheckRemove()
@@ -259,15 +259,15 @@ void ColliderSystem::CheckRemove()
 		if (Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->IsDead())
 		{
 			
-			//for (auto itr = cellAllay_[collider.currentAccessNumber_].begin(); itr != cellAllay_[collider.currentAccessNumber_].end();)
-			//{
-			//	if (*itr == collider.currentAccessNumber_)
-			//	{
-			//		itr = cellAllay_[collider.currentAccessNumber_].erase(itr);
-			//	}
-			//	else
-			//		itr++;
-			//}
+			for (auto itr = cellAllay_[collider.currentAccessNumber_].begin(); itr != cellAllay_[collider.currentAccessNumber_].end();)
+			{
+				if (*itr == collider.currentAccessNumber_)
+				{
+					itr = cellAllay_[collider.currentAccessNumber_].erase(itr);
+				}
+				else
+					itr++;
+			}
 			Coordinator::GetComponent<Collider>(entity).Release();
 			Coordinator::RemoveComponent<Collider>(entity);
 		}
@@ -356,23 +356,24 @@ void ColliderSystem::CheckCollision_Octree()
 			if (prevAccessNum == -1)
 			{
 				cellAllay_[accessNum].push_back(firstEntity);
-				//collider.SetItr(std::prev(cellAllay_[accessNum].end()));
+				collider.SetItr(std::prev(cellAllay_[accessNum].end()));
 			}
 			else
 			{
-				//auto itr = collider.GetItr();
-				//itr = cellAllay_[prevAccessNum].erase(itr);
+				auto itr = collider.GetItr();
+				itr = cellAllay_[prevAccessNum].erase(itr);
 
-				for (auto itr = cellAllay_[prevAccessNum].begin();itr!=cellAllay_[prevAccessNum].end();)
-				{
-					if (*itr == collider.GetPrevAccessNumber())
-					{
-						itr = cellAllay_[prevAccessNum].erase(itr);
-					}
-					else
-						itr++;
-				}
+				//for (auto itr = cellAllay_[prevAccessNum].begin();itr!=cellAllay_[prevAccessNum].end();)
+				//{
+				//	if (*itr == collider.GetPrevAccessNumber())
+				//	{
+				//		itr = cellAllay_[prevAccessNum].erase(itr);
+				//	}
+				//	else
+				//		itr++;
+				//}
 				cellAllay_[accessNum].push_back(firstEntity);
+				collider.SetItr(std::prev(cellAllay_[accessNum].end()));
 			}
 			collider.SetPrevAccessNumber(accessNum);
 		}
@@ -408,7 +409,7 @@ void ColliderSystem::CreateCollisionList(UINT accessNum)
 	for (auto firstEntity : collisionList_)
 	{
 		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
-		firstCollision.nowHit_ = false;
+		//firstCollision.nowHit_ = false;
 		for (auto const& secondEntity : cellAllay_[accessNum])
 		{
 			if (firstEntity == secondEntity)

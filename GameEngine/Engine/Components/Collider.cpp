@@ -20,7 +20,7 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	isShowHitArea_(true),
 	collisionDistanceLimit_(100),
 	fieldSize_({2000,2000,2000}),
-	maxDivisionCount_(1),
+	maxDivisionCount_(2),
 	prevAccessNumber_(-1)
 {
 #if _DEBUG
