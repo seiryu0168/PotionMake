@@ -20,7 +20,7 @@ Collider::Collider(const XMFLOAT3& centerPos)
 	isShowHitArea_(true),
 	collisionDistanceLimit_(100),
 	fieldSize_({2000,2000,2000}),
-	maxDivisionCount_(2),
+	maxDivisionLevel_(2),
 	prevAccessNumber_(-1)
 {
 #if _DEBUG
@@ -117,22 +117,30 @@ void Collider::CalcAccessNumber()
 
 	////////////////所属空間を算出/////////////////
 	//排他的論理和をとる
-	int affiliation = luNum ^ rdNum;
+	int XOR = luNum ^ rdNum;
 
-	int aff = affiliation << 3;
-	int mask = 0x00000007;
+	int aff		   = XOR << 3;
+	int mask	   = 0x00000007;
 	int shiftCount = 0;
+	int shift	   = 0;
 
+	int i = 0;
 	//ルート空間まで3ずつビットシフト
-	for (int i = 0; i < maxDivisionCount_; i++)
+	while (XOR!=0)
 	{
-		if ((affiliation & mask) >= 1)
-			shiftCount = i+1;
-		mask = mask << 3;
-	}
-	int affiliationNum = (luNum >> shiftCount * 3);
+		if ((XOR & 0x7) != 0)
+		{
 
-	cellLevel_ = (maxDivisionCount_+1) - shiftCount;
+			shiftCount = i+1;
+			shift	   = shiftCount * 3;
+
+		}
+		XOR >>= 3;
+		i++;
+	}
+	int affiliationNum = (luNum >> shift);
+
+	cellLevel_ = maxDivisionLevel_ - shiftCount;
 	//アクセスする空間の配列番号を算出
 	//シフトした数だけ分割レベルは下がる(0=ルート空間)
 	currentAccessNumber_ = affiliationNum + ((int)(pow(8, cellLevel_) - 1) / 7);
@@ -153,7 +161,7 @@ int Collider::GetMortonOrderNumber(XMFLOAT3 pos)
 	pos.z += fieldSize_.z * 0.5f;
 	//pos.z *= -1;
 
-	float cellSize = fieldSize_.x / pow(2, maxDivisionCount_);
+	float cellSize = fieldSize_.x / pow(2, maxDivisionLevel_);
 
 	//孫空間の座標
 	int x = (int)(pos.x / cellSize);

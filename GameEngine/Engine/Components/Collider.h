@@ -81,7 +81,7 @@ private:
 	int			 prevAccessNumber_;	   //前フレームのアクセス番号
 	USHORT		 cellLevel_;		   //空間レベル
 	XMFLOAT3     fieldSize_;		   //空間分割する範囲
-	int			 maxDivisionCount_;	   //最大分割数
+	int			 maxDivisionLevel_;	   //最大分割数
 	std::list<Entity>::iterator currentItr_; //所属空間のリスト中で自身を指すイテレータ
 
 	Entity	colliderEntity_;
