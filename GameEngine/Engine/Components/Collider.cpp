@@ -124,15 +124,15 @@ void Collider::CalcAccessNumber()
 	int shiftCount = 0;
 
 	//ルート空間まで3ずつビットシフト
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < maxDivisionCount_; i++)
 	{
 		if ((affiliation & mask) >= 1)
-			shiftCount = i;
+			shiftCount = i+1;
 		mask = mask << 3;
 	}
 	int affiliationNum = (luNum >> shiftCount * 3);
 
-	cellLevel_ = maxDivisionCount_ - shiftCount;
+	cellLevel_ = (maxDivisionCount_+1) - shiftCount;
 	//アクセスする空間の配列番号を算出
 	//シフトした数だけ分割レベルは下がる(0=ルート空間)
 	currentAccessNumber_ = affiliationNum + ((int)(pow(8, cellLevel_) - 1) / 7);
