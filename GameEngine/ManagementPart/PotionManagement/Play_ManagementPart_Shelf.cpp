@@ -16,9 +16,9 @@ void Play_ManagementPart_Shelf::Initialize()
 	accessUINum_ = 1;
 	actionName_ = "ƒ|[ƒVƒ‡ƒ“ŠÇ—";
 	//“–‚½‚è”»’è‚Ìİ’è
-	HitBox tableHitBox({ 1,5,4 });
+	HitBox shelfHitBox({ 1,5,4 });
 	Collider coll({ 0,5,-4 });
-	coll.SetCollider(tableHitBox);
+	coll.SetCollider(shelfHitBox);
 	coll.SetAttachObject(this);
 	AddComponent<Collider>(coll);
 	

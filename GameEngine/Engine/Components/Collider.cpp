@@ -132,23 +132,24 @@ void Collider::CalcAccessNumber()
 	}
 	int affiliationNum = (luNum >> shiftCount * 3);
 
+	cellLevel_ = maxDivisionCount_ - shiftCount;
 	//アクセスする空間の配列番号を算出
 	//シフトした数だけ分割レベルは下がる(0=ルート空間)
-	currentAccessNumber_ = affiliationNum + ((int)(pow(8, (maxDivisionCount_ - shiftCount)) - 1) / 7);
+	currentAccessNumber_ = affiliationNum + ((int)(pow(8, cellLevel_) - 1) / 7);
 	//Debug.Log("所属空間分割レベル" + (3 - shiftCount));
 	//Debug.Log("所属空間" + (luNum >> shiftCount * 2));
 	//Debug.Log("アクセス番号" + accessNum);
-	cellLevel_ = 3 - shiftCount;
 }
 
 int Collider::GetMortonOrderNumber(XMFLOAT3 pos)
 {
-	if (pos.y <= 0)
-		pos.y = fabs(pos.y) + (fieldSize_.y * 0.5f);
-	else if (pos.y > 0)
-		pos.y = (fieldSize_.y * 0.5f) - pos.y;
+	//if (pos.y <= 0)
+	//	pos.y = fabs(pos.y) + (fieldSize_.y * 0.5f);
+	//else if (pos.y > 0)
+	//	pos.y = (fieldSize_.y * 0.5f) - pos.y;
 	//pos += new Vector3(fieldSize_.x * 0.5f, 0, -(fieldSize_.z * 0.5f));
 	pos.x += fieldSize_.x * 0.5f;
+	pos.y += fieldSize_.y * 0.5f;
 	pos.z += fieldSize_.z * 0.5f;
 	//pos.z *= -1;
 

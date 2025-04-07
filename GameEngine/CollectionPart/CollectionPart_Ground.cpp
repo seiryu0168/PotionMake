@@ -14,7 +14,7 @@ void CollectionPart_Ground::Initialize()
 	//’n–Ê‚Ìƒ‚ƒfƒ‹
 	Test_Model_ECSver groundModel(this);
 	groundModel.Load("Assets/Model/Ground02.fbx");
-	groundModel.SetDrawDistance(400);
+	groundModel.SetDrawDistance(500);
 	AddComponent<Test_Model_ECSver>(groundModel);
 	transform_->scale_ = { 2,2,2 };
 }

@@ -112,7 +112,7 @@ ColliderSystem::ColliderSystem()
 	Coordinator::RegisterComponent<HitBox>();
 	Coordinator::RegisterComponent<HitSphere>();
 
-	cellAllay_.resize(pow(8, maxDivision_));
+	cellAllay_.resize((int)((pow(8, maxDivision_+1)-1)/7));
 	int vCount_ = 0;
 	XMFLOAT3 vPos = {0,0,0};
 	for (int i = 0; i < 6; i++)
@@ -337,7 +337,10 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 	if (isCollision)
 	{
 			firstTarget->nowHit_ = true;
+			secondTarget->nowHit_ = true;
 			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
+			secondTarget->GetAttachedObject()->OnCollisionStay(firstTarget->GetAttachedObject());
+			
 	}
 }
 
@@ -351,7 +354,8 @@ void ColliderSystem::CheckCollision_Octree()
 		UINT  accessNum = collider.GetCurrentAccessNumber();
 		int  prevAccessNum = collider.GetPrevAccessNumber();
 		//前フレームの空間番号と今の空間番号が違ったら
-		if (accessNum != prevAccessNum)
+		if (accessNum != prevAccessNum &&
+			accessNum <  cellAllay_.size())
 		{
 			if (prevAccessNum == -1)
 			{
@@ -381,7 +385,7 @@ void ColliderSystem::CheckCollision_Octree()
 
 	//空間を巡って衝突判定をチェックする
 	//再帰関数使う予定
-	CreateCollisionList(0);
+ 	CreateCollisionList(0);
 
 }
 
@@ -409,7 +413,7 @@ void ColliderSystem::CreateCollisionList(UINT accessNum)
 	for (auto firstEntity : collisionList_)
 	{
 		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
-		//firstCollision.nowHit_ = false;
+
 		for (auto const& secondEntity : cellAllay_[accessNum])
 		{
 			if (firstEntity == secondEntity)
