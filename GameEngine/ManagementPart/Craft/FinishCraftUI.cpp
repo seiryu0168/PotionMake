@@ -50,7 +50,7 @@ void FinishCraftUI::Initialize()
 	
 	potionPos = edgeImage.GetPositionAtPixel();
 	//ポーションの名前
-	Text potionNameText(this);
+	Text potionNameText(this, "Rounded M+ 1c");
 	potionNameText.SetRect({ 0,0,1000,200 });
 	potionNameText.SetAlignmentType(ALIGNMENT_TYPE::CENTER_TOP);
 	potionNameText.SetColor({ 1,1,1,1 });
@@ -66,7 +66,7 @@ void FinishCraftUI::Initialize()
 	OKImage.SetLayer(2);
 	okButtonImageNum_ = AddComponent<Image>(OKImage);
 
-	Text OKText(this);
+	Text OKText(this, "Rounded M+ 1c");
 	OKText.SetText("OK");
 	OKText.SetLayer(2);
 	OKText.SetPosition({ 900,810 });
