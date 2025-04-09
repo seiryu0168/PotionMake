@@ -24,7 +24,7 @@ void FinishCraftUI::Initialize()
 	PlayerData* data = InterSceneData::GetData<PlayerData>("Data01");
 	PlayerData::PotionData pData = data->potionDataList_[data->potionDataList_.size() - 1];
 	
-	XMFLOAT3 potionPos = { -0.3f, 0.3f, 0 };
+	XMFLOAT3 potionPos = { -0.5f, 0.3f, 0 };
 	//ポーションの背景画像
 	Image backImage(this);
 	backImage.Load("Assets/Image/ItemBaseImage.png");
@@ -56,7 +56,7 @@ void FinishCraftUI::Initialize()
 	potionNameText.SetColor({ 1,1,1,1 });
 	potionNameText.SetLayer(2);
 	potionNameText.SetText(pData.potionName_+"\n\n単価:"+std::to_string(pData.price_)+"G");
-	potionNameText.SetPosition({ potionPos.x + 40,potionPos.y - 150 });
+	potionNameText.SetPosition({ potionPos.x + 300,potionPos.y - 150 });
 	AddComponent<Text>(potionNameText);
 
 	//OKボタンの画像
