@@ -2,7 +2,8 @@
 
 PlayerData::PlayerData()
 	:maxItemLimit_(999),
-	isFirstPlay_(true)
+	isFirstPlay_(true),
+	name_("ƒvƒŒƒCƒ„[")
 
 {
 }
