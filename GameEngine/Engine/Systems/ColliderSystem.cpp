@@ -140,23 +140,23 @@ ColliderSystem::ColliderSystem()
 
 void ColliderSystem::Update()
 {
-	CheckCollision_Octree();
-	//for (auto const& firstEntity : entities_)
-	//{
-	//	auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
-	//	firstCollision.nowHit_ = false;
-	//	for (auto const& secondEntity : entities_)
-	//	{
-	//		if (firstEntity == secondEntity)
-	//		{
-	//			continue;
-	//		}
-	//		auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
-	//
-	//		if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
-	//		CheckCollision(&firstCollision, &secondCollision);
-	//	}
-	//}
+	//CheckCollision_Octree();
+	for (auto const& firstEntity : entities_)
+	{
+		auto& firstCollision = Coordinator::GetComponent<Collider>(firstEntity);
+		firstCollision.nowHit_ = false;
+		for (auto const& secondEntity : entities_)
+		{
+			if (firstEntity == secondEntity)
+			{
+				continue;
+			}
+			auto& secondCollision = Coordinator::GetComponent<Collider>(secondEntity);
+	
+			if(firstCollision.attachObject_->IsActive()&& secondCollision.attachObject_->IsActive()&&VectorLength(firstCollision.attachObject_->GetTransform()->position_- secondCollision.attachObject_->GetTransform()->position_)<=firstCollision.collisionDistanceLimit_)
+			CheckCollision(&firstCollision, &secondCollision);
+		}
+	}
 }
 
 void ColliderSystem::Draw(int drawLayer)
@@ -243,10 +243,10 @@ void ColliderSystem::Release()
 		Coordinator::RemoveComponent<Collider>(entity);
 		Coordinator::DestroyEntity(entity);
 	}
-	for (int i = 0; i < cellAllay_.size(); i++)
-	{
-		cellAllay_[i].clear();
-	}
+	//for (int i = 0; i < cellAllay_.size(); i++)
+	//{
+	//	cellAllay_[i].clear();
+	//}
 }
 
 void ColliderSystem::CheckRemove()
@@ -259,15 +259,15 @@ void ColliderSystem::CheckRemove()
 		if (Coordinator::GetComponent<Collider>(entity).GetAttachedObject()->IsDead())
 		{
 			
-			for (auto itr = cellAllay_[collider.currentAccessNumber_].begin(); itr != cellAllay_[collider.currentAccessNumber_].end();)
-			{
-				if (*itr == collider.currentAccessNumber_)
-				{
-					itr = cellAllay_[collider.currentAccessNumber_].erase(itr);
-				}
-				else
-					itr++;
-			}
+			//for (auto itr = cellAllay_[collider.currentAccessNumber_].begin(); itr != cellAllay_[collider.currentAccessNumber_].end();)
+			//{
+			//	if (*itr == collider.currentAccessNumber_)
+			//	{
+			//		itr = cellAllay_[collider.currentAccessNumber_].erase(itr);
+			//	}
+			//	else
+			//		itr++;
+			//}
 			Coordinator::GetComponent<Collider>(entity).Release();
 			Coordinator::RemoveComponent<Collider>(entity);
 		}
@@ -337,9 +337,9 @@ void ColliderSystem::CheckCollision(Collider* firstTarget, Collider* secondTarge
 	if (isCollision)
 	{
 			firstTarget->nowHit_ = true;
-			secondTarget->nowHit_ = true;
+			//secondTarget->nowHit_ = true;
 			firstTarget->GetAttachedObject()->OnCollisionStay(secondTarget->GetAttachedObject());
-			secondTarget->GetAttachedObject()->OnCollisionStay(firstTarget->GetAttachedObject());
+			//secondTarget->GetAttachedObject()->OnCollisionStay(firstTarget->GetAttachedObject());
 			
 	}
 }

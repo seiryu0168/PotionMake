@@ -6,7 +6,6 @@
 #include"Engine/Collider/BoxCollider.h"
 #include"Engine/Components/Test_Model_ECSver.h"
 #include"Engine/Components/Text.h"
-#include"AssimpLoader.h"
 #include"Engine/Systems/ImageSystem.h"
 #include"Engine/newSceneManager.h"
 #include"Engine/DirectX_11/Input.h"
