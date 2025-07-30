@@ -23,7 +23,7 @@ namespace AudioManager
 		std::string fileName;
 	};
 	//初期化
-	void Initialize();
+	HRESULT Initialize();
 
 	//サウンドファイル(.wav）をロード
 	//すでに同じ名前のファイルをロード済みの場合は、既存のデータの番号を返す

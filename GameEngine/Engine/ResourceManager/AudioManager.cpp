@@ -35,7 +35,7 @@ namespace AudioManager
     //std::unique_ptr<char[]> pBuffer;
 
 //初期化
-    void AudioManager::Initialize()
+    HRESULT AudioManager::Initialize()
     {
         HRESULT hr;
         //hr = CoInitializeEx(0, COINIT_MULTITHREADED);
@@ -44,12 +44,17 @@ namespace AudioManager
         //    MessageBox(NULL, L"AudioManager::Initialize 初期化に失敗しました", L"エラー", MB_OK);
         //    //return hr;
         //}
-        XAudio2Create(&pXAudio);
+        hr = XAudio2Create(&pXAudio);
+        if (FAILED(hr))
+        {
+            MessageBox(NULL, L"AudioManager::Initialize XAudio2の作成に失敗しました", L"エラー", MB_OK);
+            return hr;
+        }
         hr = pXAudio->CreateMasteringVoice(&pMasteringVoice);
         if (FAILED(hr))
         {
             MessageBox(NULL, L"AudioManager::Initialize マスタリングボイスの作成に失敗しました", L"エラー", MB_OK);
-            //return hr;
+            return hr;
         }
     }
 
@@ -453,11 +458,11 @@ namespace AudioManager
             itr->second.get()->buf.pAudioData = nullptr;
         }
         audioDatas_.clear();
-        //CoUninitialize();
         if (pMasteringVoice)
         {
             pMasteringVoice->DestroyVoice();
         }
         pXAudio->Release();
+        //CoUninitialize();
     }
 }

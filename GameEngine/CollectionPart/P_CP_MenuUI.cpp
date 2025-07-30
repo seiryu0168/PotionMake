@@ -45,16 +45,16 @@ void P_CP_MenuUI::Initialize()
 	status.SetUINumber(0);
 
 	MenuUI& item = *Instantiate<MenuUI_Item>(this);
-	item.SetButton("Assets/Image/SelectImage3.png", "素材", { -1.2f,0.25f,0 });
+	item.SetButton("Assets/Image/SelectImage3.png", "素材", { -1.2f,0.25f,0.0f });
 	item.SetUINumber(1);
 
 	MenuUI& rtnHome = *Instantiate<MenuUI_ReturnHome>(this);
-	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.0f,0 });
+	rtnHome.SetButton("Assets/Image/SelectImage3.png", "家に帰る", { -1.2f,0.0f,0.0f });
 	rtnHome.SetUINumber(2);
 
 	//クローズボタン
 	GameObject* button = Instantiate<CloseButton>(this);
-	button->GetComponent<Image>().SetPosition({ -0.9,0.9,0 });
+	button->GetComponent<Image>().SetPosition({ -0.9f,0.9f,0.0f });
 
 	Audio audio(this);
 	audio.Load("Assets/Audio/Confirm51.wav", false, 1.0f, 5);

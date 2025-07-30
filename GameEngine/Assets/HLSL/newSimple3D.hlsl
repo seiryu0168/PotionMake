@@ -117,6 +117,29 @@ float VSM_Filter(float2 depth, float fragDepth)
 	else return 1.0f;
 	//return saturate(max(p, depth.x <= fragDepth));
 }
+float PCF(float depth, float2 shadowCoord,float2 texelSize)
+{
+	int2 offSet[9] = {
+		int2(-1,-1),int2(0,-1),int2(1,-1),
+		int2(-1, 0),int2(0, 0),int2(1, 0),
+		int2(-1, 1),int2(0, 1),int2(1, 1),
+	};
+	float sum = 0.1;
+	for (int i = 0; i < 9; i++)
+	{
+		float2 uv = shadowCoord.xy + offSet[i] * texelSize;
+		if (any(uv < 0) || any(uv > 1))
+		{
+			sum += 1;
+			continue;
+		}
+
+		float shadowMapDepth = g_depthTexture.Sample(g_depthSampler, uv).r;
+		//shadowMapDepth = 1.0 - shadowMapDepth;
+		sum += step(depth, shadowMapDepth);
+	}
+	return sum / 9.0;
+}
 //───────────────────────────────────────
 // ピクセルシェーダ
 //───────────────────────────────────────
@@ -197,8 +220,8 @@ float4 PS(VS_OUT inData) : SV_Target
 	
 	/////通常のシャドウマップ/////
 	if (depthTexValue.x + 0.003f < lightLength)
-		outColor *= 0.6f;
-	//////////////////////////////
+		outColor *= 0.6;
+	////////////////////////////////
 
 	/////VSM(分散シャドウマップ)/////
 	//outColor *= VSM_Filter(depthTexValue, lightLength);

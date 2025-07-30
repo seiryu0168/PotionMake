@@ -108,15 +108,19 @@ void DebugUI::GetProcess(DWORD processID)
 	{
 		return;
 	}
-	GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));	
-	ImGui::Text(std::to_string(pmc.PagefileUsage).c_str());
-	ImGui::Text(std::to_string(pmc.PeakPagefileUsage).c_str());
-	ImGui::Text(std::to_string(pmc.QuotaPagedPoolUsage).c_str());
-	ImGui::Text(std::to_string(pmc.QuotaPeakPagedPoolUsage).c_str());
-	ImGui::Text(std::to_string(pmc.QuotaNonPagedPoolUsage).c_str());
-	ImGui::Text(std::to_string(pmc.QuotaPeakNonPagedPoolUsage).c_str());
-	ImGui::Text(std::to_string(pmc.WorkingSetSize).c_str());
-	ImGui::Text(std::to_string(pmc.PeakWorkingSetSize).c_str());
+	GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));
+	std::string txt = "UseMemory:"+std::to_string(pmc.PagefileUsage);
+	ImGui::Text(txt.c_str());
+	txt = "PeakUsedMemory:" + std::to_string(pmc.PeakPagefileUsage);
+	ImGui::Text(txt.c_str());
+
+	//ImGui::Text(std::to_string(pmc.PeakPagefileUsage).c_str());
+	//ImGui::Text(std::to_string(pmc.QuotaPagedPoolUsage).c_str());
+	//ImGui::Text(std::to_string(pmc.QuotaPeakPagedPoolUsage).c_str());
+	//ImGui::Text(std::to_string(pmc.QuotaNonPagedPoolUsage).c_str());
+	//ImGui::Text(std::to_string(pmc.QuotaPeakNonPagedPoolUsage).c_str());
+	//ImGui::Text(std::to_string(pmc.WorkingSetSize).c_str());
+	//ImGui::Text(std::to_string(pmc.PeakWorkingSetSize).c_str());
 	CloseHandle(hProcess);
 }
 

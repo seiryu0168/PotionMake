@@ -95,14 +95,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	//ウィンドウ表示
 	ShowWindow(hWnd, nCmdShow);
 
-	CoInitialize(nullptr);
-
+	HRESULT hr;
+	hr = CoInitialize(nullptr);
 	if (FAILED(Direct3D::Initialize(winW, winH, hWnd,{ WINDOW_WIDTH ,WINDOW_HEIGHT})))
 	{
+		MessageBox(NULL, L"Main:: Direct3Dの初期化に失敗しました", L"エラー", MB_OK);
 		PostQuitMessage(0);
 	}
 	if (FAILED(D2D::Initialize(winW, winH, hWnd, { WINDOW_WIDTH ,WINDOW_HEIGHT })))
 	{
+		MessageBox(NULL, L"Main:: D2Dの初期化に失敗しました", L"エラー", MB_OK);
 		PostQuitMessage(0);
 	}
 
@@ -111,7 +113,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	Input::Initialize(hWnd);
 	//ModelManager::Initialize();
 	CameraManager::Initialize(winW, winH);
-	AudioManager::Initialize();
+	hr = AudioManager::Initialize();
+	if (FAILED(hr))
+	{
+		MessageBox(NULL, L"Main:: オーディオマネージャーの初期化に失敗しました", L"エラー", MB_OK);
+		PostQuitMessage(0);
+	}
 	Coordinator::Init();
 
 	//Brightness::Initialize();
